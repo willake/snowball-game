@@ -1,0 +1,1 @@
+Scenes in this folder is for systems and UI editing. If you are making a scene for game level, forward to `StaticAssets/Scenes`.

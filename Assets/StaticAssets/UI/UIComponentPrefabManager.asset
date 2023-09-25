@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e9fd3764da408849964d289ceea6508, type: 3}
+  m_Name: UIComponentPrefabManager
+  m_EditorClassIdentifier: 
+  Canvas: {fileID: 5442759027055832220, guid: bbf9c5379f74902418a447cf49d21de4, type: 3}
+  UIPanels:
+    EmptyPanel: {fileID: 7185758587975509216, guid: 022acca5e962d8544924f083d2cd0098, type: 3}
+    EmptyPanelWithBackground: {fileID: 5205195438902286646, guid: d4b9b3e3db83faf4e8b8a860673071db, type: 3}
+  Buttons:
+    Button: {fileID: 6721966927338978572, guid: c1360b11ba8387d499dc908ed72d904a, type: 3}
+    TextButton: {fileID: 1178972353511161972, guid: 08a0fb1b6ef6dd74bb0c7a5a4a338e20, type: 3}
+  Texts:
+    Text: {fileID: 2441071252275513888, guid: a7e61924276624849acc9d13e17f24a3, type: 3}
