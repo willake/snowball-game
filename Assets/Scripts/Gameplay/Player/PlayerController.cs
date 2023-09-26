@@ -9,7 +9,6 @@ namespace Game.Gameplay
     public class PlayerController : Controller
     {
         private PlayerCamera _camera;
-        public Character bindedCharacter;
 
         private bool _isMoving;
         private bool _isAiming = false;
@@ -18,21 +17,6 @@ namespace Game.Gameplay
         {
             _camera = cam;
             _camera.TakeOver(PlayerCamera.ControllerType.Player);
-        }
-
-        public void BindCharacter(Character character)
-        {
-            bindedCharacter = character;
-        }
-
-        public void EquipWeapon(Weapon weapon)
-        {
-            bindedCharacter.EquipWeapon(weapon);
-        }
-
-        public void Aim()
-        {
-            bindedCharacter.Aim(Vector2.zero);
         }
 
         private void Update()
