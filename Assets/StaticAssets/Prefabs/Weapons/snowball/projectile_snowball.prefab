@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 5498469994331899273}
   - component: {fileID: 8225437482548443189}
   - component: {fileID: -7738907633172832076}
+  - component: {fileID: -4951978760779152871}
   m_Layer: 0
-  m_Name: bullet_snowball
+  m_Name: projectile_snowball
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -133,3 +134,16 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 0
   m_CollisionDetection: 1
+--- !u!114 &-4951978760779152871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5823859254762134577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bb4887d6ed3d5a47a850f532f296daf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoDisabledInSeconds: 5

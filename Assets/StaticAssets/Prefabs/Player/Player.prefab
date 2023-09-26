@@ -197,11 +197,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   socket: {fileID: 7800226174688626351}
+  isDebugLogEnabled: 0
   minEnergy: 0
   maxEnergy: 10
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
   timeOutEnergy: 0.1
+  ownerCamp: 0
   holdingWeapon: {fileID: 7283590466229455252}
 --- !u!1001 &1773001378379615850
 PrefabInstance:
