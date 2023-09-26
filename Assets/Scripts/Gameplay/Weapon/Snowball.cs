@@ -63,13 +63,14 @@ namespace Game.Gameplay
             _holdingProjectile = null;
         }
 
-        public override void Reload()
+        public override bool Reload()
         {
-            if (Ammo >= maxAmmo) return;
+            if (Ammo >= maxAmmo) return false;
 
             // TODO: add reload time and play animation
 
             Ammo = maxAmmo;
+            return true;
         }
 
         private void Update()
