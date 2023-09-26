@@ -11,6 +11,8 @@ namespace Game.Gameplay
 
         [Header("Settings")]
         public bool isDebugLogEnabled = false;
+        [Range(0f, 30f)]
+        public float throwingPitch = 10f;
         public float minEnergy = 0f;
         public float maxEnergy = 10f;
         public float chargeIntervalInSeconds = 0.01f;
@@ -56,7 +58,14 @@ namespace Game.Gameplay
 
             _runningCorotine = null;
 
-            holdingWeapon.Attack(AimDirection, Energy);
+            float pitch = throwingPitch * Mathf.Deg2Rad;
+
+            Vector3 shootDirection = new Vector3(
+                AimDirection.x * Mathf.Cos(pitch),
+                Mathf.Sin(pitch),
+                AimDirection.z * Mathf.Cos(pitch)
+            );
+            holdingWeapon.Attack(shootDirection.normalized, Energy);
         }
 
         public void Reload()

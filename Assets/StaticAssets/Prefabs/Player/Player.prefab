@@ -212,6 +212,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   socket: {fileID: 7800226174688626351}
   isDebugLogEnabled: 0
+  throwingPitch: 20
   minEnergy: 0
   maxEnergy: 10
   chargeIntervalInSeconds: 0.01
