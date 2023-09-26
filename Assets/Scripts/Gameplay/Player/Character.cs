@@ -41,6 +41,11 @@ namespace Game.Gameplay
         {
         }
 
+        public void Reload()
+        {
+            weaponHolder.Reload();
+        }
+
         public void Aim(Vector3 direction)
         {
             float angle = (float)Math.Atan2(direction.x, direction.y);

@@ -63,6 +63,11 @@ namespace Game.Gameplay
                 _isAiming = false;
             }
 
+            if (Input.GetKeyDown(KeyCode.R))
+            {
+                bindedCharacter.Reload();
+            }
+
             if (_isAiming)
             {
                 Vector3 chaPos =
