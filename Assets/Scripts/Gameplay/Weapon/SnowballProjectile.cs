@@ -27,15 +27,15 @@ namespace Game.Gameplay
                 && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
-                gameObject.SetActive(false);
             }
 
             if (OwnerCamp == Camp.Enemy
                 && other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
-                gameObject.SetActive(false);
             }
+
+            gameObject.SetActive(false);
 
             // play hit effect
         }
