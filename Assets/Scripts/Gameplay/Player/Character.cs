@@ -1,6 +1,7 @@
 using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.Events;
 
 namespace Game.Gameplay
 {
@@ -8,9 +9,14 @@ namespace Game.Gameplay
     {
         private Rigidbody _rigibody;
 
+        [Header("Status")]
+        public float health = 100;
+        public HealthUpdateEvent healthUpdateEvent = new();
+        public DieEvent dieEvent = new();
+
+        [Header("Settings")]
         public float acc = 5f;
         public float maxSpeed = 5f;
-        public Vector3 facingDirection = Vector2.right;
         public Vector3 currentVelocity { get { return GetRigidbody().velocity; } }
 
         [Header("Weapons")]
@@ -32,13 +38,17 @@ namespace Game.Gameplay
             }
         }
 
-        public void EquipWeapon(Weapon weapon)
+        public void TakeDamage(float damage)
         {
-            weaponHolder.EquipWeapon(weapon);
-        }
+            health -= damage;
 
-        public void DropWeapon()
-        {
+            if (health < float.Epsilon)
+            {
+                health = 0f;
+                dieEvent.Invoke();
+            }
+
+            healthUpdateEvent.Invoke(health);
         }
 
         public void Reload()
@@ -63,5 +73,8 @@ namespace Game.Gameplay
         {
             weaponHolder.Throw();
         }
+
+        public class HealthUpdateEvent : UnityEvent<float> { }
+        public class DieEvent : UnityEvent { }
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.Events;
 
 namespace Game.Gameplay
 {
@@ -20,11 +21,27 @@ namespace Game.Gameplay
         public float timeOutEnergy = 0.1f;
 
         public Vector3 AimDirection { get; private set; }
+        public int Ammo
+        {
+            get
+            {
+                if (holdingWeapon)
+                {
+                    return holdingWeapon.Ammo;
+                }
+
+                return 0;
+            }
+        }
         public float Energy { get; private set; }
+        public UnityEvent holdEvent = new();
+        public UnityEvent throwEvent = new();
+        public EnergyUpdateEvent energyUpdateEvent = new();
+        public AmmoUpdateEvent ammoUpdateEvent = new();
 
         [Header("Property")]
         public Camp ownerCamp;
-        public Weapon holdingWeapon;
+        public Snowball holdingWeapon;
 
         private Coroutine _runningCorotine = null;
 
@@ -33,20 +50,12 @@ namespace Game.Gameplay
             AimDirection = direction;
         }
 
-        public void EquipWeapon(Weapon weapon)
-        {
-            holdingWeapon = weapon;
-            weapon.transform.SetParent(socket);
-            weapon.transform.position = socket.position;
-            weapon.SetOwnerCamp(ownerCamp);
-        }
-
         public void Hold()
         {
             Energy = 0;
-            Snowball snowball = holdingWeapon as Snowball;
-            snowball.Hold();
+            holdingWeapon.Hold();
             _runningCorotine = StartCoroutine(ChargeEnergy());
+            holdEvent.Invoke();
         }
 
         public void Throw()
@@ -66,13 +75,16 @@ namespace Game.Gameplay
                 AimDirection.z * Mathf.Cos(pitch)
             );
             holdingWeapon.Attack(shootDirection.normalized, Energy);
+            throwEvent.Invoke();
         }
 
         public void Reload()
         {
-            if (holdingWeapon.weaponType == WeaponType.Snowball)
+            bool success = holdingWeapon.Reload();
+
+            if (success)
             {
-                holdingWeapon.Reload();
+                ammoUpdateEvent.Invoke(holdingWeapon.maxAmmo);
             }
         }
 
@@ -82,6 +94,7 @@ namespace Game.Gameplay
             {
                 yield return new WaitForSeconds(chargeIntervalInSeconds);
                 Energy += energyPerInterval;
+                energyUpdateEvent.Invoke(Energy / maxEnergy);
                 if (isDebugLogEnabled)
                 {
                     Debug.Log($"Energy increase {energyPerInterval} to {Energy}");
@@ -94,6 +107,7 @@ namespace Game.Gameplay
             {
                 yield return new WaitForSeconds(chargeIntervalInSeconds);
                 Energy -= energyPerInterval;
+                energyUpdateEvent.Invoke(Energy / maxEnergy);
                 if (isDebugLogEnabled)
                 {
                     Debug.Log($"Energy decrease {energyPerInterval} to {Energy}");
@@ -101,6 +115,7 @@ namespace Game.Gameplay
             }
 
             Energy = timeOutEnergy;
+            energyUpdateEvent.Invoke(Energy / maxEnergy);
 
             Throw();
             if (isDebugLogEnabled)
@@ -108,5 +123,9 @@ namespace Game.Gameplay
                 Debug.Log($"Time out, throw the ball anyway");
             }
         }
+
+        public class EnergyUpdateEvent : UnityEvent<float> { }
+        // ammo / maxAmmo
+        public class AmmoUpdateEvent : UnityEvent<int> { }
     }
 }
