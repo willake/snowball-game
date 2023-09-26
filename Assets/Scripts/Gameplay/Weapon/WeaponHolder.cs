@@ -10,6 +10,7 @@ namespace Game.Gameplay
         public Transform socket;
 
         [Header("Settings")]
+        public bool isDebugLogEnabled = false;
         public float minEnergy = 0f;
         public float maxEnergy = 10f;
         public float chargeIntervalInSeconds = 0.01f;
@@ -19,6 +20,8 @@ namespace Game.Gameplay
         public Vector3 AimDirection { get; private set; }
         public float Energy { get; private set; }
 
+        [Header("Property")]
+        public Camp ownerCamp;
         public Weapon holdingWeapon;
 
         private Coroutine _runningCorotine = null;
@@ -33,6 +36,7 @@ namespace Game.Gameplay
             holdingWeapon = weapon;
             weapon.transform.SetParent(socket);
             weapon.transform.position = socket.position;
+            weapon.SetOwnerCamp(ownerCamp);
         }
 
         public void Hold()
@@ -69,7 +73,10 @@ namespace Game.Gameplay
             {
                 yield return new WaitForSeconds(chargeIntervalInSeconds);
                 Energy += energyPerInterval;
-                Debug.Log($"Energy increase {energyPerInterval} to {Energy}");
+                if (isDebugLogEnabled)
+                {
+                    Debug.Log($"Energy increase {energyPerInterval} to {Energy}");
+                }
             }
 
             yield return new WaitForSeconds(0.1f);
@@ -78,13 +85,19 @@ namespace Game.Gameplay
             {
                 yield return new WaitForSeconds(chargeIntervalInSeconds);
                 Energy -= energyPerInterval;
-                Debug.Log($"Energy decrease {energyPerInterval} to {Energy}");
+                if (isDebugLogEnabled)
+                {
+                    Debug.Log($"Energy decrease {energyPerInterval} to {Energy}");
+                }
             }
 
             Energy = timeOutEnergy;
 
             Throw();
-            Debug.Log($"Time out, throw the ball anyway");
+            if (isDebugLogEnabled)
+            {
+                Debug.Log($"Time out, throw the ball anyway");
+            }
         }
     }
 }

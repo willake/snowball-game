@@ -12,10 +12,24 @@ namespace Game.Gameplay
     {
         public int id;
         public WeaponType weaponType;
-        public bool canHold = false;
+        public Camp ownerCamp;
 
-        public abstract void SetOwnerType(ControllerType type);
-        public abstract int GetOwnerLayer();
+        public void SetOwnerCamp(Camp camp)
+        {
+            ownerCamp = camp;
+        }
+
+        public int GetOwnerCampLayer()
+        {
+            switch (ownerCamp)
+            {
+                case Camp.Player:
+                default:
+                    return LayerMask.NameToLayer("Player");
+                case Camp.Enemy:
+                    return LayerMask.NameToLayer("Enemy");
+            }
+        }
         public abstract void Attack(Vector3 direction, float energy);
         public abstract void Reload();
     }

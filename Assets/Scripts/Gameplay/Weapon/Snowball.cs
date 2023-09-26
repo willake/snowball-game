@@ -15,16 +15,19 @@ namespace Game.Gameplay
         public float energyMultiplier = 10f;
         public ControllerType OwnerType { get; private set; }
         public int Ammo { get; private set; }
+        private GameObject _snowballPoolObj;
         private Queue<GameObject> _snowballPool;
         private GameObject _holdingSnowball;
 
         private void Start()
         {
             _snowballPool = new Queue<GameObject>();
+            _snowballPoolObj = new GameObject();
             for (int i = 0; i < poolSize; i++)
             {
                 GameObject obj =
-                    Instantiate(prefabSnowballBullet, transform.position, Quaternion.identity);
+                    Instantiate(
+                        prefabSnowballBullet, transform.position, Quaternion.identity, _snowballPoolObj.transform);
                 obj.SetActive(false);
                 obj.layer = this.gameObject.layer;
                 _snowballPool.Enqueue(obj);
@@ -32,33 +35,15 @@ namespace Game.Gameplay
             Ammo = maxAmmo;
         }
 
-        public override void SetOwnerType(ControllerType type)
-        {
-            OwnerType = type;
-        }
-
-        public override int GetOwnerLayer()
-        {
-            switch (OwnerType)
-            {
-                case ControllerType.Player:
-                default:
-                    return LayerMask.NameToLayer("Player");
-                case ControllerType.AI:
-                    return LayerMask.NameToLayer("Enemy");
-            }
-        }
-
         public void Hold()
         {
             if (Ammo <= 0) return;
 
-            Debug.Log("Hold");
             // pop a snowball
             _holdingSnowball = _snowballPool.Dequeue();
             _holdingSnowball.SetActive(true);
             _holdingSnowball.transform.position = this.transform.position;
-            _holdingSnowball.gameObject.layer = GetOwnerLayer();
+            _holdingSnowball.gameObject.layer = GetOwnerCampLayer();
             Rigidbody rig = _holdingSnowball.GetComponent<Rigidbody>();
             rig.useGravity = false;
         }
@@ -67,7 +52,6 @@ namespace Game.Gameplay
         {
             if (Ammo <= 0 || _holdingSnowball == null) return;
 
-            Debug.Log("Throw");
             // TODO: snowball mechanic
             Rigidbody rig = _holdingSnowball.GetComponent<Rigidbody>();
             rig.useGravity = true;
@@ -91,6 +75,12 @@ namespace Game.Gameplay
             {
                 _holdingSnowball.transform.position = this.transform.position;
             }
+        }
+
+        private void OnDestroy()
+        {
+            _snowballPool.Clear();
+            Destroy(_snowballPoolObj);
         }
     }
 }

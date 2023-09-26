@@ -20,11 +20,9 @@ namespace Game.Gameplay
             {
                 UIManager.instance.OpenUI(AvailableUI.GameHUDPanel);
             }
-            Character player = characterFactory.GeneratePlayerCharacter("Dummy");
+            Character player = characterFactory.GeneratePlayerCharacter("Player");
             playerController.BindCharacter(player);
             playerController.BindCamera(playerCamera);
-            Weapon snowball = weaponFactory.GenerateWeapon(0);
-            playerController.EquipWeapon(snowball);
             // UIManager.instance.OpenUI(AvailableUI.GameHUDPanel);
         }
     }
