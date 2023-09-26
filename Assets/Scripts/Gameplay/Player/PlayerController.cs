@@ -11,10 +11,8 @@ namespace Game.Gameplay
         private PlayerCamera _camera;
         private Character _character;
 
-        public bool isControllingMovement;
-
+        private bool _isMoving;
         private bool _isAiming = false;
-        private bool _isHoldingFire = false;
 
         public void BindCamera(PlayerCamera cam)
         {
@@ -25,17 +23,11 @@ namespace Game.Gameplay
         public void BindCharacter(Character character)
         {
             _character = character;
-            Debug.Log($"Character has been set to: {character.name}");
         }
 
         public void EquipWeapon(Weapon weapon)
         {
             _character.EquipWeapon(weapon);
-        }
-
-        public void Fire()
-        {
-            _character.Attack();
         }
 
         public void Aim()
@@ -52,32 +44,23 @@ namespace Game.Gameplay
             if (Math.Abs(horizontal) > float.Epsilon || Math.Abs(vertical) > float.Epsilon)
             {
                 _character.Move(horizontal, vertical);
-                isControllingMovement = true;
+                _isMoving = true;
             }
             else
             {
-                isControllingMovement = false;
-            }
-
-            if (Input.GetKeyDown(KeyCode.Mouse1))
-            {
-                _isAiming = true;
-            }
-
-            if (Input.GetKeyUp(KeyCode.Mouse1))
-            {
-                _isAiming = false;
+                _isMoving = false;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                _character.Attack();
-                _isHoldingFire = true;
+                _character.Hold();
+                _isAiming = true;
             }
 
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
-                _isHoldingFire = false;
+                _character.Throw();
+                _isAiming = false;
             }
 
             if (_isAiming)
@@ -85,11 +68,6 @@ namespace Game.Gameplay
                 Vector3 chaPos =
                     _camera.GetCamera().WorldToScreenPoint(_character.transform.position);
                 _character.Aim((chaPos - Input.mousePosition).normalized);
-            }
-
-            if (_isHoldingFire && _character.weaponHolder.HoldingWeapon.canHold)
-            {
-                _character.Attack();
             }
         }
 
@@ -102,7 +80,7 @@ namespace Game.Gameplay
             direction.Normalize();
 
             _camera.FollowCharacter(
-                isControllingMovement, _character.transform.position, direction);
+                _isMoving, _character.transform.position, direction);
         }
     }
 }

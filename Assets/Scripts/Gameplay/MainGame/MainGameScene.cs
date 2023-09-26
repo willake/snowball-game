@@ -23,8 +23,8 @@ namespace Game.Gameplay
             Character player = characterFactory.GeneratePlayerCharacter("Dummy");
             playerController.BindCharacter(player);
             playerController.BindCamera(playerCamera);
-            Weapon pistol = weaponFactory.GenerateWeapon(0);
-            playerController.EquipWeapon(pistol);
+            Weapon snowball = weaponFactory.GenerateWeapon(0);
+            playerController.EquipWeapon(snowball);
             // UIManager.instance.OpenUI(AvailableUI.GameHUDPanel);
         }
     }

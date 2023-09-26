@@ -2518,7 +2518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3e994222b0e26544a91a6dea546dfbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefabPistol: {fileID: 5217637091868284721, guid: 101c0c9b04054254185c1811f55d7d9c, type: 3}
+  prefabSnowball: {fileID: 7536811184194946928, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
 --- !u!4 &1560859839
 Transform:
   m_ObjectHideFlags: 0
@@ -2631,6 +2631,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4257229174932705262, guid: 0948ed997e067d241a4c41787d846308, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d86c650b9c0b36a459c0587d24906bbc, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3005,7 +3009,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c124f138041ef43bb78f5a9419a283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isControllingMovement: 0
 --- !u!4 &1830154284
 Transform:
   m_ObjectHideFlags: 0

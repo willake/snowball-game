@@ -46,11 +46,17 @@ namespace Game.Gameplay
             float angle = (float)Math.Atan2(direction.x, direction.y);
             transform.rotation = Quaternion.Euler(
                 new Vector3(0, angle * Mathf.Rad2Deg + 180, 0));
+            weaponHolder.UpdateAimDirection(transform.forward);
         }
 
-        public void Attack()
+        public void Hold()
         {
-            weaponHolder.Attack(transform.forward);
+            weaponHolder.Hold();
+        }
+
+        public void Throw()
+        {
+            weaponHolder.Throw();
         }
     }
 }
