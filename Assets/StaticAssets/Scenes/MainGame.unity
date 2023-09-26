@@ -1027,9 +1027,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPersistant: 0
   playerCamera: {fileID: 660417104}
-  playerController: {fileID: 1830154283}
   characterFactory: {fileID: 1629096364}
-  weaponFactory: {fileID: 1560859838}
   vfxManager: {fileID: 1105884531}
 --- !u!4 &789512049
 Transform:
@@ -1046,7 +1044,6 @@ Transform:
   m_Children:
   - {fileID: 1105884532}
   - {fileID: 1629096365}
-  - {fileID: 1560859839}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &1070977822
@@ -2489,51 +2486,6 @@ Mesh:
     offset: 0
     size: 0
     path: 
---- !u!1 &1560859837
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1560859839}
-  - component: {fileID: 1560859838}
-  m_Layer: 0
-  m_Name: WeaponFactory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1560859838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560859837}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3e994222b0e26544a91a6dea546dfbe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabSnowball: {fileID: 7536811184194946928, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
---- !u!4 &1560859839
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560859837}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 789512049}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1629096363
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,7 +2515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b662144745bd4974ba7db2fd06f00e73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCharacter: {fileID: 2619225314589898786, guid: 428192129b684004ba070643cde19b88, type: 3}
+  playerPrefab: {fileID: 2619225314589898786, guid: 428192129b684004ba070643cde19b88, type: 3}
+  enemyPrefab: {fileID: 0}
 --- !u!4 &1629096365
 Transform:
   m_ObjectHideFlags: 0
@@ -3009,6 +2962,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c124f138041ef43bb78f5a9419a283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bindedCharacter: {fileID: 0}
 --- !u!4 &1830154284
 Transform:
   m_ObjectHideFlags: 0

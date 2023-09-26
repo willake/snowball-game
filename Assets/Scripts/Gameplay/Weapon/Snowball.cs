@@ -13,11 +13,10 @@ namespace Game.Gameplay
         public int maxAmmo = 10;
         public int poolSize = 20;
         public float energyMultiplier = 10f;
-        public ControllerType OwnerType { get; private set; }
         public int Ammo { get; private set; }
         private GameObject _snowballPoolObj;
         private Queue<GameObject> _snowballPool;
-        private GameObject _holdingSnowball;
+        private GameObject _holdingProjectile;
 
         private void Start()
         {
@@ -40,24 +39,28 @@ namespace Game.Gameplay
             if (Ammo <= 0) return;
 
             // pop a snowball
-            _holdingSnowball = _snowballPool.Dequeue();
-            _holdingSnowball.SetActive(true);
-            _holdingSnowball.transform.position = this.transform.position;
-            _holdingSnowball.gameObject.layer = GetOwnerCampLayer();
-            Rigidbody rig = _holdingSnowball.GetComponent<Rigidbody>();
+            _holdingProjectile = _snowballPool.Dequeue();
+            _holdingProjectile.SetActive(true);
+            _holdingProjectile.transform.position = this.transform.position;
+            _holdingProjectile.gameObject.layer = GetOwnerCampLayer();
+            Rigidbody rig = _holdingProjectile.GetComponent<Rigidbody>();
             rig.useGravity = false;
         }
 
         public override void Attack(Vector3 direction, float energy)
         {
-            if (Ammo <= 0 || _holdingSnowball == null) return;
+            if (Ammo <= 0 || _holdingProjectile == null) return;
 
             // TODO: snowball mechanic
-            Rigidbody rig = _holdingSnowball.GetComponent<Rigidbody>();
+            Rigidbody rig = _holdingProjectile.GetComponent<Rigidbody>();
             rig.useGravity = true;
             rig.AddForce(direction * energy * energyMultiplier, ForceMode.Impulse);
-            _snowballPool.Enqueue(_holdingSnowball);
-            _holdingSnowball = null;
+
+            // activate auto disabled
+            _holdingProjectile.GetComponent<SnowballProjectile>().Shot();
+
+            _snowballPool.Enqueue(_holdingProjectile);
+            _holdingProjectile = null;
         }
 
         public override void Reload()
@@ -71,9 +74,9 @@ namespace Game.Gameplay
 
         private void Update()
         {
-            if (_holdingSnowball)
+            if (_holdingProjectile)
             {
-                _holdingSnowball.transform.position = this.transform.position;
+                _holdingProjectile.transform.position = this.transform.position;
             }
         }
 
