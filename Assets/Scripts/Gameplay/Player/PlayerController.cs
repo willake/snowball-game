@@ -87,7 +87,7 @@ namespace Game.Gameplay
                 _character.Aim((chaPos - Input.mousePosition).normalized);
             }
 
-            if (_isHoldingFire && _character.weapon.canHold)
+            if (_isHoldingFire && _character.weaponHolder.HoldingWeapon.canHold)
             {
                 _character.Attack();
             }

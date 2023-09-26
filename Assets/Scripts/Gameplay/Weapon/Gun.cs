@@ -32,7 +32,7 @@ namespace Game.Gameplay
             }
         }
 
-        public override void Fire(Vector3 direction)
+        public override void Attack(Vector3 direction)
         {
             if (Time.time - _lastShootTime < shootingDelay)
             {

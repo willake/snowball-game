@@ -14,8 +14,8 @@ namespace Game.Gameplay
         public Vector3 currentVelocity { get { return GetRigidbody().velocity; } }
 
         [Header("Weapons")]
-        public Transform weaponSocket;
-        public Weapon weapon;
+        public WeaponHolder weaponHolder;
+
         private Rigidbody GetRigidbody()
         {
             if (_rigibody == null) _rigibody = GetComponent<Rigidbody>();
@@ -34,9 +34,7 @@ namespace Game.Gameplay
 
         public void EquipWeapon(Weapon weapon)
         {
-            this.weapon = weapon;
-            this.weapon.transform.SetParent(weaponSocket);
-            this.weapon.transform.position = weaponSocket.position;
+            weaponHolder.EquipWeapon(weapon);
         }
 
         public void DropWeapon()
@@ -52,7 +50,7 @@ namespace Game.Gameplay
 
         public void Attack()
         {
-            this.weapon.Fire(transform.forward);
+            weaponHolder.Attack(transform.forward);
         }
     }
 }

@@ -5,7 +5,8 @@ namespace Game.Gameplay
     public enum WeaponType
     {
         Melee,
-        Gun
+        Gun,
+        Snowball
     }
     public abstract class Weapon : MonoBehaviour
     {
@@ -13,6 +14,6 @@ namespace Game.Gameplay
         public WeaponType weaponType;
         public bool canHold = false;
 
-        public abstract void Fire(Vector3 direction);
+        public abstract void Attack(Vector3 direction);
     }
 }
