@@ -14,8 +14,8 @@ namespace Game.Gameplay
         public Vector3 currentVelocity { get { return GetRigidbody().velocity; } }
 
         [Header("Weapons")]
-        public Transform weaponSocket;
-        public Weapon weapon;
+        public WeaponHolder weaponHolder;
+
         private Rigidbody GetRigidbody()
         {
             if (_rigibody == null) _rigibody = GetComponent<Rigidbody>();
@@ -34,13 +34,16 @@ namespace Game.Gameplay
 
         public void EquipWeapon(Weapon weapon)
         {
-            this.weapon = weapon;
-            this.weapon.transform.SetParent(weaponSocket);
-            this.weapon.transform.position = weaponSocket.position;
+            weaponHolder.EquipWeapon(weapon);
         }
 
         public void DropWeapon()
         {
+        }
+
+        public void Reload()
+        {
+            weaponHolder.Reload();
         }
 
         public void Aim(Vector3 direction)
@@ -48,11 +51,17 @@ namespace Game.Gameplay
             float angle = (float)Math.Atan2(direction.x, direction.y);
             transform.rotation = Quaternion.Euler(
                 new Vector3(0, angle * Mathf.Rad2Deg + 180, 0));
+            weaponHolder.UpdateAimDirection(transform.forward);
         }
 
-        public void Attack()
+        public void Hold()
         {
-            this.weapon.Fire(transform.forward);
+            weaponHolder.Hold();
+        }
+
+        public void Throw()
+        {
+            weaponHolder.Throw();
         }
     }
 }

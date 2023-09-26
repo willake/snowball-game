@@ -4,12 +4,12 @@ namespace Game.Gameplay
 {
     public class WeaponFactory : MonoBehaviour
     {
-        public GameObject prefabPistol;
+        public GameObject prefabSnowball;
 
         public Weapon GenerateWeapon(int id)
         {
-            GameObject obj = Instantiate(prefabPistol, Vector3.zero, Quaternion.identity);
-            obj.name = "Pistol";
+            GameObject obj = Instantiate(prefabSnowball, Vector3.zero, Quaternion.identity);
+            obj.name = "snowball";
             Weapon weapon = obj.GetComponent<Weapon>();
             return weapon;
         }
