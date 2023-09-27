@@ -75,7 +75,6 @@ namespace Game.Gameplay
                 direction * energy * energyMultiplier, ForceMode.Impulse);
 
             // activate auto disabled
-            _holdingProjectile.Shot();
 
             _projectilePool.Enqueue(_holdingProjectile);
             _holdingProjectile = null;

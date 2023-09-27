@@ -8,7 +8,7 @@ namespace Game.Gameplay
     {
         [Header("Settings")]
         public float damage = 50f;
-        public float autoDisabledInSeconds = 5f;
+        public float autoDisabledInSeconds = 2f;
         public Camp OwnerCamp { get; private set; }
         public OnHitEvent onHitEvent = new();
 
@@ -24,11 +24,6 @@ namespace Game.Gameplay
         public void SetOwnerCamp(Camp camp)
         {
             OwnerCamp = camp;
-        }
-
-        public void Shot()
-        {
-            StartCoroutine(AutoDisabled());
         }
 
         private void OnTriggerEnter(Collider other)
@@ -54,11 +49,12 @@ namespace Game.Gameplay
 
         }
 
-        IEnumerator AutoDisabled()
+        private void Update()
         {
-            yield return new WaitForSeconds(autoDisabledInSeconds);
-            GetRigidbody().velocity = Vector3.zero;
-            gameObject.SetActive(false);
+            if (transform.position.y < -20)
+            {
+                gameObject.SetActive(false);
+            }
         }
 
         public class OnHitEvent : UnityEvent<Vector3, Vector3> { }
