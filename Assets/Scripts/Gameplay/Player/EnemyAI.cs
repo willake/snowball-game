@@ -4,7 +4,7 @@ using UnityEngine.AI;
 
 namespace Game.Gameplay
 {
-    public class EnemyAiTutorial : MonoBehaviour
+    public class EnemyAI : MonoBehaviour
     {
         public NavMeshAgent agent;
 
@@ -77,6 +77,8 @@ namespace Game.Gameplay
 
         private void AttackPlayer()
         {
+            if (weaponHolder.Ammo == 0)
+                weaponHolder.Reload();
             //Make sure enemy doesn't move
             agent.SetDestination(transform.position);
             transform.LookAt(player);
@@ -92,6 +94,7 @@ namespace Game.Gameplay
             {
                 lastAttack = Time.realtimeSinceStartup;
                 weaponHolder.SetAimDirection(player.transform.position - self.transform.position);
+                weaponHolder.SetEnergy(timeBetweenAttacks);
                 weaponHolder.Throw();
                 ResetAttack();
             }
@@ -102,7 +105,7 @@ namespace Game.Gameplay
             alreadyAttacked = false;
         }
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             health -= damage;
 

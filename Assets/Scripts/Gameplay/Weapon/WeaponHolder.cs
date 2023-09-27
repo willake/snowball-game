@@ -36,6 +36,8 @@ namespace Game.Gameplay
             }
         }
         public float Energy { get; private set; }
+
+        public void SetEnergy(float e) { Energy = e; }
         public UnityEvent holdEvent = new();
         public UnityEvent throwEvent = new();
         public EnergyUpdateEvent energyUpdateEvent = new();

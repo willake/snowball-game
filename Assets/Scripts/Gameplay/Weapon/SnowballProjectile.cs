@@ -13,7 +13,6 @@ namespace Game.Gameplay
         public OnHitEvent onHitEvent = new();
 
         private Rigidbody _rig;
-
         public Rigidbody GetRigidbody()
         {
             if (_rig == null) _rig = GetComponent<Rigidbody>();
