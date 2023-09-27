@@ -9,10 +9,9 @@ namespace Game.Gameplay
 {
     public class MainGameScene : GameScene<MainGameScene>
     {
-        public PlayerCamera playerCamera;
         public CharacterFactory characterFactory;
         public EnvironmentVFXManager vfxManager;
-        public LevelManager levelManager;
+        public LevelLoader levelLoader;
 
         private GameHUDPanel _gameHUDPanel;
 
@@ -20,11 +19,11 @@ namespace Game.Gameplay
         {
             if (GameManager.instance)
             {
-                levelManager.LoadLevel(GameManager.instance.levelToLoad).Forget();
+                levelLoader.LoadLevel(GameManager.instance.levelToLoad).Forget();
             }
             else
             {
-                levelManager.LoadLevel(AvailableLevel.Test).Forget();
+                levelLoader.LoadLevel(AvailableLevel.Test).Forget();
             }
 
             // Character player = characterFactory.GeneratePlayer("Player");

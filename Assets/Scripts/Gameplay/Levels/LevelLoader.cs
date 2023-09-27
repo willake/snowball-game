@@ -9,7 +9,7 @@ using Game.Gameplay;
 
 namespace Game
 {
-    public class LevelManager : MonoBehaviour
+    public class LevelLoader : MonoBehaviour
     {
         private string _currentLevel = string.Empty;
 
