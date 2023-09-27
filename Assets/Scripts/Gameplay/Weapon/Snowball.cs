@@ -58,10 +58,11 @@ namespace Game.Gameplay
 
             // pop a snowball
             _holdingProjectile = _projectilePool.Dequeue();
-            _holdingProjectile.gameObject.SetActive(true);
             _holdingProjectile.transform.position = this.transform.position;
             _holdingProjectile.gameObject.layer = GetOwnerCampLayer();
+            _holdingProjectile.GetRigidbody().velocity = Vector3.zero;
             _holdingProjectile.GetRigidbody().useGravity = false;
+            _holdingProjectile.gameObject.SetActive(true);
         }
 
         public override void Attack(Vector3 direction, float energy)
@@ -69,7 +70,6 @@ namespace Game.Gameplay
             if (Ammo <= 0 || _holdingProjectile == null) return;
 
             // TODO: snowball mechanic
-            Rigidbody rig = _holdingProjectile.GetComponent<Rigidbody>();
             _holdingProjectile.GetRigidbody().useGravity = true;
             _holdingProjectile.GetRigidbody().AddForce(
                 direction * energy * energyMultiplier, ForceMode.Impulse);
@@ -93,10 +93,13 @@ namespace Game.Gameplay
         public void PlayOnHitEffect(Vector3 position, Vector3 velocity)
         {
             ParticleSystem onHitEffect = _onHitEffectPool.Dequeue();
-            onHitEffect.gameObject.SetActive(true);
             onHitEffect.transform.position = position;
+            onHitEffect.gameObject.SetActive(true);
             onHitEffect.Play();
-            onHitEffect.transform.rotation = Quaternion.LookRotation(velocity.normalized * -1);
+            if (velocity.magnitude > float.Epsilon)
+            {
+                onHitEffect.transform.rotation = Quaternion.LookRotation(velocity.normalized * -1);
+            }
             _onHitEffectPool.Enqueue(onHitEffect);
         }
 
