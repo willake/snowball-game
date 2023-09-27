@@ -61,8 +61,7 @@ namespace Game.Gameplay
             _holdingProjectile.gameObject.SetActive(true);
             _holdingProjectile.transform.position = this.transform.position;
             _holdingProjectile.gameObject.layer = GetOwnerCampLayer();
-            Rigidbody rig = _holdingProjectile.GetComponent<Rigidbody>();
-            rig.useGravity = false;
+            _holdingProjectile.GetRigidbody().useGravity = false;
         }
 
         public override void Attack(Vector3 direction, float energy)
@@ -71,8 +70,9 @@ namespace Game.Gameplay
 
             // TODO: snowball mechanic
             Rigidbody rig = _holdingProjectile.GetComponent<Rigidbody>();
-            rig.useGravity = true;
-            rig.AddForce(direction * energy * energyMultiplier, ForceMode.Impulse);
+            _holdingProjectile.GetRigidbody().useGravity = true;
+            _holdingProjectile.GetRigidbody().AddForce(
+                direction * energy * energyMultiplier, ForceMode.Impulse);
 
             // activate auto disabled
             _holdingProjectile.Shot();

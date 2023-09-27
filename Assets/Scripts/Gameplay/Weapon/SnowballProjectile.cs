@@ -14,7 +14,7 @@ namespace Game.Gameplay
 
         private Rigidbody _rig;
 
-        private Rigidbody GetRigidbody()
+        public Rigidbody GetRigidbody()
         {
             if (_rig == null) _rig = GetComponent<Rigidbody>();
 
@@ -47,6 +47,7 @@ namespace Game.Gameplay
             }
 
             onHitEvent.Invoke(transform.position, GetRigidbody().velocity);
+            GetRigidbody().velocity = Vector3.zero;
             gameObject.SetActive(false);
 
             // play hit effect
@@ -56,7 +57,7 @@ namespace Game.Gameplay
         IEnumerator AutoDisabled()
         {
             yield return new WaitForSeconds(autoDisabledInSeconds);
-
+            GetRigidbody().velocity = Vector3.zero;
             gameObject.SetActive(false);
         }
 
