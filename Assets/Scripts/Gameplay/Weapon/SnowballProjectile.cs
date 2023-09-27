@@ -15,8 +15,18 @@ namespace Game.Gameplay
             OwnerCamp = camp;
         }
 
+        public void Start()
+        {
+            Debug.Log("F");
+        }
+
+        public void Awake()
+        {
+            Debug.Log("A");
+        }
         public void Shot()
         {
+            Awake();
             StartCoroutine(AutoDisabled());
         }
 

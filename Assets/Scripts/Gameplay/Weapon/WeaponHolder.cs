@@ -21,6 +21,8 @@ namespace Game.Gameplay
         public float timeOutEnergy = 0.1f;
 
         public Vector3 AimDirection { get; private set; }
+
+        public void SetAimDirection(Vector3 dir) { AimDirection = AimDirection;}
         public int Ammo
         {
             get
