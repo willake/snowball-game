@@ -8,15 +8,23 @@ namespace Game.Gameplay
 {
     public class PlayerController : Controller
     {
-        private PlayerCamera _camera;
+        public PlayerCamera bindedCamera;
 
         private bool _isMoving;
         private bool _isAiming = false;
 
         public void BindCamera(PlayerCamera cam)
         {
-            _camera = cam;
-            _camera.TakeOver(PlayerCamera.ControllerType.Player);
+            bindedCamera = cam;
+            bindedCamera.TakeOver(PlayerCamera.ControllerType.Player);
+        }
+
+        private void Start()
+        {
+            if (MainGameScene.instance)
+            {
+                MainGameScene.instance.RegisterPlayer(this);
+            }
         }
 
         private void Update()
@@ -55,20 +63,20 @@ namespace Game.Gameplay
             if (_isAiming)
             {
                 Vector3 chaPos =
-                    _camera.GetCamera().WorldToScreenPoint(bindedCharacter.transform.position);
+                    bindedCamera.GetCamera().WorldToScreenPoint(bindedCharacter.transform.position);
                 bindedCharacter.Aim((chaPos - Input.mousePosition).normalized);
             }
         }
 
         private void FixedUpdate()
         {
-            if (bindedCharacter == null || _camera == null) return;
+            if (bindedCharacter == null || bindedCamera == null) return;
 
             Vector3 direction = bindedCharacter.currentVelocity;
             direction.y = 0;
             direction.Normalize();
 
-            _camera.FollowCharacter(
+            bindedCamera.FollowCharacter(
                 _isMoving, bindedCharacter.transform.position, direction);
         }
     }

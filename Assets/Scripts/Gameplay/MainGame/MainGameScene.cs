@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.UI;
+using Cysharp.Threading.Tasks;
 using Game.Gameplay.Cameras;
 
 namespace Game.Gameplay
@@ -11,16 +12,35 @@ namespace Game.Gameplay
         public PlayerCamera playerCamera;
         public CharacterFactory characterFactory;
         public EnvironmentVFXManager vfxManager;
+        public LevelManager levelManager;
+
+        private GameHUDPanel _gameHUDPanel;
 
         private void Start()
         {
-            Character player = characterFactory.GeneratePlayer("Player");
-            player.GetComponent<PlayerController>().BindCamera(playerCamera);
+            if (GameManager.instance)
+            {
+                levelManager.LoadLevel(GameManager.instance.levelToLoad).Forget();
+            }
+            else
+            {
+                levelManager.LoadLevel(AvailableLevel.Test).Forget();
+            }
+
+            // Character player = characterFactory.GeneratePlayer("Player");
+            // player.GetComponent<PlayerController>().BindCamera(playerCamera);
 
             if (UIManager.instance)
             {
-                GameHUDPanel hud = UIManager.instance.OpenUI(AvailableUI.GameHUDPanel) as GameHUDPanel;
-                hud.BindCharacter(player);
+                _gameHUDPanel = UIManager.instance.OpenUI(AvailableUI.GameHUDPanel) as GameHUDPanel;
+            }
+        }
+
+        public void RegisterPlayer(PlayerController playerController)
+        {
+            if (UIManager.instance)
+            {
+                _gameHUDPanel.BindCharacter(playerController.bindedCharacter);
             }
         }
     }
