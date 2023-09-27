@@ -12,6 +12,15 @@ namespace Game.Gameplay
         public Camp OwnerCamp { get; private set; }
         public OnHitEvent onHitEvent = new();
 
+        private Rigidbody _rig;
+
+        private Rigidbody GetRigidbody()
+        {
+            if (_rig == null) _rig = GetComponent<Rigidbody>();
+
+            return _rig;
+        }
+
         public void SetOwnerCamp(Camp camp)
         {
             OwnerCamp = camp;
@@ -37,7 +46,7 @@ namespace Game.Gameplay
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
             }
 
-            onHitEvent.Invoke(transform.position);
+            onHitEvent.Invoke(transform.position, GetRigidbody().velocity);
             gameObject.SetActive(false);
 
             // play hit effect
@@ -51,6 +60,6 @@ namespace Game.Gameplay
             gameObject.SetActive(false);
         }
 
-        public class OnHitEvent : UnityEvent<Vector3> { }
+        public class OnHitEvent : UnityEvent<Vector3, Vector3> { }
     }
 }

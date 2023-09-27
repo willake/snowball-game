@@ -91,12 +91,13 @@ namespace Game.Gameplay
             return true;
         }
 
-        public void PlayOnHitEffect(Vector3 position)
+        public void PlayOnHitEffect(Vector3 position, Vector3 velocity)
         {
             ParticleSystem onHitEffect = _onHitEffectPool.Dequeue();
             onHitEffect.gameObject.SetActive(true);
             onHitEffect.transform.position = position;
             onHitEffect.Play();
+            onHitEffect.transform.rotation = Quaternion.LookRotation(velocity.normalized * -1);
             _onHitEffectPool.Enqueue(onHitEffect);
         }
 
