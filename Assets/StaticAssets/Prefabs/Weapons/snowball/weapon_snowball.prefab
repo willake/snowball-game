@@ -46,9 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   weaponType: 1
-  canHold: 1
-  prefabSnowballBullet: {fileID: 5823859254762134577, guid: 6ce07fdcf6b95ec44b8e8708d9437d49, type: 3}
-  minEnergy: 0
-  maxEnergy: 10
+  ownerCamp: 0
+  prefabProjectile: {fileID: 5823859254762134577, guid: 6ce07fdcf6b95ec44b8e8708d9437d49, type: 3}
+  prefabOnHitEffect: {fileID: 5665328747249036557, guid: bc6ba0aefb0bbf64bb4bfd4283cfebb5, type: 3}
   maxAmmo: 10
-  poolSize: 20
+  poolSize: 15
+  energyMultiplier: 10
