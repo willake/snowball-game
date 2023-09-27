@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Gameplay
 {
@@ -9,6 +10,16 @@ namespace Game.Gameplay
         public float damage = 50f;
         public float autoDisabledInSeconds = 5f;
         public Camp OwnerCamp { get; private set; }
+        public OnHitEvent onHitEvent = new();
+
+        private Rigidbody _rig;
+
+        public Rigidbody GetRigidbody()
+        {
+            if (_rig == null) _rig = GetComponent<Rigidbody>();
+
+            return _rig;
+        }
 
         public void SetOwnerCamp(Camp camp)
         {
@@ -20,7 +31,7 @@ namespace Game.Gameplay
             StartCoroutine(AutoDisabled());
         }
 
-        private void OnCollisionEnter(Collision other)
+        private void OnTriggerEnter(Collider other)
         {
             if (
                 OwnerCamp == Camp.Player
@@ -35,16 +46,21 @@ namespace Game.Gameplay
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
             }
 
+            onHitEvent.Invoke(transform.position, GetRigidbody().velocity);
+            GetRigidbody().velocity = Vector3.zero;
             gameObject.SetActive(false);
 
             // play hit effect
+
         }
 
         IEnumerator AutoDisabled()
         {
             yield return new WaitForSeconds(autoDisabledInSeconds);
-
+            GetRigidbody().velocity = Vector3.zero;
             gameObject.SetActive(false);
         }
+
+        public class OnHitEvent : UnityEvent<Vector3, Vector3> { }
     }
 }
