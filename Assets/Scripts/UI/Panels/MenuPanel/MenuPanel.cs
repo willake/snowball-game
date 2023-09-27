@@ -11,23 +11,29 @@ namespace Game.UI
         public override AvailableUI Type => AvailableUI.MenuPanel;
 
         [Header("References")]
-        public WDTextButton btnPlay;
+        public WDTextButton btnPlayTest;
+        public WDTextButton btnPlayLevel1;
 
         private void Start()
         {
-            btnPlay
+            btnPlayTest
                 .OnClickObservable
                 .ObserveOnMainThread()
-                .Subscribe(_ => SwitchToMainGame())
+                .Subscribe(_ => PlayTest())
                 .AddTo(this);
 
-            btnPlay.SetText("Play");
+            btnPlayLevel1
+                .OnClickObservable
+                .ObserveOnMainThread()
+                .Subscribe(_ => PlayLevel1())
+                .AddTo(this);
         }
 
         public override WDButton[] GetSelectableButtons()
         {
             return new WDButton[] {
-                btnPlay
+                btnPlayTest,
+                btnPlayLevel1
             };
         }
 
@@ -58,14 +64,22 @@ namespace Game.UI
             await UniTask.CompletedTask;
         }
 
-        private void SwitchToMainGame()
+        private void PlayTest()
         {
+            GameManager.instance.levelToLoad = Gameplay.AvailableLevel.Test;
+            GameManager.instance.SwitchScene(AvailableScene.MainGame);
+        }
+
+        private void PlayLevel1()
+        {
+            GameManager.instance.levelToLoad = Gameplay.AvailableLevel.Level1;
             GameManager.instance.SwitchScene(AvailableScene.MainGame);
         }
 
         private void OnDestroy()
         {
-            btnPlay.StopAnimation();
+            btnPlayTest.StopAnimation();
+            btnPlayLevel1.StopAnimation();
         }
     }
 }

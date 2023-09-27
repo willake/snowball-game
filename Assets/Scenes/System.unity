@@ -597,8 +597,9 @@ MonoBehaviour:
   _isPersistant: 0
   audioResources: {fileID: 11400000, guid: 92a7f588fddbe2545a5932a5c08f2a5d, type: 2}
   sceneResources: {fileID: 11400000, guid: 7f7b33e8f9625b54b9622008bded8138, type: 2}
+  levelResources: {fileID: 11400000, guid: 6037870bba5cbca4b9a04ef914a7fa5a, type: 2}
   uiPanelResources: {fileID: 11400000, guid: c7d7aa699cfa51a41a8687a49c0bf718, type: 2}
-  gameplayResources: {fileID: 0}
+  gameplayResources: {fileID: 11400000, guid: 60ca2fad60679cb4dbac926c033bc93d, type: 2}
 --- !u!223 &1394699990 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 5442759027055832217, guid: bbf9c5379f74902418a447cf49d21de4, type: 3}
@@ -651,6 +652,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isPersistant: 0
   sceneLoader: {fileID: 276261630}
+  levelToLoad: 0
 --- !u!1 &1700998227
 GameObject:
   m_ObjectHideFlags: 0

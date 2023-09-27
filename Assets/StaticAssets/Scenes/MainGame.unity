@@ -861,7 +861,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &588438383
 Transform:
   m_ObjectHideFlags: 0
@@ -3209,6 +3209,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3578128749712286819, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3225,6 +3229,10 @@ PrefabInstance:
     - target: {fileID: 1638496626660115241, guid: fdedc63ac34f7ad4e86efc9ad1f23805, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 1638496626660115241, guid: fdedc63ac34f7ad4e86efc9ad1f23805, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7271587386582083837, guid: fdedc63ac34f7ad4e86efc9ad1f23805, type: 3}
       propertyPath: m_LocalPosition.x
