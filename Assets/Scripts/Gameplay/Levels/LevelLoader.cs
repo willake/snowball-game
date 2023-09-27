@@ -75,6 +75,24 @@ namespace Game
             _currentLevel = levelName;
         }
 
+        public async UniTask UnloadCurrentLevel()
+        {
+            if (_currentLevel != string.Empty || _currentLevel != null)
+            {
+                AsyncOperation unloadSceneOperation =
+                    SceneManager.UnloadSceneAsync(_currentLevel);
+
+                await unloadSceneOperation;
+            }
+
+            _currentLevel = string.Empty;
+        }
+
+        private void OnDestroy()
+        {
+            UnloadCurrentLevel().Forget();
+        }
+
         public class OnLoadLevelEvent : UnityEvent<string> { }
     }
 }
