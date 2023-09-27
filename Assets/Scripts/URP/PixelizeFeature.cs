@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 
+// Reference:  https://www.youtube.com/watch?v=-8xlPP4qgVo&ab_channel=whateep
+
 namespace Game.URP
 {
     public class PixelizeFeature : ScriptableRendererFeature
