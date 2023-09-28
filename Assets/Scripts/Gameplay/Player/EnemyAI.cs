@@ -86,7 +86,7 @@ namespace Game.Gameplay
             if (!alreadyAttacked)
             {
                 timeBetweenAttacks = Random.Range(0.2f, 10f);
-                weaponHolder.Hold();
+                // weaponHolder.Hold();
                 alreadyAttacked = true;
             }
 
@@ -94,8 +94,8 @@ namespace Game.Gameplay
             {
                 lastAttack = Time.realtimeSinceStartup;
                 weaponHolder.UpdateAimDirection(self.transform.forward);
-                weaponHolder.SetEnergy(timeBetweenAttacks);
-                weaponHolder.Throw();
+                // weaponHolder.SetEnergy(timeBetweenAttacks);
+                weaponHolder.ThrowWithoutCharging(5);
                 ResetAttack();
             }
             
