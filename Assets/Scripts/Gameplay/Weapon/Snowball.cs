@@ -14,6 +14,7 @@ namespace Game.Gameplay
         public int maxAmmo = 10;
         public int poolSize = 15;
         public float energyMultiplier = 10f;
+        public LayerMask projectileLayer;
         public int Ammo { get; private set; }
         private GameObject _poolObj;
         private Queue<SnowballProjectile> _projectilePool;
@@ -37,6 +38,7 @@ namespace Game.Gameplay
                 projectileObj.layer = this.gameObject.layer;
                 SnowballProjectile projectile =
                     projectileObj.GetComponent<SnowballProjectile>();
+                projectile.SetOwnerCamp(ownerCamp);
                 _projectilePool.Enqueue(projectile);
 
                 projectile.onHitEvent.AddListener(PlayOnHitEffect);
@@ -59,7 +61,7 @@ namespace Game.Gameplay
             // pop a snowball
             _holdingProjectile = _projectilePool.Dequeue();
             _holdingProjectile.transform.position = this.transform.position;
-            _holdingProjectile.gameObject.layer = GetOwnerCampLayer();
+            _holdingProjectile.gameObject.layer = projectileLayer;
             _holdingProjectile.GetRigidbody().velocity = Vector3.zero;
             _holdingProjectile.GetRigidbody().useGravity = false;
             _holdingProjectile.gameObject.SetActive(true);
@@ -67,6 +69,8 @@ namespace Game.Gameplay
 
         public override void Attack(Vector3 direction, float energy)
         {
+            Debug.Log("FUCK: " + energy);
+            Debug.Log("DIR:" + direction);
             if (Ammo <= 0 || _holdingProjectile == null) return;
 
             // TODO: snowball mechanic

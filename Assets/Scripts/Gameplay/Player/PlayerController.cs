@@ -2,13 +2,16 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Game.Gameplay.Cameras;
+using Game.RuntimeStates;
 using UnityEngine;
 
 namespace Game.Gameplay
 {
     public class PlayerController : Controller
     {
+        [Header("References")]
         public PlayerCamera bindedCamera;
+        public Vector3State statePlayerPos;
 
         private bool _isMoving;
         private bool _isAiming = false;
@@ -64,8 +67,10 @@ namespace Game.Gameplay
             {
                 Vector3 chaPos =
                     bindedCamera.GetCamera().WorldToScreenPoint(bindedCharacter.transform.position);
-                bindedCharacter.Aim((chaPos - Input.mousePosition).normalized);
+                bindedCharacter.Aim((Input.mousePosition - chaPos).normalized);
             }
+
+            statePlayerPos.value = bindedCharacter.transform.position;
         }
 
         private void FixedUpdate()

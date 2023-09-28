@@ -1,12 +1,14 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace Game.Gameplay
 {
     public class Character : MonoBehaviour
     {
+        private NavMeshAgent _navMeshAgent;
         private Rigidbody _rigibody;
 
         [Header("Status")]
@@ -29,6 +31,13 @@ namespace Game.Gameplay
             return _rigibody;
         }
 
+        public NavMeshAgent GetNavMeshAgent()
+        {
+            if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
+
+            return _navMeshAgent;
+        }
+
         public void Move(float horizontal, float vertical)
         {
             if (GetRigidbody().velocity.magnitude < maxSpeed)
@@ -36,6 +45,11 @@ namespace Game.Gameplay
                 GetRigidbody().AddForce(
                  new Vector3(horizontal, 0, vertical) * acc, ForceMode.Force);
             }
+        }
+
+        public void MoveTo(Vector3 position)
+        {
+            GetNavMeshAgent().SetDestination(position);
         }
 
         public void TakeDamage(float damage)
@@ -60,8 +74,8 @@ namespace Game.Gameplay
         {
             float angle = (float)Math.Atan2(direction.x, direction.y);
             transform.rotation = Quaternion.Euler(
-                new Vector3(0, angle * Mathf.Rad2Deg + 180, 0));
-            weaponHolder.UpdateAimDirection(transform.forward);
+                new Vector3(0, angle * Mathf.Rad2Deg, 0));
+            weaponHolder.UpdateAimDirection(direction);
         }
 
         public void Hold()
@@ -72,6 +86,17 @@ namespace Game.Gameplay
         public void Throw()
         {
             weaponHolder.Throw();
+        }
+
+        public void ThrowWithoutCharging(float energy)
+        {
+            weaponHolder.ThrowWithoutCharging(energy);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, transform.forward * 3);
         }
 
         public class HealthUpdateEvent : UnityEvent<float> { }

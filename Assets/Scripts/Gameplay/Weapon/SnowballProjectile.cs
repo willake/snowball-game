@@ -13,7 +13,6 @@ namespace Game.Gameplay
         public OnHitEvent onHitEvent = new();
 
         private Rigidbody _rig;
-
         public Rigidbody GetRigidbody()
         {
             if (_rig == null) _rig = GetComponent<Rigidbody>();
@@ -28,17 +27,26 @@ namespace Game.Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
+            bool hit = false;
             if (
                 OwnerCamp == Camp.Player
                 && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
+                hit = true;
             }
 
             if (OwnerCamp == Camp.Enemy
                 && other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
+                hit = true;
+            }
+
+            if (!hit && (other.gameObject.layer == LayerMask.NameToLayer("Enemy") ||
+                other.gameObject.layer == LayerMask.NameToLayer("Player")))
+            {
+                return;
             }
 
             onHitEvent.Invoke(transform.position, GetRigidbody().velocity);

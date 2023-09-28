@@ -21,6 +21,7 @@ namespace Game.Gameplay
         public float timeOutEnergy = 0.1f;
 
         public Vector3 AimDirection { get; private set; }
+
         public int Ammo
         {
             get
@@ -34,6 +35,7 @@ namespace Game.Gameplay
             }
         }
         public float Energy { get; private set; }
+
         public UnityEvent holdEvent = new();
         public UnityEvent throwEvent = new();
         public EnergyUpdateEvent energyUpdateEvent = new();
@@ -74,7 +76,25 @@ namespace Game.Gameplay
                 Mathf.Sin(pitch),
                 AimDirection.z * Mathf.Cos(pitch)
             );
+
             holdingWeapon.Attack(shootDirection.normalized, Energy);
+            throwEvent.Invoke();
+        }
+
+        // for enemy AI
+        public void ThrowWithoutCharging(float energy)
+        {
+            holdingWeapon.Hold();
+
+            float pitch = throwingPitch * Mathf.Deg2Rad;
+
+            Vector3 shootDirection = new Vector3(
+                AimDirection.x * Mathf.Cos(pitch),
+                Mathf.Sin(pitch),
+                AimDirection.z * Mathf.Cos(pitch)
+            );
+
+            holdingWeapon.Attack(shootDirection.normalized, energy);
             throwEvent.Invoke();
         }
 
