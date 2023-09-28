@@ -40,6 +40,12 @@ namespace Game.Gameplay
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
             }
 
+            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy") ||
+                other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            {
+                return;
+            }
+
             onHitEvent.Invoke(transform.position, GetRigidbody().velocity);
             GetRigidbody().velocity = Vector3.zero;
             gameObject.SetActive(false);

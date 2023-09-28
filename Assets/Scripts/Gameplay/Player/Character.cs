@@ -74,6 +74,11 @@ namespace Game.Gameplay
             weaponHolder.Throw();
         }
 
+        public void ThrowWithoutCharging(float energy)
+        {
+            weaponHolder.ThrowWithoutCharging(energy);
+        }
+
         public class HealthUpdateEvent : UnityEvent<float> { }
         public class DieEvent : UnityEvent { }
     }

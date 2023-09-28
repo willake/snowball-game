@@ -212,6 +212,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bindedCharacter: {fileID: 976506936313217661}
+  statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  sightRange: 6
+  attackRange: 4
+  patrolPoints: []
+  walkPointRange: 0
+  minAttackIntervalInSeconds: 1
+  maxAttackIntervalInSeconds: 2
 --- !u!114 &976506936313217661
 MonoBehaviour:
   m_ObjectHideFlags: 0

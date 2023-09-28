@@ -149,6 +149,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bindedCharacter: {fileID: 5728579434294135749}
+  bindedCamera: {fileID: 0}
+  statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
 --- !u!114 &5728579434294135749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,9 +163,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 381139795fa734d41bb8b8d2fd10cc14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  health: 100
   acc: 7
   maxSpeed: 7
-  facingDirection: {x: 1, y: 0, z: 0}
   weaponHolder: {fileID: 5986669345516289111}
 --- !u!1 &2701457751538819732
 GameObject:
@@ -218,6 +220,12 @@ MonoBehaviour:
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
   timeOutEnergy: 0.1
+  holdEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  throwEvent:
+    m_PersistentCalls:
+      m_Calls: []
   ownerCamp: 0
   holdingWeapon: {fileID: 7283590466229455252}
 --- !u!1001 &1773001378379615850
