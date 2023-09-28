@@ -82,7 +82,7 @@ namespace Game.Gameplay
             // agent.SetDestination(transform.position);
 
             Vector3 direction = statePlayerPos.value - transform.position;
-            bindedCharacter.Aim(direction.normalized);
+            bindedCharacter.Aim(direction.normalized, false);
 
             bindedCharacter.ThrowWithoutCharging(5);
 
