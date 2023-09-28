@@ -70,12 +70,13 @@ namespace Game.Gameplay
             weaponHolder.Reload();
         }
 
-        public void Aim(Vector3 direction)
+        public void Aim(Vector3 direction, bool useFoward = true)
         {
             float angle = (float)Math.Atan2(direction.x, direction.y);
             transform.rotation = Quaternion.Euler(
                 new Vector3(0, angle * Mathf.Rad2Deg, 0));
-            weaponHolder.UpdateAimDirection(direction);
+
+            weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
         }
 
         public void Hold()
