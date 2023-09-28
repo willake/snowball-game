@@ -79,6 +79,7 @@ namespace Game.Gameplay
 
             holdingWeapon.Attack(shootDirection.normalized, Energy);
             throwEvent.Invoke();
+            ammoUpdateEvent.Invoke(Ammo);
         }
 
         // for enemy AI

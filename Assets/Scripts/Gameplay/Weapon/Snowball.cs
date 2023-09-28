@@ -1,3 +1,4 @@
+using Game.UI;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -82,6 +83,8 @@ namespace Game.Gameplay
 
             _projectilePool.Enqueue(_holdingProjectile);
             _holdingProjectile = null;
+            Ammo -= 1;
+            
         }
 
         public override bool Reload()

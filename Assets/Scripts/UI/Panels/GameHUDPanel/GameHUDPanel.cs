@@ -4,6 +4,7 @@ using Cysharp.Threading.Tasks;
 using Game.Events;
 using UnityEngine;
 using Game.Gameplay;
+using UnityEngine.UI;
 
 namespace Game.UI
 {
@@ -13,6 +14,9 @@ namespace Game.UI
 
         [Header("References")]
         public WDButton btnMenu;
+
+        public Slider heathBarSlider;
+        public Slider ammoBarSlider;
 
         private Character _bindedCharacter = null;
 
@@ -76,11 +80,13 @@ namespace Game.UI
         private void UpdateHealth(float health)
         {
             // TODO: update health UI
+           heathBarSlider.value = health / 100.0f;
         }
 
         private void UpdateAmmo(int ammo)
         {
             // TODO: update ammo UI
+           ammoBarSlider.value = ammo;
         }
 
         private void UpdateEnergy(float energyInPercentage)
