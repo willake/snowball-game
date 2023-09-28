@@ -93,7 +93,7 @@ namespace Game.Gameplay
             if (Time.realtimeSinceStartup - lastAttack > timeBetweenAttacks)
             {
                 lastAttack = Time.realtimeSinceStartup;
-                weaponHolder.SetAimDirection(player.transform.position - self.transform.position);
+                weaponHolder.UpdateAimDirection(self.transform.forward);
                 weaponHolder.SetEnergy(timeBetweenAttacks);
                 weaponHolder.Throw();
                 ResetAttack();

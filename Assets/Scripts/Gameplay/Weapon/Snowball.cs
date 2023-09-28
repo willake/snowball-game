@@ -67,6 +67,8 @@ namespace Game.Gameplay
 
         public override void Attack(Vector3 direction, float energy)
         {
+            Debug.Log("FUCK: " + energy);
+            Debug.Log("DIR:" + direction); 
             if (Ammo <= 0 || _holdingProjectile == null) return;
 
             // TODO: snowball mechanic

@@ -22,7 +22,6 @@ namespace Game.Gameplay
 
         public Vector3 AimDirection { get; private set; }
 
-        public void SetAimDirection(Vector3 dir) { AimDirection = AimDirection;}
         public int Ammo
         {
             get
@@ -62,7 +61,7 @@ namespace Game.Gameplay
             holdEvent.Invoke();
         }
 
-        public void Throw()
+        public void Throw(float enemyEnergy = 0)
         {
             if (_runningCorotine != null)
             {
@@ -78,6 +77,10 @@ namespace Game.Gameplay
                 Mathf.Sin(pitch),
                 AimDirection.z * Mathf.Cos(pitch)
             );
+
+            if (enemyEnergy != 0)
+                Energy = enemyEnergy;
+
             holdingWeapon.Attack(shootDirection.normalized, Energy);
             throwEvent.Invoke();
         }
