@@ -27,21 +27,24 @@ namespace Game.Gameplay
 
         private void OnTriggerEnter(Collider other)
         {
+            bool hit = false;
             if (
                 OwnerCamp == Camp.Player
                 && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
+                hit = true;
             }
 
             if (OwnerCamp == Camp.Enemy
                 && other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 other.gameObject.GetComponent<Character>().TakeDamage(damage);
+                hit = true;
             }
 
-            if (other.gameObject.layer == LayerMask.NameToLayer("Enemy") ||
-                other.gameObject.layer == LayerMask.NameToLayer("Player"))
+            if (!hit && (other.gameObject.layer == LayerMask.NameToLayer("Enemy") ||
+                other.gameObject.layer == LayerMask.NameToLayer("Player")))
             {
                 return;
             }
