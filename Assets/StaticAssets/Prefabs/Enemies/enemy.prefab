@@ -76,7 +76,6 @@ GameObject:
   - component: {fileID: 560471429328775222}
   - component: {fileID: 5656765554562033071}
   - component: {fileID: 976506936313217661}
-  - component: {fileID: 5400430140318426358}
   - component: {fileID: 3789580959815490114}
   m_Layer: 7
   m_Name: enemy
@@ -238,36 +237,6 @@ MonoBehaviour:
   acc: 7
   maxSpeed: 7
   weaponHolder: {fileID: 7025742364367610556}
---- !u!114 &5400430140318426358
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3578128749712286819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ca8c1fa77696340929e7524dd89660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 3789580959815490114}
-  player: {fileID: 0}
-  self: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 64
-  health: 100
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 6.68
-  timeBetweenAttacks: 0.5
-  weaponHolder: {fileID: 7025742364367610556}
-  sightRange: 11.23
-  attackRange: 4.39
-  playerInSightRange: 0
-  playerInAttackRange: 0
 --- !u!195 &3789580959815490114
 NavMeshAgent:
   m_ObjectHideFlags: 0

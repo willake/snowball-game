@@ -60,8 +60,9 @@ namespace Game.Gameplay
         {
             float angle = (float)Math.Atan2(direction.x, direction.y);
             transform.rotation = Quaternion.Euler(
-                new Vector3(0, angle * Mathf.Rad2Deg + 180, 0));
+                new Vector3(0, angle * Mathf.Rad2Deg, 0));
             weaponHolder.UpdateAimDirection(transform.forward);
+            Debug.DrawRay(transform.position, transform.forward, Color.green, 5);
         }
 
         public void Hold()
@@ -77,6 +78,12 @@ namespace Game.Gameplay
         public void ThrowWithoutCharging(float energy)
         {
             weaponHolder.ThrowWithoutCharging(energy);
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, transform.forward * 3);
         }
 
         public class HealthUpdateEvent : UnityEvent<float> { }

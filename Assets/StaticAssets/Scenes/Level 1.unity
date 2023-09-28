@@ -1929,33 +1929,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemy_2
       objectReference: {fileID: 0}
-    - target: {fileID: 5656765554562033071, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
-      propertyPath: sightRange
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656765554562033071, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
-      propertyPath: attackRange
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656765554562033071, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
-      propertyPath: _navMeshAgent
-      value: 
-      objectReference: {fileID: 1462021923}
-    - target: {fileID: 5656765554562033071, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
-      propertyPath: playerLayer.m_Bits
-      value: 64
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5400430140318426358, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
---- !u!195 &1462021923 stripped
-NavMeshAgent:
-  m_CorrespondingSourceObject: {fileID: 3789580959815490114, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
-  m_PrefabInstance: {fileID: 1422047337}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1463173535
 PrefabInstance:
   m_ObjectHideFlags: 0

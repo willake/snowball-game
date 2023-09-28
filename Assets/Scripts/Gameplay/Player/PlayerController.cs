@@ -67,7 +67,7 @@ namespace Game.Gameplay
             {
                 Vector3 chaPos =
                     bindedCamera.GetCamera().WorldToScreenPoint(bindedCharacter.transform.position);
-                bindedCharacter.Aim((chaPos - Input.mousePosition).normalized);
+                bindedCharacter.Aim((Input.mousePosition - chaPos).normalized);
             }
 
             statePlayerPos.value = bindedCharacter.transform.position;
