@@ -12,7 +12,6 @@ namespace Game.Gameplay
     {
         [Header("References")]
         public Vector3State statePlayerPos;
-        private NavMeshAgent _navMeshAgent;
 
         [Header("Settings")]
         public LayerMask playerLayer;
@@ -25,11 +24,6 @@ namespace Game.Gameplay
         public float maxAttackIntervalInSeconds = 2f;
         private float _nextAttackInterval;
         private float _lastAttackTime = 0;
-
-        private void Start()
-        {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-        }
 
         private void Update()
         {
@@ -52,7 +46,6 @@ namespace Game.Gameplay
         private void Patroling()
         {
             if (patrolPoints.Length == 0) return;
-            if (_navMeshAgent.isStopped == false) return;
             // if (!walkPointSet) SearchWalkPoint();
 
             // Vector3 distanceToWalkPoint = transform.position - walkPoint;
@@ -75,7 +68,7 @@ namespace Game.Gameplay
 
         private void ChasePlayer()
         {
-            _navMeshAgent.SetDestination(statePlayerPos.value);
+            bindedCharacter.MoveTo(statePlayerPos.value);
         }
 
         private void AttackPlayer()

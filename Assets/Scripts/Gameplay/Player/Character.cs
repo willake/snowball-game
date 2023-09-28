@@ -1,12 +1,14 @@
 using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 namespace Game.Gameplay
 {
     public class Character : MonoBehaviour
     {
+        private NavMeshAgent _navMeshAgent;
         private Rigidbody _rigibody;
 
         [Header("Status")]
@@ -29,6 +31,13 @@ namespace Game.Gameplay
             return _rigibody;
         }
 
+        public NavMeshAgent GetNavMeshAgent()
+        {
+            if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
+
+            return _navMeshAgent;
+        }
+
         public void Move(float horizontal, float vertical)
         {
             if (GetRigidbody().velocity.magnitude < maxSpeed)
@@ -36,6 +45,11 @@ namespace Game.Gameplay
                 GetRigidbody().AddForce(
                  new Vector3(horizontal, 0, vertical) * acc, ForceMode.Force);
             }
+        }
+
+        public void MoveTo(Vector3 position)
+        {
+            _navMeshAgent.SetDestination(position);
         }
 
         public void TakeDamage(float damage)
