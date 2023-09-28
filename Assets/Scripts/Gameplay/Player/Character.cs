@@ -49,7 +49,7 @@ namespace Game.Gameplay
 
         public void MoveTo(Vector3 position)
         {
-            _navMeshAgent.SetDestination(position);
+            GetNavMeshAgent().SetDestination(position);
         }
 
         public void TakeDamage(float damage)
@@ -75,8 +75,7 @@ namespace Game.Gameplay
             float angle = (float)Math.Atan2(direction.x, direction.y);
             transform.rotation = Quaternion.Euler(
                 new Vector3(0, angle * Mathf.Rad2Deg, 0));
-            weaponHolder.UpdateAimDirection(transform.forward);
-            Debug.DrawRay(transform.position, transform.forward, Color.green, 5);
+            weaponHolder.UpdateAimDirection(direction);
         }
 
         public void Hold()
