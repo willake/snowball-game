@@ -2,6 +2,7 @@ using UnityEngine;
 using Game.RuntimeStates;
 using Game.UI;
 using Game.Gameplay.Cameras;
+using System.Collections;
 
 namespace Game.Gameplay
 {
@@ -23,6 +24,8 @@ namespace Game.Gameplay
         private float _nextAttackInterval;
         private float _lastAttackTime = 0;
 
+        private bool _isActive = true;
+
         private void Start()
         {
             if (MainGameScene.instance)
@@ -34,10 +37,12 @@ namespace Game.Gameplay
             }
 
             bindedCharacter.healthUpdateEvent.AddListener(UpdateHealthBar);
+            bindedCharacter.dieEvent.AddListener(HandleDieEvent);
         }
 
         private void Update()
         {
+            if (_isActive == false) return;
             //target player
             float distance = Vector3.Distance(transform.position, statePlayerPos.value);
 
@@ -99,6 +104,18 @@ namespace Game.Gameplay
 
             _nextAttackInterval = UnityEngine.Random.Range(minAttackIntervalInSeconds, maxAttackIntervalInSeconds);
             _lastAttackTime = Time.time;
+        }
+
+        private void HandleDieEvent()
+        {
+            _isActive = false;
+            StartCoroutine(DestoryCharacter());
+        }
+
+        IEnumerator DestoryCharacter()
+        {
+            yield return new WaitForSeconds(2f);
+            Destroy(this.gameObject);
         }
 
         private void UpdateHealthBar(float health, float maxHealth)
