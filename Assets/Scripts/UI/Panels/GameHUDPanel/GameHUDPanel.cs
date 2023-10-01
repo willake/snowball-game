@@ -77,16 +77,16 @@ namespace Game.UI
             _bindedCharacter = null;
         }
 
-        private void UpdateHealth(float health)
+        private void UpdateHealth(float health, float maxHealth)
         {
             // TODO: update health UI
-           heathBarSlider.value = health / 100.0f;
+            heathBarSlider.value = health / maxHealth;
         }
 
         private void UpdateAmmo(int ammo)
         {
             // TODO: update ammo UI
-           ammoBarSlider.value = ammo;
+            ammoBarSlider.value = ammo;
         }
 
         private void UpdateEnergy(float energyInPercentage)

@@ -15,6 +15,7 @@ namespace Game.Gameplay
         public float health = 100;
         public HealthUpdateEvent healthUpdateEvent = new();
         public DieEvent dieEvent = new();
+        private float _maxHealth = 100;
 
         [Header("Settings")]
         public float acc = 5f;
@@ -23,6 +24,11 @@ namespace Game.Gameplay
 
         [Header("Weapons")]
         public WeaponHolder weaponHolder;
+
+        private void Start()
+        {
+            _maxHealth = health;
+        }
 
         private Rigidbody GetRigidbody()
         {
@@ -62,7 +68,7 @@ namespace Game.Gameplay
                 dieEvent.Invoke();
             }
 
-            healthUpdateEvent.Invoke(health);
+            healthUpdateEvent.Invoke(health, _maxHealth);
         }
 
         public void Reload()
@@ -100,7 +106,13 @@ namespace Game.Gameplay
             Gizmos.DrawLine(transform.position, transform.forward * 3);
         }
 
-        public class HealthUpdateEvent : UnityEvent<float> { }
+        private void OnDestroy()
+        {
+            healthUpdateEvent.RemoveAllListeners();
+            dieEvent.RemoveAllListeners();
+        }
+
+        public class HealthUpdateEvent : UnityEvent<float, float> { }
         public class DieEvent : UnityEvent { }
     }
 }

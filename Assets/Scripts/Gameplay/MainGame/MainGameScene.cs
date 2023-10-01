@@ -9,9 +9,12 @@ namespace Game.Gameplay
 {
     public class MainGameScene : GameScene<MainGameScene>
     {
+        [Header("References")]
+        public Camera playerCamera;
         public CharacterFactory characterFactory;
         public EnvironmentVFXManager vfxManager;
         public LevelLoader levelLoader;
+        public Canvas worldSpaceCanvas;
 
         private GameHUDPanel _gameHUDPanel;
 
@@ -39,6 +42,7 @@ namespace Game.Gameplay
         {
             if (UIManager.instance)
             {
+                playerCamera = playerController.bindedCamera.GetCamera();
                 _gameHUDPanel.BindCharacter(playerController.bindedCharacter);
             }
         }
