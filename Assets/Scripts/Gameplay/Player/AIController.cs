@@ -116,6 +116,7 @@ namespace Game.Gameplay
         IEnumerator DestoryCharacter()
         {
             yield return new WaitForSeconds(2f);
+            MainGameScene.instance?.EliminateEnemy(this);
             Destroy(this.healthBar.gameObject);
             Destroy(this.gameObject);
         }

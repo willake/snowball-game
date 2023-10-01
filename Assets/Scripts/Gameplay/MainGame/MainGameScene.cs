@@ -17,6 +17,7 @@ namespace Game.Gameplay
         public Canvas worldSpaceCanvas;
 
         private GameHUDPanel _gameHUDPanel;
+        private HashSet<int> _enemyList = new HashSet<int>();
 
         private void Start()
         {
@@ -44,6 +45,27 @@ namespace Game.Gameplay
             {
                 playerCamera = playerController.bindedCamera.GetCamera();
                 _gameHUDPanel.BindCharacter(playerController.bindedCharacter);
+            }
+        }
+
+        public void EliminatePlayer(PlayerController playerController)
+        {
+            Debug.Log("Player lose!");
+        }
+
+        /* Register enemy to enemylist and return an ID. */
+        public void RegisterEnemy(AIController aiController)
+        {
+            _enemyList.Add(aiController.GetInstanceID());
+        }
+
+        public void EliminateEnemy(AIController aiController)
+        {
+            _enemyList.Remove(aiController.GetInstanceID());
+
+            if (_enemyList.Count <= 0)
+            {
+                Debug.Log("Player wins");
             }
         }
     }
