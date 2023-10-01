@@ -2,18 +2,18 @@ using UnityEngine;
 
 namespace Game.UI
 {
-    public class WDTextButton : WDButton, IWDText
+    public class WDTextButton : WDButton
     {
-        public WDText text;
+        public WDText wdtext;
 
         public void SetText(string t)
         {
-            text.SetText(t);
+            wdtext.text = t;
         }
 
         public void SetTextColor(Color32 color)
         {
-            text.SetTextColor(color);
+            wdtext.color = color;
         }
     }
 }

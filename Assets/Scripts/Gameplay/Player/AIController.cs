@@ -34,6 +34,7 @@ namespace Game.Gameplay
                     MainGameScene.instance.worldSpaceCanvas,
                     MainGameScene.instance.playerCamera
                 );
+                MainGameScene.instance.RegisterEnemy(this);
             }
 
             bindedCharacter.healthUpdateEvent.AddListener(UpdateHealthBar);

@@ -16,5 +16,7 @@ namespace Game
         public GameObject gameHUDPanel;
         [AssetsOnly]
         public GameObject pausePanel;
+        [AssetsOnly]
+        public GameObject endGamePanel;
     }
 }
