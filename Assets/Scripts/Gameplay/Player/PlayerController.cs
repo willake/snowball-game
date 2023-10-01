@@ -15,6 +15,7 @@ namespace Game.Gameplay
 
         private bool _isMoving;
         private bool _isAiming = false;
+        private bool _isActive = true;
 
         public void BindCamera(PlayerCamera cam)
         {
@@ -28,11 +29,27 @@ namespace Game.Gameplay
             {
                 MainGameScene.instance.RegisterPlayer(this);
             }
+
+            bindedCharacter.dieEvent.AddListener(HandleDieEvent);
+        }
+
+        private void HandleDieEvent()
+        {
+            _isActive = false;
+            // bindedCharacter.GetNavMeshAgent().isStopped = true;
+            StartCoroutine(DestoryCharacter());
+        }
+
+        IEnumerator DestoryCharacter()
+        {
+            yield return new WaitForSeconds(2f);
+            MainGameScene.instance?.EliminatePlayer(this);
         }
 
         private void Update()
         {
             if (bindedCharacter == null) return;
+            if (_isActive == false) return;
 
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");

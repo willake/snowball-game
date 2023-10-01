@@ -15,3 +15,4 @@ MonoBehaviour:
   menuPanel: {fileID: 223458925828663289, guid: 4176d5aab5d38b744873d4546a6c972f, type: 3}
   gameHUDPanel: {fileID: 6508905079759022395, guid: fe038840768ed614ca4c5f20652f8d53, type: 3}
   pausePanel: {fileID: 7863950439982282695, guid: b6b35d09c95c8a644a8ac236e39d17c3, type: 3}
+  endGamePanel: {fileID: 8722227121731769291, guid: 646e05e62c40e5a459b3152dd444ef9a, type: 3}
