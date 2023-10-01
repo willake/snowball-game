@@ -1,10 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Sirenix.Utilities;
 using UnityEngine;
-using UnityEngine.AI;
 using Game.RuntimeStates;
+using Game.UI;
+using Game.Gameplay.Cameras;
 
 namespace Game.Gameplay
 {
@@ -12,6 +9,7 @@ namespace Game.Gameplay
     {
         [Header("References")]
         public Vector3State statePlayerPos;
+        public ProgressBar healthBar;
 
         [Header("Settings")]
         public LayerMask playerLayer;
@@ -24,6 +22,19 @@ namespace Game.Gameplay
         public float maxAttackIntervalInSeconds = 2f;
         private float _nextAttackInterval;
         private float _lastAttackTime = 0;
+
+        private void Start()
+        {
+            if (MainGameScene.instance)
+            {
+                SetupHealthBar(
+                    MainGameScene.instance.worldSpaceCanvas,
+                    MainGameScene.instance.playerCamera
+                );
+            }
+
+            bindedCharacter.healthUpdateEvent.AddListener(UpdateHealthBar);
+        }
 
         private void Update()
         {
@@ -88,6 +99,22 @@ namespace Game.Gameplay
 
             _nextAttackInterval = UnityEngine.Random.Range(minAttackIntervalInSeconds, maxAttackIntervalInSeconds);
             _lastAttackTime = Time.time;
+        }
+
+        private void UpdateHealthBar(float health, float maxHealth)
+        {
+            healthBar.SetProgress(health / maxHealth);
+        }
+
+        private void SetupHealthBar(Canvas canvas, Camera camera)
+        {
+            // set healthbar transform to canvas.transform
+            healthBar.SetProgress(1, 0);
+            healthBar.transform.SetParent(canvas.transform);
+            if (healthBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
+            {
+                faceCamera.cam = camera;
+            }
         }
 
         private void OnDrawGizmosSelected()
