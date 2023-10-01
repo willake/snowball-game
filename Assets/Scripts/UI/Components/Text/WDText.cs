@@ -4,17 +4,31 @@ using TMPro;
 
 namespace Game.UI
 {
-    public class WDText : MonoBehaviour, IWDText
+    public class WDText : MonoBehaviour
     {
-        public TextMeshProUGUI text;
-        public void SetText(string t)
+        public TextMeshProUGUI textMesh;
+        public string text
         {
-            text.text = t;
+            set
+            {
+                textMesh.text = value;
+            }
+            get
+            {
+                return textMesh.text;
+            }
         }
 
-        public void SetTextColor(Color32 color)
+        public Color32 color
         {
-            text.color = color;
+            set
+            {
+                textMesh.color = value;
+            }
+            get
+            {
+                return textMesh.color;
+            }
         }
     }
 }

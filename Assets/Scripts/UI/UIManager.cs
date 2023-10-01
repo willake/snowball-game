@@ -168,6 +168,7 @@ namespace Game.UI
                 AvailableUI.MenuPanel => ResourceManager.instance.uiPanelResources.menuPanel,
                 AvailableUI.GameHUDPanel => ResourceManager.instance.uiPanelResources.gameHUDPanel,
                 AvailableUI.PausePanel => ResourceManager.instance.uiPanelResources.pausePanel,
+                AvailableUI.EndGamePanel => ResourceManager.instance.uiPanelResources.endGamePanel,
                 _ => null
             };
         }

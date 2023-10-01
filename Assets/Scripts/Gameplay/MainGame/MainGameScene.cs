@@ -51,6 +51,11 @@ namespace Game.Gameplay
         public void EliminatePlayer(PlayerController playerController)
         {
             Debug.Log("Player lose!");
+            if (UIManager.instance)
+            {
+                EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
+                panel.SetEndGameState(EndGamePanel.EndGameState.Lose);
+            }
         }
 
         /* Register enemy to enemylist and return an ID. */
@@ -66,6 +71,8 @@ namespace Game.Gameplay
             if (_enemyList.Count <= 0)
             {
                 Debug.Log("Player wins");
+                EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
+                panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }
         }
     }
