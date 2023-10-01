@@ -982,36 +982,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &104508805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 104508796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2ca8c1fa77696340929e7524dd89660, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  agent: {fileID: 104508804}
-  player: {fileID: 1729502703}
-  self: {fileID: 0}
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 8
-  whatIsPlayer:
-    serializedVersion: 2
-    m_Bits: 64
-  health: 100
-  walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 6.68
-  timeBetweenAttacks: 0.5
-  weaponHolder: {fileID: 1177658823}
-  sightRange: 11.23
-  attackRange: 4.39
-  playerInSightRange: 0
-  playerInAttackRange: 0
 --- !u!1001 &108020941
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3573,17 +3543,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 0f5f08b83d08ca74d9aa1c7d50e1e383, type: 3}
---- !u!114 &1177658823 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7025742364367610556, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
-  m_PrefabInstance: {fileID: 1463173535}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77023e4ef1c96bf4da5d9aa580cf4bc2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1194502462
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4627,9 +4586,6 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 3578128749712286819, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 104508805}
-    - targetCorrespondingSourceObject: {fileID: 3578128749712286819, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
-      insertIndex: -1
       addedObject: {fileID: 104508804}
   m_SourcePrefab: {fileID: 100100000, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
 --- !u!1001 &1475127212
@@ -5143,10 +5099,6 @@ PrefabInstance:
     - target: {fileID: 3578128749712286819, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
       propertyPath: m_Name
       value: enemy_1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3578128749712286819, guid: 222e7e4422abed3489ee705358d709ed, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5712,11 +5664,6 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 0f5f08b83d08ca74d9aa1c7d50e1e383, type: 3}
---- !u!4 &1729502703 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4134077393838368072, guid: 428192129b684004ba070643cde19b88, type: 3}
-  m_PrefabInstance: {fileID: 1905713156}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1804931967
 PrefabInstance:
   m_ObjectHideFlags: 0

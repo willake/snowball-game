@@ -15,7 +15,7 @@ namespace Game.Gameplay
 
         private bool _isMoving;
         private bool _isAiming = false;
-        private bool _isActive = true;
+        public bool isControllable = true;
 
         public void BindCamera(PlayerCamera cam)
         {
@@ -35,7 +35,7 @@ namespace Game.Gameplay
 
         private void HandleDieEvent()
         {
-            _isActive = false;
+            isControllable = false;
             // bindedCharacter.GetNavMeshAgent().isStopped = true;
             StartCoroutine(DestoryCharacter());
         }
@@ -49,7 +49,7 @@ namespace Game.Gameplay
         private void Update()
         {
             if (bindedCharacter == null) return;
-            if (_isActive == false) return;
+            if (isControllable == false) return;
 
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
