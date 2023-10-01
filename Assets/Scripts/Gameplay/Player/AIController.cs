@@ -109,12 +109,14 @@ namespace Game.Gameplay
         private void HandleDieEvent()
         {
             _isActive = false;
+            bindedCharacter.GetNavMeshAgent().isStopped = true;
             StartCoroutine(DestoryCharacter());
         }
 
         IEnumerator DestoryCharacter()
         {
             yield return new WaitForSeconds(2f);
+            Destroy(this.healthBar.gameObject);
             Destroy(this.gameObject);
         }
 
