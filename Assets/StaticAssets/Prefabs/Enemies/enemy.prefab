@@ -49,7 +49,7 @@ MonoBehaviour:
   isDebugLogEnabled: 0
   throwingPitch: 2
   minEnergy: 0
-  maxEnergy: 10
+  maxEnergy: 100
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
   timeOutEnergy: 0.1
@@ -620,6 +620,14 @@ PrefabInstance:
     - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: ownerCamp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: energyMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: projectileLayer.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

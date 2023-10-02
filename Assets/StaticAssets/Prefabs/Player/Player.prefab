@@ -151,6 +151,7 @@ MonoBehaviour:
   bindedCharacter: {fileID: 5728579434294135749}
   bindedCamera: {fileID: 0}
   statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
+  isControllable: 1
 --- !u!114 &5728579434294135749
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,10 +217,10 @@ MonoBehaviour:
   isDebugLogEnabled: 0
   throwingPitch: 2
   minEnergy: 0
-  maxEnergy: 10
+  maxEnergy: 100
   chargeIntervalInSeconds: 0.01
-  energyPerInterval: 0.1
-  timeOutEnergy: 0.1
+  energyPerInterval: 1
+  timeOutEnergy: 1
   holdEvent:
     m_PersistentCalls:
       m_Calls: []
@@ -279,6 +280,14 @@ PrefabInstance:
     - target: {fileID: 7536811184194946928, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: m_Name
       value: weapon_snowball
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: energyMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: projectileLayer.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

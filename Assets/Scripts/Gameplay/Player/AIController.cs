@@ -101,7 +101,11 @@ namespace Game.Gameplay
             Vector3 direction = statePlayerPos.value - transform.position;
             bindedCharacter.Aim(direction.normalized, false);
 
-            bindedCharacter.ThrowWithoutCharging(5);
+            // bindedCharacter.ThrowWithoutCharging(5);
+
+            Debug.Log(bindedCharacter.EstimateEnergyToPosition(statePlayerPos.value));
+            float energy = bindedCharacter.EstimateEnergyToPosition(statePlayerPos.value);
+            bindedCharacter.ThrowWithoutCharging(energy);
 
             _nextAttackInterval = UnityEngine.Random.Range(minAttackIntervalInSeconds, maxAttackIntervalInSeconds);
             _lastAttackTime = Time.time;
