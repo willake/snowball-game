@@ -26,6 +26,14 @@ namespace Game.Gameplay
 
         private bool _isActive = true;
 
+        private AICharacter _aiCharacter;
+
+        private AICharacter GetAICharacter()
+        {
+            if (_aiCharacter == null) _aiCharacter = bindedCharacter as AICharacter;
+
+            return _aiCharacter;
+        }
         private void Start()
         {
             if (MainGameScene.instance)
@@ -103,9 +111,9 @@ namespace Game.Gameplay
 
             // bindedCharacter.ThrowWithoutCharging(5);
 
-            Debug.Log(bindedCharacter.EstimateEnergyToPosition(statePlayerPos.value));
-            float energy = bindedCharacter.EstimateEnergyToPosition(statePlayerPos.value);
-            bindedCharacter.ThrowWithoutCharging(energy);
+            Debug.Log(GetAICharacter().EstimateEnergyToPosition(statePlayerPos.value));
+            float energy = GetAICharacter().EstimateEnergyToPosition(statePlayerPos.value);
+            GetAICharacter().ThrowWithoutCharging(energy);
 
             _nextAttackInterval = UnityEngine.Random.Range(minAttackIntervalInSeconds, maxAttackIntervalInSeconds);
             _lastAttackTime = Time.time;

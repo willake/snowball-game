@@ -62,7 +62,7 @@ namespace Game.Gameplay
             // pop a snowball
             _holdingProjectile = _projectilePool.Dequeue();
             _holdingProjectile.transform.position = this.transform.position;
-            _holdingProjectile.gameObject.layer = projectileLayer;
+            // _holdingProjectile.gameObject.layer = projectileLayer;
             _holdingProjectile.GetRigidbody().velocity = Vector3.zero;
             _holdingProjectile.GetRigidbody().useGravity = false;
             _holdingProjectile.gameObject.SetActive(true);
@@ -84,7 +84,7 @@ namespace Game.Gameplay
             _projectilePool.Enqueue(_holdingProjectile);
             _holdingProjectile = null;
             Ammo -= 1;
-            
+
         }
 
         public override bool Reload()

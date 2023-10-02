@@ -166,7 +166,7 @@ GameObject:
   - component: {fileID: 7542597026045697946}
   - component: {fileID: 560471429328775222}
   - component: {fileID: 5656765554562033071}
-  - component: {fileID: 976506936313217661}
+  - component: {fileID: 5017514766177734151}
   - component: {fileID: 3789580959815490114}
   m_Layer: 7
   m_Name: enemy
@@ -302,7 +302,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3f0a7ea9d8b08d45a9c7341fb9d86ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bindedCharacter: {fileID: 976506936313217661}
+  bindedCharacter: {fileID: 5017514766177734151}
   statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   healthBar: {fileID: 5318979070795798163}
   playerLayer:
@@ -314,7 +314,7 @@ MonoBehaviour:
   walkPointRange: 0
   minAttackIntervalInSeconds: 1
   maxAttackIntervalInSeconds: 2
---- !u!114 &976506936313217661
+--- !u!114 &5017514766177734151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3578128749712286819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 381139795fa734d41bb8b8d2fd10cc14, type: 3}
+  m_Script: {fileID: 11500000, guid: bf4d0bcf8b56e5f468d787cc8143ae4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100

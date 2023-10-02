@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 8958008966896170436}
   - component: {fileID: 1509387966523173710}
   - component: {fileID: -9029565395954839271}
-  - component: {fileID: 5728579434294135749}
+  - component: {fileID: 449057190532595614}
+  - component: {fileID: 283867998679798434}
   m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
@@ -148,11 +149,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50c124f138041ef43bb78f5a9419a283, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bindedCharacter: {fileID: 5728579434294135749}
+  bindedCharacter: {fileID: 449057190532595614}
   bindedCamera: {fileID: 0}
   statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   isControllable: 1
---- !u!114 &5728579434294135749
+--- !u!114 &449057190532595614
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -161,13 +162,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 2619225314589898786}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 381139795fa734d41bb8b8d2fd10cc14, type: 3}
+  m_Script: {fileID: 11500000, guid: 0690e84063309734caeb37ef9f017df4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
   acc: 7
   maxSpeed: 7
   weaponHolder: {fileID: 5986669345516289111}
+--- !u!195 &283867998679798434
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2619225314589898786}
+  m_Enabled: 0
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2701457751538819732
 GameObject:
   m_ObjectHideFlags: 0
