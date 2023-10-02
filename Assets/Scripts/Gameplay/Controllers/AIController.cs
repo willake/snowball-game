@@ -13,8 +13,6 @@ namespace Game.Gameplay
         public ProgressBar healthBar;
 
         [Header("Settings")]
-        public LayerMask playerLayer;
-        public float sightRange, attackRange;
         //Patroling
         public Transform[] patrolPoints;
         public float walkPointRange;
@@ -24,16 +22,10 @@ namespace Game.Gameplay
         private float _nextAttackInterval;
         private float _lastAttackTime = 0;
 
-        private bool _isActive = true;
+        public bool isControllable { get; private set; }
 
         private AICharacter _aiCharacter;
 
-        private AICharacter GetAICharacter()
-        {
-            if (_aiCharacter == null) _aiCharacter = bindedCharacter as AICharacter;
-
-            return _aiCharacter;
-        }
         private void Start()
         {
             if (MainGameScene.instance)
@@ -47,28 +39,11 @@ namespace Game.Gameplay
 
             bindedCharacter.healthUpdateEvent.AddListener(UpdateHealthBar);
             bindedCharacter.dieEvent.AddListener(HandleDieEvent);
+
+            isControllable = true;
         }
 
-        private void Update()
-        {
-            if (_isActive == false) return;
-            //target player
-            float distance = Vector3.Distance(transform.position, statePlayerPos.value);
-
-            if (distance < attackRange)
-            {
-                AttackPlayer();
-                return;
-            }
-            // player is in sight range
-            if (distance < sightRange)
-            {
-                ChasePlayer();
-                return;
-            }
-        }
-
-        private void Patroling()
+        protected void Patroling()
         {
             if (patrolPoints.Length == 0) return;
             // if (!walkPointSet) SearchWalkPoint();
@@ -79,7 +54,7 @@ namespace Game.Gameplay
             // if (distanceToWalkPoint.magnitude < 1f)
             // walkPointSet = false;
         }
-        private void SearchWalkPoint()
+        protected void SearchWalkPoint()
         {
             //Calculate random point in range
             // float randomZ = Random.Range(-walkPointRange, walkPointRange);
@@ -91,37 +66,32 @@ namespace Game.Gameplay
             // walkPointSet = true;
         }
 
-        private void ChasePlayer()
+        protected void ChasePlayer()
         {
             bindedCharacter.MoveTo(statePlayerPos.value);
         }
 
-        private void AttackPlayer()
+        protected void AttackPlayer()
         {
             if (Time.time - _lastAttackTime < _nextAttackInterval) return;
             if (bindedCharacter.weaponHolder.Ammo <= 0)
             {
                 bindedCharacter.Reload();
             }
-            //Make sure enemy doesn't move
-            // agent.SetDestination(transform.position);
 
             Vector3 direction = statePlayerPos.value - transform.position;
             bindedCharacter.Aim(direction.normalized, false);
 
-            // bindedCharacter.ThrowWithoutCharging(5);
-
-            Debug.Log(GetAICharacter().EstimateEnergyToPosition(statePlayerPos.value));
             float energy = GetAICharacter().EstimateEnergyToPosition(statePlayerPos.value);
             GetAICharacter().ThrowWithoutCharging(energy);
 
-            _nextAttackInterval = UnityEngine.Random.Range(minAttackIntervalInSeconds, maxAttackIntervalInSeconds);
+            _nextAttackInterval = Random.Range(minAttackIntervalInSeconds, maxAttackIntervalInSeconds);
             _lastAttackTime = Time.time;
         }
 
         private void HandleDieEvent()
         {
-            _isActive = false;
+            isControllable = false;
             bindedCharacter.GetNavMeshAgent().isStopped = true;
             StartCoroutine(DestoryCharacter());
         }
@@ -150,12 +120,11 @@ namespace Game.Gameplay
             }
         }
 
-        private void OnDrawGizmosSelected()
+        protected AICharacter GetAICharacter()
         {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, sightRange);
+            if (_aiCharacter == null) _aiCharacter = bindedCharacter as AICharacter;
+
+            return _aiCharacter;
         }
     }
 }
