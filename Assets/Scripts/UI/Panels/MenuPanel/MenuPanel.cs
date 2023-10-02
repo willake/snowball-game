@@ -3,6 +3,7 @@ using System;
 using Cysharp.Threading.Tasks;
 using Game.Events;
 using UnityEngine;
+using Unity.Plastic.Antlr3.Runtime.Tree;
 
 namespace Game.UI
 {
@@ -11,29 +12,29 @@ namespace Game.UI
         public override AvailableUI Type => AvailableUI.MenuPanel;
 
         [Header("References")]
-        public WDTextButton btnPlayTest;
-        public WDTextButton btnPlayLevel1;
+        public WDTextButton btnPlay;
+        public WDTextButton btnSettings;
 
         private void Start()
         {
-            btnPlayTest
+            btnPlay
                 .OnClickObservable
                 .ObserveOnMainThread()
-                .Subscribe(_ => PlayTest())
+                .Subscribe(_ => GoLevelSelect())
                 .AddTo(this);
 
-            btnPlayLevel1
+            btnSettings
                 .OnClickObservable
                 .ObserveOnMainThread()
-                .Subscribe(_ => PlayLevel1())
+                .Subscribe(_ => { })
                 .AddTo(this);
         }
 
         public override WDButton[] GetSelectableButtons()
         {
             return new WDButton[] {
-                btnPlayTest,
-                btnPlayLevel1
+                btnPlay,
+                btnSettings
             };
         }
 
@@ -64,22 +65,9 @@ namespace Game.UI
             await UniTask.CompletedTask;
         }
 
-        private void PlayTest()
+        private void GoLevelSelect()
         {
-            GameManager.instance.levelToLoad = Gameplay.AvailableLevel.Test;
-            GameManager.instance.SwitchScene(AvailableScene.MainGame);
-        }
-
-        private void PlayLevel1()
-        {
-            GameManager.instance.levelToLoad = Gameplay.AvailableLevel.Level1;
-            GameManager.instance.SwitchScene(AvailableScene.MainGame);
-        }
-
-        private void OnDestroy()
-        {
-            btnPlayTest.StopAnimation();
-            btnPlayLevel1.StopAnimation();
+            UIManager.instance.OpenUI(AvailableUI.LevelSelectPanel);
         }
     }
 }

@@ -111,6 +111,11 @@ namespace Game.UI
             onClick.Invoke();
         }
 
+        private void OnDestroy()
+        {
+            animator.Stop();
+        }
+
         public class OnClickEvent : UnityEvent { }
     }
 

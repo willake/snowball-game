@@ -8,7 +8,7 @@ namespace Game.UI
 {
     public class EndGamePanel : UIPanel
     {
-        public override AvailableUI Type => AvailableUI.MenuPanel;
+        public override AvailableUI Type => AvailableUI.EndGamePanel;
 
         [Header("References")]
         public EndGameTitle title;
