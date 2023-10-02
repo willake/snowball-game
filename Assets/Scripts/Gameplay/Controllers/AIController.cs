@@ -13,6 +13,8 @@ namespace Game.Gameplay
         public ProgressBar healthBar;
 
         [Header("Settings")]
+        public float sightRange;
+        public float attackRange;
         //Patroling
         public Transform[] patrolPoints;
         public float walkPointRange;
@@ -118,6 +120,14 @@ namespace Game.Gameplay
             {
                 faceCamera.cam = camera;
             }
+        }
+
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, attackRange);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, sightRange);
         }
 
         protected AICharacter GetAICharacter()

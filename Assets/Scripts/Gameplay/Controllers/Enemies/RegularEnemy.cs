@@ -2,9 +2,8 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class Regular : AIController
+    public class RegularEnemy : AIController
     {
-        public float sightRange, attackRange;
         private void Update()
         {
             if (isControllable == false) return;
@@ -22,14 +21,6 @@ namespace Game.Gameplay
                 ChasePlayer();
                 return;
             }
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, attackRange);
-            Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, sightRange);
         }
     }
 }

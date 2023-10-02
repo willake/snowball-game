@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game.Gameplay
 {
-    public class Sniper : AIController
+    public class RangerEnemy : AIController
     {
 
     }
