@@ -15,7 +15,9 @@ namespace Game.Gameplay
 
         private bool _isMoving;
         private bool _isAiming = false;
-        public bool isControllable = true;
+        public bool isControllable;
+
+        private PlayerCharacter _playerCharacter;
 
         public void BindCamera(PlayerCamera cam)
         {
@@ -31,6 +33,8 @@ namespace Game.Gameplay
             }
 
             bindedCharacter.dieEvent.AddListener(HandleDieEvent);
+
+            isControllable = true;
         }
 
         private void HandleDieEvent()
@@ -65,13 +69,13 @@ namespace Game.Gameplay
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                bindedCharacter.Hold();
+                GetPlayerCharacter().Hold();
                 _isAiming = true;
             }
 
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
-                bindedCharacter.Throw();
+                GetPlayerCharacter().Throw();
                 _isAiming = false;
             }
 
@@ -100,6 +104,13 @@ namespace Game.Gameplay
 
             bindedCamera.FollowCharacter(
                 _isMoving, bindedCharacter.transform.position, direction);
+        }
+
+        private PlayerCharacter GetPlayerCharacter()
+        {
+            if (_playerCharacter == null) _playerCharacter = bindedCharacter as PlayerCharacter;
+
+            return _playerCharacter;
         }
     }
 }

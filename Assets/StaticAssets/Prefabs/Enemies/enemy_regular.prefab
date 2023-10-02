@@ -49,7 +49,7 @@ MonoBehaviour:
   isDebugLogEnabled: 0
   throwingPitch: 2
   minEnergy: 0
-  maxEnergy: 10
+  maxEnergy: 100
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
   timeOutEnergy: 0.1
@@ -165,11 +165,11 @@ GameObject:
   - component: {fileID: 1747195045141471114}
   - component: {fileID: 7542597026045697946}
   - component: {fileID: 560471429328775222}
-  - component: {fileID: 5656765554562033071}
-  - component: {fileID: 976506936313217661}
+  - component: {fileID: -6649866418627067077}
+  - component: {fileID: 5017514766177734151}
   - component: {fileID: 3789580959815490114}
   m_Layer: 7
-  m_Name: enemy
+  m_Name: enemy_regular
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,7 +290,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &5656765554562033071
+--- !u!114 &-6649866418627067077
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -299,22 +299,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 3578128749712286819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3f0a7ea9d8b08d45a9c7341fb9d86ce, type: 3}
+  m_Script: {fileID: 11500000, guid: 9f3d907dc18d83646bdfaf1c179a8058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bindedCharacter: {fileID: 976506936313217661}
+  bindedCharacter: {fileID: 5017514766177734151}
   statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   healthBar: {fileID: 5318979070795798163}
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
   sightRange: 6
   attackRange: 4
   patrolPoints: []
   walkPointRange: 0
   minAttackIntervalInSeconds: 1
   maxAttackIntervalInSeconds: 2
---- !u!114 &976506936313217661
+--- !u!114 &5017514766177734151
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -323,7 +320,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3578128749712286819}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 381139795fa734d41bb8b8d2fd10cc14, type: 3}
+  m_Script: {fileID: 11500000, guid: bf4d0bcf8b56e5f468d787cc8143ae4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   health: 100
@@ -620,6 +617,14 @@ PrefabInstance:
     - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: ownerCamp
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: energyMultiplier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: projectileLayer.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

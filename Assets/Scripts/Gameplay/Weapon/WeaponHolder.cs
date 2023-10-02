@@ -95,6 +95,8 @@ namespace Game.Gameplay
                 AimDirection.z * Mathf.Cos(pitch)
             );
 
+            energy = Mathf.Clamp(energy, minEnergy, maxEnergy);
+
             holdingWeapon.Attack(shootDirection.normalized, energy);
             throwEvent.Invoke();
         }

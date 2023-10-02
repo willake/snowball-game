@@ -2,6 +2,7 @@ using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
 
 namespace Game.Gameplay
@@ -15,7 +16,7 @@ namespace Game.Gameplay
         public float health = 100;
         public HealthUpdateEvent healthUpdateEvent = new();
         public DieEvent dieEvent = new();
-        private float _maxHealth = 100;
+        public float MaxHealth { get; private set; }
 
         [Header("Settings")]
         public float acc = 5f;
@@ -27,21 +28,7 @@ namespace Game.Gameplay
 
         private void Start()
         {
-            _maxHealth = health;
-        }
-
-        private Rigidbody GetRigidbody()
-        {
-            if (_rigibody == null) _rigibody = GetComponent<Rigidbody>();
-
-            return _rigibody;
-        }
-
-        public NavMeshAgent GetNavMeshAgent()
-        {
-            if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
-
-            return _navMeshAgent;
+            MaxHealth = health;
         }
 
         public void Move(float horizontal, float vertical)
@@ -68,7 +55,7 @@ namespace Game.Gameplay
                 dieEvent.Invoke();
             }
 
-            healthUpdateEvent.Invoke(health, _maxHealth);
+            healthUpdateEvent.Invoke(health, MaxHealth);
         }
 
         public void Reload()
@@ -85,21 +72,6 @@ namespace Game.Gameplay
             weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
         }
 
-        public void Hold()
-        {
-            weaponHolder.Hold();
-        }
-
-        public void Throw()
-        {
-            weaponHolder.Throw();
-        }
-
-        public void ThrowWithoutCharging(float energy)
-        {
-            weaponHolder.ThrowWithoutCharging(energy);
-        }
-
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
@@ -114,5 +86,19 @@ namespace Game.Gameplay
 
         public class HealthUpdateEvent : UnityEvent<float, float> { }
         public class DieEvent : UnityEvent { }
+
+        private Rigidbody GetRigidbody()
+        {
+            if (_rigibody == null) _rigibody = GetComponent<Rigidbody>();
+
+            return _rigibody;
+        }
+
+        public NavMeshAgent GetNavMeshAgent()
+        {
+            if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
+
+            return _navMeshAgent;
+        }
     }
 }
