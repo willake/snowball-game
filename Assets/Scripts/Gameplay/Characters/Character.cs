@@ -9,6 +9,7 @@ namespace Game.Gameplay
 {
     public class Character : MonoBehaviour
     {
+        private CharacterAnimatior _characterAnimator;
         private NavMeshAgent _navMeshAgent;
         private Rigidbody _rigibody;
 
@@ -26,9 +27,23 @@ namespace Game.Gameplay
         [Header("Weapons")]
         public WeaponHolder weaponHolder;
 
+        private bool _isAiming = false;
+
         private void Start()
         {
             MaxHealth = health;
+            weaponHolder.throwEvent.AddListener(HandleThrowEvent);
+        }
+
+        public void SetIsAiming(bool isAiming)
+        {
+            _isAiming = isAiming;
+        }
+
+        public void Idle()
+        {
+            GetRigidbody().velocity = Vector3.zero;
+            GetCharacterAnimatior()?.SetMoveSpeed(0);
         }
 
         public void Move(float horizontal, float vertical)
@@ -37,6 +52,13 @@ namespace Game.Gameplay
             {
                 GetRigidbody().AddForce(
                  new Vector3(horizontal, 0, vertical) * acc, ForceMode.Force);
+                GetCharacterAnimatior()?.SetMoveSpeed(1);
+            }
+
+            if (_isAiming == false)
+            {
+                transform.rotation =
+                    Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
             }
         }
 
@@ -56,6 +78,7 @@ namespace Game.Gameplay
             }
 
             healthUpdateEvent.Invoke(health, MaxHealth);
+            GetCharacterAnimatior()?.TriggerDamage();
         }
 
         public void Reload()
@@ -70,6 +93,11 @@ namespace Game.Gameplay
                 new Vector3(0, angle * Mathf.Rad2Deg, 0));
 
             weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
+        }
+
+        public void HandleThrowEvent()
+        {
+            GetCharacterAnimatior()?.TriggerThrow();
         }
 
         private void OnDrawGizmosSelected()
@@ -87,6 +115,12 @@ namespace Game.Gameplay
         public class HealthUpdateEvent : UnityEvent<float, float> { }
         public class DieEvent : UnityEvent { }
 
+        private CharacterAnimatior GetCharacterAnimatior()
+        {
+            if (_characterAnimator == null) _characterAnimator = GetComponent<CharacterAnimatior>();
+
+            return _characterAnimator;
+        }
         private Rigidbody GetRigidbody()
         {
             if (_rigibody == null) _rigibody = GetComponent<Rigidbody>();
