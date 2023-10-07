@@ -13,8 +13,10 @@ namespace Game.Gameplay
             return _animator;
         }
 
-        public void SetMoveSpeed(float speed)
+        public void SetMoveSpeed(float horizontal, float vertical, float speed)
         {
+            GetAnimator().SetFloat("Horizontal", horizontal);
+            GetAnimator().SetFloat("Vertical", vertical);
             GetAnimator().SetFloat("Speed", speed);
         }
 

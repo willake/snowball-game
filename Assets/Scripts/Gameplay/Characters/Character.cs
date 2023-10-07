@@ -43,7 +43,7 @@ namespace Game.Gameplay
         public void Idle()
         {
             GetRigidbody().velocity = Vector3.zero;
-            GetCharacterAnimatior()?.SetMoveSpeed(0);
+            GetCharacterAnimatior()?.SetMoveSpeed(0, 0, 0);
         }
 
         public void Move(float horizontal, float vertical)
@@ -52,13 +52,24 @@ namespace Game.Gameplay
             {
                 GetRigidbody().AddForce(
                  new Vector3(horizontal, 0, vertical) * acc, ForceMode.Force);
-                GetCharacterAnimatior()?.SetMoveSpeed(1);
+
+                // calculate angle of moving direction
+                float movingAngle = (horizontal > 0 ? 1 : -1) *
+                    Vector2.Angle(new Vector2(0, 1), new Vector2(horizontal, vertical));
+                // calculate angle of facing direction
+                Vector2 forward = new Vector2(transform.forward.x, transform.forward.z);
+                float facingAngle = (transform.forward.x > 0 ? 1 : -1) * Vector2.Angle(new Vector2(0, 1), forward);
+                float angle = (movingAngle - facingAngle) * Mathf.Deg2Rad;
+                // Debug.Log($"Facing Angle: {facingAngle}, Moving Angle: {movingAngle}, Angle: {(facingAngle - movingAngle)}");
+                GetCharacterAnimatior()?.SetMoveSpeed(
+                    Mathf.Sin(angle),
+                    Mathf.Cos(angle), 1);
             }
 
             if (_isAiming == false)
             {
-                transform.rotation =
-                    Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
+                // transform.rotation =
+                //     Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
             }
         }
 
