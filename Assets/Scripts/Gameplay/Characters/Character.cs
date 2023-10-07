@@ -38,6 +38,7 @@ namespace Game.Gameplay
         public void SetIsAiming(bool isAiming)
         {
             _isAiming = isAiming;
+            GetCharacterAnimatior().SetIsAiming(isAiming);
         }
 
         public void Idle()
@@ -68,8 +69,8 @@ namespace Game.Gameplay
 
             if (_isAiming == false)
             {
-                // transform.rotation =
-                //     Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
+                transform.rotation =
+                    Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
             }
         }
 

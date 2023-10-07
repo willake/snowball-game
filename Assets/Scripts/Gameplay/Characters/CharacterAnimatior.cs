@@ -13,6 +13,11 @@ namespace Game.Gameplay
             return _animator;
         }
 
+        public void SetIsAiming(bool isAiming)
+        {
+            GetAnimator().SetBool("isAiming", isAiming);
+        }
+
         public void SetMoveSpeed(float horizontal, float vertical, float speed)
         {
             GetAnimator().SetFloat("Horizontal", horizontal);
