@@ -151,13 +151,13 @@ namespace Game.Gameplay
         public class HealthUpdateEvent : UnityEvent<float, float> { }
         public class DieEvent : UnityEvent { }
 
-        private CharacterAnimatior GetCharacterAnimatior()
+        protected CharacterAnimatior GetCharacterAnimatior()
         {
             if (_characterAnimator == null) _characterAnimator = GetComponent<CharacterAnimatior>();
 
             return _characterAnimator;
         }
-        private Rigidbody GetRigidbody()
+        protected Rigidbody GetRigidbody()
         {
             if (_rigibody == null) _rigibody = GetComponent<Rigidbody>();
 

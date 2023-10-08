@@ -1,0 +1,123 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!319 &31900000
+AvatarMask:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: LowerBody
+  m_Mask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+  m_Elements:
+  - m_Path: 
+    m_Weight: 1
+  - m_Path: Boy0.Humanoid.Body
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Leg.Upper.L
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Leg.Upper.L/Leg.Lower.L
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Leg.Upper.L/Leg.Lower.L/Foot.L
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Leg.Upper.L/Leg.Lower.L/Foot.L/Toe.L
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Leg.Upper.R
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Leg.Upper.R/Leg.Lower.R
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Leg.Upper.R/Leg.Lower.R/Foot.R
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Leg.Upper.R/Leg.Lower.R/Foot.R/Toe.R
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest
+    m_Weight: 1
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Neck
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Neck/Head
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Index.Proximal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Index.Proximal.L/Index.Intermediate.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Index.Proximal.L/Index.Intermediate.L/Index.Distal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Little.Proximal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Little.Proximal.L/Little.Intermediate.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Little.Proximal.L/Little.Intermediate.L/Little.Distal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Middle.Proximal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Middle.Proximal.L/Middle.Intermediate.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Middle.Proximal.L/Middle.Intermediate.L/Middle.Distal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Ring.Proximal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Ring.Proximal.L/Ring.Intermediate.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Ring.Proximal.L/Ring.Intermediate.L/Ring.Distal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Thumb.Proximal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Thumb.Proximal.L/Thumb.Intermediate.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.L/Arm.Upper.L/Arm.Lower.L/Hand.L/Thumb.Proximal.L/Thumb.Intermediate.L/Thumb.Distal.L
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Index.Proximal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Index.Proximal.R/Index.Intermediate.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Index.Proximal.R/Index.Intermediate.R/Index.Distal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Little.Proximal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Little.Proximal.R/Little.Intermediate.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Little.Proximal.R/Little.Intermediate.R/Little.Distal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Middle.Proximal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Middle.Proximal.R/Middle.Intermediate.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Middle.Proximal.R/Middle.Intermediate.R/Middle.Distal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Ring.Proximal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Ring.Proximal.R/Ring.Intermediate.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Ring.Proximal.R/Ring.Intermediate.R/Ring.Distal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Thumb.Proximal.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Thumb.Proximal.R/Thumb.Intermediate.R
+    m_Weight: 0
+  - m_Path: Kid.Humanoid.Armature/Root/Hips/Spine/Chest/Upper.Chest/Shoulder.R/Arm.Upper.R/Arm.Lower.R/Hand.R/Thumb.Proximal.R/Thumb.Intermediate.R/Thumb.Distal.R
+    m_Weight: 0
