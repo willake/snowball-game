@@ -27,7 +27,8 @@ namespace Game.Gameplay
         [Header("Weapons")]
         public WeaponHolder weaponHolder;
 
-        private bool _isAiming = false;
+        public bool isAiming { get; private set; }
+        public bool isGrounded { get; private set; }
 
         private void Start()
         {
@@ -37,13 +38,13 @@ namespace Game.Gameplay
 
         public void SetIsAiming(bool isAiming)
         {
-            _isAiming = isAiming;
+            this.isAiming = isAiming;
             GetCharacterAnimatior().SetIsAiming(isAiming);
         }
 
         public void Idle()
         {
-            GetRigidbody().velocity = Vector3.zero;
+            GetRigidbody().velocity = new Vector3(0, GetRigidbody().velocity.y, 0);
             GetCharacterAnimatior()?.SetMoveSpeed(0, 0, 0);
         }
 
@@ -67,7 +68,7 @@ namespace Game.Gameplay
                     Mathf.Cos(angle), 1);
             }
 
-            if (_isAiming == false)
+            if (isAiming == false)
             {
                 transform.rotation =
                     Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
@@ -107,6 +108,20 @@ namespace Game.Gameplay
             weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
         }
 
+        private void Update()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(
+                transform.position, transform.TransformDirection(Vector3.down), out hit, 0.5f, LayerMask.NameToLayer("Floor")))
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                isGrounded = false;
+            }
+        }
+
         public void HandleThrowEvent()
         {
             GetCharacterAnimatior()?.TriggerThrow();
@@ -116,6 +131,7 @@ namespace Game.Gameplay
         {
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, transform.forward * 3);
+            Gizmos.DrawLine(transform.position, Vector3.down);
         }
 
         private void OnDestroy()
