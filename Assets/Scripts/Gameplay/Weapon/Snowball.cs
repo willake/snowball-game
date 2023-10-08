@@ -68,11 +68,9 @@ namespace Game.Gameplay
             _holdingProjectile.gameObject.SetActive(true);
         }
 
-        public override void Attack(Vector3 direction, float energy)
+        public override bool Attack(Vector3 direction, float energy)
         {
-            Debug.Log("FUCK: " + energy);
-            Debug.Log("DIR:" + direction);
-            if (Ammo <= 0 || _holdingProjectile == null) return;
+            if (Ammo <= 0 || _holdingProjectile == null) return false;
 
             // TODO: snowball mechanic
             _holdingProjectile.GetRigidbody().useGravity = true;
@@ -84,7 +82,7 @@ namespace Game.Gameplay
             _projectilePool.Enqueue(_holdingProjectile);
             _holdingProjectile = null;
             Ammo -= 1;
-
+            return true;
         }
 
         public override bool Reload()

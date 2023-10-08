@@ -30,7 +30,7 @@ namespace Game.Gameplay
                     return LayerMask.NameToLayer("Enemy");
             }
         }
-        public abstract void Attack(Vector3 direction, float energy);
+        public abstract bool Attack(Vector3 direction, float energy);
         public abstract bool Reload();
     }
 }

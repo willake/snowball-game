@@ -77,9 +77,11 @@ namespace Game.Gameplay
                 AimDirection.z * Mathf.Cos(pitch)
             );
 
-            holdingWeapon.Attack(shootDirection.normalized, Energy);
-            throwEvent.Invoke();
-            ammoUpdateEvent.Invoke(Ammo);
+            if (holdingWeapon.Attack(shootDirection.normalized, Energy))
+            {
+                throwEvent.Invoke();
+                ammoUpdateEvent.Invoke(Ammo);
+            }
         }
 
         // for enemy AI
@@ -145,6 +147,14 @@ namespace Game.Gameplay
             {
                 Debug.Log($"Time out, throw the ball anyway");
             }
+        }
+
+        private void OnDestroy()
+        {
+            holdEvent.RemoveAllListeners();
+            throwEvent.RemoveAllListeners();
+            energyUpdateEvent.RemoveAllListeners();
+            ammoUpdateEvent.RemoveAllListeners();
         }
 
         public class EnergyUpdateEvent : UnityEvent<float> { }

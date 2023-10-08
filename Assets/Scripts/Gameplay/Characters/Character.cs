@@ -9,6 +9,7 @@ namespace Game.Gameplay
 {
     public class Character : MonoBehaviour
     {
+        private CharacterAnimatior _characterAnimator;
         private NavMeshAgent _navMeshAgent;
         private Rigidbody _rigibody;
 
@@ -26,9 +27,27 @@ namespace Game.Gameplay
         [Header("Weapons")]
         public WeaponHolder weaponHolder;
 
+        public bool isAiming { get; private set; }
+        public bool isGrounded { get; private set; }
+        public bool isThrowing { get; private set; }
+
         private void Start()
         {
             MaxHealth = health;
+            weaponHolder.throwEvent.AddListener(HandleThrowEvent);
+            GetCharacterAnimatior()?.thorwEndedEvent.AddListener(HandleThrowEndedEvent);
+        }
+
+        public void SetIsAiming(bool isAiming)
+        {
+            this.isAiming = isAiming;
+            GetCharacterAnimatior()?.SetIsAiming(isAiming);
+        }
+
+        public void Idle()
+        {
+            GetRigidbody().velocity = new Vector3(0, GetRigidbody().velocity.y, 0);
+            GetCharacterAnimatior()?.SetMoveSpeed(0, 0, 0);
         }
 
         public void Move(float horizontal, float vertical)
@@ -37,6 +56,24 @@ namespace Game.Gameplay
             {
                 GetRigidbody().AddForce(
                  new Vector3(horizontal, 0, vertical) * acc, ForceMode.Force);
+
+                // calculate angle of moving direction
+                float movingAngle = (horizontal > 0 ? 1 : -1) *
+                    Vector2.Angle(new Vector2(0, 1), new Vector2(horizontal, vertical));
+                // calculate angle of facing direction
+                Vector2 forward = new Vector2(transform.forward.x, transform.forward.z);
+                float facingAngle = (transform.forward.x > 0 ? 1 : -1) * Vector2.Angle(new Vector2(0, 1), forward);
+                float angle = (movingAngle - facingAngle) * Mathf.Deg2Rad;
+                // Debug.Log($"Facing Angle: {facingAngle}, Moving Angle: {movingAngle}, Angle: {(facingAngle - movingAngle)}");
+                GetCharacterAnimatior()?.SetMoveSpeed(
+                    Mathf.Sin(angle),
+                    Mathf.Cos(angle), 1);
+            }
+
+            if (isAiming == false && isThrowing == false)
+            {
+                transform.rotation =
+                    Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
             }
         }
 
@@ -53,6 +90,11 @@ namespace Game.Gameplay
             {
                 health = 0f;
                 dieEvent.Invoke();
+                GetCharacterAnimatior()?.TriggerDead();
+            }
+            else
+            {
+                GetCharacterAnimatior()?.TriggerDamage();
             }
 
             healthUpdateEvent.Invoke(health, MaxHealth);
@@ -72,10 +114,36 @@ namespace Game.Gameplay
             weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
         }
 
+        private void Update()
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(
+                transform.position, transform.TransformDirection(Vector3.down), out hit, 0.5f, LayerMask.NameToLayer("Floor")))
+            {
+                isGrounded = true;
+            }
+            else
+            {
+                isGrounded = false;
+            }
+        }
+
+        public void HandleThrowEvent()
+        {
+            GetCharacterAnimatior()?.TriggerThrow();
+            isThrowing = true;
+        }
+
+        public void HandleThrowEndedEvent()
+        {
+            isThrowing = false;
+        }
+
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
             Gizmos.DrawLine(transform.position, transform.forward * 3);
+            Gizmos.DrawLine(transform.position, Vector3.down);
         }
 
         private void OnDestroy()
@@ -87,7 +155,13 @@ namespace Game.Gameplay
         public class HealthUpdateEvent : UnityEvent<float, float> { }
         public class DieEvent : UnityEvent { }
 
-        private Rigidbody GetRigidbody()
+        protected CharacterAnimatior GetCharacterAnimatior()
+        {
+            if (_characterAnimator == null) _characterAnimator = GetComponent<CharacterAnimatior>();
+
+            return _characterAnimator;
+        }
+        protected Rigidbody GetRigidbody()
         {
             if (_rigibody == null) _rigibody = GetComponent<Rigidbody>();
 
