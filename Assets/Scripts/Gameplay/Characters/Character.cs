@@ -90,10 +90,14 @@ namespace Game.Gameplay
             {
                 health = 0f;
                 dieEvent.Invoke();
+                GetCharacterAnimatior()?.TriggerDead();
+            }
+            else
+            {
+                GetCharacterAnimatior()?.TriggerDamage();
             }
 
             healthUpdateEvent.Invoke(health, MaxHealth);
-            GetCharacterAnimatior()?.TriggerDamage();
         }
 
         public void Reload()
