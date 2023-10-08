@@ -1,10 +1,20 @@
 using UnityEngine;
+using UnityEngine.Events;
+using System.Collections;
 
 namespace Game.Gameplay
 {
     public class CharacterAnimatior : MonoBehaviour
     {
         private Animator _animator;
+
+        [Header("Settings")]
+        public float throwingAnimationTime = 0.5f;
+
+        public UnityEvent thorwEndedEvent = new();
+
+        private Coroutine _throwCoroutine = null;
+
 
         private Animator GetAnimator()
         {
@@ -28,6 +38,13 @@ namespace Game.Gameplay
         public void TriggerThrow()
         {
             GetAnimator().SetTrigger("Throw");
+
+            if (_throwCoroutine != null)
+            {
+                StopCoroutine(_throwCoroutine);
+                _throwCoroutine = null;
+            }
+            _throwCoroutine = StartCoroutine(CountDownThrowAnimation());
         }
 
         public void TriggerDamage()
@@ -38,6 +55,17 @@ namespace Game.Gameplay
         public void TriggerDead()
         {
             GetAnimator().SetTrigger("Dead");
+        }
+
+        IEnumerator CountDownThrowAnimation()
+        {
+            yield return new WaitForSecondsRealtime(throwingAnimationTime);
+            thorwEndedEvent.Invoke();
+        }
+
+        private void OnDestroy()
+        {
+            thorwEndedEvent.RemoveAllListeners();
         }
     }
 }

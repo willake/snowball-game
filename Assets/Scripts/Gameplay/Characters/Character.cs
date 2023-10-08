@@ -29,17 +29,19 @@ namespace Game.Gameplay
 
         public bool isAiming { get; private set; }
         public bool isGrounded { get; private set; }
+        public bool isThrowing { get; private set; }
 
         private void Start()
         {
             MaxHealth = health;
             weaponHolder.throwEvent.AddListener(HandleThrowEvent);
+            GetCharacterAnimatior()?.thorwEndedEvent.AddListener(HandleThrowEndedEvent);
         }
 
         public void SetIsAiming(bool isAiming)
         {
             this.isAiming = isAiming;
-            GetCharacterAnimatior().SetIsAiming(isAiming);
+            GetCharacterAnimatior()?.SetIsAiming(isAiming);
         }
 
         public void Idle()
@@ -68,7 +70,7 @@ namespace Game.Gameplay
                     Mathf.Cos(angle), 1);
             }
 
-            if (isAiming == false)
+            if (isAiming == false && isThrowing == false)
             {
                 transform.rotation =
                     Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
@@ -125,6 +127,12 @@ namespace Game.Gameplay
         public void HandleThrowEvent()
         {
             GetCharacterAnimatior()?.TriggerThrow();
+            isThrowing = true;
+        }
+
+        public void HandleThrowEndedEvent()
+        {
+            isThrowing = false;
         }
 
         private void OnDrawGizmosSelected()
