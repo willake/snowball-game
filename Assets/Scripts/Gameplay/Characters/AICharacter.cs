@@ -37,28 +37,5 @@ namespace Game.Gameplay
         {
             GetNavMeshAgent().SetDestination(position);
         }
-
-        private void Update()
-        {
-            if (GetNavMeshAgent().velocity.magnitude > float.Epsilon)
-            {
-                Vector3 velocity = GetNavMeshAgent().velocity;
-                GetCharacterAnimatior()?.SetMoveSpeed(
-                    velocity.x,
-                    velocity.z, 1);
-                if (isAiming == false && isThrowing == false)
-                {
-                    // transform.rotation =
-                    //     Quaternion.LookRotation(new Vector3(
-                    //         velocity.x, 0, velocity.z));
-                }
-            }
-            else
-            {
-                GetCharacterAnimatior()?.SetMoveSpeed(
-                    0,
-                    0, 0);
-            }
-        }
     }
 }

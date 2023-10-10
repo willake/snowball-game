@@ -82,7 +82,7 @@ namespace Game.Gameplay
             }
 
             Vector3 direction = statePlayerPos.value - transform.position;
-            bindedCharacter.Aim(direction.normalized, false);
+            bindedCharacter.UpdateAimDirection(direction.normalized, false);
 
             float energy = GetAICharacter().EstimateEnergyToPosition(statePlayerPos.value);
             GetAICharacter().ThrowWithoutCharging(energy);

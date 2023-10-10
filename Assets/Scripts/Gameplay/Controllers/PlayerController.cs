@@ -71,14 +71,14 @@ namespace Game.Gameplay
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 GetPlayerCharacter().SetIsAiming(true);
-                GetPlayerCharacter().Hold();
+                GetPlayerCharacter().Aim();
                 _isAiming = true;
             }
 
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
                 GetPlayerCharacter().SetIsAiming(false);
-                GetPlayerCharacter().Throw();
+                GetPlayerCharacter().TryThrow();
                 _isAiming = false;
             }
 
@@ -91,7 +91,7 @@ namespace Game.Gameplay
             {
                 Vector3 chaPos =
                     bindedCamera.GetCamera().WorldToScreenPoint(bindedCharacter.transform.position);
-                bindedCharacter.Aim((Input.mousePosition - chaPos).normalized);
+                bindedCharacter.UpdateAimDirection((Input.mousePosition - chaPos).normalized);
             }
 
             statePlayerPos.value = bindedCharacter.transform.position;

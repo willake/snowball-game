@@ -1,17 +1,20 @@
 using UnityEngine;
+using Game.Gameplay.CharacterStates;
 
 namespace Game.Gameplay
 {
     public class PlayerCharacter : Character
     {
-        public void Hold()
+        public void Aim()
         {
-            if (isThrowing || isDamaging) return;
+            if (State.canThrow == false) return;
             weaponHolder.Hold();
+            SetCharacterState(CharacterState.AimState);
         }
 
-        public void Throw()
+        public void TryThrow()
         {
+            // haven't really throw yet, show do not set state
             weaponHolder.Throw();
         }
     }
