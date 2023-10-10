@@ -13,8 +13,7 @@ namespace Game.Gameplay
         public PlayerCamera bindedCamera;
         public Vector3State statePlayerPos;
 
-        private bool _isMoving;
-        private bool _isAiming = false;
+        private bool _isPressingMove;
         public bool isControllable;
 
         private PlayerCharacter _playerCharacter;
@@ -60,26 +59,22 @@ namespace Game.Gameplay
             if (Math.Abs(horizontal) > float.Epsilon || Math.Abs(vertical) > float.Epsilon)
             {
                 bindedCharacter.Move(horizontal, vertical);
-                _isMoving = true;
+                _isPressingMove = true;
             }
             else
             {
                 bindedCharacter.Idle();
-                _isMoving = false;
+                _isPressingMove = false;
             }
 
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                GetPlayerCharacter().SetIsAiming(true);
                 GetPlayerCharacter().Aim();
-                _isAiming = true;
             }
 
             if (Input.GetKeyUp(KeyCode.Mouse0))
             {
-                GetPlayerCharacter().SetIsAiming(false);
                 GetPlayerCharacter().TryThrow();
-                _isAiming = false;
             }
 
             if (Input.GetKeyDown(KeyCode.R))
@@ -87,7 +82,7 @@ namespace Game.Gameplay
                 bindedCharacter.Reload();
             }
 
-            if (_isAiming)
+            if (bindedCharacter.State.isAiming)
             {
                 Vector3 chaPos =
                     bindedCamera.GetCamera().WorldToScreenPoint(bindedCharacter.transform.position);
@@ -106,7 +101,7 @@ namespace Game.Gameplay
             direction.Normalize();
 
             bindedCamera.FollowCharacter(
-                _isMoving, bindedCharacter.transform.position, direction);
+                _isPressingMove, bindedCharacter.transform.position, direction);
         }
 
         private PlayerCharacter GetPlayerCharacter()

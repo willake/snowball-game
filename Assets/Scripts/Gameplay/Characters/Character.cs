@@ -64,7 +64,9 @@ namespace Game.Gameplay
         public void TakeDamage(float damage, Vector3 direction)
         {
             if (State.canInterrupt == false) return;
+
             health -= damage;
+            healthUpdateEvent.Invoke(health, MaxHealth);
 
             if (health < float.Epsilon)
             {
@@ -84,8 +86,6 @@ namespace Game.Gameplay
 
             transform.rotation =
                     Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z) * -1);
-
-            healthUpdateEvent.Invoke(health, MaxHealth);
         }
 
         public void Reload()

@@ -15,7 +15,10 @@ namespace Game.Gameplay
         public void TryThrow()
         {
             // haven't really throw yet, show do not set state
-            weaponHolder.Throw();
+            if (State.isAiming)
+            {
+                weaponHolder.Throw();
+            }
         }
     }
 }
