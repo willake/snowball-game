@@ -70,7 +70,7 @@ namespace Game.Gameplay
 
         protected void ChasePlayer()
         {
-            bindedCharacter.MoveTo(statePlayerPos.value);
+            GetAICharacter().MoveTo(statePlayerPos.value);
         }
 
         protected void AttackPlayer()
