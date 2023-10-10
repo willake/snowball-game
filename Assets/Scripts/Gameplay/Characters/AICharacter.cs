@@ -33,9 +33,9 @@ namespace Game.Gameplay
             return finalVelocity.magnitude;
         }
 
-        public void ThrowWithoutCharging(float energy)
+        public void MoveTo(Vector3 position)
         {
-            weaponHolder.ThrowWithoutCharging(energy);
+            GetNavMeshAgent().SetDestination(position);
         }
 
         private void Update()

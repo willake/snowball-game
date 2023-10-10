@@ -6,6 +6,7 @@ namespace Game.Gameplay
     {
         public void Hold()
         {
+            if (isThrowing || isDamaging) return;
             weaponHolder.Hold();
         }
 

@@ -22,6 +22,8 @@ namespace Game.Gameplay
         private Queue<ParticleSystem> _onHitEffectPool;
         private SnowballProjectile _holdingProjectile;
 
+        public bool isHolding { get; private set; }
+
         private void Start()
         {
             _projectilePool = new Queue<SnowballProjectile>();
@@ -66,10 +68,13 @@ namespace Game.Gameplay
             _holdingProjectile.GetRigidbody().velocity = Vector3.zero;
             _holdingProjectile.GetRigidbody().useGravity = false;
             _holdingProjectile.gameObject.SetActive(true);
+
+            isHolding = true;
         }
 
         public override bool Attack(Vector3 direction, float energy)
         {
+            isHolding = false;
             if (Ammo <= 0 || _holdingProjectile == null) return false;
 
             // TODO: snowball mechanic

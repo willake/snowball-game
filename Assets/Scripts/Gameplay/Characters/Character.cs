@@ -30,12 +30,14 @@ namespace Game.Gameplay
         public bool isAiming { get; private set; }
         public bool isGrounded { get; private set; }
         public bool isThrowing { get; private set; }
+        public bool isDamaging { get; private set; }
 
         private void Start()
         {
             MaxHealth = health;
             weaponHolder.throwEvent.AddListener(HandleThrowEvent);
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(HandleThrowEndedEvent);
+            GetCharacterAnimatior()?.damageEndedEvent.AddListener(HandleDamageEndedEvent);
         }
 
         public void SetIsAiming(bool isAiming)
@@ -77,12 +79,7 @@ namespace Game.Gameplay
             }
         }
 
-        public void MoveTo(Vector3 position)
-        {
-            GetNavMeshAgent().SetDestination(position);
-        }
-
-        public void TakeDamage(float damage)
+        public void TakeDamage(float damage, Vector3 direction)
         {
             health -= damage;
 
@@ -95,7 +92,16 @@ namespace Game.Gameplay
             else
             {
                 GetCharacterAnimatior()?.TriggerDamage();
+                isDamaging = true;
             }
+
+            if (isAiming)
+            {
+                ThrowWithoutCharging(1f);
+            }
+
+            transform.rotation =
+                    Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z) * -1);
 
             healthUpdateEvent.Invoke(health, MaxHealth);
         }
@@ -128,6 +134,11 @@ namespace Game.Gameplay
             }
         }
 
+        public void ThrowWithoutCharging(float energy)
+        {
+            weaponHolder.ThrowWithoutCharging(energy);
+        }
+
         public void HandleThrowEvent()
         {
             GetCharacterAnimatior()?.TriggerThrow();
@@ -137,6 +148,11 @@ namespace Game.Gameplay
         public void HandleThrowEndedEvent()
         {
             isThrowing = false;
+        }
+
+        public void HandleDamageEndedEvent()
+        {
+            isDamaging = false;
         }
 
         private void OnDrawGizmosSelected()

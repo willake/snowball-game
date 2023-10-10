@@ -32,14 +32,16 @@ namespace Game.Gameplay
                 OwnerCamp == Camp.Player
                 && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                other.gameObject.GetComponent<Character>().TakeDamage(damage);
+                other.gameObject.GetComponent<Character>().TakeDamage(
+                    damage, GetRigidbody().velocity);
                 hit = true;
             }
 
             if (OwnerCamp == Camp.Enemy
                 && other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                other.gameObject.GetComponent<Character>().TakeDamage(damage);
+                other.gameObject.GetComponent<Character>().TakeDamage(
+                    damage, GetRigidbody().velocity);
                 hit = true;
             }
 
