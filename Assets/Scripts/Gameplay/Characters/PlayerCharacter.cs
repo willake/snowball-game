@@ -8,7 +8,7 @@ namespace Game.Gameplay
         public override Vector3 Velocity => GetRigidbody() ? GetRigidbody().velocity : Vector3.zero;
         public void Aim()
         {
-            if (isGrounded == false && State.canThrow == false) return;
+            if (isGrounded == false || State.canThrow == false) return;
             weaponHolder.Aim();
             SetCharacterState(CharacterState.AimState);
         }
