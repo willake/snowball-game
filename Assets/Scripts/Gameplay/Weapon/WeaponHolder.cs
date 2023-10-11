@@ -135,16 +135,16 @@ namespace Game.Gameplay
         {
             if (Ammo >= holdingWeapon.maxAmmo) return;
 
-            StartCoroutine(StartReload());
+            _reloadingCorotine = StartCoroutine(StartReload());
 
             SetWeaponHolderState(WeaponHolderState.ReloadState);
         }
 
         public void TerminateReload()
         {
-            if (_chargingCorotine != null)
+            if (_reloadingCorotine != null)
             {
-                StopCoroutine(_chargingCorotine);
+                StopCoroutine(_reloadingCorotine);
             }
 
             SetWeaponHolderState(WeaponHolderState.IdleState);
