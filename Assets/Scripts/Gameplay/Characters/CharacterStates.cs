@@ -34,7 +34,7 @@ namespace Game.Gameplay.CharacterStates
         // From: Hold, HoldMove
         // To: Idle, Dead
         public bool isAiming { get => true; }
-        public bool canMove { get => true; }
+        public bool canMove { get => false; }
         public bool canThrow { get => false; }
         public bool canInterrupt { get => false; }
     }

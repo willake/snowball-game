@@ -11,6 +11,10 @@ namespace Game.Gameplay
         private CharacterAnimatior _characterAnimator;
         private Rigidbody _rigibody;
 
+        [Header("References")]
+        public Transform groundDectector;
+        public WeaponHolder weaponHolder;
+
         [Header("Status")]
         public float health = 100;
         public HealthUpdateEvent healthUpdateEvent = new();
@@ -21,15 +25,13 @@ namespace Game.Gameplay
         public float acc = 5f;
         public float maxSpeed = 5f;
         public Vector3 currentVelocity { get { return GetRigidbody().velocity; } }
-
-        [Header("Weapons")]
-        public WeaponHolder weaponHolder;
+        public LayerMask GroundLayer;
 
         public bool isGrounded { get; private set; }
         public ICharacterState State { get; private set; }
         public abstract Vector3 Velocity { get; }
 
-        private void Start()
+        private void Awake()
         {
             MaxHealth = health;
             weaponHolder.throwEvent.AddListener(() => SetCharacterState(CharacterState.ThrowState));
@@ -38,9 +40,7 @@ namespace Game.Gameplay
             GetCharacterAnimatior()?.damageEndedEvent.AddListener(
                 () => SetCharacterState(CharacterState.IdleState));
 
-            SetCharacterState(IdleState);
-            Debug.Log(gameObject.name + "Character Start");
-            Debug.Log(State);
+            SetCharacterState(CharacterState.IdleState);
         }
 
         public void Idle()
@@ -137,14 +137,14 @@ namespace Game.Gameplay
         {
             RaycastHit hit;
             isGrounded = Physics.Raycast(
-                transform.position, transform.TransformDirection(Vector3.down), out hit,
-                0.5f, LayerMask.NameToLayer("Floor"));
+                groundDectector.position, Vector3.down, out hit,
+                0.5f, GroundLayer);
 
-            Debug.Log("Current State: " + State);
             if (State.canMove == false) return;
 
             Vector3 velocity = Velocity;
-            if (State.isAiming && velocity.magnitude > float.Epsilon)
+            bool isMoving = new Vector2(velocity.normalized.x, velocity.normalized.z).magnitude > float.Epsilon;
+            if (State.isAiming && isMoving)
             {
                 // calculate angle of moving direction
                 float movingAngle = (velocity.x > 0 ? 1 : -1) *
@@ -161,13 +161,13 @@ namespace Game.Gameplay
                     Mathf.Sin(angle),
                     Mathf.Cos(angle), 1);
             }
-            else if (velocity.magnitude > float.Epsilon)
+            else if (isMoving)
             {
                 GetCharacterAnimatior()?.SetMoveSpeed(
-                    velocity.x,
-                    velocity.z, 1);
+                    velocity.normalized.x,
+                    velocity.normalized.z, 1);
                 transform.rotation =
-                    Quaternion.LookRotation(new Vector3(velocity.normalized.x, 0, velocity.normalized.z));
+                        Quaternion.LookRotation(new Vector3(velocity.normalized.x, 0, velocity.normalized.z));
             }
             else
             {
@@ -202,14 +202,9 @@ namespace Game.Gameplay
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, transform.forward * 3);
-            Gizmos.DrawLine(transform.position, Vector3.down);
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward * 3);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(groundDectector.position, groundDectector.position + Vector3.down * 0.5f);
         }
-
-        public static readonly ICharacterState IdleState = new IdleState();
-        public static readonly ICharacterState AimState = new AimState();
-        public static readonly ICharacterState ThrowState = new ThrowState();
-        public static readonly ICharacterState DamagedState = new DamagedState();
-        public static readonly ICharacterState DeadState = new DeadState();
     }
 }
