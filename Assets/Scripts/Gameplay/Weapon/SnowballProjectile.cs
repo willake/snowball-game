@@ -6,6 +6,8 @@ namespace Game.Gameplay
 {
     public class SnowballProjectile : MonoBehaviour
     {
+        [Header("References")]
+        public GameObject trail;
         [Header("Settings")]
         public float damage = 50f;
         public float autoDisabledInSeconds = 2f;
@@ -13,16 +15,15 @@ namespace Game.Gameplay
         public OnHitEvent onHitEvent = new();
 
         private Rigidbody _rig;
-        public Rigidbody GetRigidbody()
-        {
-            if (_rig == null) _rig = GetComponent<Rigidbody>();
-
-            return _rig;
-        }
 
         public void SetOwnerCamp(Camp camp)
         {
             OwnerCamp = camp;
+        }
+
+        public void EnableTrail(bool enabled)
+        {
+            trail.SetActive(enabled);
         }
 
         private void OnTriggerEnter(Collider other)
@@ -66,6 +67,14 @@ namespace Game.Gameplay
                 gameObject.SetActive(false);
             }
         }
+
+        public Rigidbody GetRigidbody()
+        {
+            if (_rig == null) _rig = GetComponent<Rigidbody>();
+
+            return _rig;
+        }
+
 
         public class OnHitEvent : UnityEvent<Vector3, Vector3> { }
     }
