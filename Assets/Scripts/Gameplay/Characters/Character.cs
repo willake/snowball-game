@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using Game.Gameplay.CharacterStates;
+using System.Collections;
 
 namespace Game.Gameplay
 {
@@ -35,6 +36,16 @@ namespace Game.Gameplay
         {
             MaxHealth = health;
             weaponHolder.throwEvent.AddListener(() => SetCharacterState(CharacterState.ThrowState));
+            weaponHolder.reloadStartEvent.AddListener(() =>
+                {
+                    SetCharacterState(CharacterState.ReloadState);
+                    GetCharacterAnimatior()?.SetIsReloading(true);
+                });
+            weaponHolder.reloadEndEvent.AddListener(() =>
+                {
+                    SetCharacterState(CharacterState.IdleState);
+                    GetCharacterAnimatior()?.SetIsReloading(false);
+                });
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => SetCharacterState(CharacterState.IdleState));
             GetCharacterAnimatior()?.damageEndedEvent.AddListener(
@@ -71,6 +82,16 @@ namespace Game.Gameplay
             health -= damage;
             healthUpdateEvent.Invoke(health, MaxHealth);
 
+            if (State.isAiming)
+            {
+                ThrowWithoutCharging(1f);
+            }
+
+            if (State.isReloading)
+            {
+                weaponHolder.TerminateReload();
+            }
+
             if (health < float.Epsilon)
             {
                 health = 0f;
@@ -82,17 +103,13 @@ namespace Game.Gameplay
                 SetCharacterState(CharacterState.DamagedState);
             }
 
-            if (State.isAiming)
-            {
-                ThrowWithoutCharging(1f);
-            }
-
             transform.rotation =
                     Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z) * -1);
         }
 
         public void Reload()
         {
+            if (State.isReloading) return;
             weaponHolder.Reload();
         }
 

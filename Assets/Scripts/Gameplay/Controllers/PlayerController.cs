@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.Gameplay.Cameras;
 using Game.RuntimeStates;
+using Game.UI;
 using UnityEngine;
 
 namespace Game.Gameplay
@@ -12,6 +13,7 @@ namespace Game.Gameplay
         [Header("References")]
         public PlayerCamera bindedCamera;
         public Vector3State statePlayerPos;
+        public ProgressBar reloadBar;
 
         private bool _isPressingMove;
         public bool isControllable;
@@ -28,12 +30,30 @@ namespace Game.Gameplay
         {
             if (MainGameScene.instance)
             {
+                SetupReloadBar();
                 MainGameScene.instance.RegisterPlayer(this);
             }
 
             bindedCharacter.dieEvent.AddListener(HandleDieEvent);
+            bindedCharacter.weaponHolder.reloadStartEvent.AddListener(() =>
+            {
+                reloadBar.gameObject.SetActive(true);
+                reloadBar.SetProgress(0f, 0f);
+            });
+            bindedCharacter.weaponHolder.reloadEndEvent.AddListener(() => reloadBar.gameObject.SetActive(false));
+            bindedCharacter.weaponHolder.reloadProgressUpdateEvent.AddListener(progress => reloadBar.SetProgress(progress, 0f));
 
             isControllable = true;
+        }
+
+        private void SetupReloadBar()
+        {
+            reloadBar.SetProgress(0f, 0f);
+            reloadBar.transform.SetParent(MainGameScene.instance.worldSpaceCanvas.transform);
+            if (reloadBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
+            {
+                faceCamera.cam = bindedCamera.GetComponent<Camera>();
+            }
         }
 
         private void HandleDieEvent()

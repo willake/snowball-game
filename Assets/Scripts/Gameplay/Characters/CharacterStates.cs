@@ -5,6 +5,7 @@ namespace Game.Gameplay.CharacterStates
         public static readonly ICharacterState IdleState = new IdleState();
         public static readonly ICharacterState AimState = new AimState();
         public static readonly ICharacterState ThrowState = new ThrowState();
+        public static readonly ICharacterState ReloadState = new ReloadState();
         public static readonly ICharacterState DamagedState = new DamagedState();
         public static readonly ICharacterState DeadState = new DeadState();
     }
@@ -14,6 +15,7 @@ namespace Game.Gameplay.CharacterStates
         // From: Move, Damaged, Throw
         // To: Move, Damaged, Dead, Hold
         public bool isAiming { get => false; }
+        public bool isReloading { get => false; }
         public bool isDead { get => false; }
         public bool canMove { get => true; }
         public bool canThrow { get => true; }
@@ -25,6 +27,7 @@ namespace Game.Gameplay.CharacterStates
         // From: Idle, Move, HoldMove
         // To: HoldMove, Damaged, Dead, Throw
         public bool isAiming { get => true; }
+        public bool isReloading { get => false; }
         public bool isDead { get => false; }
         public bool canMove { get => true; }
         public bool canThrow { get => false; }
@@ -36,6 +39,7 @@ namespace Game.Gameplay.CharacterStates
         // From: Hold, HoldMove
         // To: Idle, Dead
         public bool isAiming { get => true; }
+        public bool isReloading { get => false; }
         public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
@@ -47,6 +51,7 @@ namespace Game.Gameplay.CharacterStates
         // From: any
         // To: Idle
         public bool isAiming { get => false; }
+        public bool isReloading { get => false; }
         public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
@@ -58,6 +63,7 @@ namespace Game.Gameplay.CharacterStates
         // From: any
         // To: NaN
         public bool isAiming { get => false; }
+        public bool isReloading { get => false; }
         public bool isDead { get => true; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
@@ -69,6 +75,7 @@ namespace Game.Gameplay.CharacterStates
         // From: any
         // To: NaN
         public bool isAiming { get => false; }
+        public bool isReloading { get => true; }
         public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }

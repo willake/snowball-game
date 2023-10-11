@@ -20,6 +20,8 @@ namespace Game.Gameplay
         public float chargeIntervalInSeconds = 0.01f;
         public float energyPerInterval = 0.1f;
         public float timeOutEnergy = 0.1f;
+        public float reloadIntervalInSeconds = 0.05f;
+        public float reloadTimeInSeconds = 1f;
 
         public Vector3 AimDirection { get; private set; }
 
@@ -41,13 +43,17 @@ namespace Game.Gameplay
         public UnityEvent throwEvent = new();
         public EnergyUpdateEvent energyUpdateEvent = new();
         public AmmoUpdateEvent ammoUpdateEvent = new();
+        public UnityEvent reloadStartEvent = new();
+        public UnityEvent reloadEndEvent = new();
+        public ReloadProgressUpdateEvent reloadProgressUpdateEvent = new();
 
         [Header("Property")]
         public Camp ownerCamp;
         public Snowball holdingWeapon;
         public IWeaponHolderStates State { get; private set; }
 
-        private Coroutine _runningCorotine = null;
+        private Coroutine _chargingCorotine = null;
+        private Coroutine _reloadingCorotine = null;
 
         private void Start()
         {
@@ -65,7 +71,7 @@ namespace Game.Gameplay
 
             Energy = 0;
             holdingWeapon.Load();
-            _runningCorotine = StartCoroutine(ChargeEnergy());
+            _chargingCorotine = StartCoroutine(ChargeEnergy());
             loadEvent.Invoke();
             SetWeaponHolderState(WeaponHolderState.AimState);
             return true;
@@ -75,12 +81,12 @@ namespace Game.Gameplay
         {
             if (State.isAiming == false) return false;
             // the ball is already on the hand, so no need to check anything
-            if (_runningCorotine != null)
+            if (_chargingCorotine != null)
             {
-                StopCoroutine(_runningCorotine);
+                StopCoroutine(_chargingCorotine);
             }
 
-            _runningCorotine = null;
+            _chargingCorotine = null;
 
             float pitch = throwingPitch * Mathf.Deg2Rad;
 
@@ -129,10 +135,38 @@ namespace Game.Gameplay
         {
             if (Ammo >= holdingWeapon.maxAmmo) return;
 
+            StartCoroutine(StartReload());
+
+            SetWeaponHolderState(WeaponHolderState.ReloadState);
+        }
+
+        public void TerminateReload()
+        {
+            if (_chargingCorotine != null)
+            {
+                StopCoroutine(_chargingCorotine);
+            }
+
+            SetWeaponHolderState(WeaponHolderState.IdleState);
+            reloadEndEvent.Invoke();
+        }
+
+        IEnumerator StartReload()
+        {
+            reloadStartEvent.Invoke();
+            float time = 0;
+            while (time < reloadTimeInSeconds)
+            {
+                yield return new WaitForSeconds(reloadIntervalInSeconds);
+                time += reloadIntervalInSeconds;
+                reloadProgressUpdateEvent.Invoke(time / reloadTimeInSeconds);
+            }
+
             holdingWeapon.Reload();
 
             ammoUpdateEvent.Invoke(holdingWeapon.maxAmmo);
             SetWeaponHolderState(WeaponHolderState.IdleState);
+            reloadEndEvent.Invoke();
         }
 
         IEnumerator ChargeEnergy()
@@ -182,9 +216,13 @@ namespace Game.Gameplay
             throwEvent.RemoveAllListeners();
             energyUpdateEvent.RemoveAllListeners();
             ammoUpdateEvent.RemoveAllListeners();
+            reloadStartEvent.RemoveAllListeners();
+            reloadEndEvent.RemoveAllListeners();
+            reloadProgressUpdateEvent.RemoveAllListeners();
         }
 
         public class EnergyUpdateEvent : UnityEvent<float> { }
+        public class ReloadProgressUpdateEvent : UnityEvent<float> { }
         // ammo / maxAmmo
         public class AmmoUpdateEvent : UnityEvent<int> { }
     }
