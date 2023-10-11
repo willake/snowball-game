@@ -12,7 +12,6 @@ namespace Game.Gameplay.WeaponHolderStates
     {
         public bool isAiming { get => false; }
         public bool canThrow { get => true; }
-        public bool canInterupt { get => true; }
         public bool shouldReload { get => false; }
     }
 
@@ -20,7 +19,6 @@ namespace Game.Gameplay.WeaponHolderStates
     {
         public bool isAiming { get => true; }
         public bool canThrow { get => false; }
-        public bool canInterupt { get => false; }
         public bool shouldReload { get => false; }
     }
 
@@ -28,7 +26,6 @@ namespace Game.Gameplay.WeaponHolderStates
     {
         public bool isAiming { get => false; }
         public bool canThrow { get => false; }
-        public bool canInterupt { get => false; }
         public bool shouldReload { get => false; }
     }
 
@@ -36,7 +33,6 @@ namespace Game.Gameplay.WeaponHolderStates
     {
         public bool isAiming { get => false; }
         public bool canThrow { get => false; }
-        public bool canInterupt { get => false; }
         public bool shouldReload { get => true; }
     }
 }

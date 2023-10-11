@@ -127,7 +127,6 @@ namespace Game.Gameplay
 
         public void Reload()
         {
-            if (State.canInterupt == false) return;
             if (Ammo >= holdingWeapon.maxAmmo) return;
 
             holdingWeapon.Reload();
