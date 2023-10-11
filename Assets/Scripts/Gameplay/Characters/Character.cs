@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Events;
 using Game.Gameplay.CharacterStates;
+using System.Collections;
 
 namespace Game.Gameplay
 {
@@ -35,6 +36,16 @@ namespace Game.Gameplay
         {
             MaxHealth = health;
             weaponHolder.throwEvent.AddListener(() => SetCharacterState(CharacterState.ThrowState));
+            weaponHolder.reloadStartEvent.AddListener(() =>
+                {
+                    SetCharacterState(CharacterState.ReloadState);
+                    GetCharacterAnimatior()?.SetIsReloading(true);
+                });
+            weaponHolder.reloadEndEvent.AddListener(() =>
+                {
+                    SetCharacterState(CharacterState.IdleState);
+                    GetCharacterAnimatior()?.SetIsReloading(false);
+                });
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => SetCharacterState(CharacterState.IdleState));
             GetCharacterAnimatior()?.damageEndedEvent.AddListener(
@@ -93,6 +104,7 @@ namespace Game.Gameplay
 
         public void Reload()
         {
+            if (State.isReloading) return;
             weaponHolder.Reload();
         }
 

@@ -31,6 +31,18 @@ namespace Game.Gameplay
             GetAnimator().SetBool("isAiming", isAiming);
         }
 
+        public void SetIsReloading(bool isReloading)
+        {
+            if (isReloading)
+            {
+                GetAnimator().SetTrigger("ReloadStart");
+            }
+            else
+            {
+                GetAnimator().SetTrigger("ReloadEnd");
+            }
+        }
+
         public void SetMoveSpeed(float horizontal, float vertical, float speed)
         {
             GetAnimator().SetFloat("Horizontal", horizontal);
