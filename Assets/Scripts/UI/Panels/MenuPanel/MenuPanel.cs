@@ -1,9 +1,6 @@
 using UniRx;
-using System;
 using Cysharp.Threading.Tasks;
-using Game.Events;
 using UnityEngine;
-using Unity.Plastic.Antlr3.Runtime.Tree;
 
 namespace Game.UI
 {

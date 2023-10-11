@@ -6,6 +6,7 @@ using UnityEditor;
 // Don't edit if you are not sure
 // reference: https://manuel-rauber.com/2022/05/23/instantiate-your-own-prefabs-via-gameobject-menu/
 
+#if UNITY_EDITOR
 namespace Game.UI
 {
     public static class UIComponentMenus
@@ -66,3 +67,4 @@ namespace Game.UI
         }
     }
 }
+#endif
