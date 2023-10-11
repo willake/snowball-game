@@ -433,10 +433,18 @@ MonoBehaviour:
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
   timeOutEnergy: 0.1
+  reloadIntervalInSeconds: 0.05
+  reloadTimeInSeconds: 1.5
   loadEvent:
     m_PersistentCalls:
       m_Calls: []
   throwEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  reloadStartEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  reloadEndEvent:
     m_PersistentCalls:
       m_Calls: []
   ownerCamp: 1
