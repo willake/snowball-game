@@ -82,6 +82,16 @@ namespace Game.Gameplay
             health -= damage;
             healthUpdateEvent.Invoke(health, MaxHealth);
 
+            if (State.isAiming)
+            {
+                ThrowWithoutCharging(1f);
+            }
+
+            if (State.isReloading)
+            {
+                weaponHolder.TerminateReload();
+            }
+
             if (health < float.Epsilon)
             {
                 health = 0f;
@@ -91,11 +101,6 @@ namespace Game.Gameplay
             else
             {
                 SetCharacterState(CharacterState.DamagedState);
-            }
-
-            if (State.isAiming)
-            {
-                ThrowWithoutCharging(1f);
             }
 
             transform.rotation =

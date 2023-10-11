@@ -52,7 +52,8 @@ namespace Game.Gameplay
         public Snowball holdingWeapon;
         public IWeaponHolderStates State { get; private set; }
 
-        private Coroutine _runningCorotine = null;
+        private Coroutine _chargingCorotine = null;
+        private Coroutine _reloadingCorotine = null;
 
         private void Start()
         {
@@ -70,7 +71,7 @@ namespace Game.Gameplay
 
             Energy = 0;
             holdingWeapon.Load();
-            _runningCorotine = StartCoroutine(ChargeEnergy());
+            _chargingCorotine = StartCoroutine(ChargeEnergy());
             loadEvent.Invoke();
             SetWeaponHolderState(WeaponHolderState.AimState);
             return true;
@@ -80,12 +81,12 @@ namespace Game.Gameplay
         {
             if (State.isAiming == false) return false;
             // the ball is already on the hand, so no need to check anything
-            if (_runningCorotine != null)
+            if (_chargingCorotine != null)
             {
-                StopCoroutine(_runningCorotine);
+                StopCoroutine(_chargingCorotine);
             }
 
-            _runningCorotine = null;
+            _chargingCorotine = null;
 
             float pitch = throwingPitch * Mathf.Deg2Rad;
 
@@ -137,6 +138,17 @@ namespace Game.Gameplay
             StartCoroutine(StartReload());
 
             SetWeaponHolderState(WeaponHolderState.ReloadState);
+        }
+
+        public void TerminateReload()
+        {
+            if (_chargingCorotine != null)
+            {
+                StopCoroutine(_chargingCorotine);
+            }
+
+            SetWeaponHolderState(WeaponHolderState.IdleState);
+            reloadEndEvent.Invoke();
         }
 
         IEnumerator StartReload()
