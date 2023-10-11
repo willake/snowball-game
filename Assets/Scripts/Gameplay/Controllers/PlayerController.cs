@@ -14,6 +14,7 @@ namespace Game.Gameplay
         public PlayerCamera bindedCamera;
         public Vector3State statePlayerPos;
         public ProgressBar reloadBar;
+        public ProgressBar chargeBar;
 
         private bool _isPressingMove;
         public bool isControllable;
@@ -31,6 +32,7 @@ namespace Game.Gameplay
             if (MainGameScene.instance)
             {
                 SetupReloadBar();
+                SetupChargeBar();
                 MainGameScene.instance.RegisterPlayer(this);
             }
 
@@ -38,19 +40,37 @@ namespace Game.Gameplay
             bindedCharacter.weaponHolder.reloadStartEvent.AddListener(() =>
             {
                 reloadBar.gameObject.SetActive(true);
-                reloadBar.SetProgress(0f, 0f);
+                reloadBar.SetProgress(0f);
             });
             bindedCharacter.weaponHolder.reloadEndEvent.AddListener(() => reloadBar.gameObject.SetActive(false));
-            bindedCharacter.weaponHolder.reloadProgressUpdateEvent.AddListener(progress => reloadBar.SetProgress(progress, 0f));
+            bindedCharacter.weaponHolder.reloadProgressUpdateEvent.AddListener(progress => reloadBar.SetProgress(progress));
+
+            bindedCharacter.weaponHolder.loadEvent.AddListener(() =>
+            {
+                chargeBar.gameObject.SetActive(true);
+                chargeBar.SetProgress(0f);
+            });
+            bindedCharacter.weaponHolder.throwEvent.AddListener(() => chargeBar.gameObject.SetActive(false));
+            bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
 
             isControllable = true;
         }
 
         private void SetupReloadBar()
         {
-            reloadBar.SetProgress(0f, 0f);
+            reloadBar.SetProgress(0f);
             reloadBar.transform.SetParent(MainGameScene.instance.worldSpaceCanvas.transform);
             if (reloadBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
+            {
+                faceCamera.cam = bindedCamera.GetComponent<Camera>();
+            }
+        }
+
+        private void SetupChargeBar()
+        {
+            chargeBar.SetProgress(0f);
+            chargeBar.transform.SetParent(MainGameScene.instance.worldSpaceCanvas.transform);
+            if (chargeBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
             {
                 faceCamera.cam = bindedCamera.GetComponent<Camera>();
             }

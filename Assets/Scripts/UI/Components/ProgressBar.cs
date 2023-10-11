@@ -33,7 +33,14 @@ namespace Game.UI
 
         public void SetProgress(float progress)
         {
-            SetProgress(progress, defaultDuration);
+            if (_tween != null && _tween.IsPlaying())
+            {
+                _tween.Kill();
+            }
+
+            onProgress.Invoke();
+            progressImage.fillAmount = progress;
+            progressImage.color = gradient.Evaluate(progress);
         }
 
         public void SetProgress(float progress, float duration)

@@ -154,5 +154,5 @@ MonoBehaviour:
   idleSmoothTime: 0.7
   maxFollowSpeed: 100
   predictionDistance: 1.5
-  cameraAngle: 20
-  cameraDistance: 15
+  cameraAngle: 30
+  cameraDistance: 20
