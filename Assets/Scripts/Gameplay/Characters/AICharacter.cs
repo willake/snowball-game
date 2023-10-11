@@ -1,9 +1,18 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Game.Gameplay
 {
     public class AICharacter : Character
     {
+        public override Vector3 Velocity => GetNavMeshAgent() ? GetNavMeshAgent().velocity : Vector3.zero;
+
+        private NavMeshAgent _navMeshAgent;
+
+        private void Start()
+        {
+            dieEvent.AddListener(() => GetNavMeshAgent().isStopped = true);
+        }
         public float EstimateEnergyToPosition(Vector3 target)
         {
             float gravity = Physics.gravity.magnitude;
@@ -36,6 +45,13 @@ namespace Game.Gameplay
         public void MoveTo(Vector3 position)
         {
             GetNavMeshAgent().SetDestination(position);
+        }
+
+        public NavMeshAgent GetNavMeshAgent()
+        {
+            if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
+
+            return _navMeshAgent;
         }
     }
 }

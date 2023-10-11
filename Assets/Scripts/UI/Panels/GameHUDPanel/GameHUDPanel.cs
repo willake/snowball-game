@@ -63,7 +63,7 @@ namespace Game.UI
             character.healthUpdateEvent.AddListener(UpdateHealth);
             character.weaponHolder.ammoUpdateEvent.AddListener(UpdateAmmo);
             character.weaponHolder.energyUpdateEvent.AddListener(UpdateEnergy);
-            character.weaponHolder.holdEvent.AddListener(ShowChargeBar);
+            character.weaponHolder.loadEvent.AddListener(ShowChargeBar);
             character.weaponHolder.throwEvent.AddListener(CloseChargeBar);
         }
 
@@ -72,7 +72,7 @@ namespace Game.UI
             _bindedCharacter.healthUpdateEvent.RemoveListener(UpdateHealth);
             _bindedCharacter.weaponHolder.ammoUpdateEvent.RemoveListener(UpdateAmmo);
             _bindedCharacter.weaponHolder.energyUpdateEvent.RemoveListener(UpdateEnergy);
-            _bindedCharacter.weaponHolder.holdEvent.RemoveListener(ShowChargeBar);
+            _bindedCharacter.weaponHolder.loadEvent.RemoveListener(ShowChargeBar);
             _bindedCharacter.weaponHolder.throwEvent.RemoveListener(CloseChargeBar);
             _bindedCharacter = null;
         }

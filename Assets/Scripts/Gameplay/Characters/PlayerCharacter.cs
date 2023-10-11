@@ -5,10 +5,11 @@ namespace Game.Gameplay
 {
     public class PlayerCharacter : Character
     {
+        public override Vector3 Velocity => GetRigidbody() ? GetRigidbody().velocity : Vector3.zero;
         public void Aim()
         {
             if (State.canThrow == false) return;
-            weaponHolder.Hold();
+            weaponHolder.Aim();
             SetCharacterState(CharacterState.AimState);
         }
 

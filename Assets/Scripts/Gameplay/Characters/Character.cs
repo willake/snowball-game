@@ -6,10 +6,9 @@ using Game.Gameplay.CharacterStates;
 
 namespace Game.Gameplay
 {
-    public class Character : MonoBehaviour
+    public abstract class Character : MonoBehaviour
     {
         private CharacterAnimatior _characterAnimator;
-        private NavMeshAgent _navMeshAgent;
         private Rigidbody _rigibody;
 
         [Header("Status")]
@@ -28,6 +27,7 @@ namespace Game.Gameplay
 
         public bool isGrounded { get; private set; }
         public ICharacterState State { get; private set; }
+        public abstract Vector3 Velocity { get; }
 
         private void Start()
         {
@@ -37,7 +37,10 @@ namespace Game.Gameplay
                 () => SetCharacterState(CharacterState.IdleState));
             GetCharacterAnimatior()?.damageEndedEvent.AddListener(
                 () => SetCharacterState(CharacterState.IdleState));
-            State = CharacterState.IdleState;
+
+            SetCharacterState(IdleState);
+            Debug.Log(gameObject.name + "Character Start");
+            Debug.Log(State);
         }
 
         public void Idle()
@@ -137,10 +140,11 @@ namespace Game.Gameplay
                 transform.position, transform.TransformDirection(Vector3.down), out hit,
                 0.5f, LayerMask.NameToLayer("Floor"));
 
+            Debug.Log("Current State: " + State);
             if (State.canMove == false) return;
 
-            Vector3 velocity = GetNavMeshAgent().velocity;
-            if (State.isAiming && GetNavMeshAgent().velocity.magnitude > float.Epsilon)
+            Vector3 velocity = Velocity;
+            if (State.isAiming && velocity.magnitude > float.Epsilon)
             {
                 // calculate angle of moving direction
                 float movingAngle = (velocity.x > 0 ? 1 : -1) *
@@ -157,7 +161,7 @@ namespace Game.Gameplay
                     Mathf.Sin(angle),
                     Mathf.Cos(angle), 1);
             }
-            else if (GetNavMeshAgent().velocity.magnitude > float.Epsilon)
+            else if (velocity.magnitude > float.Epsilon)
             {
                 GetCharacterAnimatior()?.SetMoveSpeed(
                     velocity.x,
@@ -194,12 +198,6 @@ namespace Game.Gameplay
 
             return _rigibody;
         }
-        public NavMeshAgent GetNavMeshAgent()
-        {
-            if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
-
-            return _navMeshAgent;
-        }
 
         private void OnDrawGizmosSelected()
         {
@@ -207,5 +205,11 @@ namespace Game.Gameplay
             Gizmos.DrawLine(transform.position, transform.forward * 3);
             Gizmos.DrawLine(transform.position, Vector3.down);
         }
+
+        public static readonly ICharacterState IdleState = new IdleState();
+        public static readonly ICharacterState AimState = new AimState();
+        public static readonly ICharacterState ThrowState = new ThrowState();
+        public static readonly ICharacterState DamagedState = new DamagedState();
+        public static readonly ICharacterState DeadState = new DeadState();
     }
 }

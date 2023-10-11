@@ -94,7 +94,6 @@ namespace Game.Gameplay
         private void HandleDieEvent()
         {
             isControllable = false;
-            bindedCharacter.GetNavMeshAgent().isStopped = true;
             StartCoroutine(DestoryCharacter());
         }
 
