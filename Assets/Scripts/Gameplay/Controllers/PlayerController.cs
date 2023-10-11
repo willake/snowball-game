@@ -96,8 +96,8 @@ namespace Game.Gameplay
             if (bindedCharacter == null) return;
             if (isControllable == false) return;
 
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
+            float horizontal = Input.GetAxis("Horizontal");
+            float vertical = Input.GetAxis("Vertical");
             if (Math.Abs(horizontal) > float.Epsilon || Math.Abs(vertical) > float.Epsilon)
             {
                 bindedCharacter.Move(horizontal, vertical);
