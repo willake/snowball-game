@@ -64,6 +64,7 @@ namespace Game.Gameplay
             {
                 faceCamera.cam = bindedCamera.GetComponent<Camera>();
             }
+            reloadBar.gameObject.SetActive(false);
         }
 
         private void SetupChargeBar()
@@ -74,6 +75,7 @@ namespace Game.Gameplay
             {
                 faceCamera.cam = bindedCamera.GetComponent<Camera>();
             }
+            chargeBar.gameObject.SetActive(false);
         }
 
         private void HandleDieEvent()
