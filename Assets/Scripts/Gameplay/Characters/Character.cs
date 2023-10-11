@@ -23,8 +23,8 @@ namespace Game.Gameplay
         public float MaxHealth { get; private set; }
 
         [Header("Settings")]
-        public float acc = 5f;
-        public float maxSpeed = 5f;
+        public float moveSpeed = 8f;
+        public float aimSpeed = 5f;
         public Vector3 currentVelocity { get { return GetRigidbody().velocity; } }
         public LayerMask GroundLayer;
 
@@ -62,16 +62,17 @@ namespace Game.Gameplay
         public void Move(float horizontal, float vertical)
         {
             if (State.canMove == false) return;
-            if (GetRigidbody().velocity.magnitude < maxSpeed)
-            {
-                GetRigidbody().AddForce(
-                 new Vector3(horizontal, 0, vertical) * acc, ForceMode.Force);
-            }
 
+            Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
             if (State.isAiming)
             {
+                GetRigidbody().velocity = direction * aimSpeed;
                 transform.rotation =
-                    Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
+                    Quaternion.LookRotation(direction);
+            }
+            else
+            {
+                GetRigidbody().velocity = direction * moveSpeed;
             }
         }
 
@@ -110,6 +111,7 @@ namespace Game.Gameplay
         public void Reload()
         {
             if (State.isReloading) return;
+            GetRigidbody().velocity = Vector3.zero;
             weaponHolder.Reload();
         }
 
