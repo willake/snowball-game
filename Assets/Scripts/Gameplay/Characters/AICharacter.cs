@@ -12,6 +12,9 @@ namespace Game.Gameplay
         private void Start()
         {
             dieEvent.AddListener(() => GetNavMeshAgent().isStopped = true);
+            weaponHolder.throwEvent.AddListener(() => GetNavMeshAgent().isStopped = true);
+            GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
+                () => GetNavMeshAgent().isStopped = false);
         }
         public float EstimateEnergyToPosition(Vector3 target)
         {
@@ -44,6 +47,7 @@ namespace Game.Gameplay
 
         public void MoveTo(Vector3 position)
         {
+            if (State.canMove == false) return;
             GetNavMeshAgent().SetDestination(position);
         }
 

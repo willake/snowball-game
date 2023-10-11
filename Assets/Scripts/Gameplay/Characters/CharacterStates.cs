@@ -14,6 +14,7 @@ namespace Game.Gameplay.CharacterStates
         // From: Move, Damaged, Throw
         // To: Move, Damaged, Dead, Hold
         public bool isAiming { get => false; }
+        public bool isDead { get => false; }
         public bool canMove { get => true; }
         public bool canThrow { get => true; }
         public bool canInterrupt { get => true; }
@@ -24,6 +25,7 @@ namespace Game.Gameplay.CharacterStates
         // From: Idle, Move, HoldMove
         // To: HoldMove, Damaged, Dead, Throw
         public bool isAiming { get => true; }
+        public bool isDead { get => false; }
         public bool canMove { get => true; }
         public bool canThrow { get => false; }
         public bool canInterrupt { get => true; }
@@ -34,6 +36,7 @@ namespace Game.Gameplay.CharacterStates
         // From: Hold, HoldMove
         // To: Idle, Dead
         public bool isAiming { get => true; }
+        public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
         public bool canInterrupt { get => false; }
@@ -44,6 +47,7 @@ namespace Game.Gameplay.CharacterStates
         // From: any
         // To: Idle
         public bool isAiming { get => false; }
+        public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
         public bool canInterrupt { get => false; }
@@ -54,6 +58,7 @@ namespace Game.Gameplay.CharacterStates
         // From: any
         // To: NaN
         public bool isAiming { get => false; }
+        public bool isDead { get => true; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
         public bool canInterrupt { get => false; }
@@ -64,6 +69,7 @@ namespace Game.Gameplay.CharacterStates
         // From: any
         // To: NaN
         public bool isAiming { get => false; }
+        public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
         public bool canInterrupt { get => true; }

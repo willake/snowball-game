@@ -66,7 +66,7 @@ namespace Game.Gameplay
 
         public void TakeDamage(float damage, Vector3 direction)
         {
-            if (State.canInterrupt == false) return;
+            if (State.isDead) return;
 
             health -= damage;
             healthUpdateEvent.Invoke(health, MaxHealth);
