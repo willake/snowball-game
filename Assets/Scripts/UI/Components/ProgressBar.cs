@@ -63,5 +63,10 @@ namespace Game.UI
                     .OnComplete(() => onComplated.Invoke());
             }
         }
+
+        private void OnDestroy()
+        {
+            _tween?.Kill();
+        }
     }
 }

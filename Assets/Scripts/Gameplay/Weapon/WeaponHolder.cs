@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
+using Game.Gameplay.WeaponHolderStates;
 
 namespace Game.Gameplay
 {
@@ -36,7 +37,7 @@ namespace Game.Gameplay
         }
         public float Energy { get; private set; }
 
-        public UnityEvent holdEvent = new();
+        public UnityEvent loadEvent = new();
         public UnityEvent throwEvent = new();
         public EnergyUpdateEvent energyUpdateEvent = new();
         public AmmoUpdateEvent ammoUpdateEvent = new();
@@ -44,24 +45,36 @@ namespace Game.Gameplay
         [Header("Property")]
         public Camp ownerCamp;
         public Snowball holdingWeapon;
+        public IWeaponHolderStates State { get; private set; }
 
         private Coroutine _runningCorotine = null;
+
+        private void Start()
+        {
+            State = WeaponHolderState.IdleState;
+        }
 
         public void UpdateAimDirection(Vector3 direction)
         {
             AimDirection = direction;
         }
 
-        public void Hold()
+        public bool Aim()
         {
+            if (State.shouldReload) return false;
+
             Energy = 0;
-            holdingWeapon.Hold();
+            holdingWeapon.Load();
             _runningCorotine = StartCoroutine(ChargeEnergy());
-            holdEvent.Invoke();
+            loadEvent.Invoke();
+            SetWeaponHolderState(WeaponHolderState.AimState);
+            return true;
         }
 
-        public void Throw()
+        public bool Throw()
         {
+            if (State.isAiming == false) return false;
+            // the ball is already on the hand, so no need to check anything
             if (_runningCorotine != null)
             {
                 StopCoroutine(_runningCorotine);
@@ -77,17 +90,23 @@ namespace Game.Gameplay
                 AimDirection.z * Mathf.Cos(pitch)
             );
 
-            if (holdingWeapon.Attack(shootDirection.normalized, Energy))
-            {
-                throwEvent.Invoke();
-                ammoUpdateEvent.Invoke(Ammo);
-            }
+            holdingWeapon.Attack(shootDirection.normalized, Energy);
+
+            throwEvent.Invoke();
+            ammoUpdateEvent.Invoke(Ammo);
+
+            if (Ammo <= 0) SetWeaponHolderState(WeaponHolderState.NeedReloadState);
+            else SetWeaponHolderState(WeaponHolderState.IdleState);
+
+            return true;
         }
 
         // for enemy AI
         public void ThrowWithoutCharging(float energy)
         {
-            holdingWeapon.Hold();
+            if (State.shouldReload) return;
+
+            holdingWeapon.Load();
 
             float pitch = throwingPitch * Mathf.Deg2Rad;
 
@@ -101,16 +120,19 @@ namespace Game.Gameplay
 
             holdingWeapon.Attack(shootDirection.normalized, energy);
             throwEvent.Invoke();
+
+            if (Ammo <= 0) SetWeaponHolderState(WeaponHolderState.NeedReloadState);
+            else SetWeaponHolderState(WeaponHolderState.IdleState);
         }
 
         public void Reload()
         {
-            bool success = holdingWeapon.Reload();
+            if (Ammo >= holdingWeapon.maxAmmo) return;
 
-            if (success)
-            {
-                ammoUpdateEvent.Invoke(holdingWeapon.maxAmmo);
-            }
+            holdingWeapon.Reload();
+
+            ammoUpdateEvent.Invoke(holdingWeapon.maxAmmo);
+            SetWeaponHolderState(WeaponHolderState.IdleState);
         }
 
         IEnumerator ChargeEnergy()
@@ -149,9 +171,14 @@ namespace Game.Gameplay
             }
         }
 
+        protected void SetWeaponHolderState(IWeaponHolderStates state)
+        {
+            State = state;
+        }
+
         private void OnDestroy()
         {
-            holdEvent.RemoveAllListeners();
+            loadEvent.RemoveAllListeners();
             throwEvent.RemoveAllListeners();
             energyUpdateEvent.RemoveAllListeners();
             ammoUpdateEvent.RemoveAllListeners();

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &85075525707472385
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5389384264681331714}
+  m_Layer: 7
+  m_Name: GroundDetector
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5389384264681331714
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85075525707472385}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.416, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3962904975810425267}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &543847078400989296
 GameObject:
   m_ObjectHideFlags: 0
@@ -402,7 +433,7 @@ MonoBehaviour:
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
   timeOutEnergy: 0.1
-  holdEvent:
+  loadEvent:
     m_PersistentCalls:
       m_Calls: []
   throwEvent:
@@ -1336,6 +1367,7 @@ Transform:
   - {fileID: 6413601681453333370}
   - {fileID: 7585977744877711984}
   - {fileID: 7973933188330058329}
+  - {fileID: 5389384264681331714}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &911837673999342245
@@ -1442,10 +1474,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4d0bcf8b56e5f468d787cc8143ae4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  groundDectector: {fileID: 5389384264681331714}
+  weaponHolder: {fileID: 7634809250427197494}
   health: 100
   acc: 7
   maxSpeed: 7
-  weaponHolder: {fileID: 7634809250427197494}
+  GroundLayer:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!195 &8639364480911027795
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1481,7 +1517,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwingAnimationTime: 0.5
+  damageAnimationTime: 0.5
   thorwEndedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  damageEndedEvent:
     m_PersistentCalls:
       m_Calls: []
 --- !u!1 &7304136909812816162

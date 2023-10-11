@@ -20,7 +20,9 @@ namespace Game.Gameplay
         private GameObject _poolObj;
         private Queue<SnowballProjectile> _projectilePool;
         private Queue<ParticleSystem> _onHitEffectPool;
-        private SnowballProjectile _holdingProjectile;
+        private SnowballProjectile _loadedProjectile;
+
+        public bool isLoaded { get; private set; }
 
         private void Start()
         {
@@ -55,44 +57,45 @@ namespace Game.Gameplay
             Ammo = maxAmmo;
         }
 
-        public void Hold()
+        public void Load()
         {
             if (Ammo <= 0) return;
+            if (isLoaded) return;
 
             // pop a snowball
-            _holdingProjectile = _projectilePool.Dequeue();
-            _holdingProjectile.transform.position = this.transform.position;
+            _loadedProjectile = _projectilePool.Dequeue();
+            _loadedProjectile.transform.position = this.transform.position;
             // _holdingProjectile.gameObject.layer = projectileLayer;
-            _holdingProjectile.GetRigidbody().velocity = Vector3.zero;
-            _holdingProjectile.GetRigidbody().useGravity = false;
-            _holdingProjectile.gameObject.SetActive(true);
+            _loadedProjectile.GetRigidbody().velocity = Vector3.zero;
+            _loadedProjectile.GetRigidbody().useGravity = false;
+            _loadedProjectile.gameObject.SetActive(true);
+
+            isLoaded = true;
+            Ammo -= 1;
         }
 
         public override bool Attack(Vector3 direction, float energy)
         {
-            if (Ammo <= 0 || _holdingProjectile == null) return false;
+            if (isLoaded == false) return false;
 
-            // TODO: snowball mechanic
-            _holdingProjectile.GetRigidbody().useGravity = true;
-            _holdingProjectile.GetRigidbody().AddForce(
+            _loadedProjectile.GetRigidbody().useGravity = true;
+            _loadedProjectile.GetRigidbody().AddForce(
                 direction * energy * energyMultiplier, ForceMode.Impulse);
 
             // activate auto disabled
 
-            _projectilePool.Enqueue(_holdingProjectile);
-            _holdingProjectile = null;
-            Ammo -= 1;
+            _projectilePool.Enqueue(_loadedProjectile);
+            _loadedProjectile = null;
+            isLoaded = false;
+
             return true;
         }
 
-        public override bool Reload()
+        public override void Reload()
         {
-            if (Ammo >= maxAmmo) return false;
-
-            // TODO: add reload time and play animation
+            if (Ammo >= maxAmmo) return;
 
             Ammo = maxAmmo;
-            return true;
         }
 
         public void PlayOnHitEffect(Vector3 position, Vector3 velocity)
@@ -110,9 +113,9 @@ namespace Game.Gameplay
 
         private void Update()
         {
-            if (_holdingProjectile)
+            if (_loadedProjectile)
             {
-                _holdingProjectile.transform.position = this.transform.position;
+                _loadedProjectile.transform.position = this.transform.position;
             }
         }
 

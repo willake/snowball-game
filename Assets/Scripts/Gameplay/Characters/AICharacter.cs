@@ -1,9 +1,21 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Game.Gameplay
 {
     public class AICharacter : Character
     {
+        public override Vector3 Velocity => GetNavMeshAgent() ? GetNavMeshAgent().velocity : Vector3.zero;
+
+        private NavMeshAgent _navMeshAgent;
+
+        private void Start()
+        {
+            dieEvent.AddListener(() => GetNavMeshAgent().isStopped = true);
+            weaponHolder.throwEvent.AddListener(() => GetNavMeshAgent().isStopped = true);
+            GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
+                () => GetNavMeshAgent().isStopped = false);
+        }
         public float EstimateEnergyToPosition(Vector3 target)
         {
             float gravity = Physics.gravity.magnitude;
@@ -33,32 +45,17 @@ namespace Game.Gameplay
             return finalVelocity.magnitude;
         }
 
-        public void ThrowWithoutCharging(float energy)
+        public void MoveTo(Vector3 position)
         {
-            weaponHolder.ThrowWithoutCharging(energy);
+            if (State.canMove == false) return;
+            GetNavMeshAgent().SetDestination(position);
         }
 
-        private void Update()
+        public NavMeshAgent GetNavMeshAgent()
         {
-            if (GetNavMeshAgent().velocity.magnitude > float.Epsilon)
-            {
-                Vector3 velocity = GetNavMeshAgent().velocity;
-                GetCharacterAnimatior()?.SetMoveSpeed(
-                    velocity.x,
-                    velocity.z, 1);
-                if (isAiming == false && isThrowing == false)
-                {
-                    // transform.rotation =
-                    //     Quaternion.LookRotation(new Vector3(
-                    //         velocity.x, 0, velocity.z));
-                }
-            }
-            else
-            {
-                GetCharacterAnimatior()?.SetMoveSpeed(
-                    0,
-                    0, 0);
-            }
+            if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
+
+            return _navMeshAgent;
         }
     }
 }

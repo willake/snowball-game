@@ -1,17 +1,19 @@
 using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
+using Game.Gameplay.CharacterStates;
 
 namespace Game.Gameplay
 {
-    public class Character : MonoBehaviour
+    public abstract class Character : MonoBehaviour
     {
         private CharacterAnimatior _characterAnimator;
-        private NavMeshAgent _navMeshAgent;
         private Rigidbody _rigibody;
+
+        [Header("References")]
+        public Transform groundDectector;
+        public WeaponHolder weaponHolder;
 
         [Header("Status")]
         public float health = 100;
@@ -23,81 +25,70 @@ namespace Game.Gameplay
         public float acc = 5f;
         public float maxSpeed = 5f;
         public Vector3 currentVelocity { get { return GetRigidbody().velocity; } }
+        public LayerMask GroundLayer;
 
-        [Header("Weapons")]
-        public WeaponHolder weaponHolder;
-
-        public bool isAiming { get; private set; }
         public bool isGrounded { get; private set; }
-        public bool isThrowing { get; private set; }
+        public ICharacterState State { get; private set; }
+        public abstract Vector3 Velocity { get; }
 
-        private void Start()
+        private void Awake()
         {
             MaxHealth = health;
-            weaponHolder.throwEvent.AddListener(HandleThrowEvent);
-            GetCharacterAnimatior()?.thorwEndedEvent.AddListener(HandleThrowEndedEvent);
-        }
+            weaponHolder.throwEvent.AddListener(() => SetCharacterState(CharacterState.ThrowState));
+            GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
+                () => SetCharacterState(CharacterState.IdleState));
+            GetCharacterAnimatior()?.damageEndedEvent.AddListener(
+                () => SetCharacterState(CharacterState.IdleState));
 
-        public void SetIsAiming(bool isAiming)
-        {
-            this.isAiming = isAiming;
-            GetCharacterAnimatior()?.SetIsAiming(isAiming);
+            SetCharacterState(CharacterState.IdleState);
         }
 
         public void Idle()
         {
             GetRigidbody().velocity = new Vector3(0, GetRigidbody().velocity.y, 0);
-            GetCharacterAnimatior()?.SetMoveSpeed(0, 0, 0);
         }
 
         public void Move(float horizontal, float vertical)
         {
+            if (State.canMove == false) return;
             if (GetRigidbody().velocity.magnitude < maxSpeed)
             {
                 GetRigidbody().AddForce(
                  new Vector3(horizontal, 0, vertical) * acc, ForceMode.Force);
-
-                // calculate angle of moving direction
-                float movingAngle = (horizontal > 0 ? 1 : -1) *
-                    Vector2.Angle(new Vector2(0, 1), new Vector2(horizontal, vertical));
-                // calculate angle of facing direction
-                Vector2 forward = new Vector2(transform.forward.x, transform.forward.z);
-                float facingAngle = (transform.forward.x > 0 ? 1 : -1) * Vector2.Angle(new Vector2(0, 1), forward);
-                float angle = (movingAngle - facingAngle) * Mathf.Deg2Rad;
-                // Debug.Log($"Facing Angle: {facingAngle}, Moving Angle: {movingAngle}, Angle: {(facingAngle - movingAngle)}");
-                GetCharacterAnimatior()?.SetMoveSpeed(
-                    Mathf.Sin(angle),
-                    Mathf.Cos(angle), 1);
             }
 
-            if (isAiming == false && isThrowing == false)
+            if (State.isAiming)
             {
                 transform.rotation =
                     Quaternion.LookRotation(new Vector3(horizontal, 0, vertical));
             }
         }
 
-        public void MoveTo(Vector3 position)
+        public void TakeDamage(float damage, Vector3 direction)
         {
-            GetNavMeshAgent().SetDestination(position);
-        }
+            if (State.isDead) return;
 
-        public void TakeDamage(float damage)
-        {
             health -= damage;
+            healthUpdateEvent.Invoke(health, MaxHealth);
 
             if (health < float.Epsilon)
             {
                 health = 0f;
                 dieEvent.Invoke();
-                GetCharacterAnimatior()?.TriggerDead();
+                SetCharacterState(CharacterState.DeadState);
             }
             else
             {
-                GetCharacterAnimatior()?.TriggerDamage();
+                SetCharacterState(CharacterState.DamagedState);
             }
 
-            healthUpdateEvent.Invoke(health, MaxHealth);
+            if (State.isAiming)
+            {
+                ThrowWithoutCharging(1f);
+            }
+
+            transform.rotation =
+                    Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z) * -1);
         }
 
         public void Reload()
@@ -105,7 +96,7 @@ namespace Game.Gameplay
             weaponHolder.Reload();
         }
 
-        public void Aim(Vector3 direction, bool useFoward = true)
+        public void UpdateAimDirection(Vector3 direction, bool useFoward = true)
         {
             float angle = (float)Math.Atan2(direction.x, direction.y);
             transform.rotation = Quaternion.Euler(
@@ -114,36 +105,76 @@ namespace Game.Gameplay
             weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
         }
 
+        public void ThrowWithoutCharging(float energy)
+        {
+            if (State.canThrow == false) return;
+            weaponHolder.ThrowWithoutCharging(energy);
+        }
+
+        protected void SetCharacterState(ICharacterState state)
+        {
+            State = state;
+
+            if (state == CharacterState.DamagedState)
+            {
+                GetCharacterAnimatior()?.TriggerDamage();
+            }
+
+            if (state == CharacterState.DeadState)
+            {
+                GetCharacterAnimatior()?.TriggerDead();
+            }
+
+            if (state == CharacterState.ThrowState)
+            {
+                GetCharacterAnimatior()?.TriggerThrow();
+            }
+
+            GetCharacterAnimatior()?.SetIsAiming(state == CharacterState.AimState);
+        }
+
         private void Update()
         {
             RaycastHit hit;
-            if (Physics.Raycast(
-                transform.position, transform.TransformDirection(Vector3.down), out hit, 0.5f, LayerMask.NameToLayer("Floor")))
+            isGrounded = Physics.Raycast(
+                groundDectector.position, Vector3.down, out hit,
+                0.5f, GroundLayer);
+
+            if (State.canMove == false) return;
+
+            Vector3 velocity = Velocity;
+            bool isMoving = new Vector2(velocity.normalized.x, velocity.normalized.z).magnitude > float.Epsilon;
+            if (State.isAiming && isMoving)
             {
-                isGrounded = true;
+                // calculate angle of moving direction
+                float movingAngle = (velocity.x > 0 ? 1 : -1) *
+                    Vector2.Angle(
+                        new Vector2(0, 1),
+                        new Vector2(velocity.normalized.x, velocity.normalized.z)
+                    );
+                // calculate angle of facing direction
+                Vector2 forward = new Vector2(transform.forward.x, transform.forward.z);
+                float facingAngle = (transform.forward.x > 0 ? 1 : -1) * Vector2.Angle(new Vector2(0, 1), forward);
+                // calculate realative moving angle of facing direction
+                float angle = (movingAngle - facingAngle) * Mathf.Deg2Rad;
+                GetCharacterAnimatior()?.SetMoveSpeed(
+                    Mathf.Sin(angle),
+                    Mathf.Cos(angle), 1);
+            }
+            else if (isMoving)
+            {
+                GetCharacterAnimatior()?.SetMoveSpeed(
+                    velocity.normalized.x,
+                    velocity.normalized.z, 1);
+                transform.rotation =
+                        Quaternion.LookRotation(new Vector3(velocity.normalized.x, 0, velocity.normalized.z));
             }
             else
             {
-                isGrounded = false;
+                GetCharacterAnimatior()?.SetMoveSpeed(
+                    0,
+                    0, 0);
             }
-        }
-
-        public void HandleThrowEvent()
-        {
-            GetCharacterAnimatior()?.TriggerThrow();
-            isThrowing = true;
-        }
-
-        public void HandleThrowEndedEvent()
-        {
-            isThrowing = false;
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.green;
-            Gizmos.DrawLine(transform.position, transform.forward * 3);
-            Gizmos.DrawLine(transform.position, Vector3.down);
         }
 
         private void OnDestroy()
@@ -168,11 +199,12 @@ namespace Game.Gameplay
             return _rigibody;
         }
 
-        public NavMeshAgent GetNavMeshAgent()
+        private void OnDrawGizmosSelected()
         {
-            if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
-
-            return _navMeshAgent;
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward * 3);
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(groundDectector.position, groundDectector.position + Vector3.down * 0.5f);
         }
     }
 }

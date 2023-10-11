@@ -1,17 +1,25 @@
 using UnityEngine;
+using Game.Gameplay.CharacterStates;
 
 namespace Game.Gameplay
 {
     public class PlayerCharacter : Character
     {
-        public void Hold()
+        public override Vector3 Velocity => GetRigidbody() ? GetRigidbody().velocity : Vector3.zero;
+        public void Aim()
         {
-            weaponHolder.Hold();
+            if (isGrounded == false && State.canThrow == false) return;
+            weaponHolder.Aim();
+            SetCharacterState(CharacterState.AimState);
         }
 
-        public void Throw()
+        public void TryThrow()
         {
-            weaponHolder.Throw();
+            // haven't really throw yet, show do not set state
+            if (State.isAiming)
+            {
+                weaponHolder.Throw();
+            }
         }
     }
 }

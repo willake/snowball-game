@@ -10,10 +10,13 @@ namespace Game.Gameplay
 
         [Header("Settings")]
         public float throwingAnimationTime = 0.5f;
+        public float damageAnimationTime = 0.5f;
 
         public UnityEvent thorwEndedEvent = new();
+        public UnityEvent damageEndedEvent = new();
 
         private Coroutine _throwCoroutine = null;
+        private Coroutine _damageCoroutine = null;
 
 
         private Animator GetAnimator()
@@ -50,6 +53,13 @@ namespace Game.Gameplay
         public void TriggerDamage()
         {
             GetAnimator().SetTrigger("Damage");
+
+            if (_damageCoroutine != null)
+            {
+                StopCoroutine(_damageCoroutine);
+                _damageCoroutine = null;
+            }
+            _damageCoroutine = StartCoroutine(CountDownDamageAnimation());
         }
 
         public void TriggerDead()
@@ -61,6 +71,12 @@ namespace Game.Gameplay
         {
             yield return new WaitForSecondsRealtime(throwingAnimationTime);
             thorwEndedEvent.Invoke();
+        }
+
+        IEnumerator CountDownDamageAnimation()
+        {
+            yield return new WaitForSecondsRealtime(damageAnimationTime);
+            damageEndedEvent.Invoke();
         }
 
         private void OnDestroy()

@@ -31,6 +31,6 @@ namespace Game.Gameplay
             }
         }
         public abstract bool Attack(Vector3 direction, float energy);
-        public abstract bool Reload();
+        public abstract void Reload();
     }
 }

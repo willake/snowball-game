@@ -70,7 +70,7 @@ namespace Game.Gameplay
 
         protected void ChasePlayer()
         {
-            bindedCharacter.MoveTo(statePlayerPos.value);
+            GetAICharacter().MoveTo(statePlayerPos.value);
         }
 
         protected void AttackPlayer()
@@ -82,7 +82,7 @@ namespace Game.Gameplay
             }
 
             Vector3 direction = statePlayerPos.value - transform.position;
-            bindedCharacter.Aim(direction.normalized, false);
+            bindedCharacter.UpdateAimDirection(direction.normalized, false);
 
             float energy = GetAICharacter().EstimateEnergyToPosition(statePlayerPos.value);
             GetAICharacter().ThrowWithoutCharging(energy);
@@ -94,7 +94,6 @@ namespace Game.Gameplay
         private void HandleDieEvent()
         {
             isControllable = false;
-            bindedCharacter.GetNavMeshAgent().isStopped = true;
             StartCoroutine(DestoryCharacter());
         }
 
