@@ -18,13 +18,21 @@ namespace Game.UI
             btnPlay
                 .OnClickObservable
                 .ObserveOnMainThread()
-                .Subscribe(_ => GoLevelSelect())
+                .Subscribe(_ =>
+                {
+                    UIManager.instance.Prev();
+                    UIManager.instance.OpenUI(AvailableUI.LevelSelectPanel);
+                })
                 .AddTo(this);
 
             btnSettings
                 .OnClickObservable
                 .ObserveOnMainThread()
-                .Subscribe(_ => { })
+                .Subscribe(_ =>
+                {
+                    UIManager.instance.Prev();
+                    UIManager.instance.OpenUI(AvailableUI.SettingsPanel);
+                })
                 .AddTo(this);
 
             btnExit
@@ -68,12 +76,6 @@ namespace Game.UI
         {
             gameObject.SetActive(false);
             await UniTask.CompletedTask;
-        }
-
-        private void GoLevelSelect()
-        {
-            UIManager.instance.Prev();
-            UIManager.instance.OpenUI(AvailableUI.LevelSelectPanel);
         }
     }
 }

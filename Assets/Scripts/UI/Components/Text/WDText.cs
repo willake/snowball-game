@@ -6,16 +6,16 @@ namespace Game.UI
 {
     public class WDText : MonoBehaviour
     {
-        public TextMeshProUGUI textMesh;
+        private TextMeshProUGUI _textMesh;
         public string text
         {
             set
             {
-                textMesh.text = value;
+                GetTextMeshProUGUI().text = value;
             }
             get
             {
-                return textMesh.text;
+                return GetTextMeshProUGUI().text;
             }
         }
 
@@ -23,12 +23,18 @@ namespace Game.UI
         {
             set
             {
-                textMesh.color = value;
+                GetTextMeshProUGUI().color = value;
             }
             get
             {
-                return textMesh.color;
+                return GetTextMeshProUGUI().color;
             }
+        }
+
+        private TextMeshProUGUI GetTextMeshProUGUI()
+        {
+            if (_textMesh == null) _textMesh = GetComponent<TextMeshProUGUI>();
+            return _textMesh;
         }
     }
 }
