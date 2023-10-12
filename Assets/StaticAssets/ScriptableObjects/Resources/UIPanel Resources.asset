@@ -17,3 +17,4 @@ MonoBehaviour:
   pausePanel: {fileID: 7863950439982282695, guid: b6b35d09c95c8a644a8ac236e39d17c3, type: 3}
   endGamePanel: {fileID: 8722227121731769291, guid: 646e05e62c40e5a459b3152dd444ef9a, type: 3}
   levelSelectPanel: {fileID: 5952261982807876208, guid: 26cc4838c92b8fb4b9ed802316eb5e26, type: 3}
+  settingsPanel: {fileID: 8961320636660114426, guid: 6e3c34d090efa2f46976735dfbd88631, type: 3}
