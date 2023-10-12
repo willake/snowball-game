@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 622242237083120548}
+  textMesh: {fileID: 0}
 --- !u!114 &622242237083120548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +485,7 @@ MonoBehaviour:
   playAnimation: 1
   animator: {fileID: 3209454098146015139}
   _isInteractable: 1
-  text: {fileID: 2999725777390109227}
+  wdtext: {fileID: 0}
 --- !u!114 &3209454098146015139
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -498,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de677b24f104a3a4d93afdfd73f1cb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scale: 1.1
 --- !u!114 &7742981239199796662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -574,7 +575,7 @@ MonoBehaviour:
   playAnimation: 1
   animator: {fileID: 3995037272522054114}
   _isInteractable: 1
-  text: {fileID: 7940123456068381448}
+  wdtext: {fileID: 0}
 --- !u!114 &3995037272522054114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -587,6 +588,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de677b24f104a3a4d93afdfd73f1cb88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scale: 1.1
 --- !u!114 &5074532437535404355
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,7 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 8907575271607173075}
+  textMesh: {fileID: 0}
 --- !u!114 &8907575271607173075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,7 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: {fileID: 433058265747976084}
+  textMesh: {fileID: 0}
 --- !u!114 &433058265747976084
 MonoBehaviour:
   m_ObjectHideFlags: 0
