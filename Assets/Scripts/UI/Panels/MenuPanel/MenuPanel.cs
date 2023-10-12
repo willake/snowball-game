@@ -11,6 +11,7 @@ namespace Game.UI
         [Header("References")]
         public WDTextButton btnPlay;
         public WDTextButton btnSettings;
+        public WDTextButton btnExit;
 
         private void Start()
         {
@@ -25,13 +26,20 @@ namespace Game.UI
                 .ObserveOnMainThread()
                 .Subscribe(_ => { })
                 .AddTo(this);
+
+            btnExit
+                .OnClickObservable
+                .ObserveOnMainThread()
+                .Subscribe(_ => GameManager.instance.ExitGame())
+                .AddTo(this);
         }
 
         public override WDButton[] GetSelectableButtons()
         {
             return new WDButton[] {
                 btnPlay,
-                btnSettings
+                btnSettings,
+                btnExit
             };
         }
 
