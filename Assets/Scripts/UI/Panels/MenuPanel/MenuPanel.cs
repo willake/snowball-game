@@ -72,6 +72,7 @@ namespace Game.UI
 
         private void GoLevelSelect()
         {
+            UIManager.instance.Prev();
             UIManager.instance.OpenUI(AvailableUI.LevelSelectPanel);
         }
     }

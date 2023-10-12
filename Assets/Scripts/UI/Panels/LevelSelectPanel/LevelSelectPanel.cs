@@ -88,6 +88,7 @@ namespace Game.UI
         private void BackToMenu()
         {
             UIManager.instance.Prev();
+            UIManager.instance.OpenUI(AvailableUI.MenuPanel);
         }
 
         private void LoadLevel(int level)
@@ -109,12 +110,6 @@ namespace Game.UI
                     break;
             }
             GameManager.instance.SwitchScene(AvailableScene.MainGame);
-        }
-
-        public enum EndGameState
-        {
-            Win,
-            Lose
         }
     }
 }
