@@ -428,7 +428,7 @@ MonoBehaviour:
   socket: {fileID: 2341003306908356899}
   isDebugLogEnabled: 0
   throwingPitch: 2
-  minEnergy: 0
+  minEnergy: 5
   maxEnergy: 100
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
@@ -1464,9 +1464,10 @@ MonoBehaviour:
   bindedCharacter: {fileID: 1208598932709540589}
   statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   healthBar: {fileID: 2893815207864912696}
-  sightRange: 6
-  attackRange: 4
-  attackDelayInSeconds: 1.2
+  sightRange: 10
+  attackRange: 8
+  minAttackDelayInSeconds: 0.5
+  maxAttackDelayInSeconds: 1.2
   patrolPoints: []
   walkPointRange: 0
   minAttackIntervalInSeconds: 1
