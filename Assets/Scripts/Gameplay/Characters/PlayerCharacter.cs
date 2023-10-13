@@ -13,6 +13,13 @@ namespace Game.Gameplay
             SetCharacterState(CharacterState.AimState);
         }
 
+        public void Reload()
+        {
+            if (State.canReload == false || State.isReloading) return;
+            GetRigidbody().velocity = Vector3.zero;
+            weaponHolder.Reload();
+        }
+
         public void TryThrow()
         {
             // haven't really throw yet, show do not set state

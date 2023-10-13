@@ -19,6 +19,7 @@ namespace Game.Gameplay.CharacterStates
         public bool isDead { get => false; }
         public bool canMove { get => true; }
         public bool canThrow { get => true; }
+        public bool canReload { get => true; }
         public bool canInterrupt { get => true; }
     }
 
@@ -31,6 +32,7 @@ namespace Game.Gameplay.CharacterStates
         public bool isDead { get => false; }
         public bool canMove { get => true; }
         public bool canThrow { get => false; }
+        public bool canReload { get => false; }
         public bool canInterrupt { get => true; }
     }
 
@@ -43,6 +45,7 @@ namespace Game.Gameplay.CharacterStates
         public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
+        public bool canReload { get => false; }
         public bool canInterrupt { get => false; }
     }
 
@@ -55,6 +58,7 @@ namespace Game.Gameplay.CharacterStates
         public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
+        public bool canReload { get => false; }
         public bool canInterrupt { get => false; }
     }
 
@@ -67,6 +71,7 @@ namespace Game.Gameplay.CharacterStates
         public bool isDead { get => true; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
+        public bool canReload { get => false; }
         public bool canInterrupt { get => false; }
     }
 
@@ -79,6 +84,7 @@ namespace Game.Gameplay.CharacterStates
         public bool isDead { get => false; }
         public bool canMove { get => false; }
         public bool canThrow { get => false; }
+        public bool canReload { get => false; }
         public bool canInterrupt { get => true; }
     }
 }
