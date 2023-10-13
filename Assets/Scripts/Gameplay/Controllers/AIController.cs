@@ -89,11 +89,13 @@ namespace Game.Gameplay
 
         protected void AttackPlayer()
         {
+            if (bindedCharacter.State.canThrow == false) return;
             if (Time.time - _lastAttackTime < _nextAttackInterval) return;
-            // if (bindedCharacter.weaponHolder.Ammo <= 0)
-            // {
-            //     bindedCharacter.Reload();
-            // } 
+            if (bindedCharacter.weaponHolder.Ammo <= 0)
+            {
+                bindedCharacter.Reload();
+                return;
+            }
             GetAICharacter().Aim();
 
             float attackDelay = Random.Range(minAttackDelayInSeconds, maxAttackDelayInSeconds);
