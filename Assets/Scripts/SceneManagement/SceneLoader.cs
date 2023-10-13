@@ -5,11 +5,17 @@ using UnityEngine.SceneManagement;
 using WillakeD.ScenePropertyDrawler;
 using System;
 using UnityEngine.Events;
+using UnityEditorInternal;
+using Game.UI;
+using System.Threading;
 
 namespace Game
 {
     public class SceneLoader : MonoBehaviour
     {
+        [Header("References")]
+        public Camera crossSceneCamera;
+        public TransitionPanel transitionPanel;
         private string _currentScene = string.Empty;
 
         public OnLoadSceneEvent onLoadScene = new OnLoadSceneEvent();
@@ -29,9 +35,15 @@ namespace Game
             string sceneName = GetSceneName(scene);
 
             onLoadScene.Invoke(sceneName);
+            await transitionPanel.OpenAsync();
+            crossSceneCamera.enabled = true;
 
             await LoadScene(sceneName);
 
+            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+
+            await transitionPanel.CloseAsync();
+            crossSceneCamera.enabled = false;
             onSceneLoaded.Invoke(sceneName);
         }
 
