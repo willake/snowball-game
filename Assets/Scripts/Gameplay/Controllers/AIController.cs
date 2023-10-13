@@ -49,16 +49,6 @@ namespace Game.Gameplay
             isControllable = true;
         }
 
-
-        private void Update()
-        {
-            if (bindedCharacter.State.isAiming)
-            {
-                Vector3 direction = statePlayerPos.value - transform.position;
-                bindedCharacter.UpdateAimDirection(direction.normalized, false);
-            }
-        }
-
         protected void Patroling()
         {
             if (patrolPoints.Length == 0) return;
