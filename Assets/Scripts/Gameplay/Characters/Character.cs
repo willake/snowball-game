@@ -108,13 +108,6 @@ namespace Game.Gameplay
                     Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z) * -1);
         }
 
-        public void Reload()
-        {
-            if (State.canReload == false || State.isReloading) return;
-            GetRigidbody().velocity = Vector3.zero;
-            weaponHolder.Reload();
-        }
-
         public void UpdateAimDirection(Vector3 direction, bool useFoward = true)
         {
             float angle = (float)Math.Atan2(direction.x, direction.y);

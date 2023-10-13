@@ -121,7 +121,7 @@ namespace Game.Gameplay
 
             if (Input.GetKeyDown(KeyCode.R))
             {
-                bindedCharacter.Reload();
+                GetPlayerCharacter().Reload();
             }
 
             if (bindedCharacter.State.isAiming)

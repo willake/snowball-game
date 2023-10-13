@@ -12,10 +12,17 @@ namespace Game.Gameplay
 
         private void Start()
         {
-            dieEvent.AddListener(() => GetNavMeshAgent().isStopped = true);
-            weaponHolder.throwEvent.AddListener(() => GetNavMeshAgent().isStopped = true);
+            dieEvent.AddListener(() => SetMovementEnabled(false));
+            weaponHolder.throwEvent.AddListener(() => SetMovementEnabled(false));
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
-                () => GetNavMeshAgent().isStopped = false);
+                () => SetMovementEnabled(true));
+            weaponHolder.reloadStartEvent.AddListener(() => SetMovementEnabled(false));
+            weaponHolder.reloadEndEvent.AddListener(() => SetMovementEnabled(true));
+        }
+
+        public void SetMovementEnabled(bool isEnabled)
+        {
+            GetNavMeshAgent().isStopped = !isEnabled;
         }
 
         public void Aim()
@@ -23,6 +30,12 @@ namespace Game.Gameplay
             if (isGrounded == false || State.canThrow == false) return;
             weaponHolder.AimWithoutCharging();
             SetCharacterState(CharacterState.AimState);
+        }
+
+        public void Reload()
+        {
+            if (State.canReload == false || State.isReloading) return;
+            weaponHolder.Reload();
         }
 
         public float EstimateEnergyToPosition(Vector3 target)

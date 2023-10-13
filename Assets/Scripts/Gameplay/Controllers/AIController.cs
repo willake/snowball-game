@@ -93,7 +93,7 @@ namespace Game.Gameplay
             if (Time.time - _lastAttackTime < _nextAttackInterval) return;
             if (bindedCharacter.weaponHolder.Ammo <= 0)
             {
-                bindedCharacter.Reload();
+                GetAICharacter().Reload();
                 return;
             }
             GetAICharacter().Aim();
