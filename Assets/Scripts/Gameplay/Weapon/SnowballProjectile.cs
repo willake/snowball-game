@@ -15,6 +15,7 @@ namespace Game.Gameplay
         public OnHitEvent onHitEvent = new();
 
         private Rigidbody _rig;
+        private Collider _collider;
 
         public void SetOwnerCamp(Camp camp)
         {
@@ -73,6 +74,12 @@ namespace Game.Gameplay
             if (_rig == null) _rig = GetComponent<Rigidbody>();
 
             return _rig;
+        }
+
+        public Collider GetCollider()
+        {
+            if (_collider == null) _collider = GetComponent<Collider>();
+            return _collider;
         }
 
 

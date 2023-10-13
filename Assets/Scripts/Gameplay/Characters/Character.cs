@@ -85,7 +85,7 @@ namespace Game.Gameplay
 
             if (State.isAiming)
             {
-                ThrowWithoutCharging(1f);
+                Throw(1f);
             }
 
             if (State.isReloading)
@@ -124,10 +124,13 @@ namespace Game.Gameplay
             weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
         }
 
-        public void ThrowWithoutCharging(float energy)
+        public void Throw(float energy)
         {
-            if (State.canThrow == false) return;
-            weaponHolder.ThrowWithoutCharging(energy);
+            if (State.isAiming)
+            {
+                Debug.Log($"{gameObject.name} Throw");
+                weaponHolder.Throw(energy);
+            }
         }
 
         protected void SetCharacterState(ICharacterState state)

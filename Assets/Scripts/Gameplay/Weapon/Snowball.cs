@@ -67,7 +67,8 @@ namespace Game.Gameplay
             _loadedProjectile.transform.position = this.transform.position;
             // _holdingProjectile.gameObject.layer = projectileLayer;
             _loadedProjectile.GetRigidbody().velocity = Vector3.zero;
-            _loadedProjectile.GetRigidbody().useGravity = false;
+            _loadedProjectile.GetRigidbody().isKinematic = true;
+            _loadedProjectile.GetCollider().enabled = false;
             _loadedProjectile.EnableTrail(false);
             _loadedProjectile.gameObject.SetActive(true);
 
@@ -80,7 +81,8 @@ namespace Game.Gameplay
             if (isLoaded == false) return false;
 
             _loadedProjectile.EnableTrail(true);
-            _loadedProjectile.GetRigidbody().useGravity = true;
+            _loadedProjectile.GetRigidbody().isKinematic = false;
+            _loadedProjectile.GetCollider().enabled = true;
             _loadedProjectile.GetRigidbody().AddForce(
                 direction * energy * energyMultiplier, ForceMode.Impulse);
 

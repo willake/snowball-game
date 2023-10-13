@@ -406,7 +406,7 @@ Transform:
   m_GameObject: {fileID: 1592090928801506802}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.31, y: 0.5, z: 0.7}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1466,6 +1466,7 @@ MonoBehaviour:
   healthBar: {fileID: 2893815207864912696}
   sightRange: 6
   attackRange: 4
+  attackDelayInSeconds: 1.2
   patrolPoints: []
   walkPointRange: 0
   minAttackIntervalInSeconds: 1
@@ -1485,8 +1486,8 @@ MonoBehaviour:
   groundDectector: {fileID: 5389384264681331714}
   weaponHolder: {fileID: 7634809250427197494}
   health: 100
-  acc: 7
-  maxSpeed: 7
+  moveSpeed: 8
+  aimSpeed: 5
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8

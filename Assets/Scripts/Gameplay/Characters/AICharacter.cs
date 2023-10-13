@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Game.Gameplay.CharacterStates;
 
 namespace Game.Gameplay
 {
@@ -16,6 +17,14 @@ namespace Game.Gameplay
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => GetNavMeshAgent().isStopped = false);
         }
+
+        public void Aim()
+        {
+            if (isGrounded == false || State.canThrow == false) return;
+            weaponHolder.AimWithoutCharging();
+            SetCharacterState(CharacterState.AimState);
+        }
+
         public float EstimateEnergyToPosition(Vector3 target)
         {
             float gravity = Physics.gravity.magnitude;

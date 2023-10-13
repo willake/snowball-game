@@ -77,42 +77,32 @@ namespace Game.Gameplay
             return true;
         }
 
+        public bool AimWithoutCharging()
+        {
+            if (State.shouldReload) return false;
+
+            Energy = 0;
+            holdingWeapon.Load();
+            loadEvent.Invoke();
+            SetWeaponHolderState(WeaponHolderState.AimState);
+            return true;
+        }
+
         public bool Throw()
         {
+            return Throw(Energy);
+        }
+
+        // for enemy AI
+        public bool Throw(float energy)
+        {
             if (State.isAiming == false) return false;
-            // the ball is already on the hand, so no need to check anything
+
             if (_chargingCorotine != null)
             {
                 StopCoroutine(_chargingCorotine);
             }
-
             _chargingCorotine = null;
-
-            float pitch = throwingPitch * Mathf.Deg2Rad;
-
-            Vector3 shootDirection = new Vector3(
-                AimDirection.x * Mathf.Cos(pitch),
-                Mathf.Sin(pitch),
-                AimDirection.z * Mathf.Cos(pitch)
-            );
-
-            holdingWeapon.Attack(shootDirection.normalized, Energy);
-
-            throwEvent.Invoke();
-            ammoUpdateEvent.Invoke(Ammo);
-
-            if (Ammo <= 0) SetWeaponHolderState(WeaponHolderState.NeedReloadState);
-            else SetWeaponHolderState(WeaponHolderState.IdleState);
-
-            return true;
-        }
-
-        // for enemy AI
-        public void ThrowWithoutCharging(float energy)
-        {
-            if (State.shouldReload) return;
-
-            holdingWeapon.Load();
 
             float pitch = throwingPitch * Mathf.Deg2Rad;
 
@@ -129,6 +119,8 @@ namespace Game.Gameplay
 
             if (Ammo <= 0) SetWeaponHolderState(WeaponHolderState.NeedReloadState);
             else SetWeaponHolderState(WeaponHolderState.IdleState);
+
+            return true;
         }
 
         public void Reload()
