@@ -7,6 +7,7 @@ namespace Game.UI
         PausePanel,
         EndGamePanel,
         LevelSelectPanel,
-        SettingsPanel
+        SettingsPanel,
+        TransitionPanel
     }
 }
