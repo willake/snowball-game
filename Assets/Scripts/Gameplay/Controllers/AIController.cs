@@ -109,9 +109,7 @@ namespace Game.Gameplay
 
         IEnumerator DelayThrow(float delay)
         {
-            Debug.Log($"Start Throw: {Time.time}");
             yield return new WaitForSeconds(delay);
-            Debug.Log($"End Throw: {Time.time}");
             Vector3 direction = statePlayerPos.value - transform.position;
             bindedCharacter.UpdateAimDirection(direction.normalized, false);
 

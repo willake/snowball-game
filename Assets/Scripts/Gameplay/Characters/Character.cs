@@ -121,7 +121,6 @@ namespace Game.Gameplay
         {
             if (State.isAiming)
             {
-                Debug.Log($"{gameObject.name} Throw");
                 weaponHolder.Throw(energy);
             }
         }
