@@ -12,7 +12,7 @@ namespace Game.Saves
 #if UNITY_EDITOR
             _saveLoader = new JsonSaveLoader<T>(SaveMode.InMemory, Consts.PERSISTANT_DATA_PATH);
 #else
-            _saveLoader = new JsonSaveLoader<T>(SaveMode.File, Consts.persistentDataPath);
+            _saveLoader = new JsonSaveLoader<T>(SaveMode.File, Consts.PERSISTANT_DATA_PATH);
 #endif
         }
 

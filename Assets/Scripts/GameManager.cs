@@ -8,6 +8,7 @@ using Game.Events;
 using WillakeD.CommonPatterns;
 using Game.UI;
 using Game.Saves;
+using Game.Gameplay;
 
 namespace Game
 {
@@ -22,6 +23,7 @@ namespace Game
 
         [Header("References")]
         public SceneLoader sceneLoader;
+        public AvailableLevel levelToLoad = AvailableLevel.Test;
 
         private void Start()
         {

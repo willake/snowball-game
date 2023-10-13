@@ -3,6 +3,8 @@ using System;
 using Cysharp.Threading.Tasks;
 using Game.Events;
 using UnityEngine;
+using Game.Gameplay;
+using UnityEngine.UI;
 
 namespace Game.UI
 {
@@ -12,6 +14,11 @@ namespace Game.UI
 
         [Header("References")]
         public WDButton btnMenu;
+
+        public Slider heathBarSlider;
+        public Slider ammoBarSlider;
+
+        private Character _bindedCharacter = null;
 
         private void Start()
         {
@@ -50,6 +57,53 @@ namespace Game.UI
             await UniTask.CompletedTask;
         }
 
+        public void BindCharacter(Character character)
+        {
+            _bindedCharacter = character;
+            character.healthUpdateEvent.AddListener(UpdateHealth);
+            character.weaponHolder.ammoUpdateEvent.AddListener(UpdateAmmo);
+            character.weaponHolder.energyUpdateEvent.AddListener(UpdateEnergy);
+            character.weaponHolder.loadEvent.AddListener(ShowChargeBar);
+            character.weaponHolder.throwEvent.AddListener(CloseChargeBar);
+        }
+
+        public void UnbindCharacter()
+        {
+            _bindedCharacter.healthUpdateEvent.RemoveListener(UpdateHealth);
+            _bindedCharacter.weaponHolder.ammoUpdateEvent.RemoveListener(UpdateAmmo);
+            _bindedCharacter.weaponHolder.energyUpdateEvent.RemoveListener(UpdateEnergy);
+            _bindedCharacter.weaponHolder.loadEvent.RemoveListener(ShowChargeBar);
+            _bindedCharacter.weaponHolder.throwEvent.RemoveListener(CloseChargeBar);
+            _bindedCharacter = null;
+        }
+
+        private void UpdateHealth(float health, float maxHealth)
+        {
+            // TODO: update health UI
+            heathBarSlider.value = health / maxHealth;
+        }
+
+        private void UpdateAmmo(int ammo)
+        {
+            // TODO: update ammo UI
+            ammoBarSlider.value = ammo;
+        }
+
+        private void UpdateEnergy(float energyInPercentage)
+        {
+            // TOD: update energy bar if it shows up
+        }
+
+        private void ShowChargeBar()
+        {
+
+        }
+
+        private void CloseChargeBar()
+        {
+
+        }
+
         private void SwitchToMainGame()
         {
             GameManager.instance.SwitchScene(AvailableScene.Menu);
@@ -58,6 +112,7 @@ namespace Game.UI
         private void OnDestroy()
         {
             btnMenu.StopAnimation();
+            UnbindCharacter();
         }
     }
 }

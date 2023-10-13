@@ -5,14 +5,32 @@ namespace Game.Gameplay
     public enum WeaponType
     {
         Melee,
-        Gun
+        Snowball
     }
+
     public abstract class Weapon : MonoBehaviour
     {
         public int id;
         public WeaponType weaponType;
-        public bool canHold = false;
+        public Camp ownerCamp;
 
-        public abstract void Fire(Vector3 direction);
+        public void SetOwnerCamp(Camp camp)
+        {
+            ownerCamp = camp;
+        }
+
+        public int GetOwnerCampLayer()
+        {
+            switch (ownerCamp)
+            {
+                case Camp.Player:
+                default:
+                    return LayerMask.NameToLayer("Player");
+                case Camp.Enemy:
+                    return LayerMask.NameToLayer("Enemy");
+            }
+        }
+        public abstract bool Attack(Vector3 direction, float energy);
+        public abstract void Reload();
     }
 }

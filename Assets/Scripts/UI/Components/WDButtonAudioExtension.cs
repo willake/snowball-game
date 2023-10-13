@@ -29,7 +29,7 @@ namespace Game.UI
             WrappedAudioClip wrappedClip = ResourceManager.instance
                 .audioResources.uiAudios.buttonClick;
 
-            AudioManager.instance.PlaySfx(
+            AudioManager.instance.PlaySFX(
                 wrappedClip.clip,
                 wrappedClip.volume
             );

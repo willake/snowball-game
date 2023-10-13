@@ -4,6 +4,10 @@ namespace Game.UI
     {
         MenuPanel,
         GameHUDPanel,
-        PausePanel
+        PausePanel,
+        EndGamePanel,
+        LevelSelectPanel,
+        SettingsPanel,
+        TransitionPanel
     }
 }

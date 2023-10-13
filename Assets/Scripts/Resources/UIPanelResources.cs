@@ -16,5 +16,11 @@ namespace Game
         public GameObject gameHUDPanel;
         [AssetsOnly]
         public GameObject pausePanel;
+        [AssetsOnly]
+        public GameObject endGamePanel;
+        [AssetsOnly]
+        public GameObject levelSelectPanel;
+        [AssetsOnly]
+        public GameObject settingsPanel;
     }
 }

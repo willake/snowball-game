@@ -1,7 +1,5 @@
 using UniRx;
-using System;
 using Cysharp.Threading.Tasks;
-using Game.Events;
 using UnityEngine;
 
 namespace Game.UI
@@ -12,22 +10,44 @@ namespace Game.UI
 
         [Header("References")]
         public WDTextButton btnPlay;
+        public WDTextButton btnSettings;
+        public WDTextButton btnExit;
 
         private void Start()
         {
             btnPlay
                 .OnClickObservable
                 .ObserveOnMainThread()
-                .Subscribe(_ => SwitchToMainGame())
+                .Subscribe(_ =>
+                {
+                    UIManager.instance.Prev();
+                    UIManager.instance.OpenUI(AvailableUI.LevelSelectPanel);
+                })
                 .AddTo(this);
 
-            btnPlay.SetText("Play");
+            btnSettings
+                .OnClickObservable
+                .ObserveOnMainThread()
+                .Subscribe(_ =>
+                {
+                    UIManager.instance.Prev();
+                    UIManager.instance.OpenUI(AvailableUI.SettingsPanel);
+                })
+                .AddTo(this);
+
+            btnExit
+                .OnClickObservable
+                .ObserveOnMainThread()
+                .Subscribe(_ => GameManager.instance.ExitGame())
+                .AddTo(this);
         }
 
         public override WDButton[] GetSelectableButtons()
         {
             return new WDButton[] {
-                btnPlay
+                btnPlay,
+                btnSettings,
+                btnExit
             };
         }
 
@@ -56,16 +76,6 @@ namespace Game.UI
         {
             gameObject.SetActive(false);
             await UniTask.CompletedTask;
-        }
-
-        private void SwitchToMainGame()
-        {
-            GameManager.instance.SwitchScene(AvailableScene.MainGame);
-        }
-
-        private void OnDestroy()
-        {
-            btnPlay.StopAnimation();
         }
     }
 }

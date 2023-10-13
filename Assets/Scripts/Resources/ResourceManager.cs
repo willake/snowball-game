@@ -12,6 +12,7 @@ namespace Game
         [Header("Resources")]
         [FormerlySerializedAs("AudioResources")] public AudioResources audioResources;
         [FormerlySerializedAs("SceneResources")] public SceneResources sceneResources;
+        [FormerlySerializedAs("LevelResources")] public LevelResources levelResources;
         [FormerlySerializedAs("UIPanelResources")] public UIPanelResources uiPanelResources;
         [FormerlySerializedAs("GameplayResources")] public GameplayResources gameplayResources;
     }
