@@ -777,8 +777,8 @@ MonoBehaviour:
   groundDectector: {fileID: 1003446143622183207}
   weaponHolder: {fileID: 1102129920266668612}
   health: 100
-  acc: 8
-  maxSpeed: 8
+  moveSpeed: 8
+  aimSpeed: 5
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2563,7 +2563,7 @@ MonoBehaviour:
   socket: {fileID: 6877870985060369540}
   isDebugLogEnabled: 0
   throwingPitch: 2
-  minEnergy: 0
+  minEnergy: 5
   maxEnergy: 100
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 1
