@@ -12,5 +12,10 @@ namespace Game.Gameplay.Cameras
         {
             transform.position = target.position + offset;
         }
+
+        public void ForceUpdate()
+        {
+            transform.position = target.position + offset;
+        }
     }
 }

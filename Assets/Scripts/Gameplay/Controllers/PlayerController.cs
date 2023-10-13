@@ -39,16 +39,18 @@ namespace Game.Gameplay
             bindedCharacter.dieEvent.AddListener(HandleDieEvent);
             bindedCharacter.weaponHolder.reloadStartEvent.AddListener(() =>
             {
-                reloadBar.gameObject.SetActive(true);
+                GetReloadBarFollowScript().ForceUpdate();
                 reloadBar.SetProgress(0f);
+                reloadBar.gameObject.SetActive(true);
             });
             bindedCharacter.weaponHolder.reloadEndEvent.AddListener(() => reloadBar.gameObject.SetActive(false));
             bindedCharacter.weaponHolder.reloadProgressUpdateEvent.AddListener(progress => reloadBar.SetProgress(progress));
 
             bindedCharacter.weaponHolder.loadEvent.AddListener(() =>
             {
-                chargeBar.gameObject.SetActive(true);
+                GetChargeBarFollowScript().ForceUpdate();
                 chargeBar.SetProgress(0f);
+                chargeBar.gameObject.SetActive(true);
             });
             bindedCharacter.weaponHolder.throwEvent.AddListener(() => chargeBar.gameObject.SetActive(false));
             bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
@@ -151,6 +153,21 @@ namespace Game.Gameplay
             if (_playerCharacter == null) _playerCharacter = bindedCharacter as PlayerCharacter;
 
             return _playerCharacter;
+        }
+
+        private FollowTarget _chargebarFollow;
+        private FollowTarget GetChargeBarFollowScript()
+        {
+            if (_chargebarFollow == null) _chargebarFollow = chargeBar.GetComponent<FollowTarget>();
+
+            return _chargebarFollow;
+        }
+        private FollowTarget _reloadbarFollow;
+        private FollowTarget GetReloadBarFollowScript()
+        {
+            if (_reloadbarFollow == null) _reloadbarFollow = reloadBar.GetComponent<FollowTarget>();
+
+            return _reloadbarFollow;
         }
     }
 }
