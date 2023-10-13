@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 using WillakeD.ScenePropertyDrawler;
 using System;
 using UnityEngine.Events;
-using UnityEditorInternal;
 using Game.UI;
 using System.Threading;
 
