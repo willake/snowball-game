@@ -18,6 +18,9 @@ namespace Game
         public TransitionPanel transitionPanel;
         private string _currentScene = string.Empty;
 
+        [Header("Settings")]
+        public float transitionInSeconds = 0.5f;
+
         public OnLoadSceneEvent onLoadScene = new OnLoadSceneEvent();
         public IObservable<string> OnLoadSceneObservable
         {
@@ -40,7 +43,7 @@ namespace Game
 
             await LoadScene(sceneName);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
+            await UniTask.Delay(TimeSpan.FromSeconds(transitionInSeconds));
 
             await transitionPanel.CloseAsync();
             crossSceneCamera.enabled = false;
