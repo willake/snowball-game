@@ -7,6 +7,7 @@ namespace Game.Gameplay.CharacterStates
         public bool isDead { get; }
         public bool canMove { get; }
         public bool canThrow { get; }
+        public bool canReload { get; }
         public bool canInterrupt { get; }
     }
 }

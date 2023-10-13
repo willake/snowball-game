@@ -110,7 +110,7 @@ namespace Game.Gameplay
 
         public void Reload()
         {
-            if (State.isReloading) return;
+            if (State.canReload == false || State.isReloading) return;
             GetRigidbody().velocity = Vector3.zero;
             weaponHolder.Reload();
         }
