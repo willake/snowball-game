@@ -9,8 +9,7 @@ namespace Game.Gameplay
         public void Aim()
         {
             if (isGrounded == false || State.canThrow == false) return;
-            weaponHolder.Aim();
-            SetCharacterState(CharacterState.AimState);
+            if (weaponHolder.Aim()) SetCharacterState(CharacterState.AimState);
         }
 
         public void Reload()

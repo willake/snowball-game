@@ -115,7 +115,9 @@ namespace Game.Gameplay
             energy = Mathf.Clamp(energy, minEnergy, maxEnergy);
 
             holdingWeapon.Attack(shootDirection.normalized, energy);
+
             throwEvent.Invoke();
+            ammoUpdateEvent.Invoke(Ammo);
 
             if (Ammo <= 0) SetWeaponHolderState(WeaponHolderState.NeedReloadState);
             else SetWeaponHolderState(WeaponHolderState.IdleState);
