@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.UI;
 using Cysharp.Threading.Tasks;
 using Game.Gameplay.Cameras;
+using Game.Audios;
 
 namespace Game.Gameplay
 {
@@ -20,15 +21,15 @@ namespace Game.Gameplay
         private PlayerController _player;
         private HashSet<int> _enemyList = new HashSet<int>();
 
-        private void Start()
+        private async void Start()
         {
             if (GameManager.instance)
             {
-                levelLoader.LoadLevel(GameManager.instance.levelToLoad).Forget();
+                await levelLoader.LoadLevel(GameManager.instance.levelToLoad);
             }
             else
             {
-                levelLoader.LoadLevel(AvailableLevel.Test).Forget();
+                await levelLoader.LoadLevel(AvailableLevel.Test);
             }
 
             // Character player = characterFactory.GeneratePlayer("Player");
@@ -38,6 +39,12 @@ namespace Game.Gameplay
             {
                 _gameHUDPanel = UIManager.instance.OpenUI(AvailableUI.GameHUDPanel) as GameHUDPanel;
             }
+
+            WrappedAudioClip audioStart = ResourceManager.instance?.audioResources.gameplayAudios.levelStart;
+            AudioManager.instance?.PlaySFX(
+                audioStart.clip,
+                audioStart.volume
+            );
         }
 
         public void RegisterPlayer(PlayerController playerController)
