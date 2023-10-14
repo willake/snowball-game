@@ -36,6 +36,7 @@ namespace Game.Gameplay
         public abstract Vector3 Velocity { get; }
 
         private float _lastFootstepTime = 0f;
+        private int _reloadSFXLoopID = 0;
 
         private void Awake()
         {
@@ -45,11 +46,16 @@ namespace Game.Gameplay
                 {
                     SetCharacterState(CharacterState.ReloadState);
                     GetCharacterAnimatior()?.SetIsReloading(true);
+                    WrappedAudioClip audioClip =
+                        ResourceManager.instance?.audioResources.gameplayAudios.reload;
+                    _reloadSFXLoopID =
+                        AudioManager.instance.PlaySFXLoop(audioClip.clip, audioClip.volume);
                 });
             weaponHolder.reloadEndEvent.AddListener(() =>
                 {
                     SetCharacterState(CharacterState.IdleState);
                     GetCharacterAnimatior()?.SetIsReloading(false);
+                    AudioManager.instance?.StopSFXLoop(_reloadSFXLoopID);
                 });
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => SetCharacterState(CharacterState.IdleState));
