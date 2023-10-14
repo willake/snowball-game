@@ -10,6 +10,9 @@ namespace Game.UI
     {
         private WDButton button;
 
+        [Header("Settings")]
+        public ButtonType buttonType = ButtonType.Regular;
+
         private void Start()
         {
             if (button == null)
@@ -26,13 +29,31 @@ namespace Game.UI
 
         protected void PlayAudio()
         {
-            WrappedAudioClip wrappedClip = ResourceManager.instance
-                .audioResources.uiAudios.buttonClick;
+            WrappedAudioClip wrappedClip;
+
+            switch (buttonType)
+            {
+                case ButtonType.Regular:
+                default:
+                    wrappedClip = ResourceManager.instance
+                        .audioResources.uiAudios.buttonClick;
+                    break;
+                case ButtonType.Confirm:
+                    wrappedClip = ResourceManager.instance
+                        .audioResources.uiAudios.buttonConfirm;
+                    break;
+            }
 
             AudioManager.instance.PlaySFX(
                 wrappedClip.clip,
                 wrappedClip.volume
             );
+        }
+
+        public enum ButtonType
+        {
+            Regular,
+            Confirm
         }
     }
 }

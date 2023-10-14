@@ -4,6 +4,7 @@ using UnityEngine;
 using Game.UI;
 using Cysharp.Threading.Tasks;
 using Game.Gameplay.Cameras;
+using Game.Audios;
 
 namespace Game.Gameplay
 {
@@ -19,16 +20,17 @@ namespace Game.Gameplay
         private GameHUDPanel _gameHUDPanel;
         private PlayerController _player;
         private HashSet<int> _enemyList = new HashSet<int>();
+        private int _ambienceWindLoopID = 0;
 
-        private void Start()
+        private async void Start()
         {
             if (GameManager.instance)
             {
-                levelLoader.LoadLevel(GameManager.instance.levelToLoad).Forget();
+                await levelLoader.LoadLevel(GameManager.instance.levelToLoad);
             }
             else
             {
-                levelLoader.LoadLevel(AvailableLevel.Test).Forget();
+                await levelLoader.LoadLevel(AvailableLevel.Test);
             }
 
             // Character player = characterFactory.GeneratePlayer("Player");
@@ -38,6 +40,20 @@ namespace Game.Gameplay
             {
                 _gameHUDPanel = UIManager.instance.OpenUI(AvailableUI.GameHUDPanel) as GameHUDPanel;
             }
+
+            WrappedAudioClip audioStart =
+                ResourceManager.instance?.audioResources.gameplayAudios.levelStart;
+            AudioManager.instance?.PlaySFX(
+                audioStart.clip,
+                audioStart.volume
+            );
+
+            WrappedAudioClip ambienceWind =
+                ResourceManager.instance?.audioResources.backgroundAudios.ambienceWind;
+            _ambienceWindLoopID = AudioManager.instance.PlaySFXLoop(
+                ambienceWind.clip,
+                ambienceWind.volume
+            );
         }
 
         public void RegisterPlayer(PlayerController playerController)
@@ -77,6 +93,11 @@ namespace Game.Gameplay
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
                 panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }
+        }
+
+        private void OnDestroy()
+        {
+            AudioManager.instance.StopSFXLoop(_ambienceWindLoopID);
         }
     }
 }

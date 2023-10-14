@@ -58,7 +58,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
 --- !u!114 &1470372081474751582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -240,6 +239,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519836571adf27f42a4cacb8ce9825b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!114 &2971692973992182853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +510,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
 --- !u!114 &7558908918689850588
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -692,6 +691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519836571adf27f42a4cacb8ce9825b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!114 &323626556766145788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,6 +814,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519836571adf27f42a4cacb8ce9825b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!114 &1591896811976698451
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -902,7 +903,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
 --- !u!114 &7670246591873840692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1084,6 +1084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519836571adf27f42a4cacb8ce9825b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonType: 1
 --- !u!114 &6008214051413902283
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1233,7 +1234,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
 --- !u!114 &8785490667006568046
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1381,7 +1381,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
 --- !u!114 &1198619317029713465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1529,7 +1528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
 --- !u!114 &7457525120201459840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1800,6 +1798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519836571adf27f42a4cacb8ce9825b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonType: 0
 --- !u!114 &8647717968080118248
 MonoBehaviour:
   m_ObjectHideFlags: 0

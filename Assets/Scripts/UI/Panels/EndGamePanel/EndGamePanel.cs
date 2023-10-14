@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
+using Game.Audios;
 
 namespace Game.UI
 {
@@ -89,10 +90,16 @@ namespace Game.UI
             if (state == EndGameState.Win)
             {
                 title.PlayWinAnimation();
+                AudioManager.instance?.PlaySFX(
+                    ResourceManager.instance.audioResources.gameplayAudios.levelWin.clip
+                );
             }
             else
             {
                 title.PlayLoseAnimation();
+                AudioManager.instance?.PlaySFX(
+                    ResourceManager.instance.audioResources.gameplayAudios.levelLose.clip
+                );
             }
         }
 

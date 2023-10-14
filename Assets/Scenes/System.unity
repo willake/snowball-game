@@ -286,6 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   crossSceneCamera: {fileID: 2075603404}
   transitionPanel: {fileID: 3391800000391561772}
+  transitionInSeconds: 0.5
 --- !u!1 &414644610
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,7 +518,7 @@ MonoBehaviour:
   masterMixerGroup: {fileID: 24100000, guid: 6f42d0fb8ac3b214d92971905ba4c09d, type: 2}
   maxVolume: 0
   minVolume: -60
-  sfxSourcePoolSize: 20
+  sfxSourcePoolSize: 100
 --- !u!1 &915906339
 GameObject:
   m_ObjectHideFlags: 0

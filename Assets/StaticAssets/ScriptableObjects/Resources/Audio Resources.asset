@@ -13,6 +13,53 @@ MonoBehaviour:
   m_Name: Audio Resources
   m_EditorClassIdentifier: 
   uiAudios:
-    ButtonClick:
-      clip: {fileID: 8300000, guid: d4d1cb9cdc25f5a4aa77a9cb56948402, type: 3}
+    buttonClick:
+      clip: {fileID: 8300000, guid: 851f1bad1863f0b4ba9c5bdd1ae6ec35, type: 3}
+      volume: 1
+    buttonConfirm:
+      clip: {fileID: 8300000, guid: 00cbb81606f76974984b5bf6652ad536, type: 3}
+      volume: 1
+  backgroundAudios:
+    ambienceWind:
+      clip: {fileID: 8300000, guid: ede3ea62d8f31c14ab1285cbbeac66aa, type: 3}
+      volume: 0.5
+  gameplayAudios:
+    levelWin:
+      clip: {fileID: 8300000, guid: 3346a7f6eab633847bb845f76a31ea40, type: 3}
+      volume: 0.8
+    levelLose:
+      clip: {fileID: 8300000, guid: ad75698d155c81c4cb83f800fe5714f4, type: 3}
+      volume: 0.8
+    levelStart:
+      clip: {fileID: 8300000, guid: 83649b73213442c4696a4bbd2d640791, type: 3}
+      volume: 0.4
+    footStep1:
+      clip: {fileID: 8300000, guid: 20cad1860046bcc40aed59c8674f726b, type: 3}
+      volume: 0.05
+    footStep2:
+      clip: {fileID: 8300000, guid: 20cad1860046bcc40aed59c8674f726b, type: 3}
+      volume: 0.05
+    snowballThrow:
+      clip: {fileID: 8300000, guid: 034b81e5071913a48a93213926cbad7d, type: 3}
+      volume: 1
+    snowballNotHit:
+      clip: {fileID: 8300000, guid: d2a3674aaac91044096de5c7b71ffe58, type: 3}
+      volume: 0.4
+    snowballHit:
+      clip: {fileID: 8300000, guid: 6af35136c4354b6438d8c50a9f40b3ad, type: 3}
+      volume: 1
+    snowballHitHard:
+      clip: {fileID: 8300000, guid: 69be47b30f0384e4998e18680362621d, type: 3}
+      volume: 1
+    playerDamaged:
+      clip: {fileID: 8300000, guid: 0a1f33bbafbb3a549bf08afce0ddec09, type: 3}
+      volume: 1
+    enemyDamaged:
+      clip: {fileID: 0}
+      volume: 1
+    reload:
+      clip: {fileID: 8300000, guid: 134c7bcf80747d949926ec9f102740f3, type: 3}
+      volume: 0.2
+    criticalCharge:
+      clip: {fileID: 8300000, guid: b0400996705ccfa48924d240ace5cc8a, type: 3}
       volume: 1

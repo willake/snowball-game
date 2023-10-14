@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Audios;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -53,6 +54,24 @@ namespace Game.Gameplay
                 return;
             }
 
+            if (hit)
+            {
+                WrappedAudioClip audioClip = ResourceManager.instance.audioResources.gameplayAudios.snowballHit;
+                AudioManager.instance?.PlaySFX(
+                    audioClip.clip,
+                    audioClip.volume,
+                    Random.Range(0.6f, 1.2f)
+                );
+            }
+            else
+            {
+                WrappedAudioClip audioClip = ResourceManager.instance.audioResources.gameplayAudios.snowballNotHit;
+                AudioManager.instance?.PlaySFX(
+                    audioClip.clip,
+                    audioClip.volume,
+                    Random.Range(0.6f, 1.2f)
+                );
+            }
             onHitEvent.Invoke(transform.position, GetRigidbody().velocity);
             GetRigidbody().velocity = Vector3.zero;
             gameObject.SetActive(false);
