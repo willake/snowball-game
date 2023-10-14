@@ -19,16 +19,20 @@ MonoBehaviour:
     buttonConfirm:
       clip: {fileID: 8300000, guid: 00cbb81606f76974984b5bf6652ad536, type: 3}
       volume: 1
+  backgroundAudios:
+    ambienceWind:
+      clip: {fileID: 8300000, guid: ede3ea62d8f31c14ab1285cbbeac66aa, type: 3}
+      volume: 0.5
   gameplayAudios:
     levelWin:
       clip: {fileID: 8300000, guid: 3346a7f6eab633847bb845f76a31ea40, type: 3}
-      volume: 1
+      volume: 0.8
     levelLose:
       clip: {fileID: 8300000, guid: ad75698d155c81c4cb83f800fe5714f4, type: 3}
-      volume: 1
+      volume: 0.8
     levelStart:
       clip: {fileID: 8300000, guid: 83649b73213442c4696a4bbd2d640791, type: 3}
-      volume: 0.6
+      volume: 0.4
     footStep1:
       clip: {fileID: 8300000, guid: 20cad1860046bcc40aed59c8674f726b, type: 3}
       volume: 0.05

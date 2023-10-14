@@ -20,6 +20,7 @@ namespace Game.Gameplay
         private GameHUDPanel _gameHUDPanel;
         private PlayerController _player;
         private HashSet<int> _enemyList = new HashSet<int>();
+        private int _ambienceWindLoopID = 0;
 
         private async void Start()
         {
@@ -40,10 +41,18 @@ namespace Game.Gameplay
                 _gameHUDPanel = UIManager.instance.OpenUI(AvailableUI.GameHUDPanel) as GameHUDPanel;
             }
 
-            WrappedAudioClip audioStart = ResourceManager.instance?.audioResources.gameplayAudios.levelStart;
+            WrappedAudioClip audioStart =
+                ResourceManager.instance?.audioResources.gameplayAudios.levelStart;
             AudioManager.instance?.PlaySFX(
                 audioStart.clip,
                 audioStart.volume
+            );
+
+            WrappedAudioClip ambienceWind =
+                ResourceManager.instance?.audioResources.backgroundAudios.ambienceWind;
+            _ambienceWindLoopID = AudioManager.instance.PlaySFXLoop(
+                ambienceWind.clip,
+                ambienceWind.volume
             );
         }
 
@@ -84,6 +93,11 @@ namespace Game.Gameplay
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
                 panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }
+        }
+
+        private void OnDestroy()
+        {
+            AudioManager.instance.StopSFXLoop(_ambienceWindLoopID);
         }
     }
 }

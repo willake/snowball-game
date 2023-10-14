@@ -11,6 +11,7 @@ namespace Game
     {
         [Header("UI Audio Assets")]
         public UIAudios uiAudios;
+        public BackgroundAudios backgroundAudios;
         public GameplayAudios gameplayAudios;
 
         [Serializable]
@@ -18,6 +19,12 @@ namespace Game
         {
             [FormerlySerializedAs("ButtonClick")] public WrappedAudioClip buttonClick;
             [FormerlySerializedAs("ButtonConfirm")] public WrappedAudioClip buttonConfirm;
+        }
+
+        [Serializable]
+        public class BackgroundAudios
+        {
+            [FormerlySerializedAs("AmbienceWind")] public WrappedAudioClip ambienceWind;
         }
 
         [Serializable]
