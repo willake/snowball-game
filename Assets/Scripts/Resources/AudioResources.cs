@@ -29,6 +29,7 @@ namespace Game
             [FormerlySerializedAs("Footstep1")] public WrappedAudioClip footStep1;
             [FormerlySerializedAs("Footstep2")] public WrappedAudioClip footStep2;
             [FormerlySerializedAs("SnowballThrow")] public WrappedAudioClip snowballThrow;
+            [FormerlySerializedAs("SnowballNotHit")] public WrappedAudioClip snowballNotHit;
             [FormerlySerializedAs("SnowballHit")] public WrappedAudioClip snowballHit;
             [FormerlySerializedAs("SnoaballHitHard")] public WrappedAudioClip snowballHitHard;
             [FormerlySerializedAs("PlayerDamaged")] public WrappedAudioClip playerDamaged;

@@ -17,7 +17,7 @@ MonoBehaviour:
       clip: {fileID: 8300000, guid: 851f1bad1863f0b4ba9c5bdd1ae6ec35, type: 3}
       volume: 1
     buttonConfirm:
-      clip: {fileID: 8300000, guid: b0400996705ccfa48924d240ace5cc8a, type: 3}
+      clip: {fileID: 8300000, guid: 00cbb81606f76974984b5bf6652ad536, type: 3}
       volume: 1
   gameplayAudios:
     levelWin:
@@ -37,6 +37,9 @@ MonoBehaviour:
       volume: 1
     snowballThrow:
       clip: {fileID: 8300000, guid: 034b81e5071913a48a93213926cbad7d, type: 3}
+      volume: 1
+    snowballNotHit:
+      clip: {fileID: 8300000, guid: d2a3674aaac91044096de5c7b71ffe58, type: 3}
       volume: 1
     snowballHit:
       clip: {fileID: 8300000, guid: 6af35136c4354b6438d8c50a9f40b3ad, type: 3}
