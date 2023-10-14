@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Audios;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -53,6 +54,12 @@ namespace Game.Gameplay
                 return;
             }
 
+            WrappedAudioClip audioClip = ResourceManager.instance.audioResources.gameplayAudios.snowballHit;
+            AudioManager.instance?.PlaySFX(
+                audioClip.clip,
+                audioClip.volume,
+                Random.Range(0.8f, 1.2f)
+            );
             onHitEvent.Invoke(transform.position, GetRigidbody().velocity);
             GetRigidbody().velocity = Vector3.zero;
             gameObject.SetActive(false);
