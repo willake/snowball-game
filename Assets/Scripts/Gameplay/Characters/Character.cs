@@ -4,6 +4,7 @@ using UnityEngine.AI;
 using UnityEngine.Events;
 using Game.Gameplay.CharacterStates;
 using System.Collections;
+using Game.Audios;
 
 namespace Game.Gameplay
 {
@@ -23,6 +24,8 @@ namespace Game.Gameplay
         public float MaxHealth { get; private set; }
 
         [Header("Settings")]
+        public float footstepIntervalInSeconds = 0.4f;
+        public float footstepAimIntervalInSeconds = 0.6f;
         public float moveSpeed = 8f;
         public float aimSpeed = 5f;
         public Vector3 currentVelocity { get { return GetRigidbody().velocity; } }
@@ -32,6 +35,9 @@ namespace Game.Gameplay
         public ICharacterState State { get; private set; }
         public abstract Vector3 Velocity { get; }
 
+        private float _lastFootstepTime = 0f;
+        private int _reloadSFXLoopID = 0;
+
         private void Awake()
         {
             MaxHealth = health;
@@ -40,11 +46,16 @@ namespace Game.Gameplay
                 {
                     SetCharacterState(CharacterState.ReloadState);
                     GetCharacterAnimatior()?.SetIsReloading(true);
+                    WrappedAudioClip audioClip =
+                        ResourceManager.instance?.audioResources.gameplayAudios.reload;
+                    _reloadSFXLoopID =
+                        AudioManager.instance.PlaySFXLoop(audioClip.clip, audioClip.volume);
                 });
             weaponHolder.reloadEndEvent.AddListener(() =>
                 {
                     SetCharacterState(CharacterState.IdleState);
                     GetCharacterAnimatior()?.SetIsReloading(false);
+                    AudioManager.instance?.StopSFXLoop(_reloadSFXLoopID);
                 });
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => SetCharacterState(CharacterState.IdleState));
@@ -174,6 +185,19 @@ namespace Game.Gameplay
                 GetCharacterAnimatior()?.SetMoveSpeed(
                     Mathf.Sin(angle),
                     Mathf.Cos(angle), 1);
+                // audio
+                if (Time.time - _lastFootstepTime > footstepAimIntervalInSeconds)
+                {
+                    WrappedAudioClip audioClip = UnityEngine.Random.value > 0.5f
+                        ? ResourceManager.instance?.audioResources.gameplayAudios.footStep1
+                        : ResourceManager.instance?.audioResources.gameplayAudios.footStep2;
+                    AudioManager.instance?.PlaySFX(
+                        audioClip.clip,
+                        audioClip.volume,
+                        UnityEngine.Random.Range(0.6f, 1f)
+                    );
+                    _lastFootstepTime = Time.time;
+                }
             }
             else if (isMoving)
             {
@@ -182,6 +206,19 @@ namespace Game.Gameplay
                     velocity.normalized.z, 1);
                 transform.rotation =
                         Quaternion.LookRotation(new Vector3(velocity.normalized.x, 0, velocity.normalized.z));
+                // audio
+                if (Time.time - _lastFootstepTime > footstepIntervalInSeconds)
+                {
+                    WrappedAudioClip audioClip = UnityEngine.Random.value > 0.5f
+                        ? ResourceManager.instance?.audioResources.gameplayAudios.footStep1
+                        : ResourceManager.instance?.audioResources.gameplayAudios.footStep2;
+                    AudioManager.instance?.PlaySFX(
+                        audioClip.clip,
+                        audioClip.volume,
+                        UnityEngine.Random.Range(0.6f, 1f)
+                    );
+                    _lastFootstepTime = Time.time;
+                }
             }
             else
             {

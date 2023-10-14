@@ -180,5 +180,39 @@ namespace Game.Audios
             isMusicPaused = false;
             _musicSource.UnPause();
         }
+
+        private int _incremental = 0;
+        public Dictionary<int, AudioSource> _playingSFXLoop = new();
+        public int PlaySFXLoop(AudioClip clip, float volume = 1, float pitch = 1f)
+        {
+            if (isSfxMuted) return -1;
+            AudioSource source = _sfxSourcePool.Dequeue();
+            source.volume = volume;
+            source.pitch = pitch;
+            source.panStereo = 0f;
+            source.clip = clip;
+            source.loop = true;
+            source.Play();
+
+            _incremental++;
+
+            _playingSFXLoop.Add(_incremental, source);
+
+            return _incremental;
+        }
+
+        public bool StopSFXLoop(int key)
+        {
+            if (_playingSFXLoop.TryGetValue(key, out AudioSource value))
+            {
+                value.Stop();
+                value.loop = false;
+                value.clip = null;
+                _sfxSourcePool.Enqueue(value);
+                return true;
+            }
+
+            return false;
+        }
     }
 }

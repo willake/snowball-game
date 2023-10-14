@@ -1487,6 +1487,8 @@ MonoBehaviour:
   groundDectector: {fileID: 5389384264681331714}
   weaponHolder: {fileID: 7634809250427197494}
   health: 100
+  footstepIntervalInSeconds: 0.4
+  footstepAimIntervalInSeconds: 0.6
   moveSpeed: 8
   aimSpeed: 5
   GroundLayer:
