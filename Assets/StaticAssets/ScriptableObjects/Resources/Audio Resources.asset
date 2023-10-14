@@ -54,8 +54,8 @@ MonoBehaviour:
       clip: {fileID: 0}
       volume: 1
     reload:
-      clip: {fileID: 8300000, guid: 6c306942f14ffb64296ed094bb56c4c4, type: 3}
-      volume: 1
+      clip: {fileID: 8300000, guid: 134c7bcf80747d949926ec9f102740f3, type: 3}
+      volume: 0.2
     criticalCharge:
       clip: {fileID: 8300000, guid: b0400996705ccfa48924d240ace5cc8a, type: 3}
       volume: 1
