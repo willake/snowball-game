@@ -28,7 +28,7 @@ MonoBehaviour:
       volume: 1
     levelStart:
       clip: {fileID: 8300000, guid: 83649b73213442c4696a4bbd2d640791, type: 3}
-      volume: 1
+      volume: 0.6
     footStep1:
       clip: {fileID: 8300000, guid: 20cad1860046bcc40aed59c8674f726b, type: 3}
       volume: 1
@@ -40,7 +40,7 @@ MonoBehaviour:
       volume: 1
     snowballNotHit:
       clip: {fileID: 8300000, guid: d2a3674aaac91044096de5c7b71ffe58, type: 3}
-      volume: 1
+      volume: 0.4
     snowballHit:
       clip: {fileID: 8300000, guid: 6af35136c4354b6438d8c50a9f40b3ad, type: 3}
       volume: 1
