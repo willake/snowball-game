@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UniRx;
 using Game.Audios;
-using UnityEditorInternal;
 
 namespace Game.UI
 {
