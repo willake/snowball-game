@@ -130,7 +130,9 @@ namespace Game.Gameplay
             {
                 Vector3 chaPos =
                     bindedCamera.GetCamera().WorldToScreenPoint(bindedCharacter.transform.position);
-                bindedCharacter.UpdateAimDirection((Input.mousePosition - chaPos).normalized);
+                Vector3 dir = (Input.mousePosition - chaPos).normalized;
+                dir.z = dir.y;
+                bindedCharacter.UpdateAimDirection(dir);
             }
 
             statePlayerPos.value = bindedCharacter.transform.position;

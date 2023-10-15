@@ -10,27 +10,32 @@ namespace Game.Gameplay.CustomBehaviorTree
     public class MoveCharacterAction : Leaf
     {
         public Vector3Reference destination;
+        public BoolReference isPlayerInView;
         public AICharacter character;
         public float stopDistance = 2f;
         [Tooltip("How often target position should be updated")]
         public float updateInterval = 1f;
-        private float time = 0;
+        private float _time = 0;
 
         public override void OnEnter()
         {
-            time = 0;
+            _time = 0;
             character.MoveTo(destination.Value);
         }
 
         public override NodeResult Execute()
         {
-            time += Time.deltaTime;
+            _time += Time.deltaTime;
             // Update destination every given interval
-            if (time > updateInterval)
+            if (_time > updateInterval)
             {
                 // Reset time and update destination
-                time = 0;
+                _time = 0;
                 character.MoveTo(destination.Value);
+            }
+            if (isPlayerInView.Value)
+            {
+                return NodeResult.success;
             }
             // Check if path is ready
             if (character.PathPending)

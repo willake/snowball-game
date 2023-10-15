@@ -11,8 +11,8 @@ namespace MBTExample
     {
         public Vector3Reference variableToSet = new Vector3Reference(VarRefMode.DisableConstant);
         public Transform[] waypoints;
-        private int index = 0;
-        private int direction = 1;
+        private int _index = 0;
+        private int _direction = 1;
 
         public override NodeResult Execute()
         {
@@ -21,18 +21,18 @@ namespace MBTExample
                 return NodeResult.failure;
             }
             // Ping-pong between waypoints
-            if (direction == 1 && index == waypoints.Length - 1)
+            if (_direction == 1 && _index == waypoints.Length - 1)
             {
-                direction = -1;
+                _direction = -1;
             }
-            else if (direction == -1 && index == 0)
+            else if (_direction == -1 && _index == 0)
             {
-                direction = 1;
+                _direction = 1;
             }
-            index += direction;
+            _index += _direction;
 
             // Set blackboard variable with need waypoint (position)
-            variableToSet.Value = waypoints[index].position;
+            variableToSet.Value = waypoints[_index].position;
             return NodeResult.success;
         }
     }

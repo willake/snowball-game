@@ -96,9 +96,11 @@ namespace Game.Gameplay
 
         public void UpdateAimDirection(Vector3 direction, bool useFoward = true)
         {
-            float angle = (float)Math.Atan2(direction.x, direction.y);
-            transform.rotation = Quaternion.Euler(
-                new Vector3(0, angle * Mathf.Rad2Deg, 0));
+            // float angle = (float)Math.Atan2(direction.x, direction.y);
+            // transform.rotation = Quaternion.Euler(
+            //     new Vector3(0, angle * Mathf.Rad2Deg, 0));
+            direction.y = 0;
+            transform.rotation = Quaternion.LookRotation(direction);
 
             weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
         }
