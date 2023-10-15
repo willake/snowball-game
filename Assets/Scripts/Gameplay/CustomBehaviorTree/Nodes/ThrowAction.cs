@@ -14,6 +14,9 @@ namespace Game.Gameplay.CustomBehaviorTree
 
         public override NodeResult Execute()
         {
+            Vector3 direction = playerPos.Value - transform.position;
+            aiCharacter.UpdateAimDirection(direction.normalized, false);
+
             float energy = aiCharacter.EstimateEnergyToPosition(playerPos.Value) + 5;
             aiCharacter.Throw(energy);
             return NodeResult.success;

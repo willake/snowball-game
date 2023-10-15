@@ -1499,13 +1499,14 @@ GameObject:
   - component: {fileID: 5724069013323678649}
   - component: {fileID: 3001190919775493735}
   - component: {fileID: 8941793562427548809}
-  - component: {fileID: 3883069184116820342}
   - component: {fileID: -6997866805229090323}
   - component: {fileID: 7150682994617619964}
   - component: {fileID: 1813159567978653599}
   - component: {fileID: 1971762201510072529}
   - component: {fileID: -5896065183175424543}
   - component: {fileID: 1620991124436395222}
+  - component: {fileID: 6438079511003886421}
+  - component: {fileID: 5664797694555834380}
   m_Layer: 7
   m_Name: RegularEnemy_MBT
   m_TagString: Untagged
@@ -1809,7 +1810,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 7150682994617619964}
+  selectedEditorNode: {fileID: 6438079511003886421}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -2563,43 +2564,11 @@ MonoBehaviour:
     height: 45
   parent: {fileID: 5519046125627031269}
   children:
-  - {fileID: 3883069184116820342}
   - {fileID: 1474017061647784337}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
   random: 0
---- !u!114 &3883069184116820342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b02cda147b0cce44ae240e669f4d059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Update Aim Direction Action
-  rect:
-    serializedVersion: 2
-    x: -240
-    y: 880
-    width: 160
-    height: 59
-  parent: {fileID: 8941793562427548809}
-  children: []
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  playerPos:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 4275073464473930556}
-    key: playerPos
-    constantValue: {x: 0, y: 0, z: 0}
-  aiCharacter: {fileID: 215085660974815480}
 --- !u!114 &-6997866805229090323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2738,7 +2707,8 @@ MonoBehaviour:
   parent: {fileID: 1474017061647784337}
   children:
   - {fileID: 1971762201510072529}
-  - {fileID: 1620991124436395222}
+  - {fileID: 6438079511003886421}
+  - {fileID: 5664797694555834380}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -2758,11 +2728,11 @@ MonoBehaviour:
   title: Throw Action
   rect:
     serializedVersion: 2
-    x: 540
-    y: 1080
+    x: 740
+    y: 1160
     width: 160
     height: 45
-  parent: {fileID: -5896065183175424543}
+  parent: {fileID: 5664797694555834380}
   children: []
   behaviourTree: {fileID: 0}
   runtimePriority: 0
@@ -2774,6 +2744,71 @@ MonoBehaviour:
     key: playerPos
     constantValue: {x: 0, y: 0, z: 0}
   aiCharacter: {fileID: 215085660974815480}
+--- !u!114 &6438079511003886421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11f81e66f3f78c14fb849c1b017d6bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Aiming Follow Action
+  rect:
+    serializedVersion: 2
+    x: 540
+    y: 1080
+    width: 160
+    height: 45
+  parent: {fileID: -5896065183175424543}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  playerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
+  character: {fileID: 215085660974815480}
+  stopDistance: 2
+  updateInterval: 0.2
+  minAimingTime: 0.6
+  maxAimingTime: 1.2
+--- !u!114 &5664797694555834380
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bcf8b649a660b6944b98ececcc7977e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Update Player Position Service
+  rect:
+    serializedVersion: 2
+    x: 740
+    y: 1080
+    width: 160
+    height: 59
+  parent: {fileID: -5896065183175424543}
+  children:
+  - {fileID: 1620991124436395222}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  interval: 1
+  randomDeviation: 0
+  callOnEnter: 1
+  vector3State: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
+  vector3Reference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: playerPos
+    constantValue: {x: 0, y: 0, z: 0}
 --- !u!1 &6699964578601542879
 GameObject:
   m_ObjectHideFlags: 0
