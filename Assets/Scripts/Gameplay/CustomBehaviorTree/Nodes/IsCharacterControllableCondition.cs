@@ -6,7 +6,7 @@ using MBT;
 namespace Game.Gameplay.CustomBehaviorTree
 {
     [AddComponentMenu("")]
-    [MBTNode(name = "Conditions/Is Character Controllable Condition")]
+    [MBTNode(name = "Custom Conditions/Is Character Controllable Condition")]
     public class IsCharacterControllableCondition : Condition
     {
         public BoolReference isDead = new BoolReference(VarRefMode.DisableConstant);

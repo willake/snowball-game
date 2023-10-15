@@ -7,7 +7,7 @@ using Game.RuntimeStates;
 namespace Game.Gameplay.CustomBehaviorTree
 {
     [AddComponentMenu("")]
-    [MBTNode("Custom/Detect Player Service")]
+    [MBTNode("Custom Services/Detect Player Service")]
     public class DetectPlayerService : Service
     {
         public Vector3State statePlayerPos;
@@ -30,6 +30,11 @@ namespace Game.Gameplay.CustomBehaviorTree
             {
                 isPlayerInView.Value = false;
             }
+        }
+
+        public override bool IsValid()
+        {
+            return !(statePlayerPos == null);
         }
     }
 }

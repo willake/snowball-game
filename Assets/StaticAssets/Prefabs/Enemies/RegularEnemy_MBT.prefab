@@ -1463,18 +1463,47 @@ GameObject:
   - component: {fileID: 8023775038824565136}
   - component: {fileID: 5801301985435257788}
   - component: {fileID: 8223577276389838955}
-  - component: {fileID: 2637896362350457095}
   - component: {fileID: 215085660974815480}
   - component: {fileID: 2002889927117738545}
   - component: {fileID: 363221156363819830}
-  - component: {fileID: 4275073464473930556}
+  - component: {fileID: 5495218821233015042}
   - component: {fileID: -599680354890243941}
   - component: {fileID: -2423130406551497661}
   - component: {fileID: 3339373618709395442}
   - component: {fileID: -5564340379677482987}
   - component: {fileID: -6189796997382525982}
   - component: {fileID: 3043741019851761360}
+  - component: {fileID: 4275073464473930556}
   - component: {fileID: -6965506410551093996}
+  - component: {fileID: 4310384061011322542}
+  - component: {fileID: 6190783330994878210}
+  - component: {fileID: 5312760394531139672}
+  - component: {fileID: 4041707910848027617}
+  - component: {fileID: 983275037799857715}
+  - component: {fileID: 6659105168747278180}
+  - component: {fileID: 2680880003823752395}
+  - component: {fileID: 186931299663321387}
+  - component: {fileID: 3161236063840249732}
+  - component: {fileID: 3962593562811749086}
+  - component: {fileID: 2881145081958985481}
+  - component: {fileID: 7608619507436762446}
+  - component: {fileID: 5519046125627031269}
+  - component: {fileID: 1474017061647784337}
+  - component: {fileID: 1077641151891187556}
+  - component: {fileID: 5600484544514393991}
+  - component: {fileID: 8274675497449766161}
+  - component: {fileID: 5777301588478185002}
+  - component: {fileID: 346113381561685006}
+  - component: {fileID: 4925397662821212518}
+  - component: {fileID: 4594661809228425071}
+  - component: {fileID: 1579562564937078758}
+  - component: {fileID: 5724069013323678649}
+  - component: {fileID: 8539232271188009915}
+  - component: {fileID: 441120511008560177}
+  - component: {fileID: 1820471998282169511}
+  - component: {fileID: 3001190919775493735}
+  - component: {fileID: 8941793562427548809}
+  - component: {fileID: 3883069184116820342}
   m_Layer: 7
   m_Name: RegularEnemy_MBT
   m_TagString: Untagged
@@ -1572,29 +1601,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
---- !u!114 &2637896362350457095
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f3d907dc18d83646bdfaf1c179a8058, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bindedCharacter: {fileID: 215085660974815480}
-  statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
-  healthBar: {fileID: 5591286013810214123}
-  sightRange: 10
-  attackRange: 8
-  minAttackDelayInSeconds: 0.5
-  maxAttackDelayInSeconds: 1.2
-  patrolPoints: []
-  walkPointRange: 0
-  minAttackIntervalInSeconds: 1
-  maxAttackIntervalInSeconds: 2
 --- !u!114 &215085660974815480
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,7 +1665,7 @@ MonoBehaviour:
   damageEndedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4275073464473930556
+--- !u!114 &5495218821233015042
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1668,17 +1674,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6544132504076760926}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2217e4d35c0c94ea02cf2166c17e4b, type: 3}
+  m_Script: {fileID: 11500000, guid: d3f0a7ea9d8b08d45a9c7341fb9d86ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variables:
-  - {fileID: -599680354890243941}
-  - {fileID: -2423130406551497661}
-  - {fileID: 3339373618709395442}
-  - {fileID: -5564340379677482987}
-  - {fileID: -6189796997382525982}
-  - {fileID: 3043741019851761360}
-  masterBlackboard: {fileID: 0}
+  bindedCharacter: {fileID: 215085660974815480}
+  statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
+  healthBar: {fileID: 5591286013810214123}
+  sightRange: 0
+  attackRange: 0
+  minAttackDelayInSeconds: 0.5
+  maxAttackDelayInSeconds: 1.2
+  patrolPoints: []
+  walkPointRange: 0
+  minAttackIntervalInSeconds: 1
+  maxAttackIntervalInSeconds: 2
 --- !u!114 &-599680354890243941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1763,6 +1772,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: canReload
   val: 0
+--- !u!114 &4275073464473930556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2217e4d35c0c94ea02cf2166c17e4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variables:
+  - {fileID: -599680354890243941}
+  - {fileID: -2423130406551497661}
+  - {fileID: 3339373618709395442}
+  - {fileID: -5564340379677482987}
+  - {fileID: -6189796997382525982}
+  - {fileID: 3043741019851761360}
+  - {fileID: 2680880003823752395}
+  - {fileID: 186931299663321387}
+  - {fileID: 7608619507436762446}
+  - {fileID: 5600484544514393991}
+  - {fileID: 5724069013323678649}
+  masterBlackboard: {fileID: 0}
 --- !u!114 &-6965506410551093996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1775,10 +1809,939 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 0}
+  selectedEditorNode: {fileID: 3883069184116820342}
   repeatOnFinish: 0
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
+--- !u!114 &4310384061011322542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 538645f2f9090fd43bc6154b2e89e2d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Root
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: -60
+    width: 160
+    height: 45
+  parent: {fileID: 0}
+  children:
+  - {fileID: 6190783330994878210}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+--- !u!114 &6190783330994878210
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47bf11fc8a589d64e8ed1519d136a5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Update Character State Service
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 20
+    width: 160
+    height: 59
+  parent: {fileID: 4310384061011322542}
+  children:
+  - {fileID: 3001190919775493735}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  interval: 1
+  randomDeviation: 0
+  callOnEnter: 1
+  aiCharacter: {fileID: 215085660974815480}
+  isAiming:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: isAiming
+    constantValue: 0
+  isReloading:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: isReloading
+    constantValue: 0
+  isDead:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: isDead
+    constantValue: 0
+  canMove:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: canMove
+    constantValue: 0
+  canThrow:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: canThrow
+    constantValue: 0
+  canReload:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: canReload
+    constantValue: 0
+--- !u!114 &5312760394531139672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Set Condition
+  rect:
+    serializedVersion: 2
+    x: 100
+    y: 200
+    width: 160
+    height: 45
+  parent: {fileID: 3001190919775493735}
+  children:
+  - {fileID: 4041707910848027617}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  invert: 0
+  type: 0
+  boolReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: isDead
+    constantValue: 0
+  objectReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+  transformReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+--- !u!114 &4041707910848027617
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fe7bc6a9b18e148b82820c7c1c0a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Wait
+  rect:
+    serializedVersion: 2
+    x: 100
+    y: 280
+    width: 160
+    height: 45
+  parent: {fileID: 5312760394531139672}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  time:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 2
+  randomDeviation: 0
+  continueOnRestart: 0
+--- !u!114 &983275037799857715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Set Condition
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 200
+    width: 160
+    height: 45
+  parent: {fileID: 3001190919775493735}
+  children:
+  - {fileID: 6659105168747278180}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  invert: 0
+  type: 0
+  boolReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: canMove
+    constantValue: 0
+  objectReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+  transformReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+--- !u!114 &6659105168747278180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e772f3e1225a15b4ba273cb3087ac312, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Detect Player Service
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 280
+    width: 160
+    height: 45
+  parent: {fileID: 983275037799857715}
+  children:
+  - {fileID: 3161236063840249732}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  interval: 1
+  randomDeviation: 0
+  callOnEnter: 1
+  statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
+  sightRange: 10
+  isPlayerInView:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: isPlayerInView
+    constantValue: 0
+  playerPos:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: playerPos
+    constantValue: {x: 0, y: 0, z: 0}
+--- !u!114 &2680880003823752395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae15c5e6bcb1714080f2e8296c3d17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: isPlayerInView
+  val: 0
+--- !u!114 &186931299663321387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51272808e3662eb4286c82f38f91fae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: playerPos
+  val: {x: 0, y: 0, z: 0}
+--- !u!114 &3161236063840249732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08540605df275034fafc8e05c6704214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Selector
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 360
+    width: 160
+    height: 45
+  parent: {fileID: 6659105168747278180}
+  children:
+  - {fileID: 3962593562811749086}
+  - {fileID: 346113381561685006}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  random: 0
+--- !u!114 &3962593562811749086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Set Condition
+  rect:
+    serializedVersion: 2
+    x: 200
+    y: 480
+    width: 160
+    height: 45
+  parent: {fileID: 3161236063840249732}
+  children:
+  - {fileID: 2881145081958985481}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  invert: 0
+  type: 0
+  boolReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: isPlayerInView
+    constantValue: 0
+  objectReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+  transformReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+--- !u!114 &2881145081958985481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08540605df275034fafc8e05c6704214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Selector
+  rect:
+    serializedVersion: 2
+    x: 200
+    y: 600
+    width: 160
+    height: 45
+  parent: {fileID: 3962593562811749086}
+  children:
+  - {fileID: 5519046125627031269}
+  - {fileID: 8539232271188009915}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  random: 0
+--- !u!114 &7608619507436762446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4e5f4db414f0ab4c82c187a7653e99d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: distance
+  val: 0
+--- !u!114 &5519046125627031269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b95a918be8d9a4f9085201010bdec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Number Condition
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 700
+    width: 160
+    height: 45
+  parent: {fileID: 2881145081958985481}
+  children:
+  - {fileID: 8941793562427548809}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  type: 0
+  floatReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: distance
+    constantValue: 0
+  intReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+  comparator: 2
+  floatReference2:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 8
+  intReference2:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 0
+--- !u!114 &1474017061647784337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08540605df275034fafc8e05c6704214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Selector
+  rect:
+    serializedVersion: 2
+    x: 300
+    y: 880
+    width: 160
+    height: 45
+  parent: {fileID: 8941793562427548809}
+  children:
+  - {fileID: 1077641151891187556}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  random: 0
+--- !u!114 &1077641151891187556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 966890df6b7ad554c870bf5538f154e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Check Ammo Service
+  rect:
+    serializedVersion: 2
+    x: 80
+    y: 1000
+    width: 160
+    height: 45
+  parent: {fileID: 1474017061647784337}
+  children:
+  - {fileID: 8274675497449766161}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  interval: 1
+  randomDeviation: 0
+  callOnEnter: 1
+  character: {fileID: 215085660974815480}
+  shouldReload:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: shouldReload
+    constantValue: 0
+--- !u!114 &5600484544514393991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ae15c5e6bcb1714080f2e8296c3d17a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: shouldReload
+  val: 0
+--- !u!114 &8274675497449766161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Set Condition
+  rect:
+    serializedVersion: 2
+    x: 80
+    y: 1100
+    width: 160
+    height: 45
+  parent: {fileID: 1077641151891187556}
+  children:
+  - {fileID: 5777301588478185002}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  invert: 0
+  type: 0
+  boolReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: shouldReload
+    constantValue: 0
+  objectReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+  transformReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+--- !u!114 &5777301588478185002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74102731f2b205746a01c7e8e19f4a8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Reload Action
+  rect:
+    serializedVersion: 2
+    x: 80
+    y: 1220
+    width: 160
+    height: 45
+  parent: {fileID: 8274675497449766161}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  aiCharacter: {fileID: 215085660974815480}
+--- !u!114 &346113381561685006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c78c7da6b00e1b46bad07949050f82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Sequence
+  rect:
+    serializedVersion: 2
+    x: 680
+    y: 480
+    width: 160
+    height: 45
+  parent: {fileID: 3161236063840249732}
+  children:
+  - {fileID: 4925397662821212518}
+  - {fileID: 4594661809228425071}
+  - {fileID: 1579562564937078758}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  random: 0
+--- !u!114 &4925397662821212518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ff1ef807438e9479e3608f32bbf82b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Set Patrol Point
+  rect:
+    serializedVersion: 2
+    x: 500
+    y: 600
+    width: 160
+    height: 45
+  parent: {fileID: 346113381561685006}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  variableToSet:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: wayPoint
+    constantValue: {x: 0, y: 0, z: 0}
+  waypoints: []
+--- !u!114 &4594661809228425071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fe7bc6a9b18e148b82820c7c1c0a90, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Wait
+  rect:
+    serializedVersion: 2
+    x: 680
+    y: 600
+    width: 160
+    height: 45
+  parent: {fileID: 346113381561685006}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  time:
+    useConstant: 1
+    mode: 0
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: 3
+  randomDeviation: 0
+  continueOnRestart: 0
+--- !u!114 &1579562564937078758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ab448742faf804f9cefcd669d0642b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Move Navmesh Agent
+  rect:
+    serializedVersion: 2
+    x: 880
+    y: 600
+    width: 160
+    height: 45
+  parent: {fileID: 346113381561685006}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  playerPos:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 4275073464473930556}
+    key: wayPoint
+    constantValue: {x: 0, y: 0, z: 0}
+  agent: {fileID: 2002889927117738545}
+  stopDistance: 1
+  updateInterval: 1
+--- !u!114 &5724069013323678649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51272808e3662eb4286c82f38f91fae9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  key: wayPoint
+  val: {x: 0, y: 0, z: 0}
+--- !u!114 &8539232271188009915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ab448742faf804f9cefcd669d0642b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Move Navmesh Agent
+  rect:
+    serializedVersion: 2
+    x: 400
+    y: 700
+    width: 160
+    height: 45
+  parent: {fileID: 2881145081958985481}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  playerPos:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 4275073464473930556}
+    key: playerPos
+    constantValue: {x: 0, y: 0, z: 0}
+  agent: {fileID: 2002889927117738545}
+  stopDistance: 6
+  updateInterval: 1
+--- !u!114 &441120511008560177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Set Condition
+  rect:
+    serializedVersion: 2
+    x: 720
+    y: 160
+    width: 160
+    height: 45
+  parent: {fileID: 0}
+  children:
+  - {fileID: 1820471998282169511}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  invert: 0
+  type: 0
+  boolReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: isAiming
+    constantValue: 0
+  objectReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+  transformReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+--- !u!114 &1820471998282169511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b02cda147b0cce44ae240e669f4d059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Update Aim Direction Action
+  rect:
+    serializedVersion: 2
+    x: 720
+    y: 260
+    width: 160
+    height: 59
+  parent: {fileID: 441120511008560177}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  playerPos:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {x: 0, y: 0, z: 0}
+  aiCharacter: {fileID: 0}
+--- !u!114 &3001190919775493735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08540605df275034fafc8e05c6704214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Selector
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 120
+    width: 160
+    height: 45
+  parent: {fileID: 6190783330994878210}
+  children:
+  - {fileID: 5312760394531139672}
+  - {fileID: 983275037799857715}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  random: 0
+--- !u!114 &8941793562427548809
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c78c7da6b00e1b46bad07949050f82f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Sequence
+  rect:
+    serializedVersion: 2
+    x: 0
+    y: 800
+    width: 160
+    height: 45
+  parent: {fileID: 5519046125627031269}
+  children:
+  - {fileID: 3883069184116820342}
+  - {fileID: 1474017061647784337}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  random: 0
+--- !u!114 &3883069184116820342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b02cda147b0cce44ae240e669f4d059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Update Aim Direction Action
+  rect:
+    serializedVersion: 2
+    x: -260
+    y: 940
+    width: 160
+    height: 59
+  parent: {fileID: 8941793562427548809}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  playerPos:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: playerPos
+    constantValue: {x: 0, y: 0, z: 0}
+  aiCharacter: {fileID: 215085660974815480}
 --- !u!1 &6699964578601542879
 GameObject:
   m_ObjectHideFlags: 0

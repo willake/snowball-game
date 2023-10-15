@@ -7,7 +7,7 @@ using MBT;
 namespace Game.Gameplay.CustomBehaviorTree
 {
     [AddComponentMenu("")]
-    [MBTNode("Custom/Move Navmesh Agent")]
+    [MBTNode("Custom Actions/Move Navmesh Agent")]
     public class MoveNavmeshAgent : Leaf
     {
         public Vector3Reference playerPos;

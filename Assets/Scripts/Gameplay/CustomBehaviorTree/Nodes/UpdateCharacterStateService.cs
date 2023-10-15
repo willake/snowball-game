@@ -7,7 +7,7 @@ using Game.RuntimeStates;
 namespace Game.Gameplay.CustomBehaviorTree
 {
     [AddComponentMenu("")]
-    [MBTNode("Custom/Update Character State Service")]
+    [MBTNode("Custom Services/Update Character State Service")]
     public class UpdateCharacterStateService : Service
     {
         public AICharacter aiCharacter;
