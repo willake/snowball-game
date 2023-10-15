@@ -26,9 +26,6 @@ namespace Game.Gameplay
         [Header("Settings")]
         public float footstepIntervalInSeconds = 0.4f;
         public float footstepAimIntervalInSeconds = 0.6f;
-        public float moveSpeed = 8f;
-        public float aimSpeed = 5f;
-        public Vector3 currentVelocity { get { return GetRigidbody().velocity; } }
         public LayerMask GroundLayer;
 
         public bool isGrounded { get; private set; }
@@ -65,28 +62,6 @@ namespace Game.Gameplay
             SetCharacterState(CharacterState.IdleState);
         }
 
-        public void Idle()
-        {
-            GetRigidbody().velocity = new Vector3(0, GetRigidbody().velocity.y, 0);
-        }
-
-        public void Move(float horizontal, float vertical)
-        {
-            if (State.canMove == false) return;
-
-            Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
-            if (State.isAiming)
-            {
-                GetRigidbody().velocity = direction * aimSpeed;
-                transform.rotation =
-                    Quaternion.LookRotation(direction);
-            }
-            else
-            {
-                GetRigidbody().velocity = direction * moveSpeed;
-            }
-        }
-
         public void TakeDamage(float damage, Vector3 direction)
         {
             if (State.isDead) return;
@@ -121,9 +96,11 @@ namespace Game.Gameplay
 
         public void UpdateAimDirection(Vector3 direction, bool useFoward = true)
         {
-            float angle = (float)Math.Atan2(direction.x, direction.y);
-            transform.rotation = Quaternion.Euler(
-                new Vector3(0, angle * Mathf.Rad2Deg, 0));
+            // float angle = (float)Math.Atan2(direction.x, direction.y);
+            // transform.rotation = Quaternion.Euler(
+            //     new Vector3(0, angle * Mathf.Rad2Deg, 0));
+            direction.y = 0;
+            transform.rotation = Quaternion.LookRotation(direction);
 
             weaponHolder.UpdateAimDirection(useFoward ? transform.forward : direction);
         }

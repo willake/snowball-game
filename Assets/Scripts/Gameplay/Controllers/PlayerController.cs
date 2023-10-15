@@ -102,12 +102,12 @@ namespace Game.Gameplay
             float vertical = Input.GetAxis("Vertical");
             if (Math.Abs(horizontal) > float.Epsilon || Math.Abs(vertical) > float.Epsilon)
             {
-                bindedCharacter.Move(horizontal, vertical);
+                GetPlayerCharacter().Move(horizontal, vertical);
                 _isPressingMove = true;
             }
             else
             {
-                bindedCharacter.Idle();
+                GetPlayerCharacter().Idle();
                 _isPressingMove = false;
             }
 
@@ -130,7 +130,9 @@ namespace Game.Gameplay
             {
                 Vector3 chaPos =
                     bindedCamera.GetCamera().WorldToScreenPoint(bindedCharacter.transform.position);
-                bindedCharacter.UpdateAimDirection((Input.mousePosition - chaPos).normalized);
+                Vector3 dir = (Input.mousePosition - chaPos).normalized;
+                dir.z = dir.y;
+                bindedCharacter.UpdateAimDirection(dir);
             }
 
             statePlayerPos.value = bindedCharacter.transform.position;
@@ -140,7 +142,7 @@ namespace Game.Gameplay
         {
             if (bindedCharacter == null || bindedCamera == null) return;
 
-            Vector3 direction = bindedCharacter.currentVelocity;
+            Vector3 direction = GetPlayerCharacter().currentVelocity;
             direction.y = 0;
             direction.Normalize();
 
