@@ -1499,11 +1499,10 @@ GameObject:
   - component: {fileID: 1579562564937078758}
   - component: {fileID: 5724069013323678649}
   - component: {fileID: 8539232271188009915}
-  - component: {fileID: 441120511008560177}
-  - component: {fileID: 1820471998282169511}
   - component: {fileID: 3001190919775493735}
   - component: {fileID: 8941793562427548809}
   - component: {fileID: 3883069184116820342}
+  - component: {fileID: -6997866805229090323}
   m_Layer: 7
   m_Name: RegularEnemy_MBT
   m_TagString: Untagged
@@ -1809,8 +1808,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 3883069184116820342}
-  repeatOnFinish: 0
+  selectedEditorNode: {fileID: 8539232271188009915}
+  repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
 --- !u!114 &4310384061011322542
@@ -2278,7 +2277,7 @@ MonoBehaviour:
   title: Selector
   rect:
     serializedVersion: 2
-    x: 300
+    x: 260
     y: 880
     width: 160
     height: 45
@@ -2524,7 +2523,7 @@ MonoBehaviour:
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
-  playerPos:
+  destination:
     useConstant: 0
     mode: 0
     blackboard: {fileID: 4275073464473930556}
@@ -2571,7 +2570,7 @@ MonoBehaviour:
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
-  playerPos:
+  destination:
     useConstant: 0
     mode: 0
     blackboard: {fileID: 4275073464473930556}
@@ -2580,83 +2579,6 @@ MonoBehaviour:
   agent: {fileID: 2002889927117738545}
   stopDistance: 6
   updateInterval: 1
---- !u!114 &441120511008560177
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Is Set Condition
-  rect:
-    serializedVersion: 2
-    x: 720
-    y: 160
-    width: 160
-    height: 45
-  parent: {fileID: 0}
-  children:
-  - {fileID: 1820471998282169511}
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  abort: 0
-  invert: 0
-  type: 0
-  boolReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 4275073464473930556}
-    key: isAiming
-    constantValue: 0
-  objectReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
-  transformReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
---- !u!114 &1820471998282169511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b02cda147b0cce44ae240e669f4d059, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Update Aim Direction Action
-  rect:
-    serializedVersion: 2
-    x: 720
-    y: 260
-    width: 160
-    height: 59
-  parent: {fileID: 441120511008560177}
-  children: []
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  playerPos:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {x: 0, y: 0, z: 0}
-  aiCharacter: {fileID: 0}
 --- !u!114 &3001190919775493735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2726,8 +2648,8 @@ MonoBehaviour:
   title: Update Aim Direction Action
   rect:
     serializedVersion: 2
-    x: -260
-    y: 940
+    x: -240
+    y: 880
     width: 160
     height: 59
   parent: {fileID: 8941793562427548809}
@@ -2742,6 +2664,19 @@ MonoBehaviour:
     key: playerPos
     constantValue: {x: 0, y: 0, z: 0}
   aiCharacter: {fileID: 215085660974815480}
+--- !u!114 &-6997866805229090323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e5f392bbea2fa2499665ed8b604ff86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monoBehaviourTree: {fileID: -6965506410551093996}
 --- !u!1 &6699964578601542879
 GameObject:
   m_ObjectHideFlags: 0

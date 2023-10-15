@@ -10,7 +10,7 @@ namespace Game.Gameplay.CustomBehaviorTree
     [MBTNode("Custom Actions/Move Navmesh Agent")]
     public class MoveNavmeshAgent : Leaf
     {
-        public Vector3Reference playerPos;
+        public Vector3Reference destination;
         public NavMeshAgent agent;
         public float stopDistance = 2f;
         [Tooltip("How often target position should be updated")]
@@ -21,7 +21,7 @@ namespace Game.Gameplay.CustomBehaviorTree
         {
             time = 0;
             agent.isStopped = false;
-            agent.SetDestination(playerPos.Value);
+            agent.SetDestination(destination.Value);
         }
 
         public override NodeResult Execute()
@@ -32,7 +32,7 @@ namespace Game.Gameplay.CustomBehaviorTree
             {
                 // Reset time and update destination
                 time = 0;
-                agent.SetDestination(playerPos.Value);
+                agent.SetDestination(destination.Value);
             }
             // Check if path is ready
             if (agent.pathPending)
