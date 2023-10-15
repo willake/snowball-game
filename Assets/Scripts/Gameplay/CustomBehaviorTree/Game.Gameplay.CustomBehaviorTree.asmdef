@@ -1,0 +1,39 @@
+{
+    "name": "Game.Gameplay.CustomBehaviorTree",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c2da7737aab07f248add22487334a422",
+        "GUID:b94eb722e14bb88498f76d28e55be3fa",
+        "GUID:8f7f5ca3f49eb1c4286d141ef85d1db8"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [
+        "Android",
+        "EmbeddedLinux",
+        "GameCoreScarlett",
+        "GameCoreXboxOne",
+        "iOS",
+        "LinuxStandalone64",
+        "CloudRendering",
+        "macOSStandalone",
+        "PS4",
+        "PS5",
+        "QNX",
+        "Stadia",
+        "Switch",
+        "tvOS",
+        "WSA",
+        "VisionOS",
+        "WebGL",
+        "WindowsStandalone32",
+        "WindowsStandalone64",
+        "XboxOne"
+    ],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
