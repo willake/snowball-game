@@ -102,12 +102,12 @@ namespace Game.Gameplay
             float vertical = Input.GetAxis("Vertical");
             if (Math.Abs(horizontal) > float.Epsilon || Math.Abs(vertical) > float.Epsilon)
             {
-                bindedCharacter.Move(horizontal, vertical);
+                GetPlayerCharacter().Move(horizontal, vertical);
                 _isPressingMove = true;
             }
             else
             {
-                bindedCharacter.Idle();
+                GetPlayerCharacter().Idle();
                 _isPressingMove = false;
             }
 
@@ -140,7 +140,7 @@ namespace Game.Gameplay
         {
             if (bindedCharacter == null || bindedCamera == null) return;
 
-            Vector3 direction = bindedCharacter.currentVelocity;
+            Vector3 direction = GetPlayerCharacter().currentVelocity;
             direction.y = 0;
             direction.Normalize();
 

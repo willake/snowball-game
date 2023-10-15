@@ -10,6 +10,10 @@ namespace Game.Gameplay
 
         private NavMeshAgent _navMeshAgent;
 
+        public bool PathPending { get => GetNavMeshAgent().pathPending; }
+        public float RemainingDistance { get => GetNavMeshAgent().remainingDistance; }
+        public bool HasPath { get => GetNavMeshAgent().hasPath; }
+
         private void Start()
         {
             dieEvent.AddListener(() => SetMovementEnabled(false));
@@ -66,9 +70,15 @@ namespace Game.Gameplay
             return finalVelocity.magnitude;
         }
 
+        public void Idle()
+        {
+            GetNavMeshAgent().isStopped = true;
+        }
+
         public void MoveTo(Vector3 position)
         {
             if (State.canMove == false) return;
+            GetNavMeshAgent().isStopped = false;
             GetNavMeshAgent().SetDestination(position);
         }
 

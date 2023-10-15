@@ -1496,13 +1496,13 @@ GameObject:
   - component: {fileID: 346113381561685006}
   - component: {fileID: 4925397662821212518}
   - component: {fileID: 4594661809228425071}
-  - component: {fileID: 1579562564937078758}
   - component: {fileID: 5724069013323678649}
-  - component: {fileID: 8539232271188009915}
   - component: {fileID: 3001190919775493735}
   - component: {fileID: 8941793562427548809}
   - component: {fileID: 3883069184116820342}
   - component: {fileID: -6997866805229090323}
+  - component: {fileID: 7150682994617619964}
+  - component: {fileID: 1813159567978653599}
   m_Layer: 7
   m_Name: RegularEnemy_MBT
   m_TagString: Untagged
@@ -1617,8 +1617,6 @@ MonoBehaviour:
   health: 100
   footstepIntervalInSeconds: 0.4
   footstepAimIntervalInSeconds: 0.6
-  moveSpeed: 8
-  aimSpeed: 5
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -1808,7 +1806,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 8539232271188009915}
+  selectedEditorNode: {fileID: 4594661809228425071}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -2191,7 +2189,7 @@ MonoBehaviour:
   parent: {fileID: 3962593562811749086}
   children:
   - {fileID: 5519046125627031269}
-  - {fileID: 8539232271188009915}
+  - {fileID: 1813159567978653599}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -2430,8 +2428,7 @@ MonoBehaviour:
   parent: {fileID: 3161236063840249732}
   children:
   - {fileID: 4925397662821212518}
-  - {fileID: 4594661809228425071}
-  - {fileID: 1579562564937078758}
+  - {fileID: 7150682994617619964}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -2486,7 +2483,7 @@ MonoBehaviour:
     y: 600
     width: 160
     height: 45
-  parent: {fileID: 346113381561685006}
+  parent: {fileID: 0}
   children: []
   behaviourTree: {fileID: 0}
   runtimePriority: 0
@@ -2499,39 +2496,6 @@ MonoBehaviour:
     constantValue: 3
   randomDeviation: 0
   continueOnRestart: 0
---- !u!114 &1579562564937078758
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ab448742faf804f9cefcd669d0642b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Move Navmesh Agent
-  rect:
-    serializedVersion: 2
-    x: 880
-    y: 600
-    width: 160
-    height: 45
-  parent: {fileID: 346113381561685006}
-  children: []
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  destination:
-    useConstant: 0
-    mode: 0
-    blackboard: {fileID: 4275073464473930556}
-    key: wayPoint
-    constantValue: {x: 0, y: 0, z: 0}
-  agent: {fileID: 2002889927117738545}
-  stopDistance: 1
-  updateInterval: 1
 --- !u!114 &5724069013323678649
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2546,39 +2510,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: wayPoint
   val: {x: 0, y: 0, z: 0}
---- !u!114 &8539232271188009915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ab448742faf804f9cefcd669d0642b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Move Navmesh Agent
-  rect:
-    serializedVersion: 2
-    x: 400
-    y: 700
-    width: 160
-    height: 45
-  parent: {fileID: 2881145081958985481}
-  children: []
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  destination:
-    useConstant: 0
-    mode: 0
-    blackboard: {fileID: 4275073464473930556}
-    key: playerPos
-    constantValue: {x: 0, y: 0, z: 0}
-  agent: {fileID: 2002889927117738545}
-  stopDistance: 6
-  updateInterval: 1
 --- !u!114 &3001190919775493735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2677,6 +2608,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monoBehaviourTree: {fileID: -6965506410551093996}
+--- !u!114 &7150682994617619964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ecf703bd8f46c4b9664ac99bdd0e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Move Character Action
+  rect:
+    serializedVersion: 2
+    x: 880
+    y: 600
+    width: 160
+    height: 45
+  parent: {fileID: 346113381561685006}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  destination:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 4275073464473930556}
+    key: wayPoint
+    constantValue: {x: 0, y: 0, z: 0}
+  character: {fileID: 215085660974815480}
+  stopDistance: 1
+  updateInterval: 1
+--- !u!114 &1813159567978653599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9ecf703bd8f46c4b9664ac99bdd0e97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Move Character Action
+  rect:
+    serializedVersion: 2
+    x: 320
+    y: 700
+    width: 160
+    height: 45
+  parent: {fileID: 2881145081958985481}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  destination:
+    useConstant: 0
+    mode: 0
+    blackboard: {fileID: 4275073464473930556}
+    key: playerPos
+    constantValue: {x: 0, y: 0, z: 0}
+  character: {fileID: 215085660974815480}
+  stopDistance: 6
+  updateInterval: 1
 --- !u!1 &6699964578601542879
 GameObject:
   m_ObjectHideFlags: 0
