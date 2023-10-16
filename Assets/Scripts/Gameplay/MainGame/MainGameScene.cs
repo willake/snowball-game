@@ -69,7 +69,7 @@ namespace Game.Gameplay
         public void OnStartGame()
         {
             IsGameRunning = true;
-            // gameStatisticsCollector.StartRecording();
+            gameStatisticsCollector.StartRecording();
         }
 
         public void OnEndGame(bool isWin)
@@ -82,7 +82,7 @@ namespace Game.Gameplay
                     args = new object[] { isWin }
                 }
             );
-            // gameStatisticsCollector.StopRecording(isWin);
+            gameStatisticsCollector.StopRecording(isWin);
 
         }
 

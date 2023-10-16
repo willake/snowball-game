@@ -22,7 +22,7 @@ namespace Game
 #elif UNITY_WEBGL
                 return new JsonRepository<GameStatisticsDataV1>(SaveMode.PlayerPrefs);
 #else
-                return new JsonRepository<GameStatisticsDataV1>(SaveMode.NonSerializedFile);
+                return new JsonRepository<GameStatisticsDataV1>(SaveMode.NonSerializedFile, Consts.GAME_FOLDER_PATH());
 #endif
             });
             Register<ScreenAspectManager>(() => new ScreenAspectManager());

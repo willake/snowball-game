@@ -779,6 +779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundDectector: {fileID: 1003446143622183207}
   weaponHolder: {fileID: 1102129920266668612}
+  isPlayer: 1
   health: 100
   footstepIntervalInSeconds: 0.4
   footstepAimIntervalInSeconds: 0.6
