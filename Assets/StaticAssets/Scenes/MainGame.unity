@@ -197,6 +197,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isPersistant: 0
+  isGameRunningState: {fileID: 11400000, guid: 56bd6a67e357b3e4fafb330d0c5306e3, type: 2}
   playerCamera: {fileID: 0}
   characterFactory: {fileID: 1629096364}
   vfxManager: {fileID: 1105884531}

@@ -7,12 +7,14 @@ using Game.Audios;
 using Game.Events;
 using System.Threading.Tasks;
 using DG.Tweening;
+using Game.RuntimeStates;
 
 namespace Game.Gameplay
 {
     public class MainGameScene : GameScene<MainGameScene>
     {
         [Header("References")]
+        public BoolState isGameRunningState;
         public Camera playerCamera;
         public CharacterFactory characterFactory;
         public EnvironmentVFXManager vfxManager;
@@ -80,6 +82,7 @@ namespace Game.Gameplay
         public void OnStartGame()
         {
             IsGameRunning = true;
+            isGameRunningState.value = true;
 
             gameStatisticsCollector.StartRecording(
                 GetLevelNumer(GameManager.instance.levelToLoad), _enemyList.Count);
@@ -103,7 +106,9 @@ namespace Game.Gameplay
 
         public void OnEndGame(bool isWin)
         {
+            AudioManager.instance.StopSFXLoop(_ambienceWindLoopID);
             IsGameRunning = false;
+            isGameRunningState.value = false;
             EventManager.Publish(
                 EventNames.onGameEnd,
                 new Payload()
@@ -165,11 +170,6 @@ namespace Game.Gameplay
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
                 panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }
-        }
-
-        private void OnDestroy()
-        {
-            AudioManager.instance.StopSFXLoop(_ambienceWindLoopID);
         }
     }
 }
