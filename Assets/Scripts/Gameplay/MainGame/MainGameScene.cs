@@ -65,7 +65,7 @@ namespace Game.Gameplay
             if (UIManager.instance)
             {
                 playerCamera = playerController.bindedCamera.GetCamera();
-                _gameHUDPanel.BindCharacter(playerController.bindedCharacter);
+                _gameHUDPanel.BindController(playerController);
             }
         }
 

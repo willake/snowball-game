@@ -6,6 +6,7 @@ using Game.Gameplay.Cameras;
 using Game.RuntimeStates;
 using Game.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Gameplay
 {
@@ -20,9 +21,9 @@ namespace Game.Gameplay
         public ProgressBar chargeBar;
 
         private bool _isPressingMove;
-        public int AvailableLifes { get; private set; }
-
+        public int availableLifes = 2;
         private PlayerCharacter _playerCharacter;
+        public LifesUpdateEvent lifesUpdateEvent = new();
 
         public void BindCamera(PlayerCamera cam)
         {
@@ -59,19 +60,20 @@ namespace Game.Gameplay
             bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
 
             isPlayerDead.value = false;
-            AvailableLifes = 3;
+            availableLifes = 2;
         }
 
         public bool Revive()
         {
-            if (AvailableLifes == 0)
+            if (availableLifes == 0)
             {
                 return false;
             }
             transform.position = spawnPoint.position;
-            AvailableLifes--;
+            availableLifes--;
             isPlayerDead.value = false;
             bindedCharacter.Revive();
+            lifesUpdateEvent.Invoke(availableLifes);
             return true;
         }
 
@@ -197,5 +199,7 @@ namespace Game.Gameplay
 
             return _reloadbarFollow;
         }
+
+        public class LifesUpdateEvent : UnityEvent<int> { }
     }
 }
