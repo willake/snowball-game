@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.UI;
-using Cysharp.Threading.Tasks;
-using Game.Gameplay.Cameras;
+using System;
 using Game.Audios;
+using Game.Events;
 
 namespace Game.Gameplay
 {
@@ -16,11 +16,18 @@ namespace Game.Gameplay
         public EnvironmentVFXManager vfxManager;
         public LevelLoader levelLoader;
         public Canvas worldSpaceCanvas;
+        public GameStatisticsCollector gameStatisticsCollector;
 
         private GameHUDPanel _gameHUDPanel;
         private PlayerController _player;
         private HashSet<int> _enemyList = new HashSet<int>();
         private int _ambienceWindLoopID = 0;
+
+        private Lazy<EventManager> _eventManager = new Lazy<EventManager>(
+            () => DIContainer.instance.GetObject<EventManager>(),
+            true
+        );
+        protected EventManager EventManager { get => _eventManager.Value; }
 
         public bool IsGameRunning { get; private set; }
 
@@ -56,7 +63,27 @@ namespace Game.Gameplay
                 ambienceWind.clip,
                 ambienceWind.volume
             );
+            OnStartGame();
+        }
+
+        public void OnStartGame()
+        {
             IsGameRunning = true;
+            gameStatisticsCollector.StartRecording();
+        }
+
+        public void OnEndGame(bool isWin)
+        {
+            IsGameRunning = false;
+            EventManager.Publish(
+                EventNames.onGameEnd,
+                new Payload()
+                {
+                    args = new object[] { isWin }
+                }
+            );
+            gameStatisticsCollector.StopRecording();
+
         }
 
         public void RegisterPlayer(PlayerController playerController)
@@ -71,6 +98,11 @@ namespace Game.Gameplay
 
         public void EliminatePlayer(PlayerController playerController)
         {
+            EventManager.Publish(
+                EventNames.onPlayerDead,
+                new Payload()
+            );
+
             if (playerController.Revive())
             {
 
@@ -78,7 +110,7 @@ namespace Game.Gameplay
             else
             {
                 Debug.Log("Player lose!");
-                IsGameRunning = false;
+                OnEndGame(false);
                 if (UIManager.instance)
                 {
                     EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
@@ -97,10 +129,15 @@ namespace Game.Gameplay
         {
             _enemyList.Remove(aiController.GetInstanceID());
 
+            EventManager.Publish(
+                EventNames.onEnemyDead,
+                new Payload()
+            );
+
             if (_enemyList.Count <= 0)
             {
                 Debug.Log("Player wins");
-                IsGameRunning = false;
+                OnEndGame(true);
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
                 panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }

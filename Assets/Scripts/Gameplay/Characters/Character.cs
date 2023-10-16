@@ -5,11 +5,18 @@ using UnityEngine.Events;
 using Game.Gameplay.CharacterStates;
 using System.Collections;
 using Game.Audios;
+using Game.Events;
 
 namespace Game.Gameplay
 {
     public abstract class Character : MonoBehaviour
     {
+        private Lazy<EventManager> _eventManager = new Lazy<EventManager>(
+            () => DIContainer.instance.GetObject<EventManager>(),
+            true
+        );
+        protected EventManager EventManager { get => _eventManager.Value; }
+
         private CharacterAnimatior _characterAnimator;
         private Rigidbody _rigibody;
 
@@ -18,6 +25,7 @@ namespace Game.Gameplay
         public WeaponHolder weaponHolder;
 
         [Header("Status")]
+        public bool isPlayer = false;
         public float health = 100;
         public HealthUpdateEvent healthUpdateEvent = new();
         public DieEvent dieEvent = new();
@@ -53,6 +61,14 @@ namespace Game.Gameplay
                     SetCharacterState(CharacterState.IdleState);
                     GetCharacterAnimatior()?.SetIsReloading(false);
                     AudioManager.instance?.StopSFXLoop(_reloadSFXLoopID);
+
+                    if (isPlayer)
+                    {
+                        EventManager.Publish(
+                            EventNames.onPlayerReload,
+                            new Payload()
+                        );
+                    }
                 });
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => SetCharacterState(CharacterState.IdleState));
@@ -77,6 +93,14 @@ namespace Game.Gameplay
 
             health -= damage;
             healthUpdateEvent.Invoke(health, MaxHealth);
+
+            if (isPlayer)
+            {
+                EventManager.Publish(
+                    EventNames.onPlayerDamaged,
+                    new Payload()
+                );
+            }
 
             if (State.isAiming)
             {

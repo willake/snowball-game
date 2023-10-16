@@ -8,7 +8,7 @@ using Cysharp.Threading.Tasks;
 
 namespace Game.Gameplay
 {
-    public class GameDataCollector : MonoBehaviour
+    public class GameStatisticsCollector : MonoBehaviour
     {
         public const string IDENTITY = "GAME_DATA_COLLECTOR";
         private Lazy<EventManager> _eventManager = new Lazy<EventManager>(
