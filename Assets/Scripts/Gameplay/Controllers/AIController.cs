@@ -40,36 +40,13 @@ namespace Game.Gameplay
                     MainGameScene.instance.worldSpaceCanvas,
                     MainGameScene.instance.playerCamera
                 );
-                MainGameScene.instance.RegisterEnemy(this);
+                MainGameScene.instance.RegisterEnemy(this, GetAICharacter().isBoss);
             }
 
             bindedCharacter.healthUpdateEvent.AddListener(UpdateHealthBar);
             bindedCharacter.dieEvent.AddListener(HandleDieEvent);
 
             isControllable = true;
-        }
-
-        protected void Patroling()
-        {
-            if (patrolPoints.Length == 0) return;
-            // if (!walkPointSet) SearchWalkPoint();
-
-            // Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-            //Walkpoint reached
-            // if (distanceToWalkPoint.magnitude < 1f)
-            // walkPointSet = false;
-        }
-        protected void SearchWalkPoint()
-        {
-            //Calculate random point in range
-            // float randomZ = Random.Range(-walkPointRange, walkPointRange);
-            // float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-            // walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-            // if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-            // walkPointSet = true;
         }
 
         protected void ChasePlayer()
@@ -120,7 +97,7 @@ namespace Game.Gameplay
         IEnumerator DestoryCharacter()
         {
             yield return new WaitForSeconds(2f);
-            MainGameScene.instance?.EliminateEnemy(this);
+            MainGameScene.instance?.EliminateEnemy(this, GetAICharacter().isBoss);
             Destroy(this.healthBar.gameObject);
             Destroy(this.gameObject);
         }

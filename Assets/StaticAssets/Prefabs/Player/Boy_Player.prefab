@@ -1798,7 +1798,7 @@ MonoBehaviour:
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
     ctime1: 20046
-    ctime2: 58982
+    ctime2: 63569
     ctime3: 65535
     ctime4: 0
     ctime5: 0
@@ -2572,9 +2572,9 @@ MonoBehaviour:
   throwingPitch: 2
   minEnergy: 20
   maxEnergy: 100
-  criticalThreshold: 0.95
+  criticalThreshold: 0.96
   chargeIntervalInSeconds: 0.01
-  energyPerInterval: 1
+  energyPerInterval: 2
   timeOutEnergy: 5
   reloadIntervalInSeconds: 0.05
   reloadTimeInSeconds: 1.5
