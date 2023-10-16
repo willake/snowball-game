@@ -34,9 +34,11 @@ namespace Game.Gameplay
         Subscription _onEnemyDeadSubscription;
         Subscription _onPlayerBallHitSubscription;
 
-        public void StartRecording()
+        public void StartRecording(int level)
         {
             _statisticsData = new GameStatisticsDataV1(TimeStampUtils.NowInMilliseconds);
+
+            _statisticsData.level = level;
 
             _onGameEndSubscription =
                 EventManager.Subscribe(IDENTITY, EventNames.onGameEnd,

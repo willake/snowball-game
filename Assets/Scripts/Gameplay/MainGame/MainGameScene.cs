@@ -69,7 +69,25 @@ namespace Game.Gameplay
         public void OnStartGame()
         {
             IsGameRunning = true;
-            gameStatisticsCollector.StartRecording();
+
+            gameStatisticsCollector.StartRecording(
+                GetLevelNumer(GameManager.instance.levelToLoad));
+        }
+
+        private int GetLevelNumer(AvailableLevel availableLevel)
+        {
+            switch (availableLevel)
+            {
+                case AvailableLevel.Test:
+                default:
+                    return 0;
+                case AvailableLevel.Level1:
+                    return 1;
+                case AvailableLevel.Level2:
+                    return 2;
+                case AvailableLevel.Level3:
+                    return 3;
+            }
         }
 
         public void OnEndGame(bool isWin)
