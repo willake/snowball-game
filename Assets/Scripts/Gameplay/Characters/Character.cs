@@ -56,13 +56,13 @@ namespace Game.Gameplay
                     _reloadSFXLoopID =
                         AudioManager.instance.PlaySFXLoop(audioClip.clip, audioClip.volume);
                 });
-            weaponHolder.reloadEndEvent.AddListener(() =>
+            weaponHolder.reloadEndEvent.AddListener(success =>
                 {
                     SetCharacterState(CharacterState.IdleState);
                     GetCharacterAnimatior()?.SetIsReloading(false);
                     AudioManager.instance?.StopSFXLoop(_reloadSFXLoopID);
 
-                    if (isPlayer)
+                    if (isPlayer && success)
                     {
                         EventManager.Publish(
                             EventNames.onPlayerReload,

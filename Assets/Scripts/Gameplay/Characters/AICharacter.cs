@@ -21,7 +21,7 @@ namespace Game.Gameplay
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => SetMovementEnabled(true));
             weaponHolder.reloadStartEvent.AddListener(() => SetMovementEnabled(false));
-            weaponHolder.reloadEndEvent.AddListener(() => SetMovementEnabled(true));
+            weaponHolder.reloadEndEvent.AddListener(_ => SetMovementEnabled(true));
         }
 
         public void SetMovementEnabled(bool isEnabled)

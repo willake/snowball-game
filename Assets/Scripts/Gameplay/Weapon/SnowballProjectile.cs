@@ -68,7 +68,7 @@ namespace Game.Gameplay
                 && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 character = other.gameObject.GetComponent<Character>();
-                if (character.State.isDead == false)
+                if (character != null && character.State.isDead == false)
                 {
                     isDamaged = character.TakeDamage(
                         _isCritical ? criticalDamage : damage, GetRigidbody().velocity);
@@ -81,7 +81,7 @@ namespace Game.Gameplay
                 && other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 character = other.gameObject.GetComponent<Character>();
-                if (character.State.isDead == false)
+                if (character != null && character.State.isDead == false)
                 {
                     isDamaged = character.TakeDamage(
                         _isCritical ? criticalDamage : damage, GetRigidbody().velocity);
