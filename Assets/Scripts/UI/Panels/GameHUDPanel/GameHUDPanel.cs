@@ -15,8 +15,8 @@ namespace Game.UI
         [Header("References")]
         public WDButton btnMenu;
 
-        public Slider heathBarSlider;
-        public Slider ammoBarSlider;
+        public ProgressBar healthBar;
+        public AmmoBar ammoBar;
 
         private Character _bindedCharacter = null;
 
@@ -62,46 +62,25 @@ namespace Game.UI
             _bindedCharacter = character;
             character.healthUpdateEvent.AddListener(UpdateHealth);
             character.weaponHolder.ammoUpdateEvent.AddListener(UpdateAmmo);
-            character.weaponHolder.energyUpdateEvent.AddListener(UpdateEnergy);
-            character.weaponHolder.loadEvent.AddListener(ShowChargeBar);
-            character.weaponHolder.throwEvent.AddListener(CloseChargeBar);
+            healthBar.SetProgress(character.health / character.MaxHealth);
+            ammoBar.SetAmmo(10);
         }
 
         public void UnbindCharacter()
         {
             _bindedCharacter.healthUpdateEvent.RemoveListener(UpdateHealth);
             _bindedCharacter.weaponHolder.ammoUpdateEvent.RemoveListener(UpdateAmmo);
-            _bindedCharacter.weaponHolder.energyUpdateEvent.RemoveListener(UpdateEnergy);
-            _bindedCharacter.weaponHolder.loadEvent.RemoveListener(ShowChargeBar);
-            _bindedCharacter.weaponHolder.throwEvent.RemoveListener(CloseChargeBar);
             _bindedCharacter = null;
         }
 
         private void UpdateHealth(float health, float maxHealth)
         {
-            // TODO: update health UI
-            heathBarSlider.value = health / maxHealth;
+            healthBar.SetProgress(health / maxHealth, 0.4f);
         }
 
         private void UpdateAmmo(int ammo)
         {
-            // TODO: update ammo UI
-            ammoBarSlider.value = ammo;
-        }
-
-        private void UpdateEnergy(float energyInPercentage)
-        {
-            // TOD: update energy bar if it shows up
-        }
-
-        private void ShowChargeBar()
-        {
-
-        }
-
-        private void CloseChargeBar()
-        {
-
+            ammoBar.SetAmmo(ammo);
         }
 
         private void SwitchToMainGame()

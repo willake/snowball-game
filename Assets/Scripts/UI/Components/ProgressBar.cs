@@ -52,7 +52,7 @@ namespace Game.UI
                 progress = Mathf.Clamp01(progress);
             }
 
-            if (Mathf.Abs(progress - progressImage.fillAmount) > float.Epsilon)
+            if (Mathf.Abs(progressImage.fillAmount - progress) > float.Epsilon)
             {
                 if (_tween != null && _tween.IsPlaying())
                 {
