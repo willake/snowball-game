@@ -5,6 +5,7 @@ using Game.UI;
 using System;
 using Game.Audios;
 using Game.Events;
+using System.Threading.Tasks;
 
 namespace Game.Gameplay
 {
@@ -50,6 +51,8 @@ namespace Game.Gameplay
                 _gameHUDPanel = UIManager.instance.OpenUI(AvailableUI.GameHUDPanel) as GameHUDPanel;
             }
 
+            await Task.Delay(TimeSpan.FromSeconds(2f));
+
             WrappedAudioClip audioStart =
                 ResourceManager.instance?.audioResources.gameplayAudios.levelStart;
             AudioManager.instance?.PlaySFX(
@@ -71,7 +74,7 @@ namespace Game.Gameplay
             IsGameRunning = true;
 
             gameStatisticsCollector.StartRecording(
-                GetLevelNumer(GameManager.instance.levelToLoad));
+                GetLevelNumer(GameManager.instance.levelToLoad), _enemyList.Count);
         }
 
         private int GetLevelNumer(AvailableLevel availableLevel)

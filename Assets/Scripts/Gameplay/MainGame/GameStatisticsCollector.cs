@@ -34,11 +34,15 @@ namespace Game.Gameplay
         Subscription _onEnemyDeadSubscription;
         Subscription _onPlayerBallHitSubscription;
 
-        public void StartRecording(int level)
+        private long _startTime;
+
+        public void StartRecording(int level, int totalEnemyCount)
         {
+            _startTime = TimeStampUtils.NowInSeconds;
             _statisticsData = new GameStatisticsDataV1(TimeStampUtils.NowInMilliseconds);
 
             _statisticsData.level = level;
+            _statisticsData.totalEnemyCount = totalEnemyCount;
 
             _onGameEndSubscription =
                 EventManager.Subscribe(IDENTITY, EventNames.onGameEnd,
@@ -87,6 +91,7 @@ namespace Game.Gameplay
 
         public void StopRecording(bool isWin)
         {
+            _statisticsData.finishTime = TimeStampUtils.NowInSeconds - _startTime;
             // save data in background
             _statisticsData.isPlayerWin = isWin;
             StatisticsDataRepository.Insert(_statisticsData).Forget();
