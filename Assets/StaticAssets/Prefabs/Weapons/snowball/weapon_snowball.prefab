@@ -51,4 +51,7 @@ MonoBehaviour:
   prefabOnHitEffect: {fileID: 5665328747249036557, guid: bc6ba0aefb0bbf64bb4bfd4283cfebb5, type: 3}
   maxAmmo: 10
   poolSize: 15
-  energyMultiplier: 10
+  energyMultiplier: 1
+  projectileLayer:
+    serializedVersion: 2
+    m_Bits: 256

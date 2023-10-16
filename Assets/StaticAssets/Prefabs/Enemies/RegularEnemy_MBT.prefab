@@ -1087,8 +1087,9 @@ MonoBehaviour:
   particalCriticalHit: {fileID: 0}
   isDebugLogEnabled: 0
   throwingPitch: 2
-  minEnergy: 5
+  minEnergy: 20
   maxEnergy: 100
+  criticalThreshold: 0.95
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
   timeOutEnergy: 0.1
@@ -1101,9 +1102,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   reloadStartEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  reloadEndEvent:
     m_PersistentCalls:
       m_Calls: []
   ownerCamp: 1
@@ -1617,6 +1615,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundDectector: {fileID: 3571375711578037997}
   weaponHolder: {fileID: 4801648317060703368}
+  isPlayer: 0
   health: 100
   footstepIntervalInSeconds: 0.4
   footstepAimIntervalInSeconds: 0.6
