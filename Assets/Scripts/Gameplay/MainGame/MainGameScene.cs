@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.UI;
-using Cysharp.Threading.Tasks;
-using Game.Gameplay.Cameras;
+using System;
 using Game.Audios;
+using Game.Events;
+using System.Threading.Tasks;
 
 namespace Game.Gameplay
 {
@@ -16,11 +17,18 @@ namespace Game.Gameplay
         public EnvironmentVFXManager vfxManager;
         public LevelLoader levelLoader;
         public Canvas worldSpaceCanvas;
+        public GameStatisticsCollector gameStatisticsCollector;
 
         private GameHUDPanel _gameHUDPanel;
         private PlayerController _player;
         private HashSet<int> _enemyList = new HashSet<int>();
         private int _ambienceWindLoopID = 0;
+
+        private Lazy<EventManager> _eventManager = new Lazy<EventManager>(
+            () => DIContainer.instance.GetObject<EventManager>(),
+            true
+        );
+        protected EventManager EventManager { get => _eventManager.Value; }
 
         public bool IsGameRunning { get; private set; }
 
@@ -43,6 +51,8 @@ namespace Game.Gameplay
                 _gameHUDPanel = UIManager.instance.OpenUI(AvailableUI.GameHUDPanel) as GameHUDPanel;
             }
 
+            await Task.Delay(TimeSpan.FromSeconds(2f));
+
             WrappedAudioClip audioStart =
                 ResourceManager.instance?.audioResources.gameplayAudios.levelStart;
             AudioManager.instance?.PlaySFX(
@@ -56,7 +66,45 @@ namespace Game.Gameplay
                 ambienceWind.clip,
                 ambienceWind.volume
             );
+            OnStartGame();
+        }
+
+        public void OnStartGame()
+        {
             IsGameRunning = true;
+
+            gameStatisticsCollector.StartRecording(
+                GetLevelNumer(GameManager.instance.levelToLoad), _enemyList.Count);
+        }
+
+        private int GetLevelNumer(AvailableLevel availableLevel)
+        {
+            switch (availableLevel)
+            {
+                case AvailableLevel.Test:
+                default:
+                    return 0;
+                case AvailableLevel.Level1:
+                    return 1;
+                case AvailableLevel.Level2:
+                    return 2;
+                case AvailableLevel.Level3:
+                    return 3;
+            }
+        }
+
+        public void OnEndGame(bool isWin)
+        {
+            IsGameRunning = false;
+            EventManager.Publish(
+                EventNames.onGameEnd,
+                new Payload()
+                {
+                    args = new object[] { isWin }
+                }
+            );
+            gameStatisticsCollector.StopRecording(isWin);
+
         }
 
         public void RegisterPlayer(PlayerController playerController)
@@ -71,6 +119,11 @@ namespace Game.Gameplay
 
         public void EliminatePlayer(PlayerController playerController)
         {
+            EventManager.Publish(
+                EventNames.onPlayerDead,
+                new Payload()
+            );
+
             if (playerController.Revive())
             {
 
@@ -78,7 +131,7 @@ namespace Game.Gameplay
             else
             {
                 Debug.Log("Player lose!");
-                IsGameRunning = false;
+                OnEndGame(false);
                 if (UIManager.instance)
                 {
                     EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
@@ -97,10 +150,15 @@ namespace Game.Gameplay
         {
             _enemyList.Remove(aiController.GetInstanceID());
 
+            EventManager.Publish(
+                EventNames.onEnemyDead,
+                new Payload()
+            );
+
             if (_enemyList.Count <= 0)
             {
                 Debug.Log("Player wins");
-                IsGameRunning = false;
+                OnEndGame(true);
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
                 panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }

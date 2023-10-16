@@ -47,7 +47,7 @@ namespace Game.Gameplay
                 reloadBar.SetProgress(0f);
                 reloadBar.gameObject.SetActive(true);
             });
-            bindedCharacter.weaponHolder.reloadEndEvent.AddListener(() => reloadBar.gameObject.SetActive(false));
+            bindedCharacter.weaponHolder.reloadEndEvent.AddListener(_ => reloadBar.gameObject.SetActive(false));
             bindedCharacter.weaponHolder.reloadProgressUpdateEvent.AddListener(progress => reloadBar.SetProgress(progress));
 
             bindedCharacter.weaponHolder.loadEvent.AddListener(() =>

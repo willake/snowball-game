@@ -47,7 +47,7 @@ namespace Game.Gameplay
         public EnergyUpdateEvent energyUpdateEvent = new();
         public AmmoUpdateEvent ammoUpdateEvent = new();
         public UnityEvent reloadStartEvent = new();
-        public UnityEvent reloadEndEvent = new();
+        public ReloadEndEvent reloadEndEvent = new();
         public ReloadProgressUpdateEvent reloadProgressUpdateEvent = new();
 
         [Header("Property")]
@@ -166,7 +166,7 @@ namespace Game.Gameplay
             }
 
             SetWeaponHolderState(WeaponHolderState.IdleState);
-            reloadEndEvent.Invoke();
+            reloadEndEvent.Invoke(false);
         }
 
         IEnumerator StartReload()
@@ -184,7 +184,7 @@ namespace Game.Gameplay
 
             ammoUpdateEvent.Invoke(holdingWeapon.maxAmmo);
             SetWeaponHolderState(WeaponHolderState.IdleState);
-            reloadEndEvent.Invoke();
+            reloadEndEvent.Invoke(true);
         }
 
         IEnumerator ChargeEnergy()
@@ -243,5 +243,7 @@ namespace Game.Gameplay
         public class ReloadProgressUpdateEvent : UnityEvent<float> { }
         // ammo / maxAmmo
         public class AmmoUpdateEvent : UnityEvent<int> { }
+        // success or not
+        public class ReloadEndEvent : UnityEvent<bool> { }
     }
 }

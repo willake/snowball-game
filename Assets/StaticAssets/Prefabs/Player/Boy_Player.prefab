@@ -779,6 +779,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundDectector: {fileID: 1003446143622183207}
   weaponHolder: {fileID: 1102129920266668612}
+  isPlayer: 1
   health: 100
   footstepIntervalInSeconds: 0.4
   footstepAimIntervalInSeconds: 0.6
@@ -2569,12 +2570,12 @@ MonoBehaviour:
   particalCriticalHit: {fileID: 6732514805270760128}
   isDebugLogEnabled: 0
   throwingPitch: 2
-  minEnergy: 5
+  minEnergy: 20
   maxEnergy: 100
   criticalThreshold: 0.95
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 1
-  timeOutEnergy: 1
+  timeOutEnergy: 5
   reloadIntervalInSeconds: 0.05
   reloadTimeInSeconds: 1.5
   loadEvent:
@@ -2584,9 +2585,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   reloadStartEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  reloadEndEvent:
     m_PersistentCalls:
       m_Calls: []
   ownerCamp: 0
@@ -2881,7 +2879,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: energyMultiplier
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: prefabProjectile
