@@ -19,6 +19,7 @@ namespace Game.Gameplay
         public float throwingPitch = 10f;
         public float minEnergy = 0f;
         public float maxEnergy = 10f;
+        public float criticalThreshold = 0.95f;
         public float chargeIntervalInSeconds = 0.01f;
         public float energyPerInterval = 0.1f;
         public float timeOutEnergy = 0.1f;
@@ -119,7 +120,7 @@ namespace Game.Gameplay
             bool isCritical = false;
 
             // critical hit
-            if (ownerCamp == Camp.Player && energy / maxEnergy > 0.9f)
+            if (ownerCamp == Camp.Player && energy / maxEnergy > criticalThreshold)
             {
                 WrappedAudioClip audioClip =
                     ResourceManager.instance.audioResources.gameplayAudios.criticalCharge;
