@@ -37,6 +37,8 @@ namespace Game.Gameplay
 
         private async void Start()
         {
+            IsGameRunning = false;
+            isGameRunningState.value = false;
             if (GameManager.instance)
             {
                 await levelLoader.LoadLevel(GameManager.instance.levelToLoad);
