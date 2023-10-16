@@ -55,7 +55,7 @@ namespace Game.Gameplay
                 await UIManager.instance.OpenUIAsync(AvailableUI.GameStartPanel) as GameStartPanel;
 
             await startPanel.ShowText("- Ready -", 2f, Ease.InOutSine);
-            await Task.Delay(TimeSpan.FromSeconds(2f));
+            await Task.Delay(TimeSpan.FromSeconds(1f));
             await startPanel.ShowText("- Start -", 1f, Ease.InOutSine);
             await UIManager.instance.PrevAsync();
             if (UIManager.instance)
