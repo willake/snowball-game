@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
 using Game.Gameplay.WeaponHolderStates;
+using Game.Audios;
 
 namespace Game.Gameplay
 {
@@ -113,6 +114,17 @@ namespace Game.Gameplay
             );
 
             energy = Mathf.Clamp(energy, minEnergy, maxEnergy);
+
+            // critical hit
+            if (ownerCamp == Camp.Player && energy / maxEnergy > 0.9f)
+            {
+                WrappedAudioClip audioClip =
+                    ResourceManager.instance.audioResources.gameplayAudios.criticalCharge;
+                AudioManager.instance.PlaySFX(
+                    audioClip.clip,
+                    audioClip.volume
+                );
+            }
 
             holdingWeapon.Attack(shootDirection.normalized, energy);
 
