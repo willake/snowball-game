@@ -12,6 +12,7 @@ namespace Game.Gameplay
     {
         [Header("References")]
         public PlayerCamera bindedCamera;
+        public BoolState isPlayerDead;
         public Vector3State statePlayerPos;
         public ProgressBar reloadBar;
         public ProgressBar chargeBar;
@@ -56,6 +57,7 @@ namespace Game.Gameplay
             bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
 
             isControllable = true;
+            isPlayerDead.value = false;
         }
 
         private void SetupReloadBar()
@@ -84,6 +86,7 @@ namespace Game.Gameplay
         {
             isControllable = false;
             // bindedCharacter.GetNavMeshAgent().isStopped = true;
+            isPlayerDead.value = true;
             StartCoroutine(DestoryCharacter());
         }
 
