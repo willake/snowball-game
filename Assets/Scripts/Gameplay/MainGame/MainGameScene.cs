@@ -6,6 +6,7 @@ using System;
 using Game.Audios;
 using Game.Events;
 using System.Threading.Tasks;
+using DG.Tweening;
 
 namespace Game.Gameplay
 {
@@ -46,12 +47,19 @@ namespace Game.Gameplay
             // Character player = characterFactory.GeneratePlayer("Player");
             // player.GetComponent<PlayerController>().BindCamera(playerCamera);
 
+            GameStartPanel startPanel =
+                await UIManager.instance.OpenUIAsync(AvailableUI.GameStartPanel) as GameStartPanel;
+
+            await startPanel.ShowText("- Ready -", 2f, Ease.InOutSine);
+            await Task.Delay(TimeSpan.FromSeconds(2f));
+            await startPanel.ShowText("- Start -", 1f, Ease.InOutSine);
+            await UIManager.instance.PrevAsync();
             if (UIManager.instance)
             {
                 _gameHUDPanel = UIManager.instance.OpenUI(AvailableUI.GameHUDPanel) as GameHUDPanel;
+                playerCamera = _player.bindedCamera.GetCamera();
+                _gameHUDPanel.BindController(_player);
             }
-
-            await Task.Delay(TimeSpan.FromSeconds(2f));
 
             WrappedAudioClip audioStart =
                 ResourceManager.instance?.audioResources.gameplayAudios.levelStart;
@@ -110,11 +118,6 @@ namespace Game.Gameplay
         public void RegisterPlayer(PlayerController playerController)
         {
             _player = playerController;
-            if (UIManager.instance)
-            {
-                playerCamera = playerController.bindedCamera.GetCamera();
-                _gameHUDPanel.BindController(playerController);
-            }
         }
 
         public void EliminatePlayer(PlayerController playerController)
