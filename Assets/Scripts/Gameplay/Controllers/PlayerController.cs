@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Gameplay.Cameras;
 using Game.RuntimeStates;
 using Game.UI;
@@ -98,6 +99,16 @@ namespace Game.Gameplay
 
         private void Update()
         {
+            if (MainGameScene.instance.IsGameRunning == false) return;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameManager.instance.IsPaused == false)
+                {
+                    UIManager.instance.OpenUIAsync(AvailableUI.PausePanel).Forget();
+                }
+                return;
+            }
+            if (GameManager.instance.IsPaused) return;
             if (bindedCharacter == null) return;
             if (isControllable == false) return;
 

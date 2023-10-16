@@ -22,6 +22,8 @@ namespace Game.Gameplay
         private HashSet<int> _enemyList = new HashSet<int>();
         private int _ambienceWindLoopID = 0;
 
+        public bool IsGameRunning { get; private set; }
+
         private async void Start()
         {
             if (GameManager.instance)
@@ -54,6 +56,7 @@ namespace Game.Gameplay
                 ambienceWind.clip,
                 ambienceWind.volume
             );
+            IsGameRunning = true;
         }
 
         public void RegisterPlayer(PlayerController playerController)
@@ -69,6 +72,7 @@ namespace Game.Gameplay
         public void EliminatePlayer(PlayerController playerController)
         {
             Debug.Log("Player lose!");
+            IsGameRunning = false;
             if (UIManager.instance)
             {
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
@@ -89,6 +93,7 @@ namespace Game.Gameplay
             if (_enemyList.Count <= 0)
             {
                 Debug.Log("Player wins");
+                IsGameRunning = false;
                 _player.isControllable = false;
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
                 panel.SetEndGameState(EndGamePanel.EndGameState.Win);
