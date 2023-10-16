@@ -11,6 +11,7 @@ namespace Game.Gameplay
     {
         [Header("References")]
         public Transform socket;
+        public ParticleSystem particalCriticalHit;
 
         [Header("Settings")]
         public bool isDebugLogEnabled = false;
@@ -124,6 +125,7 @@ namespace Game.Gameplay
                     audioClip.clip,
                     audioClip.volume
                 );
+                particalCriticalHit.Play();
             }
 
             holdingWeapon.Attack(shootDirection.normalized, energy);
