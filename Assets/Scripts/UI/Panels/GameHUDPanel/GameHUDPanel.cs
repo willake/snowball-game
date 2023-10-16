@@ -13,25 +13,16 @@ namespace Game.UI
         public override AvailableUI Type => AvailableUI.GameHUDPanel;
 
         [Header("References")]
-        public WDButton btnMenu;
 
-        public Slider heathBarSlider;
-        public Slider ammoBarSlider;
+        public ProgressBar healthBar;
+        public AmmoBar ammoBar;
+        public LifeBar lifeBar;
 
-        private Character _bindedCharacter = null;
-
-        private void Start()
-        {
-            btnMenu
-                .OnClickObservable
-                .ObserveOnMainThread()
-                .Subscribe(_ => SwitchToMainGame())
-                .AddTo(this);
-        }
+        private Controller _bindedController = null;
 
         public override WDButton[] GetSelectableButtons()
         {
-            return new WDButton[] { btnMenu };
+            return new WDButton[] { };
         }
 
         public override void PerformCancelAction()
@@ -57,61 +48,42 @@ namespace Game.UI
             await UniTask.CompletedTask;
         }
 
-        public void BindCharacter(Character character)
+        public void BindController(PlayerController controller)
         {
-            _bindedCharacter = character;
-            character.healthUpdateEvent.AddListener(UpdateHealth);
-            character.weaponHolder.ammoUpdateEvent.AddListener(UpdateAmmo);
-            character.weaponHolder.energyUpdateEvent.AddListener(UpdateEnergy);
-            character.weaponHolder.loadEvent.AddListener(ShowChargeBar);
-            character.weaponHolder.throwEvent.AddListener(CloseChargeBar);
+            _bindedController = controller;
+            controller.lifesUpdateEvent.AddListener(UpdateLifes);
+            controller.bindedCharacter.healthUpdateEvent.AddListener(UpdateHealth);
+            controller.bindedCharacter.weaponHolder.ammoUpdateEvent.AddListener(UpdateAmmo);
+            healthBar.SetProgress(
+                controller.bindedCharacter.health / controller.bindedCharacter.MaxHealth);
+            UpdateAmmo(10);
+            UpdateLifes(controller.availableLifes);
         }
 
         public void UnbindCharacter()
         {
-            _bindedCharacter.healthUpdateEvent.RemoveListener(UpdateHealth);
-            _bindedCharacter.weaponHolder.ammoUpdateEvent.RemoveListener(UpdateAmmo);
-            _bindedCharacter.weaponHolder.energyUpdateEvent.RemoveListener(UpdateEnergy);
-            _bindedCharacter.weaponHolder.loadEvent.RemoveListener(ShowChargeBar);
-            _bindedCharacter.weaponHolder.throwEvent.RemoveListener(CloseChargeBar);
-            _bindedCharacter = null;
+            _bindedController.bindedCharacter.healthUpdateEvent.RemoveListener(UpdateHealth);
+            _bindedController.bindedCharacter.weaponHolder.ammoUpdateEvent.RemoveListener(UpdateAmmo);
+            _bindedController = null;
+        }
+
+        private void UpdateLifes(int lifes)
+        {
+            lifeBar.SetLifes(lifes);
         }
 
         private void UpdateHealth(float health, float maxHealth)
         {
-            // TODO: update health UI
-            heathBarSlider.value = health / maxHealth;
+            healthBar.SetProgress(health / maxHealth, 0.4f);
         }
 
         private void UpdateAmmo(int ammo)
         {
-            // TODO: update ammo UI
-            ammoBarSlider.value = ammo;
-        }
-
-        private void UpdateEnergy(float energyInPercentage)
-        {
-            // TOD: update energy bar if it shows up
-        }
-
-        private void ShowChargeBar()
-        {
-
-        }
-
-        private void CloseChargeBar()
-        {
-
-        }
-
-        private void SwitchToMainGame()
-        {
-            GameManager.instance.SwitchScene(AvailableScene.Menu);
+            ammoBar.SetAmmo(ammo);
         }
 
         private void OnDestroy()
         {
-            btnMenu.StopAnimation();
             UnbindCharacter();
         }
     }

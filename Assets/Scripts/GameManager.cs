@@ -25,6 +25,8 @@ namespace Game
         public SceneLoader sceneLoader;
         public AvailableLevel levelToLoad = AvailableLevel.Test;
 
+        public bool IsPaused { get; private set; }
+
         private void Start()
         {
             sceneLoader
@@ -34,16 +36,19 @@ namespace Game
                 .AddTo(this);
 
             SwitchScene(AvailableScene.Menu);
+            IsPaused = false;
         }
 
         public void PauseGame()
         {
             Time.timeScale = 0;
+            IsPaused = true;
         }
 
         public void ResumeGame()
         {
             Time.timeScale = 1;
+            IsPaused = false;
         }
 
         public void SwitchScene(AvailableScene scene)

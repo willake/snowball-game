@@ -171,6 +171,7 @@ namespace Game.UI
                 AvailableUI.EndGamePanel => ResourceManager.instance.uiPanelResources.endGamePanel,
                 AvailableUI.LevelSelectPanel => ResourceManager.instance.uiPanelResources.levelSelectPanel,
                 AvailableUI.SettingsPanel => ResourceManager.instance.uiPanelResources.settingsPanel,
+                AvailableUI.GameStartPanel => ResourceManager.instance.uiPanelResources.gameStartPanel,
                 _ => null
             };
         }
@@ -286,14 +287,14 @@ namespace Game.UI
 
         private void BlockUIInput()
         {
-            InputManager.instance.SetAllowInput(false);
+            // InputManager.instance.SetAllowInput(false);
             inputBlocker.SetActive(true);
             inputBlocker.transform.SetAsLastSibling();
         }
 
         private void UnblockUIInput()
         {
-            InputManager.instance.SetAllowInput(true);
+            // InputManager.instance.SetAllowInput(true);
             inputBlocker.SetActive(false);
         }
     }

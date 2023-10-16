@@ -1,25 +1,29 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using Game.Gameplay.Cameras;
 using Game.RuntimeStates;
 using Game.UI;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace Game.Gameplay
 {
     public class PlayerController : Controller
     {
         [Header("References")]
+        public Transform spawnPoint;
         public PlayerCamera bindedCamera;
+        public BoolState isPlayerDead;
         public Vector3State statePlayerPos;
         public ProgressBar reloadBar;
         public ProgressBar chargeBar;
 
         private bool _isPressingMove;
-        public bool isControllable;
-
+        public int availableLifes = 3;
         private PlayerCharacter _playerCharacter;
+        public LifesUpdateEvent lifesUpdateEvent = new();
 
         public void BindCamera(PlayerCamera cam)
         {
@@ -43,7 +47,7 @@ namespace Game.Gameplay
                 reloadBar.SetProgress(0f);
                 reloadBar.gameObject.SetActive(true);
             });
-            bindedCharacter.weaponHolder.reloadEndEvent.AddListener(() => reloadBar.gameObject.SetActive(false));
+            bindedCharacter.weaponHolder.reloadEndEvent.AddListener(_ => reloadBar.gameObject.SetActive(false));
             bindedCharacter.weaponHolder.reloadProgressUpdateEvent.AddListener(progress => reloadBar.SetProgress(progress));
 
             bindedCharacter.weaponHolder.loadEvent.AddListener(() =>
@@ -55,7 +59,22 @@ namespace Game.Gameplay
             bindedCharacter.weaponHolder.throwEvent.AddListener(() => chargeBar.gameObject.SetActive(false));
             bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
 
-            isControllable = true;
+            isPlayerDead.value = false;
+        }
+
+        public bool Revive()
+        {
+            if (availableLifes == 0)
+            {
+                return false;
+            }
+            Debug.Log($"AvailableLife {availableLifes}");
+            transform.position = spawnPoint.position;
+            availableLifes--;
+            isPlayerDead.value = false;
+            bindedCharacter.Revive();
+            lifesUpdateEvent.Invoke(availableLifes);
+            return true;
         }
 
         private void SetupReloadBar()
@@ -82,8 +101,8 @@ namespace Game.Gameplay
 
         private void HandleDieEvent()
         {
-            isControllable = false;
             // bindedCharacter.GetNavMeshAgent().isStopped = true;
+            isPlayerDead.value = true;
             StartCoroutine(DestoryCharacter());
         }
 
@@ -95,8 +114,17 @@ namespace Game.Gameplay
 
         private void Update()
         {
-            if (bindedCharacter == null) return;
-            if (isControllable == false) return;
+            if (MainGameScene.instance.IsGameRunning == false) return;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (GameManager.instance.IsPaused == false)
+                {
+                    UIManager.instance.OpenUIAsync(AvailableUI.PausePanel).Forget();
+                }
+                return;
+            }
+            if (GameManager.instance.IsPaused) return;
+            if (bindedCharacter == null || bindedCharacter.State.isDead) return;
 
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
@@ -171,5 +199,7 @@ namespace Game.Gameplay
 
             return _reloadbarFollow;
         }
+
+        public class LifesUpdateEvent : UnityEvent<int> { }
     }
 }

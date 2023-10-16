@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
 using Game.Gameplay.WeaponHolderStates;
+using Game.Audios;
 
 namespace Game.Gameplay
 {
@@ -10,6 +11,7 @@ namespace Game.Gameplay
     {
         [Header("References")]
         public Transform socket;
+        public ParticleSystem particalCriticalHit;
 
         [Header("Settings")]
         public bool isDebugLogEnabled = false;
@@ -17,6 +19,7 @@ namespace Game.Gameplay
         public float throwingPitch = 10f;
         public float minEnergy = 0f;
         public float maxEnergy = 10f;
+        public float criticalThreshold = 0.95f;
         public float chargeIntervalInSeconds = 0.01f;
         public float energyPerInterval = 0.1f;
         public float timeOutEnergy = 0.1f;
@@ -44,7 +47,7 @@ namespace Game.Gameplay
         public EnergyUpdateEvent energyUpdateEvent = new();
         public AmmoUpdateEvent ammoUpdateEvent = new();
         public UnityEvent reloadStartEvent = new();
-        public UnityEvent reloadEndEvent = new();
+        public ReloadEndEvent reloadEndEvent = new();
         public ReloadProgressUpdateEvent reloadProgressUpdateEvent = new();
 
         [Header("Property")]
@@ -58,6 +61,12 @@ namespace Game.Gameplay
         private void Start()
         {
             State = WeaponHolderState.IdleState;
+        }
+
+        public void Reset()
+        {
+            holdingWeapon.Reset();
+            ammoUpdateEvent.Invoke(Ammo);
         }
 
         public void UpdateAimDirection(Vector3 direction)
@@ -114,7 +123,22 @@ namespace Game.Gameplay
 
             energy = Mathf.Clamp(energy, minEnergy, maxEnergy);
 
-            holdingWeapon.Attack(shootDirection.normalized, energy);
+            bool isCritical = false;
+
+            // critical hit
+            if (ownerCamp == Camp.Player && energy / maxEnergy > criticalThreshold)
+            {
+                WrappedAudioClip audioClip =
+                    ResourceManager.instance.audioResources.gameplayAudios.criticalCharge;
+                AudioManager.instance.PlaySFX(
+                    audioClip.clip,
+                    audioClip.volume
+                );
+                particalCriticalHit.Play();
+                isCritical = true;
+            }
+
+            holdingWeapon.Attack(shootDirection.normalized, energy, isCritical);
 
             throwEvent.Invoke();
             ammoUpdateEvent.Invoke(Ammo);
@@ -142,7 +166,7 @@ namespace Game.Gameplay
             }
 
             SetWeaponHolderState(WeaponHolderState.IdleState);
-            reloadEndEvent.Invoke();
+            reloadEndEvent.Invoke(false);
         }
 
         IEnumerator StartReload()
@@ -160,7 +184,7 @@ namespace Game.Gameplay
 
             ammoUpdateEvent.Invoke(holdingWeapon.maxAmmo);
             SetWeaponHolderState(WeaponHolderState.IdleState);
-            reloadEndEvent.Invoke();
+            reloadEndEvent.Invoke(true);
         }
 
         IEnumerator ChargeEnergy()
@@ -219,5 +243,7 @@ namespace Game.Gameplay
         public class ReloadProgressUpdateEvent : UnityEvent<float> { }
         // ammo / maxAmmo
         public class AmmoUpdateEvent : UnityEvent<int> { }
+        // success or not
+        public class ReloadEndEvent : UnityEvent<bool> { }
     }
 }

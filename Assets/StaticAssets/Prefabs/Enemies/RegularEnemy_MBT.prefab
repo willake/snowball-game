@@ -1084,10 +1084,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   socket: {fileID: 7208914331415137983}
+  particalCriticalHit: {fileID: 0}
   isDebugLogEnabled: 0
   throwingPitch: 2
-  minEnergy: 5
+  minEnergy: 20
   maxEnergy: 100
+  criticalThreshold: 0.95
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
   timeOutEnergy: 0.1
@@ -1100,9 +1102,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   reloadStartEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  reloadEndEvent:
     m_PersistentCalls:
       m_Calls: []
   ownerCamp: 1
@@ -1477,9 +1476,6 @@ GameObject:
   - component: {fileID: -6965506410551093996}
   - component: {fileID: 4310384061011322542}
   - component: {fileID: 6190783330994878210}
-  - component: {fileID: 5312760394531139672}
-  - component: {fileID: 4041707910848027617}
-  - component: {fileID: 983275037799857715}
   - component: {fileID: 6659105168747278180}
   - component: {fileID: 2680880003823752395}
   - component: {fileID: 186931299663321387}
@@ -1497,7 +1493,6 @@ GameObject:
   - component: {fileID: 4925397662821212518}
   - component: {fileID: 4594661809228425071}
   - component: {fileID: 5724069013323678649}
-  - component: {fileID: 3001190919775493735}
   - component: {fileID: 8941793562427548809}
   - component: {fileID: -6997866805229090323}
   - component: {fileID: 7150682994617619964}
@@ -1507,6 +1502,9 @@ GameObject:
   - component: {fileID: 1620991124436395222}
   - component: {fileID: 6438079511003886421}
   - component: {fileID: 5664797694555834380}
+  - component: {fileID: 1241256278812983463}
+  - component: {fileID: 3041972487165244362}
+  - component: {fileID: -1731735762848145262}
   m_Layer: 7
   m_Name: RegularEnemy_MBT
   m_TagString: Untagged
@@ -1618,6 +1616,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundDectector: {fileID: 3571375711578037997}
   weaponHolder: {fileID: 4801648317060703368}
+  isPlayer: 0
   health: 100
   footstepIntervalInSeconds: 0.4
   footstepAimIntervalInSeconds: 0.6
@@ -1810,7 +1809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 6438079511003886421}
+  selectedEditorNode: {fileID: -1731735762848145262}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -1830,7 +1829,7 @@ MonoBehaviour:
   rect:
     serializedVersion: 2
     x: 340
-    y: -60
+    y: -140
     width: 160
     height: 45
   parent: {fileID: 0}
@@ -1855,12 +1854,12 @@ MonoBehaviour:
   rect:
     serializedVersion: 2
     x: 340
-    y: 20
+    y: -60
     width: 160
     height: 59
   parent: {fileID: 4310384061011322542}
   children:
-  - {fileID: 3001190919775493735}
+  - {fileID: 1241256278812983463}
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -1904,130 +1903,6 @@ MonoBehaviour:
     blackboard: {fileID: 4275073464473930556}
     key: canReload
     constantValue: 0
---- !u!114 &5312760394531139672
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Is Set Condition
-  rect:
-    serializedVersion: 2
-    x: 100
-    y: 200
-    width: 160
-    height: 45
-  parent: {fileID: 3001190919775493735}
-  children:
-  - {fileID: 4041707910848027617}
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  abort: 0
-  invert: 0
-  type: 0
-  boolReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 4275073464473930556}
-    key: isDead
-    constantValue: 0
-  objectReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
-  transformReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
---- !u!114 &4041707910848027617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58fe7bc6a9b18e148b82820c7c1c0a90, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Wait
-  rect:
-    serializedVersion: 2
-    x: 100
-    y: 280
-    width: 160
-    height: 45
-  parent: {fileID: 5312760394531139672}
-  children: []
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  time:
-    useConstant: 1
-    mode: 0
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: 2
-  randomDeviation: 0
-  continueOnRestart: 0
---- !u!114 &983275037799857715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Is Set Condition
-  rect:
-    serializedVersion: 2
-    x: 340
-    y: 200
-    width: 160
-    height: 45
-  parent: {fileID: 3001190919775493735}
-  children:
-  - {fileID: 6659105168747278180}
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  abort: 0
-  invert: 0
-  type: 0
-  boolReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 4275073464473930556}
-    key: canMove
-    constantValue: 0
-  objectReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
-  transformReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
 --- !u!114 &6659105168747278180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2047,7 +1922,7 @@ MonoBehaviour:
     y: 280
     width: 160
     height: 45
-  parent: {fileID: 983275037799857715}
+  parent: {fileID: -1731735762848145262}
   children:
   - {fileID: 3161236063840249732}
   behaviourTree: {fileID: 0}
@@ -2516,33 +2391,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: wayPoint
   val: {x: 0, y: 0, z: 0}
---- !u!114 &3001190919775493735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08540605df275034fafc8e05c6704214, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Selector
-  rect:
-    serializedVersion: 2
-    x: 340
-    y: 120
-    width: 160
-    height: 45
-  parent: {fileID: 6190783330994878210}
-  children:
-  - {fileID: 5312760394531139672}
-  - {fileID: 983275037799857715}
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  random: 0
 --- !u!114 &8941793562427548809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,6 +2657,104 @@ MonoBehaviour:
     blackboard: {fileID: 4275073464473930556}
     key: playerPos
     constantValue: {x: 0, y: 0, z: 0}
+--- !u!114 &1241256278812983463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16715daced4d43047b244c9cd793c450, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Game Running Condition
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 20
+    width: 160
+    height: 59
+  parent: {fileID: 6190783330994878210}
+  children:
+  - {fileID: 3041972487165244362}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  isGameRunning: {fileID: 11400000, guid: 56bd6a67e357b3e4fafb330d0c5306e3, type: 2}
+--- !u!114 &3041972487165244362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a012be6c17f4740a13c3914de62475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Player Alive Condition
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 100
+    width: 160
+    height: 45
+  parent: {fileID: 1241256278812983463}
+  children:
+  - {fileID: -1731735762848145262}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  isPlayerDead: {fileID: 11400000, guid: c70306dcccf9b2e4b8ca3653f043521d, type: 2}
+--- !u!114 &-1731735762848145262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Set Condition
+  rect:
+    serializedVersion: 2
+    x: 340
+    y: 180
+    width: 160
+    height: 45
+  parent: {fileID: 3041972487165244362}
+  children:
+  - {fileID: 6659105168747278180}
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  invert: 1
+  type: 0
+  boolReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: isDead
+    constantValue: 0
+  objectReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+  transformReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
 --- !u!1 &6699964578601542879
 GameObject:
   m_ObjectHideFlags: 0
@@ -3253,6 +3199,10 @@ PrefabInstance:
       propertyPath: energyMultiplier
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: prefabProjectile
+      value: 
+      objectReference: {fileID: 3471576667880939631, guid: 59be58131d9969241a4348682d38da1f, type: 3}
     - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: projectileLayer.m_Bits
       value: 256

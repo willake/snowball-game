@@ -26,16 +26,21 @@ namespace Game.Gameplay.CustomBehaviorTree
         public override NodeResult Execute()
         {
             _time += Time.deltaTime;
+
+            if (character.State.isDead || character.State.canMove == false)
+            {
+                return NodeResult.failure;
+            }
+            if (isPlayerInView.Value)
+            {
+                return NodeResult.success;
+            }
             // Update destination every given interval
             if (_time > updateInterval)
             {
                 // Reset time and update destination
                 _time = 0;
                 character.MoveTo(destination.Value);
-            }
-            if (isPlayerInView.Value)
-            {
-                return NodeResult.success;
             }
             // Check if path is ready
             if (character.PathPending)

@@ -5,11 +5,18 @@ using UnityEngine.Events;
 using Game.Gameplay.CharacterStates;
 using System.Collections;
 using Game.Audios;
+using Game.Events;
 
 namespace Game.Gameplay
 {
     public abstract class Character : MonoBehaviour
     {
+        private Lazy<EventManager> _eventManager = new Lazy<EventManager>(
+            () => DIContainer.instance.GetObject<EventManager>(),
+            true
+        );
+        protected EventManager EventManager { get => _eventManager.Value; }
+
         private CharacterAnimatior _characterAnimator;
         private Rigidbody _rigibody;
 
@@ -18,6 +25,7 @@ namespace Game.Gameplay
         public WeaponHolder weaponHolder;
 
         [Header("Status")]
+        public bool isPlayer = false;
         public float health = 100;
         public HealthUpdateEvent healthUpdateEvent = new();
         public DieEvent dieEvent = new();
@@ -48,11 +56,19 @@ namespace Game.Gameplay
                     _reloadSFXLoopID =
                         AudioManager.instance.PlaySFXLoop(audioClip.clip, audioClip.volume);
                 });
-            weaponHolder.reloadEndEvent.AddListener(() =>
+            weaponHolder.reloadEndEvent.AddListener(success =>
                 {
                     SetCharacterState(CharacterState.IdleState);
                     GetCharacterAnimatior()?.SetIsReloading(false);
                     AudioManager.instance?.StopSFXLoop(_reloadSFXLoopID);
+
+                    if (isPlayer && success)
+                    {
+                        EventManager.Publish(
+                            EventNames.onPlayerReload,
+                            new Payload()
+                        );
+                    }
                 });
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => SetCharacterState(CharacterState.IdleState));
@@ -62,12 +78,29 @@ namespace Game.Gameplay
             SetCharacterState(CharacterState.IdleState);
         }
 
-        public void TakeDamage(float damage, Vector3 direction)
+        public void Revive()
         {
-            if (State.isDead) return;
+            health = MaxHealth;
+            healthUpdateEvent.Invoke(health, MaxHealth);
+            GetCharacterAnimatior().TriggerRevive();
+            SetCharacterState(CharacterState.IdleState);
+            weaponHolder.Reset();
+        }
+
+        public bool TakeDamage(float damage, Vector3 direction)
+        {
+            if (State.isDead) return false;
 
             health -= damage;
             healthUpdateEvent.Invoke(health, MaxHealth);
+
+            if (isPlayer)
+            {
+                EventManager.Publish(
+                    EventNames.onPlayerDamaged,
+                    new Payload()
+                );
+            }
 
             if (State.isAiming)
             {
@@ -92,6 +125,8 @@ namespace Game.Gameplay
 
             transform.rotation =
                     Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z) * -1);
+
+            return true;
         }
 
         public void UpdateAimDirection(Vector3 direction, bool useFoward = true)

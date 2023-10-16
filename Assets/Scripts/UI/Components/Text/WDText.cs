@@ -7,6 +7,7 @@ namespace Game.UI
     public class WDText : MonoBehaviour
     {
         private TextMeshProUGUI _textMesh;
+        public TextMeshProUGUI TextMesh { get => GetTextMeshProUGUI(); }
         public string text
         {
             set

@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   socket: {fileID: 7134823471842115881}
+  particalCriticalHit: {fileID: 0}
   isDebugLogEnabled: 0
   throwingPitch: 2
   minEnergy: 5
@@ -411,7 +412,7 @@ Transform:
   m_GameObject: {fileID: 1093707361687193867}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.202919, y: 0.05, z: -1.1088071}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -532,8 +533,6 @@ MonoBehaviour:
   health: 100
   footstepIntervalInSeconds: 0.4
   footstepAimIntervalInSeconds: 0.6
-  moveSpeed: 8
-  aimSpeed: 5
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2095,6 +2094,10 @@ PrefabInstance:
       propertyPath: energyMultiplier
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: prefabProjectile
+      value: 
+      objectReference: {fileID: 3471576667880939631, guid: 59be58131d9969241a4348682d38da1f, type: 3}
     - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: projectileLayer.m_Bits
       value: 256

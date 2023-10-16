@@ -58,11 +58,13 @@ namespace Game.UI
         {
             canvasGroup.alpha = 1;
             gameObject.SetActive(true);
+            GameManager.instance.PauseGame();
         }
 
         public override async UniTask OpenAsync()
         {
             gameObject.SetActive(true);
+            GameManager.instance.PauseGame();
             canvasGroup.alpha = 0;
             await canvasGroup
                 .DOFade(1, fadeDuration)
@@ -72,6 +74,7 @@ namespace Game.UI
         public override void Close()
         {
             gameObject.SetActive(false);
+            GameManager.instance.ResumeGame();
         }
 
         public override async UniTask CloseAsync()
@@ -81,11 +84,7 @@ namespace Game.UI
                 .DOFade(0, fadeDuration)
                 .SetEase(fadeEase).SetUpdate(true).AsyncWaitForCompletion();
             gameObject.SetActive(false);
-        }
-
-        private void OnDestroy()
-        {
-            //btnMenu.StopAnimation();
+            GameManager.instance.ResumeGame();
         }
     }
 }

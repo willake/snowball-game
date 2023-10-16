@@ -54,6 +54,11 @@ namespace Game.Gameplay
                 ParticleSystem particle = hitEffectObj.GetComponent<ParticleSystem>();
                 _onHitEffectPool.Enqueue(particle);
             }
+            Reset();
+        }
+
+        public void Reset()
+        {
             Ammo = maxAmmo;
         }
 
@@ -76,10 +81,13 @@ namespace Game.Gameplay
             Ammo -= 1;
         }
 
-        public override bool Attack(Vector3 direction, float energy)
+        public override bool Attack(Vector3 direction, float energy, bool isCritical)
         {
             if (isLoaded == false) return false;
 
+            _loadedProjectile.SetThrowPosition(transform.position);
+            _loadedProjectile.SetEnergy(energy);
+            _loadedProjectile.SetIsCritical(isCritical);
             _loadedProjectile.EnableTrail(true);
             _loadedProjectile.GetRigidbody().isKinematic = false;
             _loadedProjectile.GetCollider().enabled = true;

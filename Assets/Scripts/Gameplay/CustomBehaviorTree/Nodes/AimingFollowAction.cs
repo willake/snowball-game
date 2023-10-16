@@ -39,6 +39,11 @@ namespace Game.Gameplay.CustomBehaviorTree
             Vector3 direction = playerPos.value - transform.position;
             character.UpdateAimDirection(direction.normalized, false);
 
+            if (character.State.isDead)
+            {
+                return NodeResult.failure;
+            }
+
             if (_time > updateInterval)
             {
                 // Reset time and update destination
