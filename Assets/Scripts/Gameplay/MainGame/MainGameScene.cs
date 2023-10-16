@@ -25,6 +25,7 @@ namespace Game.Gameplay
         private GameHUDPanel _gameHUDPanel;
         private PlayerController _player;
         private HashSet<int> _enemyList = new HashSet<int>();
+        private HashSet<int> _bossList = new HashSet<int>();
         private int _ambienceWindLoopID = 0;
 
         private Lazy<EventManager> _eventManager = new Lazy<EventManager>(
@@ -34,6 +35,8 @@ namespace Game.Gameplay
         protected EventManager EventManager { get => _eventManager.Value; }
 
         public bool IsGameRunning { get; private set; }
+
+        private int _initalBossCount = 0;
 
         private async void Start()
         {
@@ -85,6 +88,7 @@ namespace Game.Gameplay
         {
             IsGameRunning = true;
             isGameRunningState.value = true;
+            _initalBossCount = _bossList.Count;
 
             gameStatisticsCollector.StartRecording(
                 GetLevelNumer(GameManager.instance.levelToLoad), _enemyList.Count);
@@ -151,22 +155,36 @@ namespace Game.Gameplay
         }
 
         /* Register enemy to enemylist and return an ID. */
-        public void RegisterEnemy(AIController aiController)
+        public void RegisterEnemy(AIController aiController, bool isBoss = false)
         {
             _enemyList.Add(aiController.GetInstanceID());
+
+            if (isBoss)
+            {
+                _bossList.Add(aiController.GetInstanceID());
+            }
         }
 
-        public void EliminateEnemy(AIController aiController)
+        public void EliminateEnemy(AIController aiController, bool isBoss = false)
         {
             _enemyList.Remove(aiController.GetInstanceID());
+
+            if (isBoss)
+            {
+                _bossList.Remove(aiController.GetInstanceID());
+            }
 
             EventManager.Publish(
                 EventNames.onEnemyDead,
                 new Payload()
             );
 
-            if (_enemyList.Count <= 0)
+            // if the level has no bosses, win when all enemies are dead
+            // if the level has bosses, win when the bosses are dead
+            if ((_initalBossCount == 0 && _enemyList.Count <= 0) ||
+                (_initalBossCount > 0 && _bossList.Count <= 0))
             {
+                // win when all enemies are dead
                 Debug.Log("Player wins");
                 OnEndGame(true);
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;

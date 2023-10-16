@@ -6,6 +6,7 @@ namespace Game.Gameplay
 {
     public class AICharacter : Character
     {
+        public bool isBoss = false;
         public override Vector3 Velocity => GetNavMeshAgent() ? GetNavMeshAgent().velocity : Vector3.zero;
 
         private NavMeshAgent _navMeshAgent;

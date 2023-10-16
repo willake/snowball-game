@@ -1203,9 +1203,6 @@ MonoBehaviour:
   reloadStartEvent:
     m_PersistentCalls:
       m_Calls: []
-  reloadEndEvent:
-    m_PersistentCalls:
-      m_Calls: []
   ownerCamp: 1
   holdingWeapon: {fileID: 1416034706444417200}
 --- !u!1 &5646003978661962621
@@ -1589,12 +1586,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   groundDectector: {fileID: 6269451055514020991}
   weaponHolder: {fileID: 4140262845479985050}
+  isPlayer: 0
   health: 400
   footstepIntervalInSeconds: 0.4
   footstepAimIntervalInSeconds: 0.6
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
+  isBoss: 1
 --- !u!195 &1218743871876331062
 NavMeshAgent:
   m_ObjectHideFlags: 0
