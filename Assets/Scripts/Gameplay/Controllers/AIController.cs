@@ -40,7 +40,7 @@ namespace Game.Gameplay
                     MainGameScene.instance.worldSpaceCanvas,
                     MainGameScene.instance.playerCamera
                 );
-                MainGameScene.instance.RegisterEnemy(this, _aiCharacter.isBoss);
+                MainGameScene.instance.RegisterEnemy(this, GetAICharacter().isBoss);
             }
 
             bindedCharacter.healthUpdateEvent.AddListener(UpdateHealthBar);
@@ -97,7 +97,7 @@ namespace Game.Gameplay
         IEnumerator DestoryCharacter()
         {
             yield return new WaitForSeconds(2f);
-            MainGameScene.instance?.EliminateEnemy(this);
+            MainGameScene.instance?.EliminateEnemy(this, GetAICharacter().isBoss);
             Destroy(this.healthBar.gameObject);
             Destroy(this.gameObject);
         }
