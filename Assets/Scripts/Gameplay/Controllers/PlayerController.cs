@@ -99,6 +99,7 @@ namespace Game.Gameplay
 
         private void Update()
         {
+            if (MainGameScene.instance.IsGameRunning == false) return;
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (GameManager.instance.IsPaused == false)
