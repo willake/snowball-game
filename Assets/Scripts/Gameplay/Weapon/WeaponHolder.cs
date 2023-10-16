@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using UnityEngine.Events;
 using Game.Gameplay.WeaponHolderStates;
+using Game.Audios;
 
 namespace Game.Gameplay
 {
@@ -10,6 +11,7 @@ namespace Game.Gameplay
     {
         [Header("References")]
         public Transform socket;
+        public ParticleSystem particalCriticalHit;
 
         [Header("Settings")]
         public bool isDebugLogEnabled = false;
@@ -17,6 +19,7 @@ namespace Game.Gameplay
         public float throwingPitch = 10f;
         public float minEnergy = 0f;
         public float maxEnergy = 10f;
+        public float criticalThreshold = 0.95f;
         public float chargeIntervalInSeconds = 0.01f;
         public float energyPerInterval = 0.1f;
         public float timeOutEnergy = 0.1f;
@@ -114,7 +117,22 @@ namespace Game.Gameplay
 
             energy = Mathf.Clamp(energy, minEnergy, maxEnergy);
 
-            holdingWeapon.Attack(shootDirection.normalized, energy);
+            bool isCritical = false;
+
+            // critical hit
+            if (ownerCamp == Camp.Player && energy / maxEnergy > criticalThreshold)
+            {
+                WrappedAudioClip audioClip =
+                    ResourceManager.instance.audioResources.gameplayAudios.criticalCharge;
+                AudioManager.instance.PlaySFX(
+                    audioClip.clip,
+                    audioClip.volume
+                );
+                particalCriticalHit.Play();
+                isCritical = true;
+            }
+
+            holdingWeapon.Attack(shootDirection.normalized, energy, isCritical);
 
             throwEvent.Invoke();
             ammoUpdateEvent.Invoke(Ammo);

@@ -160,7 +160,7 @@ GameObject:
   - component: {fileID: -7738907633172832076}
   - component: {fileID: -4951978760779152871}
   m_Layer: 0
-  m_Name: projectile_snowball
+  m_Name: projectile_template
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
