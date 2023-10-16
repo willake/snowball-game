@@ -1476,7 +1476,6 @@ GameObject:
   - component: {fileID: -6965506410551093996}
   - component: {fileID: 4310384061011322542}
   - component: {fileID: 6190783330994878210}
-  - component: {fileID: 983275037799857715}
   - component: {fileID: 6659105168747278180}
   - component: {fileID: 2680880003823752395}
   - component: {fileID: 186931299663321387}
@@ -1503,7 +1502,8 @@ GameObject:
   - component: {fileID: 1620991124436395222}
   - component: {fileID: 6438079511003886421}
   - component: {fileID: 5664797694555834380}
-  - component: {fileID: 7419415131690748299}
+  - component: {fileID: -7508556434377453031}
+  - component: {fileID: 1646564220866624225}
   m_Layer: 7
   m_Name: RegularEnemy_MBT
   m_TagString: Untagged
@@ -1857,8 +1857,7 @@ MonoBehaviour:
     width: 160
     height: 59
   parent: {fileID: 4310384061011322542}
-  children:
-  - {fileID: 7419415131690748299}
+  children: []
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
@@ -1902,52 +1901,6 @@ MonoBehaviour:
     blackboard: {fileID: 4275073464473930556}
     key: canReload
     constantValue: 0
---- !u!114 &983275037799857715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6544132504076760926}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  title: Is Set Condition
-  rect:
-    serializedVersion: 2
-    x: 340
-    y: 200
-    width: 160
-    height: 45
-  parent: {fileID: 0}
-  children:
-  - {fileID: 6659105168747278180}
-  behaviourTree: {fileID: 0}
-  runtimePriority: 0
-  breakpoint: 0
-  abort: 0
-  invert: 0
-  type: 0
-  boolReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 4275073464473930556}
-    key: canMove
-    constantValue: 0
-  objectReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
-  transformReference:
-    useConstant: 0
-    mode: 1
-    blackboard: {fileID: 0}
-    key: 
-    constantValue: {fileID: 0}
 --- !u!114 &6659105168747278180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1967,7 +1920,7 @@ MonoBehaviour:
     y: 280
     width: 160
     height: 45
-  parent: {fileID: 983275037799857715}
+  parent: {fileID: 0}
   children:
   - {fileID: 3161236063840249732}
   behaviourTree: {fileID: 0}
@@ -2702,7 +2655,7 @@ MonoBehaviour:
     blackboard: {fileID: 4275073464473930556}
     key: playerPos
     constantValue: {x: 0, y: 0, z: 0}
---- !u!114 &7419415131690748299
+--- !u!114 &-7508556434377453031
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2717,16 +2670,61 @@ MonoBehaviour:
   title: Is Player Alive Condition
   rect:
     serializedVersion: 2
-    x: 340
-    y: 40
+    x: 527
+    y: 68
     width: 160
     height: 45
-  parent: {fileID: 6190783330994878210}
+  parent: {fileID: 0}
   children: []
   behaviourTree: {fileID: 0}
   runtimePriority: 0
   breakpoint: 0
   isPlayerDead: {fileID: 11400000, guid: c70306dcccf9b2e4b8ca3653f043521d, type: 2}
+--- !u!114 &1646564220866624225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544132504076760926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534e3ec7de6cd444e984c2e7f68e42e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  title: Is Set Condition
+  rect:
+    serializedVersion: 2
+    x: 519
+    y: 190
+    width: 160
+    height: 45
+  parent: {fileID: 0}
+  children: []
+  behaviourTree: {fileID: 0}
+  runtimePriority: 0
+  breakpoint: 0
+  abort: 0
+  invert: 0
+  type: 0
+  boolReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 4275073464473930556}
+    key: canMove
+    constantValue: 0
+  objectReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
+  transformReference:
+    useConstant: 0
+    mode: 1
+    blackboard: {fileID: 0}
+    key: 
+    constantValue: {fileID: 0}
 --- !u!1 &6699964578601542879
 GameObject:
   m_ObjectHideFlags: 0
