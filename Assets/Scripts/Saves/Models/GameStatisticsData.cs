@@ -16,6 +16,7 @@ namespace Game.Saves
     public class GameStatisticsDataV1 : IEntity<GameStatisticsDataV1>
     {
         public long id;
+        public int level;
         public int version;
         public bool isPlayerWin;
         public int deathCount;
@@ -31,14 +32,11 @@ namespace Game.Saves
         [System.Serializable]
         public struct ThrownBall
         {
-            public Vector3 throwPosition;
-            public Vector3 hitPosition;
+            public float hitDistance;
             public float energy;
             public bool isCritical;
-            public bool isEnemyDamaged;
-            public bool isEnemyKilled;
-            public long throwAt;
-            public long hitAt;
+            public bool isHitEnemy;
+            public bool isKillEnemy;
         }
 
         public long SaveKey { get => id; }
@@ -46,6 +44,7 @@ namespace Game.Saves
         public GameStatisticsDataV1(long id)
         {
             this.id = id;
+            this.level = -1;
             this.version = 1;
             this.isPlayerWin = false;
             this.deathCount = 0;
@@ -62,6 +61,7 @@ namespace Game.Saves
         public void Update(GameStatisticsDataV1 data)
         {
             this.id = data.id;
+            this.level = data.level;
             this.version = 1;
             this.isPlayerWin = false;
             this.deathCount = data.deathCount;

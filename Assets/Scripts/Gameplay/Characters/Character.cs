@@ -87,9 +87,9 @@ namespace Game.Gameplay
             weaponHolder.Reset();
         }
 
-        public void TakeDamage(float damage, Vector3 direction)
+        public bool TakeDamage(float damage, Vector3 direction)
         {
-            if (State.isDead) return;
+            if (State.isDead) return false;
 
             health -= damage;
             healthUpdateEvent.Invoke(health, MaxHealth);
@@ -125,6 +125,8 @@ namespace Game.Gameplay
 
             transform.rotation =
                     Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z) * -1);
+
+            return true;
         }
 
         public void UpdateAimDirection(Vector3 direction, bool useFoward = true)

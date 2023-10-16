@@ -85,6 +85,8 @@ namespace Game.Gameplay
         {
             if (isLoaded == false) return false;
 
+            _loadedProjectile.SetThrowPosition(transform.position);
+            _loadedProjectile.SetEnergy(energy);
             _loadedProjectile.SetIsCritical(isCritical);
             _loadedProjectile.EnableTrail(true);
             _loadedProjectile.GetRigidbody().isKinematic = false;

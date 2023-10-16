@@ -83,9 +83,10 @@ namespace Game.Gameplay
                 });
         }
 
-        public void StopRecording()
+        public void StopRecording(bool isWin)
         {
             // save data in background
+            _statisticsData.isPlayerWin = isWin;
             StatisticsDataRepository.Insert(_statisticsData).Forget();
             Debug.Log($"Save Statistics Data to {Consts.GAME_FOLDER_PATH() + "Saves"} with id: {_statisticsData.id}");
             EventManager.CancelSubscription(
