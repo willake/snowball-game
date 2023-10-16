@@ -2882,6 +2882,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: prefabProjectile
+      value: 
+      objectReference: {fileID: 4418845134435237993, guid: d6814025b8a17c24fbd5a2ff4abe90e5, type: 3}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: projectileLayer.m_Bits
       value: 256
       objectReference: {fileID: 0}

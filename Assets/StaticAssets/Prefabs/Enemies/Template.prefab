@@ -426,6 +426,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   socket: {fileID: 2341003306908356899}
+  particalCriticalHit: {fileID: 0}
   isDebugLogEnabled: 0
   throwingPitch: 2
   minEnergy: 5
@@ -1489,8 +1490,6 @@ MonoBehaviour:
   health: 100
   footstepIntervalInSeconds: 0.4
   footstepAimIntervalInSeconds: 0.6
-  moveSpeed: 8
-  aimSpeed: 5
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -2095,6 +2094,10 @@ PrefabInstance:
       propertyPath: energyMultiplier
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
+      propertyPath: prefabProjectile
+      value: 
+      objectReference: {fileID: 3471576667880939631, guid: 59be58131d9969241a4348682d38da1f, type: 3}
     - target: {fileID: 9047298085136304126, guid: 820dc9c4aa2598c46b8e0acfeda99661, type: 3}
       propertyPath: projectileLayer.m_Bits
       value: 256

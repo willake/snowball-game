@@ -11,12 +11,18 @@ namespace Game.Gameplay
         public GameObject trail;
         [Header("Settings")]
         public float damage = 50f;
+        public float criticalDamage = 100f;
         public float autoDisabledInSeconds = 2f;
         public Camp OwnerCamp { get; private set; }
         public OnHitEvent onHitEvent = new();
 
         private Rigidbody _rig;
         private Collider _collider;
+        private bool _isCritical;
+        public void SetIsCritical(bool isCritical)
+        {
+            _isCritical = isCritical;
+        }
 
         public void SetOwnerCamp(Camp camp)
         {
@@ -36,7 +42,7 @@ namespace Game.Gameplay
                 && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
                 other.gameObject.GetComponent<Character>().TakeDamage(
-                    damage, GetRigidbody().velocity);
+                    _isCritical ? criticalDamage : damage, GetRigidbody().velocity);
                 hit = true;
             }
 
@@ -44,7 +50,7 @@ namespace Game.Gameplay
                 && other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
                 other.gameObject.GetComponent<Character>().TakeDamage(
-                    damage, GetRigidbody().velocity);
+                    _isCritical ? criticalDamage : damage, GetRigidbody().velocity);
                 hit = true;
             }
 

@@ -116,6 +116,8 @@ namespace Game.Gameplay
 
             energy = Mathf.Clamp(energy, minEnergy, maxEnergy);
 
+            bool isCritical = false;
+
             // critical hit
             if (ownerCamp == Camp.Player && energy / maxEnergy > 0.9f)
             {
@@ -126,9 +128,10 @@ namespace Game.Gameplay
                     audioClip.volume
                 );
                 particalCriticalHit.Play();
+                isCritical = true;
             }
 
-            holdingWeapon.Attack(shootDirection.normalized, energy);
+            holdingWeapon.Attack(shootDirection.normalized, energy, isCritical);
 
             throwEvent.Invoke();
             ammoUpdateEvent.Invoke(Ammo);
