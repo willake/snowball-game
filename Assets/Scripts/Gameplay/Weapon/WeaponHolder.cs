@@ -63,6 +63,12 @@ namespace Game.Gameplay
             State = WeaponHolderState.IdleState;
         }
 
+        public void Reset()
+        {
+            holdingWeapon.Reset();
+            ammoUpdateEvent.Invoke(Ammo);
+        }
+
         public void UpdateAimDirection(Vector3 direction)
         {
             AimDirection = direction;

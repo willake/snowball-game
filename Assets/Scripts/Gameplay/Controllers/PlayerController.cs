@@ -12,6 +12,7 @@ namespace Game.Gameplay
     public class PlayerController : Controller
     {
         [Header("References")]
+        public Transform spawnPoint;
         public PlayerCamera bindedCamera;
         public BoolState isPlayerDead;
         public Vector3State statePlayerPos;
@@ -19,7 +20,7 @@ namespace Game.Gameplay
         public ProgressBar chargeBar;
 
         private bool _isPressingMove;
-        public bool isControllable;
+        public int AvailableLifes { get; private set; }
 
         private PlayerCharacter _playerCharacter;
 
@@ -57,8 +58,21 @@ namespace Game.Gameplay
             bindedCharacter.weaponHolder.throwEvent.AddListener(() => chargeBar.gameObject.SetActive(false));
             bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
 
-            isControllable = true;
             isPlayerDead.value = false;
+            AvailableLifes = 3;
+        }
+
+        public bool Revive()
+        {
+            if (AvailableLifes == 0)
+            {
+                return false;
+            }
+            transform.position = spawnPoint.position;
+            AvailableLifes--;
+            isPlayerDead.value = false;
+            bindedCharacter.Revive();
+            return true;
         }
 
         private void SetupReloadBar()
@@ -85,7 +99,6 @@ namespace Game.Gameplay
 
         private void HandleDieEvent()
         {
-            isControllable = false;
             // bindedCharacter.GetNavMeshAgent().isStopped = true;
             isPlayerDead.value = true;
             StartCoroutine(DestoryCharacter());
@@ -109,8 +122,7 @@ namespace Game.Gameplay
                 return;
             }
             if (GameManager.instance.IsPaused) return;
-            if (bindedCharacter == null) return;
-            if (isControllable == false) return;
+            if (bindedCharacter == null || bindedCharacter.State.isDead) return;
 
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
