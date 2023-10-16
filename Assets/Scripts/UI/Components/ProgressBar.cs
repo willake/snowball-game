@@ -54,7 +54,7 @@ namespace Game.UI
 
             if (Mathf.Abs(progressImage.fillAmount - progress) > float.Epsilon)
             {
-                if (_tween != null && _tween.IsPlaying())
+                if (_tween != null && _tween.IsActive())
                 {
                     _tween.Kill();
                 }
@@ -73,7 +73,10 @@ namespace Game.UI
 
         private void OnDestroy()
         {
-            _tween?.Kill();
+            if (_tween != null && _tween.IsActive())
+            {
+                _tween.Kill();
+            }
         }
     }
 }

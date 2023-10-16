@@ -37,21 +37,30 @@ namespace Game.Gameplay
         private void OnTriggerEnter(Collider other)
         {
             bool hit = false;
+            Character character = null;
             if (
                 OwnerCamp == Camp.Player
                 && other.gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                other.gameObject.GetComponent<Character>().TakeDamage(
-                    _isCritical ? criticalDamage : damage, GetRigidbody().velocity);
-                hit = true;
+                character = other.gameObject.GetComponent<Character>();
+                if (character.State.isDead == false)
+                {
+                    character.TakeDamage(
+                        _isCritical ? criticalDamage : damage, GetRigidbody().velocity);
+                    hit = true;
+                }
             }
 
             if (OwnerCamp == Camp.Enemy
                 && other.gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                other.gameObject.GetComponent<Character>().TakeDamage(
-                    _isCritical ? criticalDamage : damage, GetRigidbody().velocity);
-                hit = true;
+                character = other.gameObject.GetComponent<Character>();
+                if (character.State.isDead == false)
+                {
+                    character.TakeDamage(
+                        _isCritical ? criticalDamage : damage, GetRigidbody().velocity);
+                    hit = true;
+                }
             }
 
             if (!hit && (other.gameObject.layer == LayerMask.NameToLayer("Enemy") ||

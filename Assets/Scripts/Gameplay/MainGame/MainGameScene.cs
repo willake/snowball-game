@@ -65,18 +65,25 @@ namespace Game.Gameplay
             if (UIManager.instance)
             {
                 playerCamera = playerController.bindedCamera.GetCamera();
-                _gameHUDPanel.BindCharacter(playerController.bindedCharacter);
+                _gameHUDPanel.BindController(playerController);
             }
         }
 
         public void EliminatePlayer(PlayerController playerController)
         {
-            Debug.Log("Player lose!");
-            IsGameRunning = false;
-            if (UIManager.instance)
+            if (playerController.Revive())
             {
-                EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
-                panel.SetEndGameState(EndGamePanel.EndGameState.Lose);
+
+            }
+            else
+            {
+                Debug.Log("Player lose!");
+                IsGameRunning = false;
+                if (UIManager.instance)
+                {
+                    EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
+                    panel.SetEndGameState(EndGamePanel.EndGameState.Lose);
+                }
             }
         }
 
@@ -94,7 +101,6 @@ namespace Game.Gameplay
             {
                 Debug.Log("Player wins");
                 IsGameRunning = false;
-                _player.isControllable = false;
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
                 panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }

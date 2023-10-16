@@ -54,6 +54,11 @@ namespace Game.Gameplay
                 ParticleSystem particle = hitEffectObj.GetComponent<ParticleSystem>();
                 _onHitEffectPool.Enqueue(particle);
             }
+            Reset();
+        }
+
+        public void Reset()
+        {
             Ammo = maxAmmo;
         }
 
