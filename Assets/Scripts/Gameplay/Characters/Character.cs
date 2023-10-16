@@ -62,6 +62,15 @@ namespace Game.Gameplay
             SetCharacterState(CharacterState.IdleState);
         }
 
+        public void Revive()
+        {
+            health = MaxHealth;
+            healthUpdateEvent.Invoke(health, MaxHealth);
+            GetCharacterAnimatior().TriggerRevive();
+            SetCharacterState(CharacterState.IdleState);
+            weaponHolder.Reset();
+        }
+
         public void TakeDamage(float damage, Vector3 direction)
         {
             if (State.isDead) return;

@@ -758,12 +758,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bindedCharacter: {fileID: 4952449846692857601}
+  spawnPoint: {fileID: 0}
   bindedCamera: {fileID: 0}
   isPlayerDead: {fileID: 11400000, guid: c70306dcccf9b2e4b8ca3653f043521d, type: 2}
   statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   reloadBar: {fileID: 4564336065038237206}
   chargeBar: {fileID: 2972403187792743455}
-  isControllable: 1
+  availableLifes: 2
 --- !u!114 &4952449846692857601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2570,6 +2571,7 @@ MonoBehaviour:
   throwingPitch: 2
   minEnergy: 5
   maxEnergy: 100
+  criticalThreshold: 0.95
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 1
   timeOutEnergy: 1

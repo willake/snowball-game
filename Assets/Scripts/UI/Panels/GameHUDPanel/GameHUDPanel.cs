@@ -16,12 +16,9 @@ namespace Game.UI
 
         public ProgressBar healthBar;
         public AmmoBar ammoBar;
+        public LifeBar lifeBar;
 
-        private Character _bindedCharacter = null;
-
-        private void Start()
-        {
-        }
+        private Controller _bindedController = null;
 
         public override WDButton[] GetSelectableButtons()
         {
@@ -51,20 +48,28 @@ namespace Game.UI
             await UniTask.CompletedTask;
         }
 
-        public void BindCharacter(Character character)
+        public void BindController(PlayerController controller)
         {
-            _bindedCharacter = character;
-            character.healthUpdateEvent.AddListener(UpdateHealth);
-            character.weaponHolder.ammoUpdateEvent.AddListener(UpdateAmmo);
-            healthBar.SetProgress(character.health / character.MaxHealth);
-            ammoBar.SetAmmo(10);
+            _bindedController = controller;
+            controller.lifesUpdateEvent.AddListener(UpdateLifes);
+            controller.bindedCharacter.healthUpdateEvent.AddListener(UpdateHealth);
+            controller.bindedCharacter.weaponHolder.ammoUpdateEvent.AddListener(UpdateAmmo);
+            healthBar.SetProgress(
+                controller.bindedCharacter.health / controller.bindedCharacter.MaxHealth);
+            UpdateAmmo(10);
+            UpdateLifes(controller.availableLifes);
         }
 
         public void UnbindCharacter()
         {
-            _bindedCharacter.healthUpdateEvent.RemoveListener(UpdateHealth);
-            _bindedCharacter.weaponHolder.ammoUpdateEvent.RemoveListener(UpdateAmmo);
-            _bindedCharacter = null;
+            _bindedController.bindedCharacter.healthUpdateEvent.RemoveListener(UpdateHealth);
+            _bindedController.bindedCharacter.weaponHolder.ammoUpdateEvent.RemoveListener(UpdateAmmo);
+            _bindedController = null;
+        }
+
+        private void UpdateLifes(int lifes)
+        {
+            lifeBar.SetLifes(lifes);
         }
 
         private void UpdateHealth(float health, float maxHealth)

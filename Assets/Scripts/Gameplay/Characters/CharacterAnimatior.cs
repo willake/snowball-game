@@ -79,6 +79,11 @@ namespace Game.Gameplay
             GetAnimator().SetTrigger("Dead");
         }
 
+        public void TriggerRevive()
+        {
+            GetAnimator().SetTrigger("Revive");
+        }
+
         IEnumerator CountDownThrowAnimation()
         {
             yield return new WaitForSecondsRealtime(throwingAnimationTime);
