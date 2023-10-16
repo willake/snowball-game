@@ -286,14 +286,14 @@ namespace Game.UI
 
         private void BlockUIInput()
         {
-            InputManager.instance.SetAllowInput(false);
+            // InputManager.instance.SetAllowInput(false);
             inputBlocker.SetActive(true);
             inputBlocker.transform.SetAsLastSibling();
         }
 
         private void UnblockUIInput()
         {
-            InputManager.instance.SetAllowInput(true);
+            // InputManager.instance.SetAllowInput(true);
             inputBlocker.SetActive(false);
         }
     }

@@ -13,7 +13,6 @@ namespace Game.UI
         public override AvailableUI Type => AvailableUI.GameHUDPanel;
 
         [Header("References")]
-        public WDButton btnMenu;
 
         public ProgressBar healthBar;
         public AmmoBar ammoBar;
@@ -22,16 +21,11 @@ namespace Game.UI
 
         private void Start()
         {
-            btnMenu
-                .OnClickObservable
-                .ObserveOnMainThread()
-                .Subscribe(_ => SwitchToMainGame())
-                .AddTo(this);
         }
 
         public override WDButton[] GetSelectableButtons()
         {
-            return new WDButton[] { btnMenu };
+            return new WDButton[] { };
         }
 
         public override void PerformCancelAction()
@@ -83,14 +77,8 @@ namespace Game.UI
             ammoBar.SetAmmo(ammo);
         }
 
-        private void SwitchToMainGame()
-        {
-            GameManager.instance.SwitchScene(AvailableScene.Menu);
-        }
-
         private void OnDestroy()
         {
-            btnMenu.StopAnimation();
             UnbindCharacter();
         }
     }
