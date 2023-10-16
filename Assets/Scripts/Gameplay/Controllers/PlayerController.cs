@@ -21,7 +21,7 @@ namespace Game.Gameplay
         public ProgressBar chargeBar;
 
         private bool _isPressingMove;
-        public int availableLifes = 2;
+        public int availableLifes = 3;
         private PlayerCharacter _playerCharacter;
         public LifesUpdateEvent lifesUpdateEvent = new();
 
@@ -60,7 +60,6 @@ namespace Game.Gameplay
             bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
 
             isPlayerDead.value = false;
-            availableLifes = 2;
         }
 
         public bool Revive()
@@ -69,6 +68,7 @@ namespace Game.Gameplay
             {
                 return false;
             }
+            Debug.Log($"AvailableLife {availableLifes}");
             transform.position = spawnPoint.position;
             availableLifes--;
             isPlayerDead.value = false;
