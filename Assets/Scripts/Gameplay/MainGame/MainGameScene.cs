@@ -155,21 +155,21 @@ namespace Game.Gameplay
         }
 
         /* Register enemy to enemylist and return an ID. */
-        public void RegisterEnemy(AIController aiController, bool isBoss = false)
+        public void RegisterEnemy(AIController aiController, EnemyType enemyType)
         {
             _enemyList.Add(aiController.GetInstanceID());
 
-            if (isBoss)
+            if (enemyType == EnemyType.Boss)
             {
                 _bossList.Add(aiController.GetInstanceID());
             }
         }
 
-        public void EliminateEnemy(AIController aiController, bool isBoss = false)
+        public void EliminateEnemy(AIController aiController, EnemyType enemyType)
         {
             _enemyList.Remove(aiController.GetInstanceID());
 
-            if (isBoss)
+            if (enemyType == EnemyType.Boss)
             {
                 _bossList.Remove(aiController.GetInstanceID());
             }
