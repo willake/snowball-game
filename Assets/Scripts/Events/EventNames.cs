@@ -19,6 +19,12 @@ namespace Game.Events
         public static EventName onPlayerDead = new EventName("ON_PLAYER_DEAD", false);
         public static EventName onPlayerDamaged = new EventName("ON_PLAYER_DAMAGED", false);
         public static EventName onPlayerReload = new EventName("ON_PLAYER_RELOAD", false);
+        /*
+        args
+        {
+            EnemyType enemyType
+        }
+        */
         public static EventName onEnemyDead = new EventName("ON_ENEMY_DEAD", false);
 
         /*

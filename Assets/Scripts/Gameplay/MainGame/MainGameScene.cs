@@ -177,6 +177,9 @@ namespace Game.Gameplay
             EventManager.Publish(
                 EventNames.onEnemyDead,
                 new Payload()
+                {
+                    args = new object[] { enemyType }
+                }
             );
 
             // if the level has no bosses, win when all enemies are dead
