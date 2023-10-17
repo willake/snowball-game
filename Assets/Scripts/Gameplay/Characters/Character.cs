@@ -198,7 +198,7 @@ namespace Game.Gameplay
                     Mathf.Sin(angle),
                     Mathf.Cos(angle), 1);
                 // audio
-                if (Time.time - _lastFootstepTime > footstepAimIntervalInSeconds)
+                if (isPlayer && Time.time - _lastFootstepTime > footstepAimIntervalInSeconds)
                 {
                     WrappedAudioClip audioClip = UnityEngine.Random.value > 0.5f
                         ? ResourceManager.instance?.audioResources.gameplayAudios.footStep1
