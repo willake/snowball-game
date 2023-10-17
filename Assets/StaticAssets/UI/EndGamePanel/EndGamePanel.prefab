@@ -59,7 +59,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 105995509651901377}
 --- !u!114 &105995509651901377
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,8 +81,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: End Game Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 127e7ff39ce58934f838accf62d2fc4b, type: 2}
+  m_sharedMaterial: {fileID: 8073151677806462598, guid: 127e7ff39ce58934f838accf62d2fc4b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -113,7 +112,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -226,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b8ffddc2c516a1478906c25f6fbdf66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 8157190695437572378}
 --- !u!114 &8157190695437572378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -249,8 +247,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Main menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3ecfa2d83c7743742bef0f9a7b7f6248, type: 2}
+  m_sharedMaterial: {fileID: 7102534911751219419, guid: 3ecfa2d83c7743742bef0f9a7b7f6248, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -375,7 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.6}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -425,7 +423,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2607167345475289604
 RectTransform:
   m_ObjectHideFlags: 0
@@ -588,6 +586,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 519836571adf27f42a4cacb8ce9825b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonType: 0
 --- !u!1 &8722227121731769291
 GameObject:
   m_ObjectHideFlags: 0
