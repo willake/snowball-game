@@ -23,6 +23,10 @@ namespace Game.Saves
         public int damagedCount;
         public int reloadCount;
         public int killedEnemyCount;
+        public int killedRegulars;
+        public int killedRangers;
+        public int killedSnipers;
+        public int killedBosses;
         public int totalEnemyCount;
         public List<ThrownBall> thrownBalls;
         public long finishTime;
@@ -51,6 +55,10 @@ namespace Game.Saves
             this.damagedCount = 0;
             this.reloadCount = 0;
             this.killedEnemyCount = 0;
+            this.killedRegulars = 0;
+            this.killedRangers = 0;
+            this.killedSnipers = 0;
+            this.killedBosses = 0;
             this.totalEnemyCount = 0;
             this.thrownBalls = new();
             this.finishTime = 0;
@@ -68,6 +76,10 @@ namespace Game.Saves
             this.damagedCount = data.damagedCount;
             this.reloadCount = data.reloadCount;
             this.killedEnemyCount = data.killedEnemyCount;
+            this.killedRegulars = data.killedRegulars;
+            this.killedRangers = data.killedRangers;
+            this.killedSnipers = data.killedSnipers;
+            this.killedBosses = data.killedBosses;
             this.totalEnemyCount = data.totalEnemyCount;
             this.thrownBalls = data.thrownBalls;
             this.finishTime = data.finishTime;

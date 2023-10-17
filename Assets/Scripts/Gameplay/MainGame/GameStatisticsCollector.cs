@@ -76,7 +76,25 @@ namespace Game.Gameplay
                 EventManager.Subscribe(IDENTITY, EventNames.onEnemyDead,
                 (payload) =>
                 {
+                    EnemyType enemyType = (EnemyType)payload.args[0];
                     _statisticsData.killedEnemyCount += 1;
+
+                    switch (enemyType)
+                    {
+                        case EnemyType.Regular:
+                        default:
+                            _statisticsData.killedRegulars += 1;
+                            break;
+                        case EnemyType.Ranger:
+                            _statisticsData.killedRangers += 1;
+                            break;
+                        case EnemyType.Sniper:
+                            _statisticsData.killedSnipers += 1;
+                            break;
+                        case EnemyType.Boss:
+                            _statisticsData.killedBosses += 1;
+                            break;
+                    }
                 });
 
             _onPlayerBallHitSubscription =

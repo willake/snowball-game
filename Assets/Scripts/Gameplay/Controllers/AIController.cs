@@ -44,7 +44,7 @@ namespace Game.Gameplay
                     MainGameScene.instance.worldSpaceCanvas,
                     MainGameScene.instance.playerCamera
                 );
-                MainGameScene.instance.RegisterEnemy(this, GetAICharacter().isBoss);
+                MainGameScene.instance.RegisterEnemy(this, GetAICharacter().enemyType);
             }
 
             bindedCharacter.healthUpdateEvent.AddListener(UpdateHealthBar);
@@ -52,7 +52,7 @@ namespace Game.Gameplay
             bindedCharacter.weaponHolder.loadEvent.AddListener(() =>
             {
                 if (bindedCharacter.State.isDead) return;
-                if (GetAICharacter().isSniper == false) return;
+                if (GetAICharacter().enemyType != EnemyType.Sniper) return;
                 sniperLine.gameObject.SetActive(true);
                 _isSnipping = true;
                 // show red line
@@ -61,7 +61,7 @@ namespace Game.Gameplay
             bindedCharacter.weaponHolder.throwEvent.AddListener(() =>
             {
                 if (bindedCharacter.State.isDead) return;
-                if (GetAICharacter().isSniper == false) return;
+                if (GetAICharacter().enemyType != EnemyType.Sniper) return;
                 sniperLine.gameObject.SetActive(false);
                 // close red line
                 _isSnipping = false;
@@ -141,7 +141,7 @@ namespace Game.Gameplay
         IEnumerator DestoryCharacter()
         {
             yield return new WaitForSeconds(2f);
-            MainGameScene.instance?.EliminateEnemy(this, GetAICharacter().isBoss);
+            MainGameScene.instance?.EliminateEnemy(this, GetAICharacter().enemyType);
             Destroy(this.healthBar.gameObject);
             Destroy(this.gameObject);
         }

@@ -240,8 +240,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
-  isBoss: 1
-  isSniper: 0
+  enemyType: 3
 --- !u!195 &336764463272099550
 NavMeshAgent:
   m_ObjectHideFlags: 0
