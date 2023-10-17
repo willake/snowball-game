@@ -50,7 +50,7 @@ MonoBehaviour:
   isDebugLogEnabled: 0
   throwingPitch: 2
   minEnergy: 20
-  maxEnergy: 100
+  maxEnergy: 80
   criticalThreshold: 0.95
   chargeIntervalInSeconds: 0.01
   energyPerInterval: 0.1
