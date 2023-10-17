@@ -1209,7 +1209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: -5154140472955633337}
+  selectedEditorNode: {fileID: 4707139004144651306}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -1344,7 +1344,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
-  sightRange: 30
+  sightRange: 35
   isTargetingPlayer:
     useConstant: 0
     mode: 1
@@ -1456,7 +1456,7 @@ MonoBehaviour:
     mode: 0
     blackboard: {fileID: 0}
     key: 
-    constantValue: 30
+    constantValue: 35
   intReference2:
     useConstant: 1
     mode: 0
