@@ -140,7 +140,13 @@ namespace Game.Gameplay
                 projectile.onHitEvent.RemoveAllListeners();
             }
             _projectilePool.Clear();
+            _onHitEffectPool.Clear();
             Destroy(_poolObj);
+
+            if (_loadedProjectile)
+            {
+                Destroy(_loadedProjectile);
+            }
         }
     }
 }
