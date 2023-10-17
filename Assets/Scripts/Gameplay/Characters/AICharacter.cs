@@ -32,12 +32,14 @@ namespace Game.Gameplay
 
         public void Aim()
         {
+            if (State.isDead) return;
             if (isGrounded == false || State.canThrow == false) return;
             if (weaponHolder.AimWithoutCharging()) SetCharacterState(CharacterState.AimState);
         }
 
         public void Reload()
         {
+            if (State.isDead) return;
             if (State.canReload == false || State.isReloading) return;
             weaponHolder.Reload();
         }
