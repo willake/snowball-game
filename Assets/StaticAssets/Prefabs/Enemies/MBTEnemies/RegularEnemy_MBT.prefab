@@ -693,7 +693,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 56268e2d9677e5b4bab194d129e7a076, type: 2}
+  - {fileID: 5702159569459833656, guid: fdcc2ea0b4a59d44ebb86899c1f72c78, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1525,7 +1525,7 @@ Transform:
   m_GameObject: {fileID: 6544132504076760926}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 9.202919, y: 0.05, z: -1.1088071}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1816,7 +1816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 6202084913549292003}
+  selectedEditorNode: {fileID: 1813159567978653599}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -2467,7 +2467,7 @@ MonoBehaviour:
     key: isPlayerInView
     constantValue: 0
   character: {fileID: 215085660974815480}
-  stopDistance: 6
+  stopDistance: 8
   updateInterval: 1
 --- !u!114 &1971762201510072529
 MonoBehaviour:
