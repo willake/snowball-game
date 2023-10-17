@@ -11,8 +11,10 @@ namespace Game.Gameplay
         [Header("References")]
         public Vector3State statePlayerPos;
         public ProgressBar healthBar;
+        public LineRenderer sniperLine;
 
         [Header("Settings")]
+        public LayerMask enemyLayer;
         public float sightRange;
         public float attackRange;
         public float minAttackDelayInSeconds = 0.5f;
@@ -32,6 +34,8 @@ namespace Game.Gameplay
 
         private Coroutine _throwCorutine;
 
+        private bool _isSnipping = false;
+
         private void Start()
         {
             if (MainGameScene.instance)
@@ -45,8 +49,48 @@ namespace Game.Gameplay
 
             bindedCharacter.healthUpdateEvent.AddListener(UpdateHealthBar);
             bindedCharacter.dieEvent.AddListener(HandleDieEvent);
+            bindedCharacter.weaponHolder.loadEvent.AddListener(() =>
+            {
+                if (bindedCharacter.State.isDead) return;
+                if (GetAICharacter().isSniper == false) return;
+                sniperLine.gameObject.SetActive(true);
+                _isSnipping = true;
+                // show red line
+                // set position
+            });
+            bindedCharacter.weaponHolder.throwEvent.AddListener(() =>
+            {
+                if (bindedCharacter.State.isDead) return;
+                if (GetAICharacter().isSniper == false) return;
+                sniperLine.gameObject.SetActive(false);
+                // close red line
+                _isSnipping = false;
+            });
 
             isControllable = true;
+        }
+
+        private void Update()
+        {
+            if (_isSnipping)
+            {
+                Vector3 start = bindedCharacter.weaponHolder.transform.position;
+                Vector3 dest = statePlayerPos.value;
+
+                RaycastHit hit;
+                if (Physics.Raycast(
+                    start, dest - start,
+                    out hit, Mathf.Infinity, ~enemyLayer))
+                {
+                    dest = hit.point;
+                }
+
+                sniperLine.SetPositions(new Vector3[]
+                {
+                    start,
+                    dest
+                });
+            }
         }
 
         protected void ChasePlayer()
