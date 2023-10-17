@@ -10,6 +10,7 @@ namespace Game.Gameplay.CustomBehaviorTree
     public class MoveCharacterAction : Leaf
     {
         public Vector3Reference destination;
+        public bool willBeInterruptByPlayerInView = false;
         public BoolReference isPlayerInView;
         public AICharacter character;
         public float stopDistance = 2f;
@@ -31,9 +32,9 @@ namespace Game.Gameplay.CustomBehaviorTree
             {
                 return NodeResult.failure;
             }
-            if (isPlayerInView.Value)
+            if (willBeInterruptByPlayerInView && isPlayerInView.Value)
             {
-                return NodeResult.success;
+                return NodeResult.failure;
             }
             // Update destination every given interval
             if (_time > updateInterval)
