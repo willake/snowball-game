@@ -2822,7 +2822,7 @@ MonoBehaviour:
     blackboard: {fileID: 4275073464473930556}
     key: isTargetingPlayer
     constantValue: 0
-  validateDistance: 18
+  validateDistance: 15
 --- !u!114 &-4022244727413319465
 MonoBehaviour:
   m_ObjectHideFlags: 0
