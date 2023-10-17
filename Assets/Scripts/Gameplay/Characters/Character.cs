@@ -49,6 +49,7 @@ namespace Game.Gameplay
             weaponHolder.throwEvent.AddListener(() => SetCharacterState(CharacterState.ThrowState));
             weaponHolder.reloadStartEvent.AddListener(() =>
                 {
+                    if (State.isDead) return;
                     SetCharacterState(CharacterState.ReloadState);
                     GetCharacterAnimatior()?.SetIsReloading(true);
                     WrappedAudioClip audioClip =
@@ -58,6 +59,7 @@ namespace Game.Gameplay
                 });
             weaponHolder.reloadEndEvent.AddListener(success =>
                 {
+                    if (State.isDead) return;
                     SetCharacterState(CharacterState.IdleState);
                     GetCharacterAnimatior()?.SetIsReloading(false);
                     AudioManager.instance?.StopSFXLoop(_reloadSFXLoopID);
@@ -71,9 +73,17 @@ namespace Game.Gameplay
                     }
                 });
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
-                () => SetCharacterState(CharacterState.IdleState));
+                () =>
+                {
+                    if (State.isDead) return;
+                    SetCharacterState(CharacterState.IdleState);
+                });
             GetCharacterAnimatior()?.damageEndedEvent.AddListener(
-                () => SetCharacterState(CharacterState.IdleState));
+                () =>
+                {
+                    if (State.isDead) return;
+                    SetCharacterState(CharacterState.IdleState);
+                });
 
             SetCharacterState(CharacterState.IdleState);
         }
@@ -131,6 +141,7 @@ namespace Game.Gameplay
 
         public void UpdateAimDirection(Vector3 direction, bool useFoward = true)
         {
+            if (State.isDead) return;
             // float angle = (float)Math.Atan2(direction.x, direction.y);
             // transform.rotation = Quaternion.Euler(
             //     new Vector3(0, angle * Mathf.Rad2Deg, 0));
@@ -142,6 +153,7 @@ namespace Game.Gameplay
 
         public void Throw(float energy)
         {
+            if (State.isDead) return;
             if (State.isAiming)
             {
                 weaponHolder.Throw(energy);
@@ -150,6 +162,11 @@ namespace Game.Gameplay
 
         protected void SetCharacterState(ICharacterState state)
         {
+            if (State == CharacterState.DeadState && state != CharacterState.IdleState)
+            {
+                return;
+            }
+
             State = state;
 
             if (state == CharacterState.DamagedState)

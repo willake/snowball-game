@@ -12,6 +12,7 @@ namespace Game.Gameplay
         public override Vector3 Velocity => GetRigidbody() ? GetRigidbody().velocity : Vector3.zero;
         public void Aim()
         {
+            if (State.isDead) return;
             if (isGrounded == false || State.canThrow == false) return;
             if (weaponHolder.Aim()) SetCharacterState(CharacterState.AimState);
         }
@@ -25,6 +26,7 @@ namespace Game.Gameplay
 
         public void TryThrow()
         {
+            if (State.isDead) return;
             // haven't really throw yet, show do not set state
             if (State.isAiming)
             {
