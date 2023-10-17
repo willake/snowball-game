@@ -15,13 +15,15 @@ namespace Game.Gameplay.CustomBehaviorTree
         public Vector3State statePlayerPos;
         [Tooltip("Sphere radius")]
         public float sightRange = 10;
+        public BoolReference isTargetingPlayer = new BoolReference(VarRefMode.DisableConstant);
         public BoolReference isPlayerInView = new BoolReference(VarRefMode.DisableConstant);
         public Vector3Reference playerPos = new Vector3Reference(VarRefMode.DisableConstant);
-
+        public FloatReference distance = new FloatReference(VarRefMode.DisableConstant);
         public override void Task()
         {
             // Find target in radius and feed blackboard variable with results
-            float distance = Vector3.Distance(transform.position, statePlayerPos.value);
+            playerPos.Value = statePlayerPos.value;
+            distance.Value = Vector3.Distance(transform.position, statePlayerPos.value);
 
             RaycastHit hit;
             bool canSeePlayer = false;
@@ -35,16 +37,15 @@ namespace Game.Gameplay.CustomBehaviorTree
                 }
             }
 
-            if (canSeePlayer && distance < sightRange)
+            if (canSeePlayer && distance.Value < sightRange)
             {
                 isPlayerInView.Value = true;
+                isTargetingPlayer.Value = true;
             }
             else
             {
                 isPlayerInView.Value = false;
             }
-
-            playerPos.Value = statePlayerPos.value;
         }
 
         public override bool IsValid()
