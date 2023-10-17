@@ -1126,6 +1126,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   isBoss: 0
+  isSniper: 0
 --- !u!195 &6632277184752286326
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1183,6 +1184,10 @@ MonoBehaviour:
   bindedCharacter: {fileID: 3619398478112654907}
   statePlayerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   healthBar: {fileID: 2432340708052294759}
+  sniperLine: {fileID: 0}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 0
   sightRange: 0
   attackRange: 0
   minAttackDelayInSeconds: 0.5
@@ -1966,7 +1971,7 @@ MonoBehaviour:
     constantValue: 0
   character: {fileID: 3619398478112654907}
   stopDistance: 5
-  updateInterval: 1
+  updateInterval: 0.2
 --- !u!114 &672356762429716370
 MonoBehaviour:
   m_ObjectHideFlags: 0
