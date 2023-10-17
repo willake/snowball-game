@@ -14,6 +14,7 @@ namespace Game.Gameplay.CustomBehaviorTree
         public BoolReference isAiming = new BoolReference(VarRefMode.DisableConstant);
         public BoolReference isReloading = new BoolReference(VarRefMode.DisableConstant);
         public BoolReference isDead = new BoolReference(VarRefMode.DisableConstant);
+        public BoolReference isDamaged = new BoolReference(VarRefMode.DisableConstant);
         public BoolReference canMove = new BoolReference(VarRefMode.DisableConstant);
         public BoolReference canThrow = new BoolReference(VarRefMode.DisableConstant);
         public BoolReference canReload = new BoolReference(VarRefMode.DisableConstant);
@@ -26,6 +27,7 @@ namespace Game.Gameplay.CustomBehaviorTree
             canMove.Value = aiCharacter.State.canMove;
             canThrow.Value = aiCharacter.State.canThrow;
             canReload.Value = aiCharacter.State.canReload;
+            isDamaged.Value = aiCharacter.MaxHealth - aiCharacter.health > float.Epsilon;
         }
 
         public override bool IsValid()
