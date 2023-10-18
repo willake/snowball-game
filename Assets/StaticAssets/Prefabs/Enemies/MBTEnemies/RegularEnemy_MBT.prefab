@@ -1627,8 +1627,7 @@ MonoBehaviour:
   GroundLayer:
     serializedVersion: 2
     m_Bits: 8
-  isBoss: 0
-  isSniper: 0
+  enemyType: 0
 --- !u!195 &2002889927117738545
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1821,7 +1820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 1813159567978653599}
+  selectedEditorNode: {fileID: 6438079511003886421}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -2584,7 +2583,7 @@ MonoBehaviour:
   breakpoint: 0
   playerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   character: {fileID: 215085660974815480}
-  stopDistance: 2
+  stopDistance: 8
   updateInterval: 0.2
   minAimingTime: 0.8
   maxAimingTime: 1.4
