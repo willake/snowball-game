@@ -39,6 +39,8 @@ namespace Game.Gameplay
 
         private int _initalBossCount = 0;
 
+        private float _playTimeInSeconds = 0f;
+
         private async void Start()
         {
             IsGameRunning = false;
@@ -93,7 +95,7 @@ namespace Game.Gameplay
 
             gameStatisticsCollector.StartRecording(
                 GetLevelNumer(GameManager.instance.levelToLoad), _enemyList.Count);
-            _gameHUDPanel.SetStartTime(TimeStampUtils.NowInSeconds);
+            _gameHUDPanel.UpdateTimeText(0);
         }
 
         private int GetLevelNumer(AvailableLevel availableLevel)
@@ -124,7 +126,7 @@ namespace Game.Gameplay
                     args = new object[] { isWin }
                 }
             );
-            gameStatisticsCollector.StopRecording(isWin);
+            gameStatisticsCollector.StopRecording(isWin, (long)_playTimeInSeconds);
 
         }
 
@@ -208,6 +210,13 @@ namespace Game.Gameplay
             Destroy(_player.gameObject);
             await levelLoader.UnloadCurrentLevel();
             GameManager.instance.SwitchScene(AvailableScene.Menu);
+        }
+
+        private void FixedUpdate()
+        {
+            if (IsGameRunning == false) return;
+            _playTimeInSeconds += Time.fixedDeltaTime;
+            _gameHUDPanel.UpdateTimeText((long)_playTimeInSeconds);
         }
     }
 }
