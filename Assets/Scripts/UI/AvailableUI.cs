@@ -9,6 +9,7 @@ namespace Game.UI
         LevelSelectPanel,
         SettingsPanel,
         TransitionPanel,
-        GameStartPanel
+        GameStartPanel,
+        TutorialPanel
     }
 }
