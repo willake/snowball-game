@@ -18,7 +18,7 @@ namespace Game
             Register<JsonRepository<GameStatisticsDataV1>>(() =>
             {
 #if UNITY_EDITOR
-                return new JsonRepository<GameStatisticsDataV1>(SaveMode.InMemory);
+                return new JsonRepository<GameStatisticsDataV1>(SaveMode.NonSerializedFile, "D:\\Projects\\INFOMAIGT\\Data");
 #elif UNITY_WEBGL
                 return new JsonRepository<GameStatisticsDataV1>(SaveMode.PlayerPrefs);
 #else
