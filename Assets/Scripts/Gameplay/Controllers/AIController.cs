@@ -177,7 +177,10 @@ namespace Game.Gameplay
 
         private void OnDestroy()
         {
-            Destroy(this.healthBar.gameObject);
+            if (this.healthBar)
+            {
+                Destroy(this.healthBar.gameObject);
+            }
         }
     }
 }

@@ -24,7 +24,11 @@ namespace Game.Gameplay
 
         private void Start()
         {
-            dieEvent.AddListener(() => SetMovementEnabled(false));
+            dieEvent.AddListener(() =>
+            {
+                SetMovementEnabled(false);
+                GetCollider().isTrigger = true;
+            });
             weaponHolder.throwEvent.AddListener(() => SetMovementEnabled(false));
             GetCharacterAnimatior()?.thorwEndedEvent.AddListener(
                 () => SetMovementEnabled(true));
@@ -97,6 +101,14 @@ namespace Game.Gameplay
             if (_navMeshAgent == null) _navMeshAgent = GetComponent<NavMeshAgent>();
 
             return _navMeshAgent;
+        }
+
+        private Collider _collider;
+        private Collider GetCollider()
+        {
+            if (_collider == null) _collider = GetComponent<Collider>();
+
+            return _collider;
         }
     }
 }

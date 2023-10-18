@@ -202,8 +202,8 @@ namespace Game.Gameplay
 
         private void OnDestroy()
         {
-            Destroy(chargeBar.gameObject);
-            Destroy(reloadBar.gameObject);
+            if (chargeBar) Destroy(chargeBar.gameObject);
+            if (reloadBar) Destroy(reloadBar.gameObject);
         }
 
 
