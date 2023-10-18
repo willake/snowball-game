@@ -4,10 +4,16 @@ using Game.Gameplay.CharacterStates;
 
 namespace Game.Gameplay
 {
+    public enum EnemyType
+    {
+        Regular,
+        Ranger,
+        Sniper,
+        Boss
+    }
     public class AICharacter : Character
     {
-        public bool isBoss = false;
-        public bool isSniper = false;
+        public EnemyType enemyType = EnemyType.Regular;
         public override Vector3 Velocity => GetNavMeshAgent() ? GetNavMeshAgent().velocity : Vector3.zero;
 
         private NavMeshAgent _navMeshAgent;
