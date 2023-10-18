@@ -114,6 +114,17 @@ namespace Game.Gameplay
             _statisticsData.isPlayerWin = isWin;
             StatisticsDataRepository.Insert(_statisticsData).Forget();
             Debug.Log($"Save Statistics Data to {Consts.GAME_FOLDER_PATH() + "Saves"} with id: {_statisticsData.id}");
+            UnsubscribeEvents();
+        }
+
+        public void StopRecordingWithoutSave()
+        {
+            Debug.Log($"Quit level without saving data");
+            UnsubscribeEvents();
+        }
+
+        private void UnsubscribeEvents()
+        {
             EventManager.CancelSubscription(
                 EventNames.onGameEnd,
                 _onGameEndSubscription);

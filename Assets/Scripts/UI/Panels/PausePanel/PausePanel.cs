@@ -5,6 +5,7 @@ using Game.Events;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using DG.Tweening;
+using Game.Gameplay;
 
 namespace Game.UI
 {
@@ -39,7 +40,7 @@ namespace Game.UI
                 .Subscribe(_ =>
                 {
                     GameManager.instance.ResumeGame();
-                    GameManager.instance.SwitchScene(AvailableScene.Menu);
+                    MainGameScene.instance.NavigateToMenu(false).Forget();
                 })
                 .AddTo(this);
         }
