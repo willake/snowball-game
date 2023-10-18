@@ -13,12 +13,14 @@ namespace Game.UI
         public override AvailableUI Type => AvailableUI.GameHUDPanel;
 
         [Header("References")]
-
         public ProgressBar healthBar;
         public AmmoBar ammoBar;
         public LifeBar lifeBar;
+        public WDText txtTime;
 
         private Controller _bindedController = null;
+
+        private long _startTime = 0;
 
         public override WDButton[] GetSelectableButtons()
         {
@@ -65,6 +67,34 @@ namespace Game.UI
             _bindedController.bindedCharacter.healthUpdateEvent.RemoveListener(UpdateHealth);
             _bindedController.bindedCharacter.weaponHolder.ammoUpdateEvent.RemoveListener(UpdateAmmo);
             _bindedController = null;
+        }
+
+        public void SetStartTime(long time)
+        {
+            _startTime = time;
+            UpdateTimeText(time);
+        }
+
+        private void Update()
+        {
+            if (MainGameScene.instance.IsGameRunning)
+            {
+                UpdateTimeText(TimeStampUtils.NowInSeconds - _startTime);
+            }
+        }
+
+        private string ParseText(long time)
+        {
+            long minutes = time / 60;
+            long seconds = time % 60;
+            string minutesText = minutes > 9 ? $"{minutes}" : $"0{minutes}";
+            string secondsText = seconds > 9 ? $"{seconds}" : $"0{seconds}";
+            return $"{minutesText}:{secondsText}";
+        }
+
+        public void UpdateTimeText(long time)
+        {
+            txtTime.text = ParseText(time);
         }
 
         private void UpdateLifes(int lifes)
