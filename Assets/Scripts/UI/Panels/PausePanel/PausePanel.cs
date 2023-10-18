@@ -40,7 +40,7 @@ namespace Game.UI
                 .Subscribe(_ =>
                 {
                     GameManager.instance.ResumeGame();
-                    MainGameScene.instance.NavigateToMenu().Forget();
+                    MainGameScene.instance.NavigateToMenu(false).Forget();
                 })
                 .AddTo(this);
         }

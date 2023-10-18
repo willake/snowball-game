@@ -199,8 +199,12 @@ namespace Game.Gameplay
             }
         }
 
-        public async UniTask NavigateToMenu()
+        public async UniTask NavigateToMenu(bool finished)
         {
+            if (finished == false)
+            {
+                gameStatisticsCollector.StopRecordingWithoutSave();
+            }
             Destroy(_player.gameObject);
             await levelLoader.UnloadCurrentLevel();
             GameManager.instance.SwitchScene(AvailableScene.Menu);

@@ -71,7 +71,7 @@ namespace Game.UI
 
         private void GoMainMenu()
         {
-            MainGameScene.instance.NavigateToMenu().Forget();
+            MainGameScene.instance.NavigateToMenu(true).Forget();
         }
 
         private void OnDestroy()
