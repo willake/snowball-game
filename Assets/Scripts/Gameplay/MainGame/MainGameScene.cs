@@ -8,6 +8,7 @@ using Game.Events;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Game.RuntimeStates;
+using Cysharp.Threading.Tasks;
 
 namespace Game.Gameplay
 {
@@ -183,6 +184,8 @@ namespace Game.Gameplay
                 }
             );
 
+            Destroy(aiController.gameObject);
+
             // if the level has no bosses, win when all enemies are dead
             // if the level has bosses, win when the bosses are dead
             if ((_initalBossCount == 0 && _enemyList.Count <= 0) ||
@@ -194,6 +197,13 @@ namespace Game.Gameplay
                 EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
                 panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }
+        }
+
+        public async UniTask NavigateToMenu()
+        {
+            Destroy(_player.gameObject);
+            await levelLoader.UnloadCurrentLevel();
+            GameManager.instance.SwitchScene(AvailableScene.Menu);
         }
     }
 }

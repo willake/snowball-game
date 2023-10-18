@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Audios;
+using Game.Gameplay;
 
 namespace Game.UI
 {
@@ -70,7 +71,7 @@ namespace Game.UI
 
         private void GoMainMenu()
         {
-            GameManager.instance.SwitchScene(AvailableScene.Menu);
+            MainGameScene.instance.NavigateToMenu().Forget();
         }
 
         private void OnDestroy()
