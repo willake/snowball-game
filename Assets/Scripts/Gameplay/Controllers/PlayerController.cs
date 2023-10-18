@@ -200,6 +200,14 @@ namespace Game.Gameplay
             return _reloadbarFollow;
         }
 
+        private void OnDestroy()
+        {
+            if (chargeBar) Destroy(chargeBar.gameObject);
+            if (reloadBar) Destroy(reloadBar.gameObject);
+        }
+
+
+
         public class LifesUpdateEvent : UnityEvent<int> { }
     }
 }

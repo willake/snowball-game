@@ -48,7 +48,9 @@ namespace Game.Gameplay.CustomBehaviorTree
             {
                 // Reset time and update destination
                 _time = 0;
-                character.MoveTo(playerPos.value);
+                Vector3 actualDistance = playerPos.value - transform.position;
+                Vector3 dest = actualDistance - ((actualDistance.normalized) * stopDistance);
+                character.MoveTo(dest);
             }
             if (_aimingTime < _determinedAimingTime)
             {

@@ -88,10 +88,10 @@ namespace Game
             _currentLevel = string.Empty;
         }
 
-        private void OnDestroy()
-        {
-            UnloadCurrentLevel().Forget();
-        }
+        // private void OnDestroy()
+        // {
+        //     UnloadCurrentLevel().Forget();
+        // }
 
         public class OnLoadLevelEvent : UnityEvent<string> { }
     }

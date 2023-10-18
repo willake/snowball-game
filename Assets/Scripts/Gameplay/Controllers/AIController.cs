@@ -142,8 +142,6 @@ namespace Game.Gameplay
         {
             yield return new WaitForSeconds(2f);
             MainGameScene.instance?.EliminateEnemy(this, GetAICharacter().enemyType);
-            Destroy(this.healthBar.gameObject);
-            Destroy(this.gameObject);
         }
 
         private void UpdateHealthBar(float health, float maxHealth)
@@ -175,6 +173,14 @@ namespace Game.Gameplay
             if (_aiCharacter == null) _aiCharacter = bindedCharacter as AICharacter;
 
             return _aiCharacter;
+        }
+
+        private void OnDestroy()
+        {
+            if (this.healthBar)
+            {
+                Destroy(this.healthBar.gameObject);
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using Game.Events;
 using System.Threading.Tasks;
 using DG.Tweening;
 using Game.RuntimeStates;
+using Cysharp.Threading.Tasks;
 
 namespace Game.Gameplay
 {
@@ -23,6 +24,7 @@ namespace Game.Gameplay
         public GameStatisticsCollector gameStatisticsCollector;
 
         private GameHUDPanel _gameHUDPanel;
+        private EndGamePanel _endGamePanel;
         private PlayerController _player;
         private HashSet<int> _enemyList = new HashSet<int>();
         private HashSet<int> _bossList = new HashSet<int>();
@@ -37,6 +39,8 @@ namespace Game.Gameplay
         public bool IsGameRunning { get; private set; }
 
         private int _initalBossCount = 0;
+
+        private float _playTimeInSeconds = 0f;
 
         private async void Start()
         {
@@ -92,7 +96,7 @@ namespace Game.Gameplay
 
             gameStatisticsCollector.StartRecording(
                 GetLevelNumer(GameManager.instance.levelToLoad), _enemyList.Count);
-            _gameHUDPanel.SetStartTime(TimeStampUtils.NowInSeconds);
+            _gameHUDPanel.UpdateTimeText(0);
         }
 
         private int GetLevelNumer(AvailableLevel availableLevel)
@@ -123,7 +127,15 @@ namespace Game.Gameplay
                     args = new object[] { isWin }
                 }
             );
-            gameStatisticsCollector.StopRecording(isWin);
+            gameStatisticsCollector.StopRecording(isWin, (long)_playTimeInSeconds);
+
+            if (UIManager.instance)
+            {
+                EndGamePanel panel =
+                    UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
+                panel.SetEndGameState(isWin ? EndGamePanel.EndGameState.Win : EndGamePanel.EndGameState.Lose);
+                panel.UpdateStatisticsInformation(gameStatisticsCollector.StatisticsData);
+            }
 
         }
 
@@ -147,11 +159,6 @@ namespace Game.Gameplay
             {
                 Debug.Log("Player lose!");
                 OnEndGame(false);
-                if (UIManager.instance)
-                {
-                    EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
-                    panel.SetEndGameState(EndGamePanel.EndGameState.Lose);
-                }
             }
         }
 
@@ -183,6 +190,8 @@ namespace Game.Gameplay
                 }
             );
 
+            Destroy(aiController.gameObject);
+
             // if the level has no bosses, win when all enemies are dead
             // if the level has bosses, win when the bosses are dead
             if ((_initalBossCount == 0 && _enemyList.Count <= 0) ||
@@ -191,9 +200,25 @@ namespace Game.Gameplay
                 // win when all enemies are dead
                 Debug.Log("Player wins");
                 OnEndGame(true);
-                EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
-                panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }
+        }
+
+        public async UniTask NavigateToMenu(bool finished)
+        {
+            if (finished == false)
+            {
+                gameStatisticsCollector.StopRecordingWithoutSave();
+            }
+            Destroy(_player.gameObject);
+            await levelLoader.UnloadCurrentLevel();
+            GameManager.instance.SwitchScene(AvailableScene.Menu);
+        }
+
+        private void FixedUpdate()
+        {
+            if (IsGameRunning == false) return;
+            _playTimeInSeconds += Time.fixedDeltaTime;
+            _gameHUDPanel.UpdateTimeText((long)_playTimeInSeconds);
         }
     }
 }

@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 3238055274078971698}
+  selectedEditorNode: {fileID: 6535220495865382121}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -1946,7 +1946,7 @@ MonoBehaviour:
   title: Move Character Action
   rect:
     serializedVersion: 2
-    x: 340
+    x: 320
     y: 720
     width: 160
     height: 45
@@ -2081,7 +2081,7 @@ MonoBehaviour:
   breakpoint: 0
   playerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   character: {fileID: 3619398478112654907}
-  stopDistance: 2
+  stopDistance: 3
   updateInterval: 0.2
   minAimingTime: 0.8
   maxAimingTime: 1.4
