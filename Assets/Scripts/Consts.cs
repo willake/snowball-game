@@ -18,6 +18,6 @@ namespace Game
             };
             return path;
         }
-        public static string VERSION = "v1.3.1";
+        public static string VERSION = "v1.3.2";
     }
 }

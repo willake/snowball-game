@@ -236,7 +236,7 @@ namespace Game.Gameplay
                 transform.rotation =
                         Quaternion.LookRotation(new Vector3(velocity.normalized.x, 0, velocity.normalized.z));
                 // audio
-                if (Time.time - _lastFootstepTime > footstepIntervalInSeconds)
+                if (isPlayer && Time.time - _lastFootstepTime > footstepIntervalInSeconds)
                 {
                     WrappedAudioClip audioClip = UnityEngine.Random.value > 0.5f
                         ? ResourceManager.instance?.audioResources.gameplayAudios.footStep1
