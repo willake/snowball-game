@@ -92,6 +92,7 @@ namespace Game.Gameplay
 
             gameStatisticsCollector.StartRecording(
                 GetLevelNumer(GameManager.instance.levelToLoad), _enemyList.Count);
+            _gameHUDPanel.SetStartTime(TimeStampUtils.NowInSeconds);
         }
 
         private int GetLevelNumer(AvailableLevel availableLevel)
