@@ -2583,7 +2583,7 @@ MonoBehaviour:
   breakpoint: 0
   playerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   character: {fileID: 215085660974815480}
-  stopDistance: 8
+  stopDistance: 4
   updateInterval: 0.2
   minAimingTime: 0.8
   maxAimingTime: 1.4
@@ -2826,7 +2826,7 @@ MonoBehaviour:
     blackboard: {fileID: 4275073464473930556}
     key: isTargetingPlayer
     constantValue: 0
-  validateDistance: 12
+  validateDistance: 13
 --- !u!114 &-4022244727413319465
 MonoBehaviour:
   m_ObjectHideFlags: 0
