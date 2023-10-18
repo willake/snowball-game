@@ -5,6 +5,9 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using Game.Audios;
 using Game.Gameplay;
+using Game.Saves;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace Game.UI
 {
@@ -15,6 +18,16 @@ namespace Game.UI
         [Header("References")]
         public EndGameTitle title;
         public WDTextButton btnMenu;
+        public WDText txtPlayTime;
+        public WDText txtDeathCount;
+        public WDText txtDamagedCount;
+        public WDText txtReloadCount;
+        public WDText txtAverageEnergy;
+        public WDText txtTotalEnemies;
+        public WDText txtKilledEnemies;
+        public WDText txtSnowballThrown;
+        public WDText txtCriticalCharge;
+        public WDText txtAvergeDistance;
 
         private CanvasGroup _canvasGroup;
 
@@ -68,6 +81,38 @@ namespace Game.UI
             gameObject.SetActive(false);
             await UniTask.CompletedTask;
         }
+
+        public void UpdateStatisticsInformation(GameStatisticsDataV1 data)
+        {
+            txtPlayTime.text = ParseTimeText(data.finishTime);
+            txtDeathCount.text = data.deathCount.ToString();
+            txtDamagedCount.text = data.damagedCount.ToString();
+            txtReloadCount.text = data.reloadCount.ToString();
+            txtTotalEnemies.text = data.totalEnemyCount.ToString();
+            txtKilledEnemies.text = data.killedEnemyCount.ToString();
+            txtSnowballThrown.text = data.thrownBalls.Count.ToString();
+            txtCriticalCharge.text = data.thrownBalls.Where(x => x.isCritical).Count().ToString();
+
+            float totalEnergy = 0f;
+            data.thrownBalls.ForEach(x => totalEnergy += x.energy);
+            txtAverageEnergy.text = (totalEnergy / data.thrownBalls.Count).ToString("0.00");
+
+            float totalDistance = 0f;
+            List<GameStatisticsDataV1.ThrownBall> ballsKilledEnemies =
+                data.thrownBalls.Where(x => x.isKillEnemy).ToList();
+            ballsKilledEnemies.ForEach(x => totalDistance += x.hitDistance);
+            txtAvergeDistance.text = (totalDistance / ballsKilledEnemies.Count).ToString("0.00");
+        }
+
+        private string ParseTimeText(long time)
+        {
+            long minutes = time / 60;
+            long seconds = time % 60;
+            string minutesText = minutes > 9 ? $"{minutes}" : $"0{minutes}";
+            string secondsText = seconds > 9 ? $"{seconds}" : $"0{seconds}";
+            return $"{minutesText}:{secondsText}";
+        }
+
 
         private void GoMainMenu()
         {

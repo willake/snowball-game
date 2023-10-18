@@ -24,6 +24,7 @@ namespace Game.Gameplay
         public GameStatisticsCollector gameStatisticsCollector;
 
         private GameHUDPanel _gameHUDPanel;
+        private EndGamePanel _endGamePanel;
         private PlayerController _player;
         private HashSet<int> _enemyList = new HashSet<int>();
         private HashSet<int> _bossList = new HashSet<int>();
@@ -128,6 +129,14 @@ namespace Game.Gameplay
             );
             gameStatisticsCollector.StopRecording(isWin, (long)_playTimeInSeconds);
 
+            if (UIManager.instance)
+            {
+                EndGamePanel panel =
+                    UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
+                panel.SetEndGameState(isWin ? EndGamePanel.EndGameState.Win : EndGamePanel.EndGameState.Lose);
+                panel.UpdateStatisticsInformation(gameStatisticsCollector.StatisticsData);
+            }
+
         }
 
         public void RegisterPlayer(PlayerController playerController)
@@ -150,11 +159,6 @@ namespace Game.Gameplay
             {
                 Debug.Log("Player lose!");
                 OnEndGame(false);
-                if (UIManager.instance)
-                {
-                    EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
-                    panel.SetEndGameState(EndGamePanel.EndGameState.Lose);
-                }
             }
         }
 
@@ -196,8 +200,6 @@ namespace Game.Gameplay
                 // win when all enemies are dead
                 Debug.Log("Player wins");
                 OnEndGame(true);
-                EndGamePanel panel = UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
-                panel.SetEndGameState(EndGamePanel.EndGameState.Win);
             }
         }
 
