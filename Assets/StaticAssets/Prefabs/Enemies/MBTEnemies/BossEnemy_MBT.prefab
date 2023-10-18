@@ -251,7 +251,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 5
+  m_Speed: 5.2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -433,7 +433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 7909334433104363119}
+  selectedEditorNode: {fileID: 6668910885665197253}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -1084,7 +1084,7 @@ MonoBehaviour:
     key: isPlayerInView
     constantValue: 0
   character: {fileID: 4394247552707750436}
-  stopDistance: 10
+  stopDistance: 8
   updateInterval: 0.4
 --- !u!114 &5668853842806132064
 MonoBehaviour:
@@ -1196,7 +1196,7 @@ MonoBehaviour:
   breakpoint: 0
   playerPos: {fileID: 11400000, guid: 7a36fd6096dec7246bbe4b501008cc84, type: 2}
   character: {fileID: 4394247552707750436}
-  stopDistance: 9
+  stopDistance: 7
   updateInterval: 0.2
   minAimingTime: 0.45
   maxAimingTime: 1.4
@@ -1439,7 +1439,7 @@ MonoBehaviour:
     blackboard: {fileID: 6831889593547320043}
     key: isTargetingPlayer
     constantValue: 0
-  validateDistance: 15
+  validateDistance: 12
 --- !u!114 &5323528751571261297
 MonoBehaviour:
   m_ObjectHideFlags: 0

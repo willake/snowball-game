@@ -1820,7 +1820,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b25af8627659c6949b60949c3aa8d91d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedEditorNode: {fileID: 6438079511003886421}
+  selectedEditorNode: {fileID: 6202084913549292003}
   repeatOnFinish: 1
   maxExecutionsPerTick: 1000
   parent: {fileID: 0}
@@ -2826,7 +2826,7 @@ MonoBehaviour:
     blackboard: {fileID: 4275073464473930556}
     key: isTargetingPlayer
     constantValue: 0
-  validateDistance: 15
+  validateDistance: 12
 --- !u!114 &-4022244727413319465
 MonoBehaviour:
   m_ObjectHideFlags: 0
