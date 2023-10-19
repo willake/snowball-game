@@ -86,13 +86,13 @@ namespace Game.Gameplay
 
         public void Idle()
         {
-            GetNavMeshAgent().isStopped = true;
+            SetMovementEnabled(false);
         }
 
         public void MoveTo(Vector3 position)
         {
-            if (State.canMove == false) return;
-            GetNavMeshAgent().isStopped = false;
+            if (State.isDead || State.canMove == false) return;
+            SetMovementEnabled(true);
             GetNavMeshAgent().SetDestination(position);
         }
 

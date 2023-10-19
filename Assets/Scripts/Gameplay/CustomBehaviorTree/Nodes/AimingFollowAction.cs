@@ -41,6 +41,7 @@ namespace Game.Gameplay.CustomBehaviorTree
 
             if (character.State.isDead)
             {
+                character.Idle();
                 return NodeResult.failure;
             }
 

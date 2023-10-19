@@ -30,6 +30,7 @@ namespace Game.Gameplay.CustomBehaviorTree
 
             if (character.State.isDead || character.State.canMove == false)
             {
+                character.Idle();
                 return NodeResult.failure;
             }
             if (willBeInterruptByPlayerInView && isPlayerInView.Value)
