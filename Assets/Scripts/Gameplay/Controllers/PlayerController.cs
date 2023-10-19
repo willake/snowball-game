@@ -141,7 +141,7 @@ namespace Game.Gameplay
                 bindedCharacter.UpdateAimDirection(dir);
             }
 
-            statePlayerPos.value = bindedCharacter.transform.position;
+            statePlayerPos.value = bindedCharacter.transform.position + new Vector3(0, 0.5f, 0);
         }
 
         private void FixedUpdate()
