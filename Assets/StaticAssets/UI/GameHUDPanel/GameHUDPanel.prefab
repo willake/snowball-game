@@ -2313,10 +2313,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: chargebar
       objectReference: {fileID: 0}
-    - target: {fileID: 1965405678691724445, guid: c1586de32192b744cb8f7e04f2578d70, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3604329195120475307, guid: c1586de32192b744cb8f7e04f2578d70, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
