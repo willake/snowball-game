@@ -24,6 +24,7 @@ namespace Game
         [Header("References")]
         public SceneLoader sceneLoader;
         public AvailableLevel levelToLoad = AvailableLevel.Test;
+        public Texture2D cursorTexture;
 
         public bool IsPaused { get; private set; }
 
@@ -37,6 +38,7 @@ namespace Game
 
             SwitchScene(AvailableScene.Menu);
             IsPaused = false;
+            Cursor.SetCursor(cursorTexture, new Vector2(16, 16), CursorMode.Auto);
         }
 
         public void PauseGame()

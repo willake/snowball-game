@@ -72,10 +72,10 @@ namespace Game.Gameplay
             _loadedProjectile.transform.position = this.transform.position;
             // _holdingProjectile.gameObject.layer = projectileLayer;
             _loadedProjectile.GetRigidbody().velocity = Vector3.zero;
-            _loadedProjectile.GetRigidbody().isKinematic = true;
-            _loadedProjectile.GetCollider().enabled = false;
+            // _loadedProjectile.GetRigidbody().isKinematic = true;
+            // _loadedProjectile.GetCollider().enabled = false;
             _loadedProjectile.EnableTrail(false);
-            _loadedProjectile.gameObject.SetActive(true);
+            // _loadedProjectile.gameObject.SetActive(true);
 
             isLoaded = true;
             Ammo -= 1;
@@ -85,12 +85,13 @@ namespace Game.Gameplay
         {
             if (isLoaded == false) return false;
 
+            _loadedProjectile.gameObject.SetActive(true);
             _loadedProjectile.SetThrowPosition(transform.position);
             _loadedProjectile.SetEnergy(energy);
             _loadedProjectile.SetIsCritical(isCritical);
-            _loadedProjectile.EnableTrail(true);
-            _loadedProjectile.GetRigidbody().isKinematic = false;
-            _loadedProjectile.GetCollider().enabled = true;
+            _loadedProjectile.EnableTrail(isCritical);
+            // _loadedProjectile.GetRigidbody().isKinematic = false;
+            // _loadedProjectile.GetCollider().enabled = true;
             _loadedProjectile.GetRigidbody().AddForce(
                 direction * energy * energyMultiplier, ForceMode.Impulse);
 
