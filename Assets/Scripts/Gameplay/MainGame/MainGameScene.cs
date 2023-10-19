@@ -205,9 +205,12 @@ namespace Game.Gameplay
 
         public async UniTask NavigateToMenu(bool finished)
         {
+            IsGameRunning = false;
+            isGameRunningState.value = false;
             if (finished == false)
             {
                 gameStatisticsCollector.StopRecordingWithoutSave();
+                AudioManager.instance.StopSFXLoop(_ambienceWindLoopID);
             }
             Destroy(_player.gameObject);
             await levelLoader.UnloadCurrentLevel();
