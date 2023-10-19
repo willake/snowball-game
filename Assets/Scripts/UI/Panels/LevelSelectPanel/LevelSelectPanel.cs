@@ -34,11 +34,11 @@ namespace Game.UI
                 .ObserveOnMainThread()
                 .Subscribe(_ => LoadLevel(2))
                 .AddTo(this);
-            btnLevel3
-                .OnClickObservable
-                .ObserveOnMainThread()
-                .Subscribe(_ => LoadLevel(3))
-                .AddTo(this);
+            // btnLevel3
+            //     .OnClickObservable
+            //     .ObserveOnMainThread()
+            //     .Subscribe(_ => LoadLevel(3))
+            //     .AddTo(this);
             btnBack
                 .OnClickObservable
                 .ObserveOnMainThread()
