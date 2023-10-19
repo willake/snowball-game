@@ -62,18 +62,18 @@ MonoBehaviour:
   ease: 2
   gradient:
     serializedVersion: 2
-    key0: {r: 1, g: 1, b: 1, a: 1}
-    key1: {r: 1, g: 1, b: 1, a: 1}
-    key2: {r: 0, g: 0, b: 0, a: 0}
-    key3: {r: 0, g: 0, b: 0, a: 0}
+    key0: {r: 0.69209987, g: 1, b: 0.2980392, a: 1}
+    key1: {r: 1, g: 0.9011904, b: 0.23137254, a: 1}
+    key2: {r: 1, g: 0.5174015, b: 0.16862744, a: 0}
+    key3: {r: 1, g: 0.13679248, b: 0.13679248, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
     key5: {r: 0, g: 0, b: 0, a: 0}
     key6: {r: 0, g: 0, b: 0, a: 0}
     key7: {r: 0, g: 0, b: 0, a: 0}
     ctime0: 0
-    ctime1: 65535
-    ctime2: 0
-    ctime3: 0
+    ctime1: 20046
+    ctime2: 63569
+    ctime3: 65535
     ctime4: 0
     ctime5: 0
     ctime6: 0
@@ -87,8 +87,8 @@ MonoBehaviour:
     atime6: 0
     atime7: 0
     m_Mode: 0
-    m_ColorSpace: -1
-    m_NumColorKeys: 2
+    m_ColorSpace: 0
+    m_NumColorKeys: 4
     m_NumAlphaKeys: 2
 --- !u!1 &4916801346881572965
 GameObject:
@@ -166,7 +166,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  borderWidth: 0
+  borderWidth: 8
   falloffDistance: 1
 --- !u!114 &4553642405657850
 MonoBehaviour:
@@ -216,7 +216,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -16, y: -16}
+  m_SizeDelta: {x: -14, y: -14}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7059238076495516127
 CanvasRenderer:
@@ -256,7 +256,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  borderWidth: 0
+  borderWidth: 2
   falloffDistance: 1
 --- !u!114 &1255977278485956899
 MonoBehaviour:
@@ -341,12 +341,12 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
-  borderWidth: 0
+  borderWidth: 5
   falloffDistance: 1
 --- !u!114 &8720750728523657650
 MonoBehaviour:

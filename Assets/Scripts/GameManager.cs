@@ -38,7 +38,7 @@ namespace Game
 
             SwitchScene(AvailableScene.Menu);
             IsPaused = false;
-            Cursor.SetCursor(cursorTexture, Vector2.zero, CursorMode.Auto);
+            Cursor.SetCursor(cursorTexture, new Vector2(16, 16), CursorMode.Auto);
         }
 
         public void PauseGame()
