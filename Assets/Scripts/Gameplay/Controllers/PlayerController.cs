@@ -18,7 +18,6 @@ namespace Game.Gameplay
         public BoolState isPlayerDead;
         public Vector3State statePlayerPos;
         public ProgressBar reloadBar;
-        public ProgressBar chargeBar;
 
         private bool _isPressingMove;
         public int availableLifes = 3;
@@ -36,7 +35,6 @@ namespace Game.Gameplay
             if (MainGameScene.instance)
             {
                 SetupReloadBar();
-                SetupChargeBar();
                 MainGameScene.instance.RegisterPlayer(this);
             }
 
@@ -49,15 +47,6 @@ namespace Game.Gameplay
             });
             bindedCharacter.weaponHolder.reloadEndEvent.AddListener(_ => reloadBar.gameObject.SetActive(false));
             bindedCharacter.weaponHolder.reloadProgressUpdateEvent.AddListener(progress => reloadBar.SetProgress(progress));
-
-            bindedCharacter.weaponHolder.loadEvent.AddListener(() =>
-            {
-                GetChargeBarFollowScript().ForceUpdate();
-                chargeBar.SetProgress(0f);
-                chargeBar.gameObject.SetActive(true);
-            });
-            bindedCharacter.weaponHolder.throwEvent.AddListener(() => chargeBar.gameObject.SetActive(false));
-            bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
 
             isPlayerDead.value = false;
         }
@@ -86,17 +75,6 @@ namespace Game.Gameplay
                 faceCamera.cam = bindedCamera.GetComponent<Camera>();
             }
             reloadBar.gameObject.SetActive(false);
-        }
-
-        private void SetupChargeBar()
-        {
-            chargeBar.SetProgress(0f);
-            chargeBar.transform.SetParent(MainGameScene.instance.worldSpaceCanvas.transform);
-            if (chargeBar.TryGetComponent<FaceCamera>(out FaceCamera faceCamera))
-            {
-                faceCamera.cam = bindedCamera.GetComponent<Camera>();
-            }
-            chargeBar.gameObject.SetActive(false);
         }
 
         private void HandleDieEvent()
@@ -185,13 +163,6 @@ namespace Game.Gameplay
             return _playerCharacter;
         }
 
-        private FollowTarget _chargebarFollow;
-        private FollowTarget GetChargeBarFollowScript()
-        {
-            if (_chargebarFollow == null) _chargebarFollow = chargeBar.GetComponent<FollowTarget>();
-
-            return _chargebarFollow;
-        }
         private FollowTarget _reloadbarFollow;
         private FollowTarget GetReloadBarFollowScript()
         {
@@ -202,7 +173,6 @@ namespace Game.Gameplay
 
         private void OnDestroy()
         {
-            if (chargeBar) Destroy(chargeBar.gameObject);
             if (reloadBar) Destroy(reloadBar.gameObject);
         }
 

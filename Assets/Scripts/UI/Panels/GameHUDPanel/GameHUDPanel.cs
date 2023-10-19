@@ -17,6 +17,8 @@ namespace Game.UI
         public AmmoBar ammoBar;
         public LifeBar lifeBar;
         public WDText txtTime;
+        public ProgressBar chargeBar;
+        private bool _isChargeBarOpen = false;
 
         private Controller _bindedController = null;
 
@@ -50,14 +52,45 @@ namespace Game.UI
 
         public void BindController(PlayerController controller)
         {
+            chargeBar.gameObject.SetActive(false);
             _bindedController = controller;
             controller.lifesUpdateEvent.AddListener(UpdateLifes);
             controller.bindedCharacter.healthUpdateEvent.AddListener(UpdateHealth);
             controller.bindedCharacter.weaponHolder.ammoUpdateEvent.AddListener(UpdateAmmo);
-            healthBar.SetProgress(
-                controller.bindedCharacter.health / controller.bindedCharacter.MaxHealth);
             UpdateAmmo(10);
             UpdateLifes(controller.availableLifes);
+
+            controller.bindedCharacter.weaponHolder.loadEvent.AddListener(() =>
+            {
+                Cursor.visible = false;
+                chargeBar.SetProgress(0f);
+                chargeBar.gameObject.SetActive(true);
+                _isChargeBarOpen = true;
+            });
+            controller.bindedCharacter.weaponHolder.throwEvent.AddListener(() =>
+            {
+                Cursor.visible = true;
+                chargeBar.gameObject.SetActive(false);
+                _isChargeBarOpen = false;
+            });
+            controller.bindedCharacter.weaponHolder.energyUpdateEvent.AddListener(progress => chargeBar.SetProgress(progress));
+            healthBar.SetProgress(
+                controller.bindedCharacter.health / controller.bindedCharacter.MaxHealth);
+        }
+
+        private void Update()
+        {
+            if (_isChargeBarOpen)
+            {
+                GetChargeBarRect().transform.position = Input.mousePosition;
+            }
+        }
+
+        private RectTransform _chargeBarRect;
+        private RectTransform GetChargeBarRect()
+        {
+            if (_chargeBarRect == null) _chargeBarRect = chargeBar.GetComponent<RectTransform>();
+            return _chargeBarRect;
         }
 
         public void UnbindCharacter()

@@ -622,6 +622,7 @@ MonoBehaviour:
   _isPersistant: 0
   sceneLoader: {fileID: 276261630}
   levelToLoad: 0
+  cursorTexture: {fileID: 2800000, guid: eea0f9ec61e55b6469307c4da3e22cea, type: 3}
 --- !u!1 &1700998227
 GameObject:
   m_ObjectHideFlags: 0
