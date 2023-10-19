@@ -14,7 +14,11 @@ namespace Game.Gameplay.CustomBehaviorTree
 
         public override NodeResult Execute()
         {
-            if (aiCharacter.State.isDead) return NodeResult.failure;
+            if (aiCharacter.State.isDead)
+            {
+                aiCharacter.Idle();
+                return NodeResult.failure;
+            }
             Vector3 direction = playerPos.Value - transform.position;
             aiCharacter.UpdateAimDirection(direction.normalized, false);
 
