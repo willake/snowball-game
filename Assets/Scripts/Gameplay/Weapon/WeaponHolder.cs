@@ -61,6 +61,7 @@ namespace Game.Gameplay
         private void Start()
         {
             State = WeaponHolderState.IdleState;
+            socket.gameObject.SetActive(false);
         }
 
         public void Reset()
@@ -79,6 +80,7 @@ namespace Game.Gameplay
             if (State.shouldReload) return false;
 
             Energy = 0;
+            socket.gameObject.SetActive(true);
             holdingWeapon.Load();
             _chargingCorotine = StartCoroutine(ChargeEnergy());
             loadEvent.Invoke();
@@ -91,6 +93,7 @@ namespace Game.Gameplay
             if (State.shouldReload) return false;
 
             Energy = 0;
+            socket.gameObject.SetActive(true);
             holdingWeapon.Load();
             loadEvent.Invoke();
             SetWeaponHolderState(WeaponHolderState.AimState);
@@ -138,6 +141,7 @@ namespace Game.Gameplay
                 isCritical = true;
             }
 
+            socket.gameObject.SetActive(false);
             holdingWeapon.Attack(shootDirection.normalized, energy, isCritical);
 
             throwEvent.Invoke();
