@@ -72,6 +72,11 @@ namespace Game.UI
 #endif
         }
 
+        public void OnFileDownload()
+        {
+            Debug.Log("File Successfully Downloaded");
+        }
+
         public override WDButton[] GetSelectableButtons()
         {
             return new WDButton[] {
