@@ -36,10 +36,12 @@ namespace Game.Gameplay
             if (isReloading)
             {
                 GetAnimator().SetTrigger("ReloadStart");
+                GetAnimator().ResetTrigger("ReloadEnd");
             }
             else
             {
                 GetAnimator().SetTrigger("ReloadEnd");
+                GetAnimator().ResetTrigger("ReloadStart");
             }
         }
 
