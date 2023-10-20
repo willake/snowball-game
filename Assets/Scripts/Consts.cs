@@ -18,8 +18,7 @@ namespace Game
             };
             return path;
         }
-        public static string VERSION = "v1.5.4";
-        // public static string DATA_COLLECTION_URL = "https://snowballgame.nl/";
-        public static string DATA_COLLECTION_URL = "https://snowbc.site.transip.me/requests/";
+        public static string VERSION = "v1.6.0";
+        public static string DATA_COLLECTION_URL = "https://snowballgame.nl/requests/";
     }
 }
