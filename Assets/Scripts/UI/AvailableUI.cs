@@ -10,6 +10,7 @@ namespace Game.UI
         SettingsPanel,
         TransitionPanel,
         GameStartPanel,
-        TutorialPanel
+        TutorialPanel,
+        ModalPanel
     }
 }
