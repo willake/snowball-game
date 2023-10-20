@@ -322,9 +322,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: By playing this game, you have consent to share your play data with us.
-    To Note that we do not collect any personal information like name and ages. Only
-    the play data will be sent after you finish Level 1.
+  m_text: By playing this game, you have consent to share your play data with us
+    for research purpose. To Note that we do not collect any personal information
+    like names and ages. Only the play data will be sent after you finish Level 1.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3ecfa2d83c7743742bef0f9a7b7f6248, type: 2}
   m_sharedMaterial: {fileID: 7102534911751219419, guid: 3ecfa2d83c7743742bef0f9a7b7f6248, type: 2}
