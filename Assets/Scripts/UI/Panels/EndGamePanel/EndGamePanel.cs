@@ -38,7 +38,7 @@ namespace Game.UI
         [Header("Fade animation settings")]
         public float fadeDuration = 0.2f;
         public Ease fadeEase = Ease.InSine;
-#if UNITY_WEBGL && UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
         //
         // WebGL
         //
@@ -55,7 +55,7 @@ namespace Game.UI
                 .Subscribe(_ => GoMainMenu())
                 .AddTo(this);
 
-#if UNITY_WEBGL && UNITY_EDITOR
+#if UNITY_WEBGL && !UNITY_EDITOR
             btnExport.gameObject.SetActive(true);
             btnExport
                 .OnClickObservable
@@ -68,7 +68,7 @@ namespace Game.UI
                 })
                 .AddTo(this);
 #else
-                btnExport.gameObject.SetActive(true);
+            btnExport.gameObject.SetActive(true);
 #endif
         }
 
