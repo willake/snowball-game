@@ -10,14 +10,9 @@ namespace Game.UI
 
         public void SetLifes(int lifes)
         {
-            if (lifes > slots.Length)
-            {
-                lifes = slots.Length;
-            }
-
             for (int i = 0; i < slots.Length; i++)
             {
-                slots[i].SetIsFilled(i < lifes);
+                slots[i].SetIsFilled(i < lifes + 1);
             }
         }
     }

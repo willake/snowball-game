@@ -44,11 +44,6 @@ namespace Game.Events
 
         public bool CancelSubscription(EventName name, Subscription subscription)
         {
-            Debug.Log($"1 {subscription}");
-            Debug.Log($"2 {subscription.Subscriber}");
-            Debug.Log($"3 {name}");
-            Debug.Log($"4 {name.value}");
-            Debug.Log($"Subscriber {subscription.Subscriber} cancelled subscription of event {name.value}");
             if (_subscriptions.TryGetValue(name.value, out HashSet<Subscription> subscriptions))
             {
                 subscriptions.Remove(subscription);
