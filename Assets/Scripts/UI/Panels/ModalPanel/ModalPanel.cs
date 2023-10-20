@@ -48,8 +48,7 @@ namespace Game.UI
 
         public override void Open()
         {
-            canvasGroup.alpha = 1;
-            gameObject.SetActive(true);
+            OpenAsync().Forget();
         }
 
         public override async UniTask OpenAsync()
@@ -66,7 +65,7 @@ namespace Game.UI
 
         public override void Close()
         {
-            gameObject.SetActive(false);
+            CloseAsync().Forget();
         }
 
         public override async UniTask CloseAsync()

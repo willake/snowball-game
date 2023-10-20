@@ -2,6 +2,7 @@ using Game.Events;
 using WillakeD.CommonPatterns;
 using Game.Screens;
 using Game.Saves;
+using Game.WebRequests;
 
 namespace Game
 {
@@ -26,6 +27,7 @@ namespace Game
 #endif
             });
             Register<ScreenAspectManager>(() => new ScreenAspectManager());
+            Register<WebRequestManager>(() => new WebRequestManager());
         }
     }
 }

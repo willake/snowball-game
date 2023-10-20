@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Cysharp.Threading.Tasks;
 using Game.Saves;
 using Newtonsoft.Json;
@@ -9,27 +10,56 @@ using UnityEngine.Networking;
 
 namespace Game.WebRequests
 {
-    public class WebRequestManager : MonoBehaviour
+    public class WebRequestManager
     {
-        public async UniTask<Tuple<bool, string>> UploadPlayData(GameStatisticsDataV1 data)
+        public async UniTask<WebRequestResult> UploadPlayData(GameStatisticsDataV1 data)
         {
             string dataToSend = JsonConvert.SerializeObject(data);
-            List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
-            formData.Add(new MultipartFormDataSection(dataToSend));
-            UnityWebRequest www = UnityWebRequest.Post(Consts.DATA_COLLECTION_URL, formData);
-            www.SetRequestHeader("Content-Type", "application/json");
-            await www.SendWebRequest();
+            Debug.Log("JSON Data: " + data);
+            UnityWebRequest request = new UnityWebRequest(
+                Consts.DATA_COLLECTION_URL, UnityWebRequest.kHttpVerbPOST);
+            byte[] bytes = Encoding.UTF8.GetBytes(dataToSend);
+            request.uploadHandler = new UploadHandlerRaw(bytes);
+            request.downloadHandler = new DownloadHandlerBuffer();
+            request.SetRequestHeader("content-Type", "application/json");
 
-            if (www.result != UnityWebRequest.Result.Success)
+            try
             {
-                Debug.Log(www.error);
-                return new Tuple<bool, string>(false, www.error);
+                await request.SendWebRequest();
+
+                if (request.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.Log(request.error);
+                }
+                else
+                {
+                    Debug.Log("Form upload complete!");
+                }
+
+                return new WebRequestResult
+                {
+                    isSuccess = request.result == UnityWebRequest.Result.Success,
+                    responseCode = request.responseCode,
+                    message = request.error
+                };
             }
-            else
+            catch (Exception e)
             {
-                Debug.Log("Form upload complete!");
-                return new Tuple<bool, string>(true, www.error);
+                Debug.Log(e);
+                return new WebRequestResult
+                {
+                    isSuccess = false,
+                    responseCode = request.responseCode,
+                    message = request.error
+                };
             }
+        }
+
+        public struct WebRequestResult
+        {
+            public bool isSuccess;
+            public long responseCode;
+            public string message;
         }
     }
 }
