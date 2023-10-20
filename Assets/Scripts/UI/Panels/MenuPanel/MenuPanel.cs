@@ -46,16 +46,18 @@ namespace Game.UI
                     UIManager.instance.OpenUI(AvailableUI.TutorialPanel);
                 })
                 .AddTo(this);
-
+#if UNITY_WEBGL
+            btnExit.gameObject.SetActive(false);
+#else
+            btnExit.gameObject.SetActive(true);
             btnExit
                 .OnClickObservable
                 .ObserveOnMainThread()
                 .Subscribe(_ => GameManager.instance.ExitGame())
                 .AddTo(this);
-
+#endif
             txtVersion.text = Consts.VERSION;
         }
-
         public override WDButton[] GetSelectableButtons()
         {
             return new WDButton[] {

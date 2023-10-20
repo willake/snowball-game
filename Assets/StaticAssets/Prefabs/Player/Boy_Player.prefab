@@ -2685,7 +2685,7 @@ MonoBehaviour:
   particalCriticalHit: {fileID: 6732514805270760128}
   isDebugLogEnabled: 0
   throwingPitch: 2
-  minEnergy: 20
+  minEnergy: 5
   maxEnergy: 100
   criticalThreshold: 0.96
   chargeIntervalInSeconds: 0.01
