@@ -167,7 +167,6 @@ namespace Game.Gameplay
 
             if (State == CharacterState.ReloadState)
             {
-                Debug.Log("Disable reloading");
                 GetCharacterAnimatior()?.SetIsReloading(false);
             }
 

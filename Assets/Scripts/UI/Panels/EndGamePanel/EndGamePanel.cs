@@ -68,7 +68,7 @@ namespace Game.UI
                 })
                 .AddTo(this);
 #else
-            btnExport.gameObject.SetActive(true);
+            btnExport.gameObject.SetActive(false);
 #endif
         }
 
@@ -128,13 +128,27 @@ namespace Game.UI
 
             float totalEnergy = 0f;
             data.thrownBalls.ForEach(x => totalEnergy += x.energy);
-            txtAverageEnergy.text = (totalEnergy / data.thrownBalls.Count).ToString("0.00");
+            if (data.thrownBalls.Count > 0)
+            {
+                txtAverageEnergy.text = (totalEnergy / data.thrownBalls.Count).ToString("0.00");
+            }
+            else
+            {
+                txtAverageEnergy.text = "0.00";
+            }
 
             float totalDistance = 0f;
             List<GameStatisticsDataV1.ThrownBall> ballsKilledEnemies =
                 data.thrownBalls.Where(x => x.isKillEnemy).ToList();
             ballsKilledEnemies.ForEach(x => totalDistance += x.hitDistance);
-            txtAvergeDistance.text = (totalDistance / ballsKilledEnemies.Count).ToString("0.00");
+            if (ballsKilledEnemies.Count > 0)
+            {
+                txtAvergeDistance.text = (totalDistance / ballsKilledEnemies.Count).ToString("0.00");
+            }
+            else
+            {
+                txtAvergeDistance.text = "0.00";
+            }
         }
 
         private string ParseTimeText(long time)
