@@ -68,7 +68,7 @@ namespace Game.UI
                 })
                 .AddTo(this);
 #else
-            btnExport.gameObject.SetActive(true);
+            btnExport.gameObject.SetActive(false);
 #endif
         }
 

@@ -165,6 +165,8 @@ namespace Game.Gameplay
                 return;
             }
 
+            Debug.Log($"Request to change state from {State} to {state}");
+
             if (State == CharacterState.ReloadState)
             {
                 Debug.Log("Disable reloading");
