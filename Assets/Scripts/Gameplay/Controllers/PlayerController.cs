@@ -55,9 +55,9 @@ namespace Game.Gameplay
         {
             if (availableLifes == 0)
             {
+                lifesUpdateEvent.Invoke(-1);
                 return false;
             }
-            Debug.Log($"AvailableLife {availableLifes}");
             transform.position = spawnPoint.position;
             availableLifes--;
             isPlayerDead.value = false;
