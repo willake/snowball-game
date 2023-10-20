@@ -26,5 +26,7 @@ namespace Game
         public GameObject gameStartPanel;
         [AssetsOnly]
         public GameObject tutorialPanel;
+        [AssetsOnly]
+        public GameObject modalPanel;
     }
 }

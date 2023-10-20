@@ -8,6 +8,7 @@ using Game.Events;
 using DG.Tweening;
 using Game.RuntimeStates;
 using Cysharp.Threading.Tasks;
+using Game.WebRequests;
 
 namespace Game.Gameplay
 {
@@ -34,6 +35,11 @@ namespace Game.Gameplay
             true
         );
         protected EventManager EventManager { get => _eventManager.Value; }
+        private Lazy<WebRequestManager> _webRequestManager = new Lazy<WebRequestManager>(
+           () => DIContainer.instance.GetObject<WebRequestManager>(),
+           true
+       );
+        protected WebRequestManager WebRequestManager { get => _webRequestManager.Value; }
 
         public bool IsGameRunning { get; private set; }
 
@@ -114,7 +120,7 @@ namespace Game.Gameplay
             }
         }
 
-        public void OnEndGame(bool isWin)
+        public async void OnEndGame(bool isWin)
         {
             AudioManager.instance.StopSFXLoop(_ambienceWindLoopID);
             IsGameRunning = false;
@@ -128,14 +134,27 @@ namespace Game.Gameplay
             );
             gameStatisticsCollector.StopRecording(isWin, (long)_playTimeInSeconds);
 
-            if (UIManager.instance)
-            {
-                EndGamePanel panel =
-                    UIManager.instance.OpenUI(AvailableUI.EndGamePanel) as EndGamePanel;
-                panel.SetEndGameState(isWin ? EndGamePanel.EndGameState.Win : EndGamePanel.EndGameState.Lose);
-                panel.UpdateStatisticsInformation(gameStatisticsCollector.StatisticsData);
-            }
+            EndGamePanel panel =
+                    await UIManager.instance.OpenUIAsync(AvailableUI.EndGamePanel) as EndGamePanel;
+            panel.SetEndGameState(isWin ? EndGamePanel.EndGameState.Win : EndGamePanel.EndGameState.Lose);
+            panel.UpdateStatisticsInformation(gameStatisticsCollector.StatisticsData);
 
+            if (GameManager.instance.levelToLoad != AvailableLevel.Level1) return;
+
+            var result = await
+                WebRequestManager.UploadPlayData(gameStatisticsCollector.StatisticsData);
+
+            ModalPanel modalPanel =
+                UIManager.instance.OpenUI(AvailableUI.ModalPanel) as ModalPanel;
+
+            if (result.isSuccess)
+            {
+                modalPanel.SetContent($"The playing data has successfully been sent. ({result.responseCode})");
+            }
+            else
+            {
+                modalPanel.SetContent($"Failed to send data. Reason: {result.message} ({result.responseCode})");
+            }
         }
 
         public void RegisterPlayer(PlayerController playerController)

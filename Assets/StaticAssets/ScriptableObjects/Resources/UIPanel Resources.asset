@@ -20,3 +20,4 @@ MonoBehaviour:
   settingsPanel: {fileID: 8961320636660114426, guid: 6e3c34d090efa2f46976735dfbd88631, type: 3}
   gameStartPanel: {fileID: 1968277135264167144, guid: 9d43c69f9928abf488fb6261214af67e, type: 3}
   tutorialPanel: {fileID: 8541659136361134372, guid: 2055cfd48b75fcd45893caa48f314734, type: 3}
+  modalPanel: {fileID: 6921301304203260996, guid: 76982b95586a59c49bc180d46caa047c, type: 3}

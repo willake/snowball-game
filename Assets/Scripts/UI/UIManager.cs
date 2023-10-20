@@ -173,6 +173,7 @@ namespace Game.UI
                 AvailableUI.SettingsPanel => ResourceManager.instance.uiPanelResources.settingsPanel,
                 AvailableUI.GameStartPanel => ResourceManager.instance.uiPanelResources.gameStartPanel,
                 AvailableUI.TutorialPanel => ResourceManager.instance.uiPanelResources.tutorialPanel,
+                AvailableUI.ModalPanel => ResourceManager.instance.uiPanelResources.modalPanel,
                 _ => null
             };
         }
