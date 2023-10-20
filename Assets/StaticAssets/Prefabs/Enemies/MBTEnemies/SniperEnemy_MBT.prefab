@@ -49,7 +49,7 @@ MonoBehaviour:
   particalCriticalHit: {fileID: 0}
   isDebugLogEnabled: 0
   throwingPitch: 2
-  minEnergy: 20
+  minEnergy: 5
   maxEnergy: 60
   criticalThreshold: 0.95
   chargeIntervalInSeconds: 0.01

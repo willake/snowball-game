@@ -51,7 +51,6 @@ namespace Game.Gameplay
                 {
                     if (State.isDead) return;
                     SetCharacterState(CharacterState.ReloadState);
-                    GetCharacterAnimatior()?.SetIsReloading(true);
                     WrappedAudioClip audioClip =
                         ResourceManager.instance?.audioResources.gameplayAudios.reload;
                     _reloadSFXLoopID =
@@ -61,7 +60,6 @@ namespace Game.Gameplay
                 {
                     if (State.isDead) return;
                     SetCharacterState(CharacterState.IdleState);
-                    GetCharacterAnimatior()?.SetIsReloading(false);
                     AudioManager.instance?.StopSFXLoop(_reloadSFXLoopID);
 
                     if (isPlayer && success)
@@ -167,7 +165,18 @@ namespace Game.Gameplay
                 return;
             }
 
+            if (State == CharacterState.ReloadState)
+            {
+                Debug.Log("Disable reloading");
+                GetCharacterAnimatior()?.SetIsReloading(false);
+            }
+
             State = state;
+
+            if (state == CharacterState.ReloadState)
+            {
+                GetCharacterAnimatior()?.SetIsReloading(true);
+            }
 
             if (state == CharacterState.DamagedState)
             {
