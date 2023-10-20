@@ -5,7 +5,6 @@ using Game.UI;
 using System;
 using Game.Audios;
 using Game.Events;
-using System.Threading.Tasks;
 using DG.Tweening;
 using Game.RuntimeStates;
 using Cysharp.Threading.Tasks;
@@ -62,7 +61,7 @@ namespace Game.Gameplay
                 await UIManager.instance.OpenUIAsync(AvailableUI.GameStartPanel) as GameStartPanel;
 
             await startPanel.ShowText("- Ready -", 2f, Ease.InOutSine);
-            await Task.Delay(TimeSpan.FromSeconds(1f));
+            await UniTask.Delay(TimeSpan.FromSeconds(1f));
             await startPanel.ShowText("- Start -", 1f, Ease.InOutSine);
             await UIManager.instance.PrevAsync();
             if (UIManager.instance)

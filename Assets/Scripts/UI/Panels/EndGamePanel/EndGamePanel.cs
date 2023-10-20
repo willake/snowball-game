@@ -8,6 +8,9 @@ using Game.Gameplay;
 using Game.Saves;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
+using System.Runtime.InteropServices;
+using Newtonsoft.Json;
 
 namespace Game.UI
 {
@@ -18,6 +21,7 @@ namespace Game.UI
         [Header("References")]
         public EndGameTitle title;
         public WDTextButton btnMenu;
+        public WDTextButton btnExport;
         public WDText txtPlayTime;
         public WDText txtDeathCount;
         public WDText txtDamagedCount;
@@ -34,8 +38,15 @@ namespace Game.UI
         [Header("Fade animation settings")]
         public float fadeDuration = 0.2f;
         public Ease fadeEase = Ease.InSine;
+#if UNITY_WEBGL && UNITY_EDITOR
+        //
+        // WebGL
+        //
+        [DllImport("__Internal")]
+        private static extern void DownloadFile(string gameObjectName, string methodName, string filename, byte[] byteArray, int byteArraySize);
+#endif
 
-
+        private GameStatisticsDataV1 _data;
         private void Start()
         {
             btnMenu
@@ -43,6 +54,22 @@ namespace Game.UI
                 .ObserveOnMainThread()
                 .Subscribe(_ => GoMainMenu())
                 .AddTo(this);
+
+#if UNITY_WEBGL && UNITY_EDITOR
+            btnExport.gameObject.SetActive(true);
+            btnExport
+                .OnClickObservable
+                .ObserveOnMainThread()
+                .Subscribe(_ =>
+                {
+                    string data = JsonConvert.SerializeObject(_data);
+                    var bytes = Encoding.UTF8.GetBytes(data);
+                    DownloadFile(gameObject.name, "OnFileDownload", $"{_data.id}.txt", bytes, bytes.Length);
+                })
+                .AddTo(this);
+#else
+                btnExport.gameObject.SetActive(true);
+#endif
         }
 
         public override WDButton[] GetSelectableButtons()
@@ -84,6 +111,7 @@ namespace Game.UI
 
         public void UpdateStatisticsInformation(GameStatisticsDataV1 data)
         {
+            _data = data;
             txtPlayTime.text = ParseTimeText(data.finishTime);
             txtDeathCount.text = data.deathCount.ToString();
             txtDamagedCount.text = data.damagedCount.ToString();
