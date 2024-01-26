@@ -1,6 +1,9 @@
 # Snowball Game
 
-A snowball game for INFOMAIGT course assignment at Utrecht University 2023 - 2024.
+A snowball game for INFOMAIGT course assignment at Utrecht University 2023 - 2024. [The game is avilable on itch.io](https://huienlin.itch.io/snowball-game).
+
+![Fight](readme_assets/fight.gif)
+![Fight](readme_assets/sniper.gif)
 
 > Do not push any commits to the `main` and `develop` branches directly. Instead, you should create a new branch and a pull request for merging.
 
